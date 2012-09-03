@@ -94,6 +94,10 @@ AppGenerator.prototype.git = function git() {
   this.copy('gitattributes', '.gitattributes');
 };
 
+AppGenerator.prototype.jshint = function jshint() {
+  this.copy('jshintrc', '.jshintrc');
+};
+
 AppGenerator.prototype.editorConfig = function editorConfig() {
   this.copy('editorconfig', '.editorconfig');
 };
