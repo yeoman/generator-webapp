@@ -322,8 +322,7 @@ AppGenerator.prototype.requirehm = function requirehm(){
 
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
       var mainjs = self.read(path.resolve('app/scripts/main.js'));
-      mainjs = mainjs.replace('require.config({', 'require.config({\n  hm: "app/hm",\n');
-      mainjs = mainjs.replace('paths: {', 'paths: {\n    esprima: \'app/scripts/esprima\',');
+      mainjs = mainjs.replace('paths: {', 'paths: {\n hm: \'vendor/hm\', \n esprima: \'vendor/esprima\',');
       self.write('app/scripts/main.js', mainjs);
 
       cb();
