@@ -290,7 +290,7 @@ AppGenerator.prototype.requirejs = function requirejs(){
         "  },",
         "",
         "  paths: {",
-        "    jquery: 'app/scripts/vendor/jquery.min'",
+        "    jquery: 'vendor/jquery.min'",
         "  }",
         "});",
         " ",
