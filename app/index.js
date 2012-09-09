@@ -280,22 +280,23 @@ AppGenerator.prototype.requirejs = function requirejs(){
       // add a basic amd module (should be a file in templates/)
       self.write('app/scripts/app.js',[
         "define([], function() {",
-        "    return 'Hello from Yeoman!'",
+        "  return 'Hello from Yeoman!';",
         "});"
       ].join('\n'));
 
       self.write('app/scripts/main.js', [
         "require.config({",
-        "  shim:{",
+        "  shim: {",
         "  },",
+        "",
         "  paths: {",
         "    jquery: 'app/scripts/vendor/jquery.min'",
         "  }",
         "});",
         " ",
         "require(['app'], function(app) {",
-        "    // use app here",
-        "    console.log(app);",
+        "  // use app here",
+        "  console.log(app);",
         "});"
       ].join('\n'));
 
@@ -322,7 +323,7 @@ AppGenerator.prototype.requirehm = function requirehm(){
 
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
       var mainjs = self.read(path.resolve('app/scripts/main.js'));
-      mainjs = mainjs.replace('paths: {', 'paths: {\n hm: \'vendor/hm\', \n esprima: \'vendor/esprima\',');
+      mainjs = mainjs.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
       self.write('app/scripts/main.js', mainjs);
 
       cb();
