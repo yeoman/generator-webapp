@@ -21,6 +21,9 @@ function AppGenerator(args, options, config) {
   // update the args object, it's used to initialize js-framework hooks
   if(this.name) this.args[0] = this.args[0].replace(/\/$/, '');
 
+  // Warn before overwriting any files
+  this.warnOn('*');
+
   // hook for bootstrap may be readded. For demo purpose, done in this generator directly.
   // this.hookFor('javascript-engine', { as: 'app' });
 
