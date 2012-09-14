@@ -110,7 +110,9 @@ AppGenerator.prototype.favicon = function favicon(){
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet(){
-  this.write('app/styles/main.css', "/* Will be compiled down to a single stylesheet with your sass files */");
+  if ( !this.compassBootstrap ) {
+    this.write('app/styles/main.css', "/* Will be compiled down to a single stylesheet with your sass files */");
+  }
 };
 
 AppGenerator.prototype.fetchH5bp = function fetchH5bp() {
