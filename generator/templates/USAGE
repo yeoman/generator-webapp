@@ -2,7 +2,7 @@ Description:
     Explain the generator
 
 Example:
-    yeoman generate <%= name %> Thing
+    yeoman init <%= name %> Thing
 
     This will create:
         what/will/it/create

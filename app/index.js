@@ -21,18 +21,8 @@ function AppGenerator(args, options, config) {
   // update the args object, it's used to initialize js-framework hooks
   if(this.name) this.args[0] = this.args[0].replace(/\/$/, '');
 
-  // Warn before overwriting any files
-  this.warnOn('*');
-
-  // hook for bootstrap may be readded. For demo purpose, done in this generator directly.
-  // this.hookFor('javascript-engine', { as: 'app' });
-
-  // resolved to sass by default (could be switched to less for instance)
-  // this.hookFor('stylesheet-engine', { as: 'app' });
-
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
-
 }
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -85,6 +75,7 @@ AppGenerator.prototype.askFor = function askFor (argument) {
 };
 
 AppGenerator.prototype.gruntfile = function gruntfile() {
+  // this.write('foo.js', '');
   this.template('Gruntfile.js');
 };
 
@@ -211,10 +202,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
     defaults.push('Twitter Bootstrap plugins');
 
-/*
-    indexData = this.appendStyles(indexData, 'styles/bootstrap-min.css',[
-     'styles/bootstrap.css' ]);*/
-
     // Wire Twitter Bootstrap plugins (usemin: scripts/plugins.js)
     indexData = this.appendScripts(indexData, 'scripts/plugins.js', [
       'scripts/vendor/bootstrap/bootstrap-affix.js',
@@ -260,7 +247,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   indexData = indexData.replace('<body>', '<body>\n' + contentText.join('\n'));
 
   // Write out final file
-  this.writeFileFromString(indexData, indexOut);
+  this.write(indexOut, indexData);
 };
 
 // XXX to be put in a subgenerator like rjs:app, along the fetching or require.js /

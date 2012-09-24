@@ -1,6 +1,6 @@
 
-var util = require('util'),
-  yeoman = require('yeoman');
+var util   = require('util');
+var yeoman = require('yeoman');
 
 module.exports = Generator;
 
