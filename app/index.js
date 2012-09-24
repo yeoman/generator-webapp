@@ -115,13 +115,14 @@ AppGenerator.prototype.fetchH5bp = function fetchH5bp() {
 
     remote.copy( '.htaccess', 'app/.htaccess' );
     remote.copy( '404.html', 'app/404.html' );
-    remote.copy( 'index.html', 'app/index.html' );
     remote.copy( 'robots.txt', 'app/robots.txt' );
     remote.copy( 'js/vendor/jquery-1.8.0.min.js', 'app/scripts/vendor/jquery.min.js' );
     remote.copy( 'js/vendor/modernizr-2.6.1.min.js', 'app/scripts/vendor/modernizr.min.js' );
 
+    this.indexFile = this.readFileAsString(path.join(remote.cachePath, 'index.html'));
+
     cb();
-  });
+  }.bind(this));
 };
 
 AppGenerator.prototype.fetchBootstrap = function fetchBootstrap() {
@@ -173,7 +174,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   var indexOut = path.resolve('app/index.html');
 
   // Read in as string for further update
-  var indexData = this.readFileAsString(indexOut);
+  var indexData = this.indexFile;
 
   // Prepare default content text
   var defaults = ['HTML5 Boilerplate','Twitter Bootstrap'];
@@ -247,7 +248,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   indexData = indexData.replace('<body>', '<body>\n' + contentText.join('\n'));
 
   // Write out final file
-  this.write(indexOut, indexData);
+  this.indexFile = indexData;
 };
 
 // XXX to be put in a subgenerator like rjs:app, along the fetching or require.js /
@@ -263,20 +264,20 @@ AppGenerator.prototype.requirejs = function requirejs(){
       remote.copy('require.js', 'app/scripts/vendor/require.js');
 
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
-      var body = self.read(path.resolve('app/index.html'));
-      body = self.appendScripts(body, 'scripts/amd-app.js', ['scripts/vendor/require.js'], {
+      var body = this.indexFile;
+      body = this.appendScripts(body, 'scripts/amd-app.js', ['scripts/vendor/require.js'], {
         'data-main': 'scripts/main'
       });
-      self.write('app/index.html', body);
+      this.write('app/index.html', body);
 
       // add a basic amd module (should be a file in templates/)
-      self.write('app/scripts/app.js',[
+      this.write('app/scripts/app.js',[
         "define([], function() {",
         "  return 'Hello from Yeoman!';",
         "});"
       ].join('\n'));
 
-      self.write('app/scripts/main.js', [
+      this.mainJsFile = [
         "require.config({",
         "  shim: {",
         "  },",
@@ -290,10 +291,10 @@ AppGenerator.prototype.requirejs = function requirejs(){
         "  // use app here",
         "  console.log(app);",
         "});"
-      ].join('\n'));
+      ].join('\n');
 
       cb();
-    });
+    }.bind(this));
 
   } else {
     cb();
@@ -314,12 +315,11 @@ AppGenerator.prototype.requirehm = function requirehm(){
 
 
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
-      var mainjs = self.read(path.resolve('app/scripts/main.js'));
-      mainjs = mainjs.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
-      self.write('app/scripts/main.js', mainjs);
+      var mainjs = this.mainJsFile.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
+      this.write('app/scripts/main.js', mainjs);
 
       cb();
-    });
+    }.bind(this));
 
   } else {
     cb();
