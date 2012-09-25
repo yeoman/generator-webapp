@@ -152,7 +152,7 @@ AppGenerator.prototype.compassBootstrapFiles = function compassBootstrapFiles() 
 
     this.write('app/styles/main.scss', '@import "compass_twitter_bootstrap";');
 
-    this.remote('kristianmandrup', 'compass-twitter-bootstrap', '19626592c8a2eafa8f52ee0344ef1ac30f74502f', function(err, remote) {
+    this.remote('kristianmandrup', 'compass-twitter-bootstrap', 'c3ccce2cca5ec52437925e8feaaa11fead51e132', function(err, remote) {
       if(err) { return cb(err); }
 
       remote.directory('stylesheets', 'app/styles');
