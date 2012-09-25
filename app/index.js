@@ -106,6 +106,11 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet(){
   }
 };
 
+AppGenerator.prototype.bootstrapImages = function bootstrapImages() {
+  this.copy('glyphicons-halflings.png', 'app/images/glyphicons-halflings.png');
+  this.copy('glyphicons-halflings-white.png', 'app/images/glyphicons-halflings-white.png');
+}
+
 AppGenerator.prototype.fetchH5bp = function fetchH5bp() {
   var cb = this.async();
 
