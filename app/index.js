@@ -269,11 +269,9 @@ AppGenerator.prototype.requirejs = function requirejs(){
       remote.copy('require.js', 'app/scripts/vendor/require.js');
 
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
-      var body = this.indexFile;
-      body = this.appendScripts(body, 'scripts/amd-app.js', ['scripts/vendor/require.js'], {
+      this.indexFile = this.appendScripts(this.indexFile, 'scripts/amd-app.js', ['scripts/vendor/require.js'], {
         'data-main': 'scripts/main'
       });
-      this.write('app/index.html', body);
 
       // add a basic amd module (should be a file in templates/)
       this.write('app/scripts/app.js',[
@@ -337,6 +335,7 @@ AppGenerator.prototype.app = function app() {
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.mkdir('app/templates');
+  this.write('app/index.html', this.indexFile);
 };
 
 AppGenerator.prototype.test = function test() {
