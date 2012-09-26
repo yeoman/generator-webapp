@@ -23,6 +23,8 @@ function AppGenerator(args, options, config) {
 
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
+
+  this.mainJsFile = '';
 }
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -109,7 +111,7 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet(){
 AppGenerator.prototype.bootstrapImages = function bootstrapImages() {
   this.copy('glyphicons-halflings.png', 'app/images/glyphicons-halflings.png');
   this.copy('glyphicons-halflings-white.png', 'app/images/glyphicons-halflings-white.png');
-}
+};
 
 AppGenerator.prototype.fetchH5bp = function fetchH5bp() {
   var cb = this.async();
@@ -252,7 +254,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   // Append the default content
   indexData = indexData.replace('<body>', '<body>\n' + contentText.join('\n'));
 
-  // Write out final file
   this.indexFile = indexData;
 };
 
@@ -316,10 +317,8 @@ AppGenerator.prototype.requirehm = function requirehm(){
       remote.copy('hm.js', 'app/scripts/vendor/hm.js');
       remote.copy('esprima.js', 'app/scripts/vendor/esprima.js');
 
-
       // Wire RequireJS/AMD (usemin: js/amd-app.js)
-      var mainjs = this.mainJsFile.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
-      this.write('app/scripts/main.js', mainjs);
+      this.mainJsFile = this.mainJsFile.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
 
       cb();
     }.bind(this));
@@ -336,6 +335,7 @@ AppGenerator.prototype.app = function app() {
   this.mkdir('app/images');
   this.mkdir('app/templates');
   this.write('app/index.html', this.indexFile);
+  this.write('app/scripts/main.js', this.mainJsFile);
 };
 
 AppGenerator.prototype.test = function test() {
