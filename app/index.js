@@ -39,12 +39,12 @@ AppGenerator.prototype.askFor = function askFor (argument) {
   // and fetch all realated bootstrap stuff, that we hook from this generator.
   var prompts = [{
     name: 'compassBootstrap',
-    message: 'Would you like to include Twitter Bootstrap for Compass?',
+    message: 'Would you like to include Twitter Bootstrap for Compass instead of CSS?',
     default: 'Y/n',
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
   },{
     name: 'bootstrap',
-    message: 'Would you like to include the Twitter Bootstrap plugins?',
+    message: 'Would you like to include the Twitter Bootstrap JS plugins?',
     default: 'Y/n',
     warning: 'Yes: All Twitter Bootstrap plugins will be placed into the JavaScript vendor directory.'
   },
