@@ -34,6 +34,22 @@ AppGenerator.prototype.askFor = function askFor (argument) {
   var cb = this.async(),
     self = this;
 
+
+  // Welcome message
+  var welcome =
+  '\n     _-----_' +
+  '\n    |       |' +
+  '\n    |'+'--(o)--'.red+'|   .--------------------------.' +
+  '\n   `---------´  |    '+'Welcome to Yeoman,'.yellow.bold+'    |' +
+  '\n    '+'( '.yellow+'_'+'´U`'.yellow+'_'+' )'.yellow+'   |   '+'ladies and gentlemen!'.yellow.bold+'  |' +
+  '\n    /___A___\\   \'__________________________\'' +
+  '\n     |  ~  |'.yellow +
+  '\n   __'+'\'.___.\''.yellow+'__' +
+  '\n ´   '+'`  |'.red+'° '+'´ Y'.red+' `\n';
+
+  console.log(welcome);
+  console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
+
   // a bit verbose prompt configuration, maybe we can improve that
   // demonstration purpose. Also, probably better to have this in other generator, whose responsability is to ask
   // and fetch all realated bootstrap stuff, that we hook from this generator.
