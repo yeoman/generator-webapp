@@ -106,6 +106,10 @@ AppGenerator.prototype.git = function git() {
   this.copy('gitattributes', '.gitattributes');
 };
 
+AppGenerator.prototype.bower = function bower() {
+  this.copy('bowerrc', '.bowerrc');
+};
+
 AppGenerator.prototype.jshint = function jshint() {
   this.copy('jshintrc', '.jshintrc');
 };

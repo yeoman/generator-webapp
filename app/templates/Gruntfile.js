@@ -10,16 +10,11 @@ module.exports = function( grunt ) {
     // Project configuration
     // ---------------------
 
-    // specify an alternate install location for Bower
-    bower: {
-      dir: 'app/components'
-    },
-
     // Coffee to JS compilation
     coffee: {
       compile: {
         files: {
-          'temp/scripts/*.js': 'app/scripts/**/*.coffee' 
+          'temp/scripts/*.js': 'app/scripts/**/*.coffee'
         },
         options: {
           basePath: 'app/scripts'
