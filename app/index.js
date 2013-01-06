@@ -2,7 +2,7 @@
 var util = require('util'),
     fs = require('fs'),
     path = require('path'),
-    yeoman = require('../../../../');
+    yeoman = require('yeoman-generators');
 
 module.exports = AppGenerator;
 

@@ -21,9 +21,11 @@
     "url": "git://github.com/yeoman/generator-webapp.git"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha test/test-*.js"
+    "test": "mocha --reporter spec"
   },
-  "dependencies": {},
+  "dependencies": {
+    "yeoman-generators": "https://github.com/yeoman/generators/archive/master.tar.gz"
+  },
   "devDependencies": {
     "mocha": "~1.7.1"
   },
