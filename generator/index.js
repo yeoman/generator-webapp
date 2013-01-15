@@ -1,6 +1,6 @@
 
 var util = require('util'),
-  yeoman = require('yeoman-generators');
+  yeoman = require('yeoman-generator');
 
 // generator generator...
 
