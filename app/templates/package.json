@@ -1,7 +1,31 @@
 {
-  "author": "",
-  "name": "myapp",
+  "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "grunt": "~0.4.0rc7",
+    "grunt-contrib-copy": "0.4.0rc7",
+    "grunt-contrib-concat": "0.1.2rc6",
+    "grunt-contrib-coffee": "0.4.0rc7",
+    "grunt-contrib-uglify": "0.1.1rc6",
+    "grunt-contrib-compass": "0.1.1rc7",
+    "grunt-contrib-jshint": "0.1.1rc6",
+    "grunt-contrib-mincss": "0.4.0rc7",
+    "grunt-contrib-connect": "0.1.1rc6",
+    "grunt-contrib-watch": "0.2.0rc7",
+    "grunt-contrib-clean": "0.4.0rc6",
+    "grunt-contrib-htmlmin": "~0.1.0",
+    "grunt-contrib-imagemin": "~0.1.0",
+    "grunt-contrib-livereload": "https://github.com/sleeper/grunt-contrib-livereload/archive/df0d739047383126a3029cd2e3039efeb79c7845.tar.gz",
+    "grunt-bower-hooks": "~0.1.2",
+    "grunt-usemin": "~0.1.2",
+    "grunt-regarde": "https://github.com/yeoman/grunt-regarde/archive/b37a2c48c546e52d94825e68e77c5cd27eafcc52.tar.gz",
+    "grunt-requirejs": "~0.3.1",
+    "grunt-mocha": "~0.2.1",
+    "grunt-open": "~0.1.0",
+    "matchdep": "~0.1.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
 }

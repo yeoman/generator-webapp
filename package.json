@@ -14,8 +14,7 @@
   "homepage": "https://github.com/yeoman/generator-webapp",
   "bugs": "https://github.com/yeoman/generator-webapp/issues",
   "author": "Chrome Developer Relations",
-  "main": "",
-  "bin": "",
+  "main": "app/index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/yeoman/generator-webapp.git"
@@ -24,11 +23,12 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "http://github.com/yeoman/generators/archive/master.tar.gz",
+    "yeoman-generator": "http://github.com/yeoman/generators/archive/ea3aca79707890e3f3f050a0c10f5832b72ec3ec.tar.gz",
+    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/ad5184514bd7f98ac5d53b8961327d2efc2aa843.tar.gz",
     "cheerio": "~0.10.5"
   },
   "devDependencies": {
-    "mocha": "~1.7.1"
+    "mocha": "~1.8.1"
   },
   "engines": {
     "node": ">=0.8.0"
