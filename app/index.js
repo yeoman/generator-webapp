@@ -104,8 +104,7 @@ AppGenerator.prototype.git = function git() {
 AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
   this.copy('component.json', 'component.json');
-  // TODO: Doesn't work. @mklabs?
-  //this.install('jquery');
+  this.install('');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
