@@ -89,7 +89,7 @@ AppGenerator.prototype.askFor = function askFor() {
 
 AppGenerator.prototype.gruntfile = function gruntfile() {
   // TODO: Gruntfile contains templates. Change template style so they don't conflict
-  //this.template('Gruntfile.js');
+  this.template('Gruntfile.js');
 };
 
 AppGenerator.prototype.packageJSON = function packageJSON() {

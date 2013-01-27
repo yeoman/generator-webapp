@@ -18,19 +18,19 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: '<%= yeoman.app %>/scripts/**/*.coffee',
+                files: '<%%= yeoman.app %>/scripts/**/*.coffee',
                 tasks: ['coffee', 'livereload']
             },
             compass: {
-                files: '<%= yeoman.app %>/styles/**/*.{scss,sass}',
+                files: '<%%= yeoman.app %>/styles/**/*.{scss,sass}',
                 tasks: ['compass', 'livereload']
             },
             livereload: {
                 files: [
-                    '<%= yeoman.app %>/*.html',
-                    '<%= yeoman.app %>/styles/*.css',
-                    '<%= yeoman.app %>/scripts/*.js',
-                    '<%= yeoman.app %>/images/*.{png,jpg,jpeg}'
+                    '<%%= yeoman.app %>/*.html',
+                    '<%%= yeoman.app %>/styles/*.css',
+                    '<%%= yeoman.app %>/scripts/*.js',
+                    '<%%= yeoman.app %>/images/*.{png,jpg,jpeg}'
                 ],
                 tasks: ['livereload']
             }
@@ -47,11 +47,11 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                url: 'http://localhost:<%= connect.livereload.options.port %>'
+                url: 'http://localhost:<%%= connect.livereload.options.port %>'
             }
         },
         clean: {
-            dist: ['.tmp', '<%= yeoman.dist %>'],
+            dist: ['.tmp', '<%%= yeoman.dist %>'],
             server: '.tmp'
         },
         jshint: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/*.js',
+                '<%%= yeoman.app %>/scripts/*.js',
                 'spec/**/*.js'
             ]
         },
@@ -70,18 +70,18 @@ module.exports = function (grunt) {
         coffee: {
             all: {
                 files: {
-                    '.tmp/scripts/coffee.js': '<%= yeoman.app %>/scripts/**/*.coffee'
+                    '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/scripts/**/*.coffee'
                 }
             }
         },
         compass: {
             all: {
                 options: {
-                    sassDir: '<%= yeoman.app %>/styles',
+                    sassDir: '<%%= yeoman.app %>/styles',
                     cssDir: '.tmp/styles',
-                    imagesDir: '<%= yeoman.app %>/images',
-                    javascriptsDir: '<%= yeoman.app %>/scripts',
-                    fontsDir: '<%= yeoman.app %>/styles/fonts',
+                    imagesDir: '<%%= yeoman.app %>/images',
+                    javascriptsDir: '<%%= yeoman.app %>/scripts',
+                    fontsDir: '<%%= yeoman.app %>/styles/fonts',
                     relativeAssets: true
                 }
             }
@@ -91,8 +91,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {}
         },
-        //<% if (includeRequireJS) { %>
-        // TODO: get some RJS experts to look at this
+        <% if (includeRequireJS) { %>// TODO: get some RJS experts to look at this
         // Only generate if RJS prompt was selected
         // Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         requirejs: {
@@ -111,19 +110,17 @@ module.exports = function (grunt) {
                     uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
-        },
-        //<% } else { %>
+        },<% } else { %>
         uglify: {
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/scripts/main.js': [
+                    '<%%= yeoman.dist %>/scripts/main.js': [
                         '.tmp/scripts/**/*.js',
-                        '<%= yeoman.app %>/scripts/**/*.js'
+                        '<%%= yeoman.app %>/scripts/**/*.js'
                     ],
                 }
             }
-        },
-        //<% } %>
+        },<% } %>
         usemin: {
             dist: {
                 files: {
@@ -135,18 +132,18 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/images',
+                    cwd: '<%%= yeoman.app %>/images',
                     src: '*.{png,jpg,jpeg}',
-                    dest: '<%= yeoman.dist %>/images'
+                    dest: '<%%= yeoman.dist %>/images'
                 }]
             }
         },
         cssmin: {
             dist: {
                 files: {
-                    '<%= yeoman.dist %>/styles/main.css': [
+                    '<%%= yeoman.dist %>/styles/main.css': [
                         '.tmp/styles/**/*.css',
-                        '<%= yeoman.app %>/styles/**/*.css'
+                        '<%%= yeoman.app %>/styles/**/*.css'
                     ]
                 }
             }
@@ -155,9 +152,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>',
+                    cwd: '<%%= yeoman.app %>',
                     src: '*.html',
-                    dest: '<%= yeoman.dist %>'
+                    dest: '<%%= yeoman.dist %>'
                 }]
             }
         },
@@ -203,11 +200,8 @@ module.exports = function (grunt) {
         //'test',
         'coffee',
         'compass',
-        //<% if (includeRequireJS) { %>
-        'requirejs',
-        //<% } else { %>
-        'uglify',
-        // <% } %>
+        <% if (includeRequireJS) { %>'requirejs',<% } else { %>
+        'uglify',<% } %>
         //'usemin',
         //'imagemin',
         'cssmin',
