@@ -171,7 +171,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // iterate over defaults and create content string
   defaults.forEach(function (el) {
-    contentText.push('                <li>' + el  +'</li>');
+    contentText.push('                    <li>' + el  +'</li>');
   });
 
   contentText = contentText.concat([
