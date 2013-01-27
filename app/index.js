@@ -222,29 +222,6 @@ AppGenerator.prototype.requirejs = function requirejs() {
   }
 };
 
-// TODO(sindresorhus): Convert to use Bower
-// Need to PR a component.json on the original repo
-AppGenerator.prototype.requirehm = function requirehm() {
-  var cb = this.async();
-
-  if (this.includeRequireHM) {
-    this.remote('jrburke', 'require-hm', '0.2.1', function (err, remote) {
-      if (err) {
-        return cb(err);
-      }
-
-      remote.copy('hm.js', 'app/scripts/vendor/hm.js');
-      remote.copy('esprima.js', 'app/scripts/vendor/esprima.js');
-
-      // wire RequireJS/AMD (usemin: js/amd-app.js)
-      this.mainJsFile = this.mainJsFile.replace('paths: {', 'paths: {\n    hm: \'vendor/hm\',\n    esprima: \'vendor/esprima\',');
-      cb();
-    }.bind(this));
-  } else {
-    cb();
-  }
-};
-
 AppGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/scripts');

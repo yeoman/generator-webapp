@@ -4,6 +4,8 @@
   "dependencies": {
     "bootstrap": "https://github.com/jlong/sass-twitter-bootstrap.git",
     "jquery": "~1.9.0",
-    "modernizr": "~2.6.2"
+    "modernizr": "~2.6.2",
+    "requirejs": "~2.1.4",
+    "require-hm": "~0.2.1"
   }
 }
