@@ -19,7 +19,7 @@
     "grunt-contrib-livereload": "https://github.com/sleeper/grunt-contrib-livereload/archive/df0d739047383126a3029cd2e3039efeb79c7845.tar.gz",
     "grunt-bower-hooks": "~0.1.2",
     "grunt-usemin": "~0.1.2",
-    "grunt-regarde": "https://github.com/yeoman/grunt-regarde/archive/b37a2c48c546e52d94825e68e77c5cd27eafcc52.tar.gz",
+    "grunt-regarde": "~0.1.0",
     "grunt-requirejs": "~0.3.1",
     "grunt-mocha": "~0.2.1",
     "grunt-open": "~0.1.0",
