@@ -3,8 +3,8 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-module.exports = AppGenerator;
 
+module.exports = AppGenerator;
 
 function AppGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -17,8 +17,6 @@ function AppGenerator(args, options, config) {
     options['test-framework'] = 'mocha';
   }
 
-  // TODO: Added `generator-mocha` as a dep of `generator-webapp`, but it doesn't seem to want to resolve?
-
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
 
@@ -27,7 +25,6 @@ function AppGenerator(args, options, config) {
 }
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
-
 
 AppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
@@ -49,14 +46,9 @@ AppGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'compassBootstrap',
-    message: 'Would you like to include Twitter Bootstrap for Compass?',
+    message: 'Would you like to include Twitter Bootstrap for Sass?',
     default: 'Y/n',
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
-  },{
-    name: 'bootstrap',
-    message: 'Would you like to include the Twitter Bootstrap JS plugins?',
-    default: 'Y/n',
-    warning: 'Yes: All Twitter Bootstrap plugins will be placed into the JavaScript vendor directory.'
   },
   {
     name: 'includeRequireJS',
@@ -78,7 +70,6 @@ AppGenerator.prototype.askFor = function askFor() {
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.bootstrap = (/y/i).test(props.bootstrap);
     this.compassBootstrap = (/y/i).test(props.compassBootstrap);
     this.includeRequireJS = (/y/i).test(props.includeRequireJS);
     this.includeRequireHM = (/y/i).test(props.includeRequireHM);
@@ -88,7 +79,6 @@ AppGenerator.prototype.askFor = function askFor() {
 };
 
 AppGenerator.prototype.gruntfile = function gruntfile() {
-  // TODO: Gruntfile contains templates. Change template style so they don't conflict
   this.template('Gruntfile.js');
 };
 
@@ -104,7 +94,11 @@ AppGenerator.prototype.git = function git() {
 AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
   this.copy('component.json', 'component.json');
-  this.install('');
+  this.install('', function (err) {
+    if (err) {
+      console.error(err);
+    }
+  });
 };
 
 AppGenerator.prototype.jshint = function jshint() {
@@ -122,8 +116,10 @@ AppGenerator.prototype.h5bp = function h5bp() {
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
-  if ( !this.compassBootstrap ) {
-    this.write('app/styles/main.css', '/* Will be compiled down to a single stylesheet with your sass files */');
+  if (this.compassBootstrap) {
+    this.write('app/styles/main.scss', '@import \'../components/sass-bootstrap/lib/bootstrap.scss\'');
+  } else {
+    this.write('app/styles/main.css', '');
   }
 };
 
@@ -139,24 +135,24 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   ];
 
   // asked for Twitter bootstrap plugins?
-  if (this.bootstrap) {
+  if (this.compassBootstrap) {
     defaults.push('Twitter Bootstrap plugins');
 
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-      'scripts/vendor/bootstrap/bootstrap-affix.js',
-      'scripts/vendor/bootstrap/bootstrap-alert.js',
-      'scripts/vendor/bootstrap/bootstrap-dropdown.js',
-      'scripts/vendor/bootstrap/bootstrap-tooltip.js',
-      'scripts/vendor/bootstrap/bootstrap-modal.js',
-      'scripts/vendor/bootstrap/bootstrap-transition.js',
-      'scripts/vendor/bootstrap/bootstrap-button.js',
-      'scripts/vendor/bootstrap/bootstrap-popover.js',
-      'scripts/vendor/bootstrap/bootstrap-typeahead.js',
-      'scripts/vendor/bootstrap/bootstrap-carousel.js',
-      'scripts/vendor/bootstrap/bootstrap-scrollspy.js',
-      'scripts/vendor/bootstrap/bootstrap-collapse.js',
-      'scripts/vendor/bootstrap/bootstrap-tab.js'
+      'components/sass-bootstrap/js/bootstrap-affix.js',
+      'components/sass-bootstrap/js/bootstrap-alert.js',
+      'components/sass-bootstrap/js/bootstrap-dropdown.js',
+      'components/sass-bootstrap/js/bootstrap-tooltip.js',
+      'components/sass-bootstrap/js/bootstrap-modal.js',
+      'components/sass-bootstrap/js/bootstrap-transition.js',
+      'components/sass-bootstrap/js/bootstrap-button.js',
+      'components/sass-bootstrap/js/bootstrap-popover.js',
+      'components/sass-bootstrap/js/bootstrap-typeahead.js',
+      'components/sass-bootstrap/js/bootstrap-carousel.js',
+      'components/sass-bootstrap/js/bootstrap-scrollspy.js',
+      'components/sass-bootstrap/js/bootstrap-collapse.js',
+      'components/sass-bootstrap/js/bootstrap-tab.js'
     ]);
   }
 
@@ -186,8 +182,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   this.indexFile = this.indexFile.replace('<body>', '<body>\n' + contentText.join('\n'));
 };
 
-// XXX to be put in a subgenerator like rjs:app, along the fetching or require.js /
-// almond lib
+// TODO(mklabs): to be put in a subgenerator like rjs:app
 AppGenerator.prototype.requirejs = function requirejs() {
   if (this.includeRequireJS) {
     // wire RequireJS/AMD (usemin: js/amd-app.js)
