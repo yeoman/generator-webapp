@@ -1,9 +1,8 @@
 Description:
-    The 'yeoman init' command creates a new yeoman application with a default
-    directory structure and configuration at the path you specify.
+    The 'yeoman init' command creates a new web application.
 
 Example:
-    yeoman init ~/Code/weblog
+    yeoman init
 
-    This generates a skeletal yeoman installation in ~/Code/weblog.
+    This generates a skeleton for a web app.
     See the README in the newly created application to get going.
