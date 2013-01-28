@@ -82,6 +82,7 @@ module.exports = function (grunt) {
                     imagesDir: '<%%= yeoman.app %>/images',
                     javascriptsDir: '<%%= yeoman.app %>/scripts',
                     fontsDir: '<%%= yeoman.app %>/styles/fonts',
+                    importPath: 'components',
                     relativeAssets: true
                 }
             }
@@ -91,9 +92,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {}
         },
-        <% if (includeRequireJS) { %>// TODO: get some RJS experts to look at this
-        // Only generate if RJS prompt was selected
-        // Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+        <% if (includeRequireJS) { %>// Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         requirejs: {
             dist: {
                 options: {
@@ -121,12 +120,12 @@ module.exports = function (grunt) {
                 }
             }
         },<% } %>
+        useminPrepare: {
+            html: 'index.html'
+        },
         usemin: {
-            dist: {
-                files: {
-
-                }
-            }
+            html: ['<%%= yeoman.dist %>/**/*.html'],
+            css: ['<%%= yeoman.dist %>/**/*.css']
         },
         imagemin: {
             dist: {
@@ -200,13 +199,15 @@ module.exports = function (grunt) {
         //'test',
         'coffee',
         'compass',
+        'useminPrepare',
         <% if (includeRequireJS) { %>'requirejs',<% } else { %>
         'uglify',<% } %>
         //'usemin',
         //'imagemin',
         'cssmin',
         //'htmlmin',
-        'copy'
+        'copy',
+        'usemin'
     ]);
 
     grunt.registerTask('default', ['build']);

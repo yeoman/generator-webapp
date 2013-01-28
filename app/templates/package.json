@@ -18,7 +18,7 @@
     "grunt-contrib-imagemin": "~0.1.0",
     "grunt-contrib-livereload": "https://github.com/sleeper/grunt-contrib-livereload/archive/df0d739047383126a3029cd2e3039efeb79c7845.tar.gz",
     "grunt-bower-hooks": "~0.1.2",
-    "grunt-usemin": "~0.1.2",
+    "grunt-usemin": "~0.1.4",
     "grunt-regarde": "~0.1.0",
     "grunt-requirejs": "~0.3.1",
     "grunt-mocha": "~0.2.1",

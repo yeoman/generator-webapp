@@ -117,7 +117,7 @@ AppGenerator.prototype.h5bp = function h5bp() {
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
-    this.write('app/styles/main.scss', '@import \'../components/sass-bootstrap/lib/bootstrap.scss\'');
+    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\'');
   } else {
     this.write('app/styles/main.css', '');
   }
@@ -134,10 +134,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '                <ul>'
   ];
 
-  // asked for Twitter bootstrap plugins?
   if (this.compassBootstrap) {
-    defaults.push('Twitter Bootstrap plugins');
-
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       'components/sass-bootstrap/js/bootstrap-affix.js',
@@ -230,5 +227,8 @@ AppGenerator.prototype.test = function test() {
   this.mkdir('test/spec');
 };
 
-// TODO:
-// - Getting this at the end of init: `Error executing yeoman-init init`
+AppGenerator.prototype.finished = function finished() {
+  this.on('end', function() {
+    console.log('\nI\'m all done. Just run ' + 'npm install'.bold.yellow + ' to install the required Node.js dependencies.');
+  });
+};
