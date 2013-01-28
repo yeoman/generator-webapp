@@ -1,12 +1,12 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
-  "dependencies": {
-    "bootstrap": "https://github.com/jlong/sass-twitter-bootstrap.git",
-    "jquery": "~1.9.0",
+  "dependencies": {<% if (compassBootstrap) { %>
+    "sass-bootstrap": "https://github.com/components/sass-twitter-bootstrap.git#~2.2.2",<% } %><% if (includeRequireJS) { %>
+    "requirejs": "~2.1.4",<% } %><% if (includeRequireHM) { %>
+    "require-hm": "~0.2.1",<% } %>
     "modernizr": "~2.6.2",
-    "requirejs": "~2.1.4",
-    "require-hm": "~0.2.1"
+    "jquery": "~1.9.0"
   },
   "devDependencies": {}
 }
