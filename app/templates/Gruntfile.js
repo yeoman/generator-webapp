@@ -27,10 +27,10 @@ module.exports = function (grunt) {
             },
             livereload: {
                 files: [
-                    '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/*.js',
-                    '<%= yeoman.app %>/images/*.{png,jpg,jpeg}'
+                    '<%%= yeoman.app %>/*.html',
+                    '{.tmp,<%%= yeoman.app %>}/styles/*.css',
+                    '{.tmp,<%%= yeoman.app %>}/scripts/*.js',
+                    '<%%= yeoman.app %>/images/*.{png,jpg,jpeg}'
                 ],
                 tasks: ['livereload']
             }
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
             },
             all: ['test/**/*.html']
             // TOOD(sindresorhus): testing works locally now, but need to figure out how to make it work with the server
-            //all: ['http://localhost:<%= connect.test.options.port %>' + '/index.html']
+            //all: ['http://localhost:<%%= connect.test.options.port %>' + '/index.html']
         },
         coffee: {
             all: {
