@@ -125,7 +125,7 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
   // prepare default content text
-  var defaults = ['HTML5 Boilerplate','Twitter Bootstrap'];
+  var defaults = ['HTML5 Boilerplate', 'Twitter Bootstrap'];
   var contentText = [
     '        <div class="container" style="margin-top:50px">',
     '            <div class="hero-unit">',

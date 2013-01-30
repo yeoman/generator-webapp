@@ -19,18 +19,18 @@ module.exports = function (grunt) {
         watch: {
             coffee: {
                 files: '<%%= yeoman.app %>/scripts/**/*.coffee',
-                tasks: ['coffee', 'livereload']
+                tasks: ['coffee']
             },
             compass: {
                 files: '<%%= yeoman.app %>/styles/**/*.{scss,sass}',
-                tasks: ['compass', 'livereload']
+                tasks: ['compass']
             },
             livereload: {
                 files: [
-                    '<%%= yeoman.app %>/*.html',
-                    '<%%= yeoman.app %>/styles/*.css',
-                    '<%%= yeoman.app %>/scripts/*.js',
-                    '<%%= yeoman.app %>/images/*.{png,jpg,jpeg}'
+                    '<%= yeoman.app %>/*.html',
+                    '{.tmp,<%= yeoman.app %>}/styles/*.css',
+                    '{.tmp,<%= yeoman.app %>}/scripts/*.js',
+                    '<%= yeoman.app %>/images/*.{png,jpg,jpeg}'
                 ],
                 tasks: ['livereload']
             }
@@ -40,7 +40,11 @@ module.exports = function (grunt) {
                 options: {
                     port: 9001,
                     middleware: function (connect) {
-                        return [lrSnippet, folderMount(connect, '.')];
+                        return [
+                            lrSnippet,
+                            folderMount(connect, '.tmp'),
+                            folderMount(connect, 'app')
+                        ];
                     }
                 }
             }
