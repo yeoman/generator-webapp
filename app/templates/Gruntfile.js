@@ -82,7 +82,7 @@ module.exports = function (grunt) {
                     imagesDir: '<%%= yeoman.app %>/images',
                     javascriptsDir: '<%%= yeoman.app %>/scripts',
                     fontsDir: '<%%= yeoman.app %>/styles/fonts',
-                    importPath: 'components',
+                    importPath: '<%%= yeoman.app %>/components',
                     relativeAssets: true
                 }
             }
