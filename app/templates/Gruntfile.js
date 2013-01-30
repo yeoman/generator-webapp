@@ -18,11 +18,11 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: '<%%= yeoman.app %>/scripts/**/*.coffee',
+                files: '<%%= yeoman.app %>/scripts/*.coffee',
                 tasks: ['coffee']
             },
             compass: {
-                files: '<%%= yeoman.app %>/styles/**/*.{scss,sass}',
+                files: '<%%= yeoman.app %>/styles/*.{scss,sass}',
                 tasks: ['compass']
             },
             livereload: {
@@ -47,6 +47,17 @@ module.exports = function (grunt) {
                         ];
                     }
                 }
+            },
+            test: {
+                options: {
+                    port: 9001,
+                    middleware: function (connect) {
+                        return [
+                            folderMount(connect, '.tmp'),
+                            folderMount(connect, 'test')
+                        ];
+                    }
+                }
             }
         },
         open: {
@@ -65,16 +76,21 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 '<%%= yeoman.app %>/scripts/*.js',
-                'spec/**/*.js'
+                'test/spec/*.js'
             ]
         },
         mocha: {
+            options: {
+                run: true
+            },
             all: ['test/**/*.html']
+            // TOOD(sindresorhus): testing works locally now, but need to figure out how to make it work with the server
+            //all: ['http://localhost:<%= connect.test.options.port %>' + '/index.html']
         },
         coffee: {
             all: {
                 files: {
-                    '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/scripts/**/*.coffee'
+                    '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/scripts/*.coffee'
                 }
             }
         },
@@ -93,9 +109,9 @@ module.exports = function (grunt) {
         },
         // not used since Uglify task does concat,
         // but still available if needed
-        concat: {
+        /*concat: {
             dist: {}
-        },
+        },*/
         <% if (includeRequireJS) { %>// Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         requirejs: {
             dist: {
@@ -118,8 +134,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%%= yeoman.dist %>/scripts/main.js': [
-                        '.tmp/scripts/**/*.js',
-                        '<%%= yeoman.app %>/scripts/**/*.js'
+                        '.tmp/scripts/*.js',
+                        '<%%= yeoman.app %>/scripts/*.js'
                     ],
                 }
             }
@@ -128,8 +144,8 @@ module.exports = function (grunt) {
             html: 'index.html'
         },
         usemin: {
-            html: ['<%%= yeoman.dist %>/**/*.html'],
-            css: ['<%%= yeoman.dist %>/**/*.css']
+            html: ['<%%= yeoman.dist %>/*.html'],
+            css: ['<%%= yeoman.dist %>/styles/*.css']
         },
         imagemin: {
             dist: {
@@ -145,14 +161,25 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/**/*.css',
-                        '<%%= yeoman.app %>/styles/**/*.css'
+                        '.tmp/styles/*.css',
+                        '<%%= yeoman.app %>/styles/*.css'
                     ]
                 }
             }
         },
         htmlmin: {
             dist: {
+                options: {
+                    removeComments: true,
+                    removeCommentsFromCDATA: true,
+                    collapseWhitespace: true,
+                    collapseBooleanAttributes: true,
+                    removeAttributeQuotes: true,
+                    removeRedundantAttributes: true,
+                    useShortDoctype: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true
+                },
                 files: [{
                     expand: true,
                     cwd: '<%%= yeoman.app %>',
@@ -185,7 +212,7 @@ module.exports = function (grunt) {
         'coffee',
         'compass',
         'livereload-start',
-        'connect',
+        'connect:livereload',
         'open',
         'watch'
     ]);
@@ -194,22 +221,23 @@ module.exports = function (grunt) {
         'clean:server',
         'coffee',
         'compass',
+        'connect:test',
         'mocha'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
         'jshint',
-        //'test',
+        'test',
         'coffee',
         'compass',
         'useminPrepare',
         <% if (includeRequireJS) { %>'requirejs',<% } else { %>
         'uglify',<% } %>
         //'usemin',
-        //'imagemin',
+        'imagemin',
         'cssmin',
-        //'htmlmin',
+        'htmlmin',
         'copy',
         'usemin'
     ]);
