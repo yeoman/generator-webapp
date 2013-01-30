@@ -96,8 +96,9 @@ AppGenerator.prototype.bower = function bower() {
   this.copy('component.json', 'component.json');
   this.install('', function (err) {
     if (err) {
-      console.error(err);
+      return console.error(err);
     }
+    console.log('\nI\'m all done. Just run ' + 'npm install'.bold.yellow + ' to install the required Node.js dependencies.');
   });
 };
 
@@ -225,10 +226,4 @@ AppGenerator.prototype.app = function app() {
 AppGenerator.prototype.test = function test() {
   this.mkdir('test');
   this.mkdir('test/spec');
-};
-
-AppGenerator.prototype.finished = function finished() {
-  this.on('end', function() {
-    console.log('\nI\'m all done. Just run ' + 'npm install'.bold.yellow + ' to install the required Node.js dependencies.');
-  });
 };
