@@ -51,16 +51,16 @@ AppGenerator.prototype.askFor = function askFor() {
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
   },
   {
+    name: 'includeRequireHM',
+    message: 'Would you like to support writing ECMAScript 6 modules? (requires RequireJS)',
+    default: 'Y/n',
+    warning: 'Yes: RequireHM will be placed into the JavaScript vendor directory.'
+  },
+  {
     name: 'includeRequireJS',
     message: 'Would you like to include RequireJS (for AMD support)?',
     default: 'Y/n',
     warning: 'Yes: RequireJS will be placed into the JavaScript vendor directory.'
-  },
-  {
-    name: 'includeRequireHM',
-    message: 'Would you like to support writing ECMAScript 6 modules?',
-    default: 'Y/n',
-    warning: 'Yes: RequireHM will be placed into the JavaScript vendor directory.'
   }];
 
   this.prompt(prompts, function (err, props) {
