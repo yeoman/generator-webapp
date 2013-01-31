@@ -18,11 +18,15 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: '<%%= yeoman.app %>/scripts/*.coffee',
-                tasks: ['coffee']
+                files: ['<%%= yeoman.app %>/scripts/*.coffee'],
+                tasks: ['coffee:dist']
+            },
+            coffeeTest: {
+                files: ['test/spec/*.coffee'],
+                tasks: ['coffee:test']
             },
             compass: {
-                files: '<%%= yeoman.app %>/styles/*.{scss,sass}',
+                files: ['<%%= yeoman.app %>/styles/*.{scss,sass}'],
                 tasks: ['compass']
             },
             livereload: {
@@ -88,22 +92,34 @@ module.exports = function (grunt) {
             //all: ['http://localhost:<%%= connect.test.options.port %>' + '/index.html']
         },
         coffee: {
-            all: {
+            dist: {
                 files: {
                     '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/scripts/*.coffee'
                 }
+            },
+            test: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/spec',
+                    src: '*.coffee',
+                    dest: 'test/spec'
+                }]
             }
         },
         compass: {
-            all: {
+            options: {
+                sassDir: '<%= yeoman.app %>/styles',
+                cssDir: '.tmp/styles',
+                imagesDir: '<%= yeoman.app %>/images',
+                javascriptsDir: '<%= yeoman.app %>/scripts',
+                fontsDir: '<%= yeoman.app %>/styles/fonts',
+                importPath: 'app/components',
+                relativeAssets: true
+            },
+            dist: {},
+            server: {
                 options: {
-                    sassDir: '<%%= yeoman.app %>/styles',
-                    cssDir: '.tmp/styles',
-                    imagesDir: '<%%= yeoman.app %>/images',
-                    javascriptsDir: '<%%= yeoman.app %>/scripts/vendor',
-                    fontsDir: '<%%= yeoman.app %>/styles/fonts',
-                    importPath: '<%%= yeoman.app %>/components',
-                    relativeAssets: true
+                    debugInfo: true
                 }
             }
         },
