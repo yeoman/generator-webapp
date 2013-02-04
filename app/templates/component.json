@@ -2,11 +2,11 @@
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
   "dependencies": {<% if (compassBootstrap) { %>
-    "sass-bootstrap": "https://github.com/components/sass-twitter-bootstrap.git#~2.2.2",<% } %><% if (includeRequireJS) { %>
+    "sass-bootstrap": "~2.2.2",<% } %><% if (includeRequireJS) { %>
     "requirejs": "~2.1.4",<% } %><% if (includeRequireHM) { %>
     "require-hm": "~0.2.1",<% } %>
     "modernizr": "~2.6.2",
-    "jquery": "~1.9.0"
+    "jquery": "~1.8.3"
   },
   "devDependencies": {}
 }
