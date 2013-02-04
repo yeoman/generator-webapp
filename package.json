@@ -23,9 +23,9 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "http://github.com/yeoman/generators/archive/ea3aca79707890e3f3f050a0c10f5832b72ec3ec.tar.gz",
-    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/ad5184514bd7f98ac5d53b8961327d2efc2aa843.tar.gz",
-    "cheerio": "~0.10.5"
+    "yeoman-generator": "http://github.com/yeoman/generator/archive/23db667fa0ce6ced8fa5825294273150832ba5f3.tar.gz",
+    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/f55d96ff78c93a49280ce11a7103bc7b3a2f3b17.tar.gz",
+    "cheerio": "~0.10.6"
   },
   "devDependencies": {
     "mocha": "~1.8.1"
