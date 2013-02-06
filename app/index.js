@@ -51,12 +51,6 @@ AppGenerator.prototype.askFor = function askFor() {
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
   },
   {
-    name: 'includeRequireHM',
-    message: 'Would you like to support writing ECMAScript 6 modules? (requires RequireJS)',
-    default: 'Y/n',
-    warning: 'Yes: RequireHM will be placed into the JavaScript vendor directory.'
-  },
-  {
     name: 'includeRequireJS',
     message: 'Would you like to include RequireJS (for AMD support)?',
     default: 'Y/n',
@@ -72,7 +66,6 @@ AppGenerator.prototype.askFor = function askFor() {
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = (/y/i).test(props.compassBootstrap);
     this.includeRequireJS = (/y/i).test(props.includeRequireJS);
-    this.includeRequireHM = (/y/i).test(props.includeRequireHM);
 
     cb();
   }.bind(this));
@@ -156,10 +149,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   if (this.includeRequireJS) {
     defaults.push('RequireJS');
-  }
-
-  if (this.includeRequireHM) {
-    defaults.push('Support for ES6 Modules');
   }
 
   // iterate over defaults and create content string
