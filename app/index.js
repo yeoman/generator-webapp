@@ -209,8 +209,3 @@ AppGenerator.prototype.app = function app() {
   this.write('app/index.html', this.indexFile);
   this.write('app/scripts/main.js', this.mainJsFile);
 };
-
-AppGenerator.prototype.test = function test() {
-  this.mkdir('test');
-  this.mkdir('test/spec');
-};
