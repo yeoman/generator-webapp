@@ -22,6 +22,10 @@ function AppGenerator(args, options, config) {
 
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.mainJsFile = '';
+
+  this.on('end', function () {
+    console.log('\nI\'m all done. Just run ' + 'npm install && bower install'.bold.yellow + ' to install the required dependencies.');
+  });
 }
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
@@ -87,12 +91,6 @@ AppGenerator.prototype.git = function git() {
 AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
   this.copy('component.json', 'component.json');
-  this.install('', function (err) {
-    if (err) {
-      return console.error(err);
-    }
-    console.log('\nI\'m all done. Just run ' + 'npm install'.bold.yellow + ' to install the required Node.js dependencies.');
-  });
 };
 
 AppGenerator.prototype.jshint = function jshint() {
