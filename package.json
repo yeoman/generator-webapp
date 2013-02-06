@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Default Yeoman generator for scaffolding out a front-end web app",
   "keywords": [
+    "yeoman-generator",
     "yeoman",
     "generator",
     "web",
@@ -23,8 +24,8 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "http://github.com/yeoman/generator/archive/23db667fa0ce6ced8fa5825294273150832ba5f3.tar.gz",
-    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/f55d96ff78c93a49280ce11a7103bc7b3a2f3b17.tar.gz",
+    "yeoman-generator": "http://github.com/yeoman/generator/archive/master.tar.gz",
+    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/master.tar.gz",
     "cheerio": "~0.10.6"
   },
   "devDependencies": {
