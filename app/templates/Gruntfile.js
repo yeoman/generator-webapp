@@ -1,6 +1,6 @@
 'use strict';
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var folderMount = function (connect, dir) {
+var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
@@ -42,23 +42,23 @@ module.exports = function (grunt) {
         connect: {
             livereload: {
                 options: {
-                    port: 9001,
+                    port: 9000,
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            folderMount(connect, '.tmp'),
-                            folderMount(connect, 'app')
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'app')
                         ];
                     }
                 }
             },
             test: {
                 options: {
-                    port: 9001,
+                    port: 9000,
                     middleware: function (connect) {
                         return [
-                            folderMount(connect, '.tmp'),
-                            folderMount(connect, 'test')
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'test')
                         ];
                     }
                 }
