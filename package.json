@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "yeoman-generator": "http://github.com/yeoman/generator/archive/master.tar.gz",
-    "generator-mocha": "http://github.com/yeoman/generator-mocha/archive/master.tar.gz",
     "cheerio": "~0.10.6"
   },
   "devDependencies": {
