@@ -80,7 +80,7 @@ AppGenerator.prototype.gruntfile = function gruntfile() {
 };
 
 AppGenerator.prototype.packageJSON = function packageJSON() {
-  this.template('package.json');
+  this.template('_package.json', 'package.json');
 };
 
 AppGenerator.prototype.git = function git() {
@@ -90,7 +90,7 @@ AppGenerator.prototype.git = function git() {
 
 AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
-  this.copy('component.json', 'component.json');
+  this.copy('_component.json', 'component.json');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
