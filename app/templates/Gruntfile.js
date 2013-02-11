@@ -229,8 +229,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('server', [
         'clean:server',
-        'coffee',
-        'compass',
+        'coffee:dist',
+        'compass:server',
         'livereload-start',
         'connect:livereload',
         'open',
@@ -250,7 +250,7 @@ module.exports = function (grunt) {
         'jshint',
         'test',
         'coffee',
-        'compass',
+        'compass:dist',
         'useminPrepare',
         <% if (includeRequireJS) { %>'requirejs',<% } else { %>
         'uglify',<% } %>
