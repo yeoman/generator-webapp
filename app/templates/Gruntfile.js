@@ -84,12 +84,12 @@ module.exports = function (grunt) {
             ]
         },
         mocha: {
-            options: {
-                run: true
-            },
-            all: ['test/**/*.html']
-            // TOOD(sindresorhus): testing works locally now, but need to figure out how to make it work with the server
-            //all: ['http://localhost:<%%= connect.test.options.port %>' + '/index.html']
+            all: {
+                options: {
+                    run: true,
+                    urls: ['http://localhost:<%= connect.livereload.options.port %>/index.html']
+                }
+            }
         },
         coffee: {
             dist: {
