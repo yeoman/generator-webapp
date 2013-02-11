@@ -157,7 +157,7 @@ module.exports = function (grunt) {
             }
         },<% } %>
         useminPrepare: {
-            html: 'index.html'
+            html: '<%%= yeoman.app %>/index.html'
         },
         usemin: {
             html: ['<%%= yeoman.dist %>/*.html'],
@@ -186,9 +186,9 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    removeComments: true,
                     removeCommentsFromCDATA: true,
-                    collapseWhitespace: true,
+                    // https://github.com/yeoman/grunt-usemin/issues/44
+                    //collapseWhitespace: true,
                     collapseBooleanAttributes: true,
                     removeAttributeQuotes: true,
                     removeRedundantAttributes: true,
@@ -254,7 +254,6 @@ module.exports = function (grunt) {
         'useminPrepare',
         <% if (includeRequireJS) { %>'requirejs',<% } else { %>
         'uglify',<% } %>
-        //'usemin',
         'imagemin',
         'cssmin',
         'htmlmin',

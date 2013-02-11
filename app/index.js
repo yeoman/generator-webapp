@@ -172,7 +172,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 AppGenerator.prototype.requirejs = function requirejs() {
   if (this.includeRequireJS) {
     // wire RequireJS/AMD (usemin: js/amd-app.js)
-    this.indexFile = this.appendScripts(this.indexFile, 'scripts/amd-app.js', ['scripts/vendor/require.js'], {
+    this.indexFile = this.appendScripts(this.indexFile, 'scripts/amd-app.js', ['components/requirejs/require.js'], {
       'data-main': 'scripts/main'
     });
 
@@ -189,7 +189,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
       'require.config({',
       '    shim: {},',
       '    paths: {',
-      '        jquery: \'vendor/jquery.min\'',
+      '        jquery: \'components/jquery/jquery\'',
       '    }',
       '});',
       '',
