@@ -206,12 +206,16 @@ module.exports = function (grunt) {
         },
         copy: {
             dist: {
-                files: {
-                    'dist/': [
-                        'app/*.{ico,text}',
-                        'app/.htaccess'
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        '*.{ico,txt}',
+                        '.htaccess'
                     ]
-                }
+                }]
             }
         },
         bower: {
