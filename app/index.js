@@ -105,7 +105,7 @@ AppGenerator.prototype.h5bp = function h5bp() {
   this.copy('favicon.ico', 'app/favicon.ico');
   this.copy('404.html', 'app/404.html');
   this.copy('robots.txt', 'app/robots.txt');
-  this.copy('htaccess', 'app/.htacess');
+  this.copy('htaccess', 'app/.htaccess');
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
@@ -171,8 +171,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 // TODO(mklabs): to be put in a subgenerator like rjs:app
 AppGenerator.prototype.requirejs = function requirejs() {
   if (this.includeRequireJS) {
-    // wire RequireJS/AMD (usemin: js/amd-app.js)
-    this.indexFile = this.appendScripts(this.indexFile, 'scripts/amd-app.js', ['components/requirejs/require.js'], {
+    this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', ['components/requirejs/require.js'], {
       'data-main': 'scripts/main'
     });
 

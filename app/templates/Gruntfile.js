@@ -131,18 +131,19 @@ module.exports = function (grunt) {
         <% if (includeRequireJS) { %>// Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
         requirejs: {
             dist: {
+                // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
+                    // `name` and `out` is set by grunt-usemin
                     baseUrl: 'app/scripts',
-                    optimize: 'uglify2',
-                    generateSourceMaps: true,
+                    optimize: 'none',
+                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
+                    //generateSourceMaps: true,
                     // required to support SourceMaps
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    name: 'main',
-                    out: 'dist/scripts/main.js',
                     wrap: true,
-                    uglify2: {} // https://github.com/mishoo/UglifyJS2
+                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
         },<% } else { %>
@@ -157,7 +158,8 @@ module.exports = function (grunt) {
             }
         },<% } %>
         useminPrepare: {
-            html: '<%%= yeoman.app %>/index.html'
+            html: '<%%= yeoman.app %>/index.html',
+            dest: 'dist'
         },
         usemin: {
             html: ['<%%= yeoman.dist %>/*.html'],
@@ -251,9 +253,10 @@ module.exports = function (grunt) {
         'test',
         'coffee',
         'compass:dist',
-        'useminPrepare',
-        <% if (includeRequireJS) { %>'requirejs',<% } else { %>
-        'uglify',<% } %>
+        'useminPrepare',<% if (includeRequireJS) { %>
+        'requirejs',<% } %>
+        'concat',
+        'uglify',
         'imagemin',
         'cssmin',
         'htmlmin',
