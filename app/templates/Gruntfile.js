@@ -159,11 +159,16 @@ module.exports = function (grunt) {
         },<% } %>
         useminPrepare: {
             html: '<%%= yeoman.app %>/index.html',
-            dest: 'dist'
+            options: {
+                dest: '<%%= yeoman.dist %>'
+            }
         },
         usemin: {
             html: ['<%%= yeoman.dist %>/*.html'],
-            css: ['<%%= yeoman.dist %>/styles/*.css']
+            css: ['<%%= yeoman.dist %>/styles/*.css'],
+            options: {
+                dirs: ['<%%= yeoman.dist %>']
+            }
         },
         imagemin: {
             dist: {
@@ -255,11 +260,11 @@ module.exports = function (grunt) {
         'compass:dist',
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
-        'concat',
-        'uglify',
         'imagemin',
         'cssmin',
         'htmlmin',
+        'concat',
+        'uglify',
         'copy',
         'usemin'
     ]);
