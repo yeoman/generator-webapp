@@ -110,14 +110,16 @@ AppGenerator.prototype.h5bp = function h5bp() {
 
 AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
   // TODO: create a Bower component for this
-  this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
+  if (this.includeRequireJS) {
+    this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
+  }
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
-    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\'');
+    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\'\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 250px;\n}');
   } else {
-    this.write('app/styles/main.css', '');
+    this.write('app/styles/main.css', 'body {\n    background: #fafafa;\n}\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 250px;\n}');
   }
 };
 
@@ -125,7 +127,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   // prepare default content text
   var defaults = ['HTML5 Boilerplate', 'Twitter Bootstrap'];
   var contentText = [
-    '        <div class="container" style="margin-top:50px">',
+    '        <div class="container">',
     '            <div class="hero-unit">',
     '                <h1>\'Allo, \'Allo!</h1>',
     '                <p>You now have</p>',
@@ -153,6 +155,8 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   if (this.includeRequireJS) {
     defaults.push('RequireJS');
+  } else {
+    this.mainJsFile = 'console.log(\'\\\'Allo \\\'Allo!\');';
   }
 
   // iterate over defaults and create content string
@@ -185,14 +189,14 @@ AppGenerator.prototype.requirejs = function requirejs() {
       '/*global define */',
       'define([], function () {',
       '    \'use strict\';\n',
-      '    return \'Hello from Yeoman!\';',
+      '    return \'\\\'Allo \\\'Allo!\';',
       '});'
     ].join('\n'));
 
     this.mainJsFile = [
       'require.config({',
       '    paths: {',
-      '        jquery: \'../components/jquery/jquery\'',
+      '        jquery: \'../components/jquery/jquery\',',
       '        bootstrap: \'vendor/bootstrap\'',
       '    },',
       '    shim: {',
