@@ -128,8 +128,7 @@ module.exports = function (grunt) {
         /*concat: {
             dist: {}
         },*/
-        <% if (includeRequireJS) { %>// Example: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-        requirejs: {
+        <% if (includeRequireJS) { %>requirejs: {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
@@ -137,6 +136,7 @@ module.exports = function (grunt) {
                     baseUrl: 'app/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
+                    // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,
                     // required to support SourceMaps
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
@@ -144,6 +144,7 @@ module.exports = function (grunt) {
                     useStrict: true,
                     wrap: true,
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
+                    mainConfigFile: 'app/scripts/main.js'
                 }
             }
         },<% } else { %>
@@ -193,7 +194,7 @@ module.exports = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    removeCommentsFromCDATA: true,
+                    /*removeCommentsFromCDATA: true,
                     // https://github.com/yeoman/grunt-usemin/issues/44
                     //collapseWhitespace: true,
                     collapseBooleanAttributes: true,
@@ -201,7 +202,7 @@ module.exports = function (grunt) {
                     removeRedundantAttributes: true,
                     useShortDoctype: true,
                     removeEmptyAttributes: true,
-                    removeOptionalTags: true
+                    removeOptionalTags: true*/
                 },
                 files: [{
                     expand: true,
@@ -226,7 +227,8 @@ module.exports = function (grunt) {
             }
         },
         bower: {
-            rjsConfig: 'app/scripts/main.js'
+            rjsConfig: 'app/scripts/main.js',
+            indent: '    '
         }
     });
 

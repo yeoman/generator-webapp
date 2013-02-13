@@ -108,6 +108,11 @@ AppGenerator.prototype.h5bp = function h5bp() {
   this.copy('htaccess', 'app/.htaccess');
 };
 
+AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
+  // TODO: create a Bower component for this
+  this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
+};
+
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
     this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\'');
@@ -127,7 +132,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '                <ul>'
   ];
 
-  if (this.compassBootstrap) {
+  if (this.compassBootstrap && !this.includeRequireJS) {
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       'components/sass-bootstrap/js/bootstrap-affix.js',
@@ -186,16 +191,23 @@ AppGenerator.prototype.requirejs = function requirejs() {
 
     this.mainJsFile = [
       'require.config({',
-      '    shim: {},',
       '    paths: {',
-      '        jquery: \'components/jquery/jquery\'',
+      '        jquery: \'../components/jquery/jquery\'',
+      '        bootstrap: \'vendor/bootstrap\'',
+      '    },',
+      '    shim: {',
+      '        boostrap: {',
+      '            deps: [\'jquery\'],',
+      '            exports: \'jquery\'',
+      '        }',
       '    }',
       '});',
       '',
-      'require([\'app\'], function (app) {',
+      'require([\'app\', \'jquery\', \'bootstrap\'], function (app, $) {',
       '    \'use strict\';',
       '    // use app here',
       '    console.log(app);',
+      '    console.log(\'Running jQuery %s\', $().version);',
       '});'
     ].join('\n');
   }

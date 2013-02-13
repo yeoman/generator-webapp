@@ -16,8 +16,8 @@
     "grunt-contrib-htmlmin": "0.1.1rc7",
     "grunt-contrib-imagemin": "0.1.1rc8",
     "grunt-contrib-livereload": "0.1.0rc8",
-    "grunt-bower-hooks": "~0.1.2",
-    "grunt-usemin": "~0.1.5",
+    "grunt-bower-hooks": "~0.2.0",
+    "grunt-usemin": "~0.1.7",
     "grunt-regarde": "~0.1.1",<% if (includeRequireJS) { %>
     "grunt-requirejs": "~0.3.1",<% } %>
     "grunt-mocha": "git://github.com/kmiyashiro/grunt-mocha.git#11067b91dc83a282b27c42dc4aac2a2f0a56faed",

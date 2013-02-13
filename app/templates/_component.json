@@ -1,7 +1,7 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
-  "dependencies": {<% if (compassBootstrap) { %>
+  "dependencies": {<% if (compassBootstrap && !includeRequireJS) { %>
     "sass-bootstrap": "~2.3.0",<% } %><% if (includeRequireJS) { %>
     "requirejs": "~2.1.4",<% } %>
     "modernizr": "~2.6.2",
