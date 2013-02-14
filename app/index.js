@@ -117,9 +117,9 @@ AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
-    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\';\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 250px;\n}');
+    this.write('app/styles/main.scss', '@import \'sass-bootstrap/lib/bootstrap\';\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
   } else {
-    this.write('app/styles/main.css', 'body {\n    background: #fafafa;\n}\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 250px;\n}');
+    this.write('app/styles/main.css', 'body {\n    background: #fafafa;\n}\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
   }
 };
 
@@ -211,7 +211,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
       '    \'use strict\';',
       '    // use app here',
       '    console.log(app);',
-      '    console.log(\'Running jQuery %s\', $().version);',
+      '    console.log(\'Running jQuery %s\', $().jquery);',
       '});'
     ].join('\n');
   }
