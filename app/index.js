@@ -200,7 +200,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
       '        bootstrap: \'vendor/bootstrap\'',
       '    },',
       '    shim: {',
-      '        boostrap: {',
+      '        bootstrap: {',
       '            deps: [\'jquery\'],',
       '            exports: \'jquery\'',
       '        }',
