@@ -62,6 +62,16 @@ module.exports = function (grunt) {
                         ];
                     }
                 }
+            },
+            dist: {
+                options: {
+                    port: 9000,
+                    middleware: function (connect) {
+                        return [
+                            mountFolder(connect, 'dist')
+                        ];
+                    }
+                }
             }
         },
         open: {
@@ -236,15 +246,21 @@ module.exports = function (grunt) {
     // remove when mincss task is renamed
     grunt.renameTask('mincss', 'cssmin');
 
-    grunt.registerTask('server', [
-        'clean:server',
-        'coffee:dist',
-        'compass:server',
-        'livereload-start',
-        'connect:livereload',
-        'open',
-        'watch'
-    ]);
+    grunt.registerTask('server', function (target) {
+        if (target === 'dist') {
+            return grunt.task.run(['open', 'connect:dist:keepalive']);
+        }
+
+        grunt.task.run([
+            'clean:server',
+            'coffee:dist',
+            'compass:server',
+            'livereload-start',
+            'connect:livereload',
+            'open',
+            'watch'
+        ]);
+    });
 
     grunt.registerTask('test', [
         'clean:server',
