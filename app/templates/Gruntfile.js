@@ -40,9 +40,11 @@ module.exports = function (grunt) {
             }
         },
         connect: {
+            options: {
+                port: 9000
+            },
             livereload: {
                 options: {
-                    port: 9000,
                     middleware: function (connect) {
                         return [
                             lrSnippet,
@@ -54,7 +56,6 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
-                    port: 9000,
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
@@ -65,7 +66,6 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
-                    port: 9000,
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, 'dist')
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         },
         open: {
             server: {
-                url: 'http://localhost:<%%= connect.livereload.options.port %>'
+                url: 'http://localhost:<%%= connect.options.port %>'
             }
         },
         clean: {
