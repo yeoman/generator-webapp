@@ -134,6 +134,12 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '                <ul>'
   ];
 
+  if (!this.includeRequireJS) {
+    this.indexFile = this.appendScripts(this.indexFile, 'scripts/jquery.js', [
+      'components/jquery/jquery.js'
+    ]);
+  }
+
   if (this.compassBootstrap && !this.includeRequireJS) {
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
