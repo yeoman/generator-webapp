@@ -1,16 +1,15 @@
 
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
-var assert  = require("assert");
+var assert  = require('assert');
 
 
 describe('Webapp generator test', function() {
   before(helpers.before(path.join(__dirname, './temp')));
 
-  it('every generator can be required without throwing', function() {
+  it('the generator can be required without throwing', function() {
     // not testing the actual run of generators yet
     this.app = require('../app');
-    this.generator = require('../generator');
   });
 
 
