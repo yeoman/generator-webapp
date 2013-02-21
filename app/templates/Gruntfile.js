@@ -279,9 +279,9 @@ module.exports = function (grunt) {
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'imagemin',
-        'cssmin',
         'htmlmin',
         'concat',
+        'cssmin',
         'uglify',
         'copy',
         'usemin'
