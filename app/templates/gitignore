@@ -1,6 +1,5 @@
 node_modules
-temp
-.tmp
 dist
+.tmp
 .sass-cache
 app/components
