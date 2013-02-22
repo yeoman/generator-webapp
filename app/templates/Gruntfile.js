@@ -187,6 +187,21 @@ module.exports = function (grunt) {
         /*uglify: {
             dist: {}
         },*/<% } %>
+        rev: {
+            src: {
+                files: {
+                    src: ['.tmp/**/*.{js,css}']
+                }
+            },
+            assets: {
+                files: {
+                    src: [
+                        '<%%= yeoman.app %>/images/**/*.{png,jpg,jpeg}',
+                        '<%%= yeoman.app %>/styles/fonts/**/*.*'
+                    ]
+                }
+            }
+        },
         useminPrepare: {
             html: '<%%= yeoman.app %>/index.html',
             options: {
@@ -308,9 +323,11 @@ module.exports = function (grunt) {
         'clean:dist',
         'coffee',
         'compass:dist',
+        'rev:src',
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'imagemin',
+        'rev:assets',
         'svgmin',
         'htmlmin',
         'concat',
