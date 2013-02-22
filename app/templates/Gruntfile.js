@@ -105,9 +105,13 @@ module.exports = function (grunt) {
         },
         coffee: {
             dist: {
-                files: {
-                    '.tmp/scripts/coffee.js': '<%%= yeoman.app %>/scripts/*.coffee'
-                }
+                files: [{
+                    expand: true,
+                    cwd: '<%%= yeoman.app %>/scripts',
+                    src: '*.coffee',
+                    dest: '.tmp/scripts',
+                    ext: '.js'
+                }]
             },
             test: {
                 files: [{
@@ -163,7 +167,6 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%%= yeoman.dist %>/scripts/main.js': [
-                        '.tmp/scripts/*.js',
                         '<%%= yeoman.app %>/scripts/*.js'
                     ],
                 }
