@@ -4,6 +4,12 @@ var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
+// # Globbing
+// for performance reasons we're only matching one level down:
+// 'test/spec/{,*/}*.js'
+// use this if you want to match all subfolders:
+// 'test/spec/**/*.js'
+
 module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -18,23 +24,23 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             coffee: {
-                files: ['<%%= yeoman.app %>/scripts/*.coffee'],
+                files: ['<%%= yeoman.app %>/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
-                files: ['test/spec/*.coffee'],
+                files: ['test/spec/{,*/}*.coffee'],
                 tasks: ['coffee:test']
             },
             compass: {
-                files: ['<%%= yeoman.app %>/styles/*.{scss,sass}'],
+                files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass']
             },
             livereload: {
                 files: [
                     '<%%= yeoman.app %>/*.html',
-                    '{.tmp,<%%= yeoman.app %>}/styles/*.css',
-                    '{.tmp,<%%= yeoman.app %>}/scripts/*.js',
-                    '<%%= yeoman.app %>/images/*.{png,jpg,jpeg,webp}'
+                    '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',
+                    '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,webp}'
                 ],
                 tasks: ['livereload']
             }
@@ -91,8 +97,8 @@ module.exports = function (grunt) {
             },
             all: [
                 'Gruntfile.js',
-                '<%%= yeoman.app %>/scripts/*.js',
-                'test/spec/*.js'
+                '<%%= yeoman.app %>/scripts/{,*/}*.js',
+                'test/spec/{,*/}*.js'
             ]
         },
         mocha: {
@@ -106,6 +112,8 @@ module.exports = function (grunt) {
         coffee: {
             dist: {
                 files: [{
+                    // rather than compiling multiple files here you should
+                    // require them into your main .coffee file
                     expand: true,
                     cwd: '<%%= yeoman.app %>/scripts',
                     src: '*.coffee',
@@ -167,7 +175,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%%= yeoman.dist %>/scripts/main.js': [
-                        '<%%= yeoman.app %>/scripts/*.js'
+                        '<%%= yeoman.app %>/scripts/{,*/}*.js'
                     ],
                 }
             }
@@ -179,8 +187,8 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            html: ['<%%= yeoman.dist %>/*.html'],
-            css: ['<%%= yeoman.dist %>/styles/*.css'],
+            html: ['<%%= yeoman.dist %>/{,*/}*.html'],
+            css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
                 dirs: ['<%%= yeoman.dist %>']
             }
@@ -190,7 +198,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%%= yeoman.app %>/images',
-                    src: '*.{png,jpg,jpeg}',
+                    src: '{,*/}*.{png,jpg,jpeg}',
                     dest: '<%%= yeoman.dist %>/images'
                 }]
             }
@@ -199,8 +207,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/*.css',
-                        '<%%= yeoman.app %>/styles/*.css'
+                        '.tmp/styles/{,*/}*.css',
+                        '<%%= yeoman.app %>/styles/{,*/}*.css'
                     ]
                 }
             }
