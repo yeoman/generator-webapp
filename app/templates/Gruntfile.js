@@ -272,8 +272,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'jshint',
-        'test',
         'coffee',
         'compass:dist',
         'useminPrepare',<% if (includeRequireJS) { %>
@@ -287,5 +285,9 @@ module.exports = function (grunt) {
         'usemin'
     ]);
 
-    grunt.registerTask('default', ['build']);
+    grunt.registerTask('default', [
+        'jshint',
+        'test',
+        'build'
+    ]);
 };
