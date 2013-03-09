@@ -236,6 +236,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        // Put files not handled in other tasks here
         copy: {
             dist: {
                 files: [{
