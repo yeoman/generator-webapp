@@ -188,16 +188,13 @@ module.exports = function (grunt) {
             dist: {}
         },*/<% } %>
         rev: {
-            src: {
-                files: {
-                    src: ['.tmp/**/*.{js,css}']
-                }
-            },
-            assets: {
+            dist: {
                 files: {
                     src: [
-                        '<%%= yeoman.app %>/images/**/*.{png,jpg,jpeg}',
-                        '<%%= yeoman.app %>/styles/fonts/**/*.*'
+                        '<%%= yeoman.dist %>/scripts/{,*/}*.js',
+                        '<%%= yeoman.dist %>/styles/{,*/}*.css',
+                        '<%%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+                        '<%%= yeoman.dist %>/styles/fonts/*'
                     ]
                 }
             }
@@ -323,17 +320,16 @@ module.exports = function (grunt) {
         'clean:dist',
         'coffee',
         'compass:dist',
-        'rev:src',
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'imagemin',
-        'rev:assets',
         'svgmin',
         'htmlmin',
         'concat',
         'cssmin',
         'uglify',
         'copy',
+        'rev',
         'usemin'
     ]);
 
