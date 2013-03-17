@@ -22,6 +22,7 @@
     "grunt-requirejs": "~0.3.2",<% } %>
     "grunt-mocha": "~0.2.3",
     "grunt-open": "~0.2.0",
+    "grunt-svgmin": "0.1.0",
     "matchdep": "~0.1.1"
   },
   "engines": {

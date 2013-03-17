@@ -205,6 +205,16 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        svgmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%%= yeoman.app %>/images',
+                    src: '{,*/}*.svg',
+                    dest: '<%%= yeoman.dist %>/images'
+                }]
+            }
+        },
         cssmin: {
             dist: {
                 files: {
@@ -292,6 +302,7 @@ module.exports = function (grunt) {
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'imagemin',
+        'svgmin',
         'htmlmin',
         'concat',
         'cssmin',
