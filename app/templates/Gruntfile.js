@@ -124,7 +124,7 @@ module.exports = function (grunt) {
             test: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/spec',
+                    cwd: 'test/spec',
                     src: '{,*/}*.coffee',
                     dest: '.tmp/spec',
                     ext: '.js'
@@ -256,7 +256,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,txt}',
                         '.htaccess',
-                        'images/{,*/}*.{webp,gif}'
+                        'images/{,*/}*.{webp,gif}',
+                        'styles/fonts/*'
                     ]
                 }]
             }
