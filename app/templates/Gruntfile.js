@@ -153,8 +153,8 @@ module.exports = function (grunt) {
         // but still available if needed
         /*concat: {
             dist: {}
-        },*/
-        <% if (includeRequireJS) { %>requirejs: {
+        },*/<% if (includeRequireJS) { %>
+        requirejs: {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
@@ -261,12 +261,12 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
-        },
+        }<% if (includeRequireJS) { %>,
         bower: {
             all: {
                 rjsConfig: '<%%= yeoman.app %>/scripts/main.js'
             }
-        }
+        }<% } %>
     });
 
     grunt.renameTask('regarde', 'watch');
