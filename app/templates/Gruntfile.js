@@ -114,8 +114,6 @@ module.exports = function (grunt) {
         coffee: {
             dist: {
                 files: [{
-                    // rather than compiling multiple files here you should
-                    // require them into your main .coffee file
                     expand: true,
                     cwd: '<%%= yeoman.app %>/scripts',
                     src: '{,*/}*.coffee',
@@ -127,8 +125,9 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '.tmp/spec',
-                    src: '*.coffee',
-                    dest: 'test/spec'
+                    src: '{,*/}*.coffee',
+                    dest: '.tmp/spec',
+                    ext: '.js'
                 }]
             }
         },
