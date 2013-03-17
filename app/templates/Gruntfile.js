@@ -262,6 +262,9 @@ module.exports = function (grunt) {
             }
         }<% if (includeRequireJS) { %>,
         bower: {
+            options: {
+                exclude: ['modernizr']
+            },
             all: {
                 rjsConfig: '<%%= yeoman.app %>/scripts/main.js'
             }
