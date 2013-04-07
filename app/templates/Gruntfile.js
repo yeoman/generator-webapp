@@ -279,6 +279,11 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
+        },
+        concurrent: {
+            server: ['coffee:dist', 'compass:server'],
+            test: ['coffee', 'compass'],
+            dist: ['coffee', 'compass:dist']
         }<% if (includeRequireJS) { %>,
         bower: {
             options: {
@@ -299,8 +304,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'coffee:dist',
-            'compass:server',
+            'concurrent:server',
             'livereload-start',
             'connect:livereload',
             'open',
@@ -310,16 +314,14 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
-        'coffee',
-        'compass',
+        'concurrent:test',
         'connect:test',
         'mocha'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
-        'coffee',
-        'compass:dist',
+        'concurrent:dist',
         'useminPrepare',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'imagemin',
