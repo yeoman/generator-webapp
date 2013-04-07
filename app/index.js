@@ -5,7 +5,7 @@ var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 
 
-var AppGenerator = module.exports = function Appgenerator (args, options, config) {
+var AppGenerator = module.exports = function Appgenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
   // setup the test-framework property, Gruntfile template will need this
@@ -34,7 +34,7 @@ var AppGenerator = module.exports = function Appgenerator (args, options, config
 
 util.inherits(AppGenerator, yeoman.generators.NamedBase);
 
-AppGenerator.prototype.askFor = function askFor () {
+AppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // welcome message
@@ -79,54 +79,54 @@ AppGenerator.prototype.askFor = function askFor () {
   }.bind(this));
 };
 
-AppGenerator.prototype.gruntfile = function gruntfile () {
+AppGenerator.prototype.gruntfile = function gruntfile() {
   this.template('Gruntfile.js');
 };
 
-AppGenerator.prototype.packageJSON = function packageJSON () {
+AppGenerator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 };
 
-AppGenerator.prototype.git = function git () {
+AppGenerator.prototype.git = function git() {
   this.copy('gitignore', '.gitignore');
   this.copy('gitattributes', '.gitattributes');
 };
 
-AppGenerator.prototype.bower = function bower () {
+AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
   this.copy('_component.json', 'component.json');
 };
 
-AppGenerator.prototype.jshint = function jshint () {
+AppGenerator.prototype.jshint = function jshint() {
   this.copy('jshintrc', '.jshintrc');
 };
 
-AppGenerator.prototype.editorConfig = function editorConfig () {
+AppGenerator.prototype.editorConfig = function editorConfig() {
   this.copy('editorconfig', '.editorconfig');
 };
 
-AppGenerator.prototype.h5bp = function h5bp () {
+AppGenerator.prototype.h5bp = function h5bp() {
   this.copy('favicon.ico', 'app/favicon.ico');
   this.copy('404.html', 'app/404.html');
   this.copy('robots.txt', 'app/robots.txt');
   this.copy('htaccess', 'app/.htaccess');
 };
 
-AppGenerator.prototype.bootstrapImg = function bootstrapImg () {
+AppGenerator.prototype.bootstrapImg = function bootstrapImg() {
   if (this.compassBootstrap) {
     this.copy('glyphicons-halflings.png', 'app/images/glyphicons-halflings.png');
     this.copy('glyphicons-halflings-white.png', 'app/images/glyphicons-halflings-white.png');
   }
 };
 
-AppGenerator.prototype.bootstrapJs = function bootstrapJs () {
+AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
   // TODO: create a Bower component for this
   if (this.includeRequireJS) {
     this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
   }
 };
 
-AppGenerator.prototype.mainStylesheet = function mainStylesheet () {
+AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
     this.write('app/styles/main.scss', '$iconSpritePath: "../images/glyphicons-halflings.png";\n$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";\n\n@import \'sass-bootstrap/lib/bootstrap\';\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
   } else {
@@ -134,7 +134,7 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet () {
   }
 };
 
-AppGenerator.prototype.writeIndex = function writeIndex () {
+AppGenerator.prototype.writeIndex = function writeIndex() {
   // prepare default content text
   var defaults = ['HTML5 Boilerplate', 'Twitter Bootstrap'];
   var contentText = [
@@ -204,7 +204,7 @@ AppGenerator.prototype.writeIndex = function writeIndex () {
 };
 
 // TODO(mklabs): to be put in a subgenerator like rjs:app
-AppGenerator.prototype.requirejs = function requirejs () {
+AppGenerator.prototype.requirejs = function requirejs() {
   if (this.includeRequireJS) {
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', ['components/requirejs/require.js'], {
       'data-main': 'scripts/main'
@@ -243,7 +243,7 @@ AppGenerator.prototype.requirejs = function requirejs () {
   }
 };
 
-AppGenerator.prototype.app = function app () {
+AppGenerator.prototype.app = function app() {
   this.mkdir('app');
   this.mkdir('app/scripts');
   this.mkdir('app/styles');
