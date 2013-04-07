@@ -291,7 +291,11 @@ module.exports = function (grunt) {
             ],
             dist: [
                 'coffee',
-                'compass:dist'
+                'compass:dist',
+                'imagemin',
+                'svgmin',
+                'htmlmin',
+                'cssmin'
             ]
         }<% if (includeRequireJS) { %>,
         bower: {
@@ -330,14 +334,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
-        'concurrent:dist',
-        'useminPrepare',<% if (includeRequireJS) { %>
+        'useminPrepare',
+        'concurrent:dist',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
-        'imagemin',
-        'svgmin',
-        'htmlmin',
         'concat',
-        'cssmin',
         'uglify',
         'copy',
         'rev',
