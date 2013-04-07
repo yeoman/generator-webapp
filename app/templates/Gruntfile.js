@@ -281,9 +281,18 @@ module.exports = function (grunt) {
             }
         },
         concurrent: {
-            server: ['coffee:dist', 'compass:server'],
-            test: ['coffee', 'compass'],
-            dist: ['coffee', 'compass:dist']
+            server: [
+                'coffee:dist',
+                'compass:server'
+            ],
+            test: [
+                'coffee',
+                'compass'
+            ],
+            dist: [
+                'coffee',
+                'compass:dist'
+            ]
         }<% if (includeRequireJS) { %>,
         bower: {
             options: {
