@@ -1,4 +1,4 @@
-/*global describe beforeEach it*/
+/*global describe, beforeEach, it*/
 
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
@@ -46,6 +46,7 @@ describe('Webapp generator test', function () {
       'includeRequireJS': 'N'
     });
 
+    this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
       done();
@@ -70,6 +71,7 @@ describe('Webapp generator test', function () {
       'includeRequireJS': 'Y'
     });
 
+    this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
       done();
