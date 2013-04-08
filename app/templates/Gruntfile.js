@@ -294,8 +294,7 @@ module.exports = function (grunt) {
                 'compass:dist',
                 'imagemin',
                 'svgmin',
-                'htmlmin',
-                'cssmin'
+                'htmlmin'
             ]
         }<% if (includeRequireJS) { %>,
         bower: {
@@ -337,6 +336,7 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:dist',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
+        'cssmin',
         'concat',
         'uglify',
         'copy',
