@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
+var win32 = process.platform === 'win32';
 
 
 var AppGenerator = module.exports = function Appgenerator(args, options, config) {
@@ -28,8 +29,8 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
       console.log('\n\nI\'m all done. Just run ' + 'npm install & bower install --dev'.bold.yellow + ' to install the required dependencies.\n\n');
     } else {
       console.log('\n\nI\'m all done. Running ' + 'npm install & bower install'.bold.yellow + ' for you to install the required dependencies. If this fails, try running the command yourself.\n\n');
-      spawn('npm', ['install'], { stdio: 'inherit' });
-      spawn('bower', ['install'], { stdio: 'inherit' });
+      spawn(win32 ? 'cmd' : 'npm', [win32 ? '/c npm install' : 'install'], { stdio: 'inherit' });
+      spawn(win32 ? 'cmd' : 'bower', [win32 ? '/c bower install' : 'install'], { stdio: 'inherit' });
     }
   });
 
