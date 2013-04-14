@@ -1,6 +1,14 @@
 # Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-webapp.png?branch=master)](http://travis-ci.org/yeoman/generator-webapp)
 
-Default Yeoman generator for scaffolding out a front-end web app.
+Yeoman generator for scaffolding out a front-end web app.
+
+
+## Getting Started
+
+- Make sure you have [yo](https://github.com/yeoman/yo) installed: `npm install -g yo`
+- Install the generator: `npm install -g generator-webapp`
+- Run: `yo webapp`
+- Run `grunt` for building and `grunt server` for preview
 
 
 ## Options
