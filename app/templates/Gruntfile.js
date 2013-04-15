@@ -111,7 +111,7 @@ module.exports = function (grunt) {
                 '!<%%= yeoman.app %>/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
-        },
+        },<% if (testFramework === 'mocha') { %>
         mocha: {
             all: {
                 options: {
@@ -119,7 +119,15 @@ module.exports = function (grunt) {
                     urls: ['http://localhost:<%%= connect.options.port %>/index.html']
                 }
             }
-        },
+        },<% } else if (testFramework === 'jasmine') { %>
+        jasmine: {
+            all: {
+                /*src: '',*/
+                options: {
+                    specs: 'test/spec/{,*/}*.js'
+                }
+            }
+        },<% } %>
         coffee: {
             dist: {
                 files: [{
@@ -327,8 +335,9 @@ module.exports = function (grunt) {
     grunt.registerTask('test', [
         'clean:server',
         'concurrent:test',
-        'connect:test',
-        'mocha'
+        'connect:test',<% if (testFramework === 'mocha') { %>
+        'mocha'<% } else if (testFramework === 'jasmine') { %>
+        'jasmine'<% } %>
     ]);
 
     grunt.registerTask('build', [
