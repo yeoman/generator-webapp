@@ -155,8 +155,10 @@ module.exports = function (grunt) {
                 imagesDir: '<%%= yeoman.app %>/images',
                 javascriptsDir: '<%%= yeoman.app %>/scripts',
                 fontsDir: '<%%= yeoman.app %>/styles/fonts',
-                importPath: 'app/components',
-                relativeAssets: true
+                importPath: '<%%= yeoman.app %>/components',
+                httpImagesPath: '/images',
+                httpGeneratedImagesPath: '/images',
+                relativeAssets: false
             },
             dist: {},
             server: {
@@ -184,7 +186,7 @@ module.exports = function (grunt) {
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true,
+                    wrap: true
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
