@@ -92,7 +92,7 @@ AppGenerator.prototype.git = function git() {
 
 AppGenerator.prototype.bower = function bower() {
   this.copy('bowerrc', '.bowerrc');
-  this.copy('_component.json', 'component.json');
+  this.copy('_bower.json', 'bower.json');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
@@ -145,7 +145,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   if (!this.includeRequireJS) {
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-      'components/jquery/jquery.js',
+      'bower_components/jquery/jquery.js',
       'scripts/main.js'
     ]);
 
@@ -161,19 +161,19 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   if (this.compassBootstrap && !this.includeRequireJS) {
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-      'components/sass-bootstrap/js/bootstrap-affix.js',
-      'components/sass-bootstrap/js/bootstrap-alert.js',
-      'components/sass-bootstrap/js/bootstrap-dropdown.js',
-      'components/sass-bootstrap/js/bootstrap-tooltip.js',
-      'components/sass-bootstrap/js/bootstrap-modal.js',
-      'components/sass-bootstrap/js/bootstrap-transition.js',
-      'components/sass-bootstrap/js/bootstrap-button.js',
-      'components/sass-bootstrap/js/bootstrap-popover.js',
-      'components/sass-bootstrap/js/bootstrap-typeahead.js',
-      'components/sass-bootstrap/js/bootstrap-carousel.js',
-      'components/sass-bootstrap/js/bootstrap-scrollspy.js',
-      'components/sass-bootstrap/js/bootstrap-collapse.js',
-      'components/sass-bootstrap/js/bootstrap-tab.js'
+      'bower_components/sass-bootstrap/js/bootstrap-affix.js',
+      'bower_components/sass-bootstrap/js/bootstrap-alert.js',
+      'bower_components/sass-bootstrap/js/bootstrap-dropdown.js',
+      'bower_components/sass-bootstrap/js/bootstrap-tooltip.js',
+      'bower_components/sass-bootstrap/js/bootstrap-modal.js',
+      'bower_components/sass-bootstrap/js/bootstrap-transition.js',
+      'bower_components/sass-bootstrap/js/bootstrap-button.js',
+      'bower_components/sass-bootstrap/js/bootstrap-popover.js',
+      'bower_components/sass-bootstrap/js/bootstrap-typeahead.js',
+      'bower_components/sass-bootstrap/js/bootstrap-carousel.js',
+      'bower_components/sass-bootstrap/js/bootstrap-scrollspy.js',
+      'bower_components/sass-bootstrap/js/bootstrap-collapse.js',
+      'bower_components/sass-bootstrap/js/bootstrap-tab.js'
     ]);
   }
 
@@ -204,7 +204,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 // TODO(mklabs): to be put in a subgenerator like rjs:app
 AppGenerator.prototype.requirejs = function requirejs() {
   if (this.includeRequireJS) {
-    this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', ['components/requirejs/require.js'], {
+    this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', ['bower_components/requirejs/require.js'], {
       'data-main': 'scripts/main'
     });
 
@@ -220,7 +220,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
     this.mainJsFile = [
       'require.config({',
       '    paths: {',
-      '        jquery: \'../components/jquery/jquery\',',
+      '        jquery: \'../bower_components/jquery/jquery\',',
       '        bootstrap: \'vendor/bootstrap\'',
       '    },',
       '    shim: {',

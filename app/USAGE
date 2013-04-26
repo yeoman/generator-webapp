@@ -10,7 +10,7 @@ Example:
 
     This will create:
         Gruntfile.js: Configuration for the task runner.
-        component.json: Front-end packages installed by bower.
+        bower.json: Front-end packages installed by bower.
         package.json: Development packages installed by npm.
 
         app/: Your application files.
