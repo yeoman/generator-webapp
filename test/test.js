@@ -29,7 +29,7 @@ describe('Webapp generator test', function () {
 
   it('creates expected files in non-AMD mode', function (done) {
     var expected = [
-      ['component.json', /"name": "temp"/],
+      ['bower.json', /"name": "temp"/],
       ['package.json', /"name": "temp"/],
       'Gruntfile.js',
       'app/404.html',
@@ -55,7 +55,7 @@ describe('Webapp generator test', function () {
 
   it('creates expected files in AMD mode', function (done) {
     var expected= [
-      ['component.json', /"name": "temp"/],
+      ['bower.json', /"name": "temp"/],
       ['package.json', /"name": "temp"/],
       'Gruntfile.js',
       'app/404.html',
