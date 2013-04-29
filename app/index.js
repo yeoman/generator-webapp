@@ -53,13 +53,13 @@ AppGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     name: 'compassBootstrap',
     message: 'Would you like to include Twitter Bootstrap for Sass?',
-    default: 'Y/n',
+    default: true,
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
   },
   {
     name: 'includeRequireJS',
     message: 'Would you like to include RequireJS (for AMD support)?',
-    default: 'Y/n',
+    default: true,
     warning: 'Yes: RequireJS will be placed into the JavaScript vendor directory.'
   }];
 
