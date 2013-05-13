@@ -26,7 +26,7 @@ module.exports = function (grunt) {
         yeoman: yeomanConfig,
         watch: {
             options: {
-              spawn: false
+                nospawn: true
             },
             coffee: {
                 files: ['<%%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
+                            mountFolder(connect, yeomanConfig.app),
                             lrSnippet
                         ];
                     }
@@ -83,7 +83,7 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, 'dist')
+                            mountFolder(connect, yeomanConfig.dist)
                         ];
                     }
                 }
@@ -128,7 +128,6 @@ module.exports = function (grunt) {
         },<% } else if (testFramework === 'jasmine') { %>
         jasmine: {
             all: {
-                /*src: '',*/
                 options: {
                     specs: 'test/spec/{,*/}*.js'
                 }
@@ -217,17 +216,17 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: '<%%= yeoman.app %>/index.html',
             options: {
                 dest: '<%%= yeoman.dist %>'
-            }
+            },
+            html: '<%%= yeoman.app %>/index.html'
         },
         usemin: {
-            html: ['<%%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
             options: {
                 dirs: ['<%%= yeoman.dist %>']
-            }
+            },
+            html: ['<%%= yeoman.dist %>/{,*/}*.html'],
+            css: ['<%%= yeoman.dist %>/styles/{,*/}*.css']
         },
         imagemin: {
             dist: {
@@ -330,8 +329,6 @@ module.exports = function (grunt) {
             }
         }<% } %>
     });
-
-    grunt.renameTask('regarde', 'watch');
 
     grunt.registerTask('server', function (target) {
         if (target === 'dist') {
