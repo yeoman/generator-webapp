@@ -70,8 +70,8 @@ AppGenerator.prototype.askFor = function askFor() {
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.compassBootstrap = (/y/i).test(props.compassBootstrap);
-    this.includeRequireJS = (/y/i).test(props.includeRequireJS);
+    this.compassBootstrap = props.compassBootstrap;
+    this.includeRequireJS = props.includeRequireJS;
 
     cb();
   }.bind(this));
