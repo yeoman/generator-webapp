@@ -30,7 +30,7 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
-util.inherits(AppGenerator, yeoman.generators.NamedBase);
+util.inherits(AppGenerator, yeoman.generators.Base);
 
 AppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
