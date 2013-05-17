@@ -119,7 +119,7 @@ AppGenerator.prototype.bootstrapImg = function bootstrapImg() {
 
 AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
   // TODO: create a Bower component for this
-  if (this.includeRequireJS) {
+  if (this.compassBootstrap) {
     this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
   }
 };
