@@ -122,9 +122,9 @@ AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
-    this.write('app/styles/main.scss', '$iconSpritePath: "../images/glyphicons-halflings.png";\n$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";\n\n@import \'sass-bootstrap/lib/bootstrap\';\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
+    this.copy('main.scss', 'app/styles/main.scss');
   } else {
-    this.write('app/styles/main.css', 'body {\n    background: #fafafa;\n}\n\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}');
+    this.copy('main.css', 'app/styles/main.css');
   }
 };
 
@@ -203,6 +203,9 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
 // TODO(mklabs): to be put in a subgenerator like rjs:app
 AppGenerator.prototype.requirejs = function requirejs() {
+  var requiredScripts = (this.compassBootstrap) ? '[\'app\', \'jquery\', \'bootstrap\']' : '[\'app\', \'jquery\']';
+  var bootstrapPath = (this.compassBootstrap) ? '        bootstrap: \'vendor/bootstrap\'\n    },' : '    },';
+
   if (this.includeRequireJS) {
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', ['bower_components/requirejs/require.js'], {
       'data-main': 'scripts/main'
@@ -221,8 +224,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
       'require.config({',
       '    paths: {',
       '        jquery: \'../bower_components/jquery/jquery\',',
-      '        bootstrap: \'vendor/bootstrap\'',
-      '    },',
+      bootstrapPath,
       '    shim: {',
       '        bootstrap: {',
       '            deps: [\'jquery\'],',
@@ -231,7 +233,7 @@ AppGenerator.prototype.requirejs = function requirejs() {
       '    }',
       '});',
       '',
-      'require([\'app\', \'jquery\', \'bootstrap\'], function (app, $) {',
+      'require(' + requiredScripts + ', function (app, $) {',
       '    \'use strict\';',
       '    // use app here',
       '    console.log(app);',
