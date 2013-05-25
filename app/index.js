@@ -50,6 +50,12 @@ AppGenerator.prototype.askFor = function askFor() {
     name: 'includeRequireJS',
     message: 'Would you like to include RequireJS (for AMD support)?',
     default: true
+  },
+  {
+    type: 'confirm',
+    name: 'autoprefixer',
+    message: 'Would you like to use autoprefixer for your CSS?',
+    default: false
   }];
 
   this.prompt(prompts, function (props) {
@@ -57,6 +63,7 @@ AppGenerator.prototype.askFor = function askFor() {
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = props.compassBootstrap;
     this.includeRequireJS = props.includeRequireJS;
+    this.autoprefixer = props.autoprefixer;
 
     cb();
   }.bind(this));

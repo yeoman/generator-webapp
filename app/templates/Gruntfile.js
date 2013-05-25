@@ -38,15 +38,20 @@ module.exports = function (grunt) {
             },
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server']
-            },
+                tasks: ['compass:server'<% if (autoprefixer) { %>, 'autoprefixer' <% } %>]
+            },<% if (autoprefixer) { %>
+            styles: {
+                files: ['<%%= yeoman.app %>/styles/{,*/}*.css'],
+                tasks: ['copy:styles', 'autoprefixer']
+            },<% } %>
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%%= yeoman.app %>/*.html',
-                    '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',
+                    '<%%= yeoman.app %>/*.html',<% if (autoprefixer) { %>
+                    '.tmp/styles/{,*/}*.css',<% } else { %>
+                    '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',<% } %>
                     '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
@@ -173,7 +178,20 @@ module.exports = function (grunt) {
                     debugInfo: true
                 }
             }
-        },
+        },<% if (autoprefixer) { %>
+        autoprefixer: {
+            options: {
+                browsers: ['last 1 version']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/styles/',
+                    src: '{,*/}*.css',
+                    dest: '.tmp/styles/'
+                }]
+            }
+        },<% } %>
         // not used since Uglify task does concat,
         // but still available if needed
         /*concat: {
@@ -302,20 +320,30 @@ module.exports = function (grunt) {
                         'generated/*'
                     ]
                 }]
-            }
+            }<% if (autoprefixer) { %>,
+            styles: {
+                expand: true,
+                dot: true,
+                cwd: '<%%= yeoman.app %>/styles',
+                dest: '.tmp/styles/',
+                src: '{,*/}*.css'
+            }<% } %>
         },
         concurrent: {
             server: [
                 'coffee:dist',
-                'compass:server'
+                'copy:styles'<% if (autoprefixer) { %>,
+                'autoprefixer'<% } %>
             ],
             test: [
                 'coffee',
-                'compass'
+                'copy:styles'<% if (autoprefixer) { %>,
+                'autoprefixer'<% } %>
             ],
             dist: [
                 'coffee',
-                'compass:dist',
+                'compass',<% if (autoprefixer) { %>
+                'copy:styles',<% } %>
                 'imagemin',
                 'svgmin',
                 'htmlmin'
@@ -338,7 +366,8 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'concurrent:server',
+            'concurrent:server',<% if (autoprefixer) { %>
+            'autoprefixer',<% } %>
             'connect:livereload',
             'open',
             'watch'
@@ -347,7 +376,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
-        'concurrent:test',
+        'concurrent:test',<% if (autoprefixer) { %>
+        'autoprefixer',<% } %>
         'connect:test',<% if (testFramework === 'mocha') { %>
         'mocha'<% } else if (testFramework === 'jasmine') { %>
         'jasmine'<% } %>
@@ -356,12 +386,13 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',<% if (includeRequireJS) { %>
+        'concurrent:dist',<% if (autoprefixer) { %>
+        'autoprefixer',<% } %><% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'cssmin',
         'concat',
         'uglify',
-        'copy',
+        'copy:dist',
         'rev',
         'usemin'
     ]);

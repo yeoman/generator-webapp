@@ -43,7 +43,8 @@ describe('Webapp generator test', function () {
 
     helpers.mockPrompt(this.webapp, {
       'compassBootstrap': 'Y',
-      'includeRequireJS': 'N'
+      'includeRequireJS': 'N',
+      'autoprefixer': 'N'
     });
 
     this.webapp.options['skip-install'] = true;
@@ -68,7 +69,8 @@ describe('Webapp generator test', function () {
 
     helpers.mockPrompt(this.webapp, {
       'compassBootstrap': 'Y',
-      'includeRequireJS': 'Y'
+      'includeRequireJS': 'Y',
+      'autoprefixer': 'N'
     });
 
     this.webapp.options['skip-install'] = true;
