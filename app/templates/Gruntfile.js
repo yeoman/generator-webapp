@@ -166,7 +166,11 @@ module.exports = function (grunt) {
                 httpGeneratedImagesPath: '/images/generated',
                 relativeAssets: false
             },
-            dist: {},
+            dist: {
+                options: {
+                    generatedImagesDir: '<%%= yeoman.dist %>/images/generated'
+                }
+            },
             server: {
                 options: {
                     debugInfo: true
@@ -292,13 +296,6 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/*'
-                    ]
-                }, {
-                    expand: true,
-                    cwd: '.tmp/images',
-                    dest: '<%%= yeoman.dist %>/images',
-                    src: [
-                        'generated/*'
                     ]
                 }]
             }
