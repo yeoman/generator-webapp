@@ -134,7 +134,7 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
   // prepare default content text
-  var defaults = ['HTML5 Boilerplate', 'Twitter Bootstrap'];
+  var defaults = ['HTML5 Boilerplate'];
   var contentText = [
     '        <div class="container">',
     '            <div class="hero-unit">',
@@ -156,6 +156,10 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
       sourceFileList: ['scripts/hello.js'],
       searchPath: '.tmp'
     });
+  }
+
+  if (this.compassBootstrap) {
+    defaults.push('Twitter Bootstrap');
   }
 
   if (this.compassBootstrap && !this.includeRequireJS) {
