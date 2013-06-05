@@ -51,23 +51,19 @@ AppGenerator.prototype.askFor = function askFor() {
   console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
 
   var prompts = [{
+    type: 'confirm',
     name: 'compassBootstrap',
     message: 'Would you like to include Twitter Bootstrap for Sass?',
-    default: true,
-    warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
+    default: true
   },
   {
+    type: 'confirm',
     name: 'includeRequireJS',
     message: 'Would you like to include RequireJS (for AMD support)?',
-    default: true,
-    warning: 'Yes: RequireJS will be placed into the JavaScript vendor directory.'
+    default: true
   }];
 
-  this.prompt(prompts, function (err, props) {
-    if (err) {
-      return this.emit('error', err);
-    }
-
+  this.prompt(prompts, function (props) {
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = props.compassBootstrap;
