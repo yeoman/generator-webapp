@@ -331,6 +331,7 @@ module.exports = function (grunt) {
         },
         concurrent: {
             server: [
+                'compass',
                 'coffee:dist'<% if (autoprefixer) { %>,
                 'copy:styles',
                 'autoprefixer'<% } %>
