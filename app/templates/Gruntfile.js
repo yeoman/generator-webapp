@@ -331,13 +331,13 @@ module.exports = function (grunt) {
         },
         concurrent: {
             server: [
-                'coffee:dist',
-                'copy:styles'<% if (autoprefixer) { %>,
+                'coffee:dist'<% if (autoprefixer) { %>,
+                'copy:styles',
                 'autoprefixer'<% } %>
             ],
             test: [
-                'coffee',
-                'copy:styles'<% if (autoprefixer) { %>,
+                'coffee'<% if (autoprefixer) { %>,
+                'copy:styles',
                 'autoprefixer'<% } %>
             ],
             dist: [
