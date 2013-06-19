@@ -333,13 +333,11 @@ module.exports = function (grunt) {
             server: [
                 'compass',
                 'coffee:dist'<% if (autoprefixer) { %>,
-                'copy:styles',
-                'autoprefixer'<% } %>
+                'copy:styles'<% } %>
             ],
             test: [
                 'coffee'<% if (autoprefixer) { %>,
-                'copy:styles',
-                'autoprefixer'<% } %>
+                'copy:styles'<% } %>
             ],
             dist: [
                 'coffee',
