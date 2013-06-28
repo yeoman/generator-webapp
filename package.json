@@ -1,6 +1,6 @@
 {
   "name": "generator-webapp",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Default Yeoman generator for scaffolding out a front-end web app",
   "keywords": [
     "yeoman-generator",
@@ -22,7 +22,7 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.12.1",
+    "yeoman-generator": "~0.12.2",
     "cheerio": "~0.10.8"
   },
   "peerDependencies": {
