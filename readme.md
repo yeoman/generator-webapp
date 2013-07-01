@@ -15,13 +15,11 @@ Yeoman generator for scaffolding out a front-end web app.
 
 * `--skip-install`
 
-  Skips the automatic execution of `bower` and `npm` after
-  scaffolding has finished.
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
-* `--test-framework=[framework]`
+* `--test-framework <framework>`
 
-  Defaults to `mocha`. Can be switched for
-  another supported testing framework like `jasmine`.
+  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
 
 ## Contribute
