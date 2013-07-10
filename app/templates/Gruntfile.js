@@ -35,20 +35,19 @@ module.exports = function (grunt) {
             },
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server'<% if (autoprefixer) { %>, 'autoprefixer' <% } %>]
-            },<% if (autoprefixer) { %>
+                tasks: ['compass:server'<% if (autoprefixer) { %>, 'autoprefixer'<% } %>]
+            },
             styles: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.css'],
-                tasks: ['copy:styles', 'autoprefixer']
-            },<% } %>
+                tasks: ['copy:styles'<% if (autoprefixer) { %>, 'autoprefixer'<% } %>]
+            },
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%%= yeoman.app %>/*.html',<% if (autoprefixer) { %>
-                    '.tmp/styles/{,*/}*.css',<% } else { %>
-                    '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',<% } %>
+                    '<%%= yeoman.app %>/*.html',
+                    '.tmp/styles/{,*/}*.css',
                     '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
@@ -320,29 +319,29 @@ module.exports = function (grunt) {
                         'styles/fonts/*'
                     ]
                 }]
-            }<% if (autoprefixer) { %>,
+            },
             styles: {
                 expand: true,
                 dot: true,
                 cwd: '<%%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
-            }<% } %>
+            }
         },
         concurrent: {
             server: [
                 'compass',
-                'coffee:dist'<% if (autoprefixer) { %>,
-                'copy:styles'<% } %>
+                'coffee:dist',
+                'copy:styles'
             ],
             test: [
-                'coffee'<% if (autoprefixer) { %>,
-                'copy:styles'<% } %>
+                'coffee',
+                'copy:styles'
             ],
             dist: [
                 'coffee',
-                'compass',<% if (autoprefixer) { %>
-                'copy:styles',<% } %>
+                'compass',
+                'copy:styles',
                 'imagemin',
                 'svgmin',
                 'htmlmin'
