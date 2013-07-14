@@ -39,30 +39,32 @@ AppGenerator.prototype.askFor = function askFor() {
   console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
 
   var prompts = [{
-    type: 'confirm',
-    name: 'compassBootstrap',
-    message: 'Would you like to include Twitter Bootstrap for Sass?',
-    default: true
-  },
-  {
-    type: 'confirm',
-    name: 'includeRequireJS',
-    message: 'Would you like to include RequireJS (for AMD support)?',
-    default: true
-  },
-  {
-    type: 'confirm',
-    name: 'autoprefixer',
-    message: 'Would you like to use autoprefixer for your CSS?',
-    default: false
+    type: 'checkbox',
+    name: 'features',
+    message: 'What more would you like?',
+    choices: [{
+      name: 'Twitter Bootstrap for Sass',
+      value: 'compassBootstrap',
+      checked: true
+    }, {
+      name: 'RequireJS',
+      value: 'includeRequireJS',
+      checked: true
+    }, {
+      name: 'Autoprefixer for your CSS',
+      value: 'autoprefixer',
+      checked: true
+    }]
   }];
 
-  this.prompt(prompts, function (props) {
+  this.prompt(prompts, function (answers) {
+    var features = answers.features;
+
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.compassBootstrap = props.compassBootstrap;
-    this.includeRequireJS = props.includeRequireJS;
-    this.autoprefixer = props.autoprefixer;
+    this.compassBootstrap = features.indexOf('compassBootstrap') !== -1;
+    this.includeRequireJS = features.indexOf('includeRequireJS') !== -1;
+    this.autoprefixer = features.indexOf('autoprefixer') !== -1;
 
     cb();
   }.bind(this));
