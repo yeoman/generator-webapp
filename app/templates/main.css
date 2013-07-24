@@ -20,3 +20,10 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
