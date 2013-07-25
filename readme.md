@@ -5,8 +5,7 @@ Yeoman generator that scaffolds out a front-end web app.
 
 ## Getting Started
 
-- Make sure you have [yo](https://github.com/yeoman/yo) installed: `npm install -g yo`
-- Install the generator: `npm install -g generator-webapp`
+- Install: `npm install -g generator-webapp`
 - Run: `yo webapp`
 - Run `grunt` for building and `grunt server` for preview
 
