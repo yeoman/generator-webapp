@@ -1,6 +1,6 @@
 {
   "name": "generator-webapp",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Scaffold out a front-end web app",
   "keywords": [
     "yeoman-generator",
