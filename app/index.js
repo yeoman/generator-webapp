@@ -135,12 +135,26 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '                <ul>'
   ];
 
+  var bowerInstallText
+    = '\n        <!-- build:js scripts/vendor.js -->'
+    + '\n        <!-- bower:js -->'
+    + (this.includeModernizr
+        ?
+      '\n        <script src="bower_components/modernizr/modernizr.js"></script>'
+        :
+      '')
+    + '\n        <script src="bower_components/jquery/jquery.js"></script>'
+    + '\n        <!-- endbower -->'
+    + '\n        <!-- endbuild -->'
+    + '\n';
+
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
   if (!this.includeRequireJS) {
+    this.indexFile = this.append(this.indexFile, 'body', bowerInstallText);
+
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-      'bower_components/jquery/jquery.js',
       'scripts/main.js'
     ]);
 
