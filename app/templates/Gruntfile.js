@@ -37,11 +37,11 @@ module.exports = function (grunt) {
             },
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server'<% if (autoprefixer) { %>, 'autoprefixer'<% } %>]
+                tasks: ['compass:server', 'autoprefixer']
             },
             styles: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.css'],
-                tasks: ['copy:styles'<% if (autoprefixer) { %>, 'autoprefixer'<% } %>]
+                tasks: ['copy:styles', 'autoprefixer']
             },
             livereload: {
                 options: {
@@ -180,7 +180,7 @@ module.exports = function (grunt) {
                     debugInfo: true
                 }
             }
-        },<% if (autoprefixer) { %>
+        },
         autoprefixer: {
             options: {
                 browsers: ['last 1 version']
@@ -193,7 +193,7 @@ module.exports = function (grunt) {
                     dest: '.tmp/styles/'
                 }]
             }
-        },<% } %>
+        },
         // not used since Uglify task does concat,
         // but still available if needed
         /*concat: {
@@ -366,8 +366,8 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
-            'concurrent:server',<% if (autoprefixer) { %>
-            'autoprefixer',<% } %>
+            'concurrent:server',
+            'autoprefixer',
             'connect:livereload',
             'open',
             'watch'
@@ -376,8 +376,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
-        'concurrent:test',<% if (autoprefixer) { %>
-        'autoprefixer',<% } %>
+        'concurrent:test',
+        'autoprefixer',
         'connect:test',<% if (testFramework === 'mocha') { %>
         'mocha'<% } else if (testFramework === 'jasmine') { %>
         'jasmine'<% } %>
@@ -386,8 +386,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',<% if (autoprefixer) { %>
-        'autoprefixer',<% } %><% if (includeRequireJS) { %>
+        'concurrent:dist',
+        'autoprefixer',<% if (includeRequireJS) { %>
         'requirejs',<% } %>
         'concat',
         'cssmin',

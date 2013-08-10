@@ -50,10 +50,6 @@ AppGenerator.prototype.askFor = function askFor() {
       name: 'RequireJS',
       value: 'includeRequireJS',
       checked: true
-    }, {
-      name: 'Autoprefixer for your CSS',
-      value: 'autoprefixer',
-      checked: true
     }]
   }];
 
@@ -64,7 +60,6 @@ AppGenerator.prototype.askFor = function askFor() {
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = features.indexOf('compassBootstrap') !== -1;
     this.includeRequireJS = features.indexOf('includeRequireJS') !== -1;
-    this.autoprefixer = features.indexOf('autoprefixer') !== -1;
 
     cb();
   }.bind(this));
