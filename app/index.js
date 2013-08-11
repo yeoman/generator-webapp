@@ -105,13 +105,6 @@ AppGenerator.prototype.bootstrapImg = function bootstrapImg() {
   }
 };
 
-AppGenerator.prototype.bootstrapJs = function bootstrapJs() {
-  // TODO: create a Bower component for this
-  if (this.compassBootstrap) {
-    this.copy('bootstrap.js', 'app/scripts/vendor/bootstrap.js');
-  }
-};
-
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
     this.copy('main.scss', 'app/styles/main.scss');
