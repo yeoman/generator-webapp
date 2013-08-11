@@ -19,7 +19,6 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
 
-  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.mainCoffeeFile = 'console.log "\'Allo from CoffeeScript!"';
 
   this.on('end', function () {
@@ -50,16 +49,23 @@ AppGenerator.prototype.askFor = function askFor() {
       name: 'RequireJS',
       value: 'includeRequireJS',
       checked: true
+    }, {
+      name: 'Modernizr',
+      value: 'includeModernizr',
+      checked: true
     }]
   }];
 
   this.prompt(prompts, function (answers) {
     var features = answers.features;
 
+    function hasFeature(feat) { return features.indexOf(feat) !== -1; }
+
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.compassBootstrap = features.indexOf('compassBootstrap') !== -1;
-    this.includeRequireJS = features.indexOf('includeRequireJS') !== -1;
+    this.compassBootstrap = hasFeature('compassBootstrap');
+    this.includeRequireJS = hasFeature('includeRequireJS');
+    this.includeModernizr = hasFeature('includeModernizr');
 
     cb();
   }.bind(this));
@@ -123,6 +129,9 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     '                <p>You now have</p>',
     '                <ul>'
   ];
+
+  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+  this.indexFile = this.engine(this.indexFile, this);
 
   if (!this.includeRequireJS) {
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
