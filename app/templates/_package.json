@@ -15,7 +15,8 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-htmlmin": "~0.1.3",<% if (includeRequireJS) { %>
     "grunt-bower-requirejs": "~0.4.1",
-    "grunt-contrib-requirejs": "~0.4.0",<% } %>
+    "grunt-contrib-requirejs": "~0.4.0",<% } %><% if (includeModernizr) { %>
+    "grunt-modernizr": "~0.3.0",<% } %>
     "grunt-contrib-imagemin": "~0.1.3",
     "grunt-contrib-watch": "~0.4.0",<% if (testFramework === 'jasmine') { %>
     "grunt-contrib-jasmine": "~0.4.2",<% } %>
