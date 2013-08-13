@@ -22,7 +22,10 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   this.mainCoffeeFile = 'console.log "\'Allo from CoffeeScript!"';
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    this.installDependencies({
+      skipInstall: options['skip-install'],
+      skipMessage: options['skip-install-message']
+    });
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -34,8 +37,10 @@ AppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // welcome message
-  console.log(this.yeoman);
-  console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
+  if (!this.options['skip-welcome-message']) {
+    console.log(this.yeoman);
+    console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
+  }
 
   var prompts = [{
     type: 'checkbox',
