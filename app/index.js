@@ -39,7 +39,7 @@ AppGenerator.prototype.askFor = function askFor() {
   // welcome message
   if (!this.options['skip-welcome-message']) {
     console.log(this.yeoman);
-    console.log('Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.');
+    console.log('Out of the box I include HTML5 Boilerplate and jQuery.');
   }
 
   var prompts = [{
