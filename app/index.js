@@ -138,11 +138,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   var bowerInstallText
     = '\n        <!-- build:js scripts/vendor.js -->'
     + '\n        <!-- bower:js -->'
-    + (this.includeModernizr
-        ?
-      '\n        <script src="bower_components/modernizr/modernizr.js"></script>'
-        :
-      '')
     + '\n        <script src="bower_components/jquery/jquery.js"></script>'
     + '\n        <!-- endbower -->'
     + '\n        <!-- endbuild -->'
