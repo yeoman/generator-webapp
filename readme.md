@@ -6,9 +6,9 @@ Yeoman generator that scaffolds out a front-end web app.
 
 * CSS Autoprefixing (new)
 * Built-in preview server with LiveReload
-* Automatically compile CoffeeScript & Compass
-* Automatically lint your scripts 
-* Automatically wire up your Bower components. Supports both [with](https://github.com/yeoman/grunt-bower-requirejs) and [without](https://github.com/stephenplusplus/grunt-bower-install) RequireJS.
+* Automagically compile CoffeeScript & Compass
+* Automagically lint your scripts 
+* Automagically wire up your Bower components. Supports both [with](https://github.com/yeoman/grunt-bower-requirejs) and [without](https://github.com/stephenplusplus/grunt-bower-install) RequireJS.
 * Awesome Image Optimization
 * PhantomJS Unit Testing
 * Optional - RequireJS
