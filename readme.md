@@ -2,6 +2,19 @@
 
 Yeoman generator that scaffolds out a front-end web app.
 
+## Features
+
+* CSS Autoprefixing (new)
+* Built-in preview server with LiveReload
+* Automatically compile CoffeeScript & Compass
+* Automatically lint your scripts 
+* Awesome Image Optimization
+* PhantomJS Unit Testing
+* Optional - RequireJS
+* Optional - Twitter Bootstrap for SASS
+* Optional - Leaner Modernizr builds (new)
+
+For more information on what `generator-webapp` can do for you, take a look at the [Grunt tasks](https://github.com/yeoman/generator-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
 
 ## Getting Started
 
