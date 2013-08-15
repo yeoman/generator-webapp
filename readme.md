@@ -8,6 +8,7 @@ Yeoman generator that scaffolds out a front-end web app.
 * Built-in preview server with LiveReload
 * Automatically compile CoffeeScript & Compass
 * Automatically lint your scripts 
+* Automatically [wire up](https://github.com/stephenplusplus/grunt-bower-install) your `bower install`s (new)
 * Awesome Image Optimization
 * PhantomJS Unit Testing
 * Optional - RequireJS
