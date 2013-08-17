@@ -77,7 +77,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+                            mountFolder(connect, 'test'),
+                            mountFolder(connect, yeomanConfig.app)
                         ];
                     }
                 }
