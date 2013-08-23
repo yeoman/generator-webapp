@@ -7,10 +7,10 @@ Yeoman generator that scaffolds out a front-end web app.
 * CSS Autoprefixing (new)
 * Built-in preview server with LiveReload
 * Automagically compile CoffeeScript & Compass
-* Automagically lint your scripts 
-* Automagically wire up your Bower components. Supported both [with](https://github.com/yeoman/grunt-bower-requirejs) and [without](https://github.com/stephenplusplus/grunt-bower-install) RequireJS.
+* Automagically lint your scripts
+* Automagically wire up your Bower components. Supported both [with](https://github.com/yeoman/grunt-bower-requirejs) and [without](https://github.com/stephenplusplus/grunt-bower-install) (new) RequireJS.
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
-* PhantomJS Unit Testing
+* Mocha Unit Testing with PhantomJS
 * Optional - RequireJS
 * Optional - Twitter Bootstrap for SASS
 * Optional - Leaner Modernizr builds (new)
@@ -39,7 +39,7 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
 See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md)
 
-Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it. 
+Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it.
 
 If not, `generator-webapp` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo webapp` or a name of your choosing.
 
