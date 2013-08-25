@@ -1,17 +1,17 @@
 require.config({
     paths: {
         jquery: '../bower_components/jquery/jquery'<% if (compassBootstrap) { %>,
-        bootstrapAffix: '../bower_components/sass-bootstrap/js/bootstrap-affix.js',
-        bootstrapAlert: '../bower_components/sass-bootstrap/js/bootstrap-alert.js',
-        bootstrapButton: '../bower_components/sass-bootstrap/js/bootstrap-button.js',
-        bootstrapCarousel: '../bower_components/sass-bootstrap/js/bootstrap-carousel.js',
-        bootstrapCollapse: '../bower_components/sass-bootstrap/js/bootstrap-collapse.js',
-        bootstrapPopover: '../bower_components/sass-bootstrap/js/bootstrap-popover.js',
-        bootstrapScrollspy: '../bower_components/sass-bootstrap/js/bootstrap-scrollspy.js',
-        bootstrapTab: '../bower_components/sass-bootstrap/js/bootstrap-tab.js',
-        bootstrapTooltip: '../bower_components/sass-bootstrap/js/bootstrap-tooltip.js',
-        bootstrapTransition: '../bower_components/sass-bootstrap/js/bootstrap-transition.js',
-        bootstrapTypeahead: '../bower_components/sass-bootstrap/js/bootstrap-typeahead.js'<% } %>
+        bootstrapAffix: '../bower_components/sass-bootstrap/js/bootstrap-affix',
+        bootstrapAlert: '../bower_components/sass-bootstrap/js/bootstrap-alert',
+        bootstrapButton: '../bower_components/sass-bootstrap/js/bootstrap-button',
+        bootstrapCarousel: '../bower_components/sass-bootstrap/js/bootstrap-carousel',
+        bootstrapCollapse: '../bower_components/sass-bootstrap/js/bootstrap-collapse',
+        bootstrapPopover: '../bower_components/sass-bootstrap/js/bootstrap-popover',
+        bootstrapScrollspy: '../bower_components/sass-bootstrap/js/bootstrap-scrollspy',
+        bootstrapTab: '../bower_components/sass-bootstrap/js/bootstrap-tab',
+        bootstrapTooltip: '../bower_components/sass-bootstrap/js/bootstrap-tooltip',
+        bootstrapTransition: '../bower_components/sass-bootstrap/js/bootstrap-transition',
+        bootstrapTypeahead: '../bower_components/sass-bootstrap/js/bootstrap-typeahead'<% } %>
     }<% if (compassBootstrap) { %>,
     shim: {
         bootstrapAffix: {
