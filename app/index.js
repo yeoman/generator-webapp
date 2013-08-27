@@ -109,13 +109,6 @@ AppGenerator.prototype.h5bp = function h5bp() {
   this.copy('htaccess', 'app/.htaccess');
 };
 
-AppGenerator.prototype.bootstrapImg = function bootstrapImg() {
-  if (this.compassBootstrap) {
-    this.copy('glyphicons-halflings.png', 'app/images/glyphicons-halflings.png');
-    this.copy('glyphicons-halflings-white.png', 'app/images/glyphicons-halflings-white.png');
-  }
-};
-
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
   if (this.compassBootstrap) {
     this.copy('main.scss', 'app/styles/main.scss');
@@ -125,30 +118,11 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
-  // prepare default content text
-  var defaults = ['HTML5 Boilerplate'];
-  var contentText = [
-    '        <div class="container">',
-    '            <div class="hero-unit">',
-    '                <h1>\'Allo, \'Allo!</h1>',
-    '                <p>You now have</p>',
-    '                <ul>'
-  ];
-
-  var bowerInstallText
-    = '\n        <!-- build:js scripts/vendor.js -->'
-    + '\n        <!-- bower:js -->'
-    + '\n        <script src="bower_components/jquery/jquery.js"></script>'
-    + '\n        <!-- endbower -->'
-    + '\n        <!-- endbuild -->'
-    + '\n';
 
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
   if (!this.includeRequireJS) {
-    this.indexFile = this.append(this.indexFile, 'body', bowerInstallText);
-
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
       'scripts/main.js'
     ]);
@@ -162,49 +136,23 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     });
   }
 
-  if (this.compassBootstrap) {
-    defaults.push('Twitter Bootstrap');
-  }
-
   if (this.compassBootstrap && !this.includeRequireJS) {
     // wire Twitter Bootstrap plugins
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-      'bower_components/sass-bootstrap/js/bootstrap-affix.js',
-      'bower_components/sass-bootstrap/js/bootstrap-alert.js',
-      'bower_components/sass-bootstrap/js/bootstrap-dropdown.js',
-      'bower_components/sass-bootstrap/js/bootstrap-tooltip.js',
-      'bower_components/sass-bootstrap/js/bootstrap-modal.js',
-      'bower_components/sass-bootstrap/js/bootstrap-transition.js',
-      'bower_components/sass-bootstrap/js/bootstrap-button.js',
-      'bower_components/sass-bootstrap/js/bootstrap-popover.js',
-      'bower_components/sass-bootstrap/js/bootstrap-typeahead.js',
-      'bower_components/sass-bootstrap/js/bootstrap-carousel.js',
-      'bower_components/sass-bootstrap/js/bootstrap-scrollspy.js',
-      'bower_components/sass-bootstrap/js/bootstrap-collapse.js',
-      'bower_components/sass-bootstrap/js/bootstrap-tab.js'
+      'bower_components/sass-bootstrap/js/affix.js',
+      'bower_components/sass-bootstrap/js/alert.js',
+      'bower_components/sass-bootstrap/js/dropdown.js',
+      'bower_components/sass-bootstrap/js/tooltip.js',
+      'bower_components/sass-bootstrap/js/modal.js',
+      'bower_components/sass-bootstrap/js/transition.js',
+      'bower_components/sass-bootstrap/js/button.js',
+      'bower_components/sass-bootstrap/js/popover.js',
+      'bower_components/sass-bootstrap/js/carousel.js',
+      'bower_components/sass-bootstrap/js/scrollspy.js',
+      'bower_components/sass-bootstrap/js/collapse.js',
+      'bower_components/sass-bootstrap/js/tab.js'
     ]);
   }
-
-  if (this.includeRequireJS) {
-    defaults.push('RequireJS');
-  }
-
-  // iterate over defaults and create content string
-  defaults.forEach(function (el) {
-    contentText.push('                    <li>' + el  +'</li>');
-  });
-
-  contentText = contentText.concat([
-    '                </ul>',
-    '                <p>installed.</p>',
-    '                <h3>Enjoy coding! - Yeoman</h3>',
-    '            </div>',
-    '        </div>',
-    ''
-  ]);
-
-  // append the default content
-  this.indexFile = this.indexFile.replace('<body>', '<body>\n' + contentText.join('\n'));
 };
 
 // TODO(mklabs): to be put in a subgenerator like rjs:app
