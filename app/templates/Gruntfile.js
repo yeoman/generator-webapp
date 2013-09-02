@@ -1,9 +1,6 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 'use strict';
 var LIVERELOAD_PORT = 35729;
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
-};
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -63,38 +60,30 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
-                        ];
-                    }
+                    base: [
+                        '.tmp',
+                        yeomanConfig.app
+                    ]
                 }
             },
             test: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test'),
-                            mountFolder(connect, yeomanConfig.app)
-                        ];
-                    }
+                    base: [
+                        '.tmp',
+                        'test',
+                        yeomanConfig.app,
+                    ]
                 }
             },
             dist: {
                 options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, yeomanConfig.dist)
-                        ];
-                    }
+                    base: yeomanConfig.dist
                 }
             }
         },
         open: {
             server: {
-                path: 'http://localhost:<%%= connect.options.port %>'
+                path: 'http://localhost:<%%= connect.options.port %>/index.html'
             }
         },
         clean: {
