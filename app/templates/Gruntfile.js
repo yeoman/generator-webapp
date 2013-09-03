@@ -60,6 +60,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
+                    open: true,
                     base: [
                         '.tmp',
                         yeomanConfig.app
@@ -77,13 +78,9 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
+                    open: true,
                     base: yeomanConfig.dist
                 }
-            }
-        },
-        open: {
-            server: {
-                path: 'http://localhost:<%%= connect.options.port %>'
             }
         },
         clean: {
@@ -114,7 +111,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     run: true,
-                    urls: ['http://localhost:<%%= connect.options.port %>/index.html']
+                    urls: ['http://<%%= connect.test.options.hostname %>:<%%= connect.test.options.port %>/index.html']
                 }
             }
         },<% } else if (testFramework === 'jasmine') { %>
@@ -366,7 +363,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('server', function (target) {
         if (target === 'dist') {
-            return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+            return grunt.task.run(['build', 'connect:dist:keepalive']);
         }
 
         grunt.task.run([
@@ -374,7 +371,6 @@ module.exports = function (grunt) {
             'concurrent:server',
             'autoprefixer',
             'connect:livereload',
-            'open',
             'watch'
         ]);
     });
