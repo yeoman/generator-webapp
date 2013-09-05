@@ -1,6 +1,5 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 'use strict';
-var LIVERELOAD_PORT = 35729;
 
 // # Globbing
 // for performance reasons we're only matching one level down:
@@ -41,7 +40,7 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
-                    livereload: LIVERELOAD_PORT
+                    livereload: '<%%= connect.options.livereload %>'
                 },
                 files: [
                     '<%%= yeoman.app %>/*.html',
@@ -54,9 +53,9 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
+                livereload: 35729,
                 // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost',
-                livereload: LIVERELOAD_PORT
+                hostname: 'localhost'
             },
             livereload: {
                 options: {
