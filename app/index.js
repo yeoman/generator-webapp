@@ -47,7 +47,7 @@ AppGenerator.prototype.askFor = function askFor() {
     name: 'features',
     message: 'What more would you like?',
     choices: [{
-      name: 'Twitter Bootstrap for Sass',
+      name: 'Bootstrap for Sass',
       value: 'compassBootstrap',
       checked: true
     }, {
