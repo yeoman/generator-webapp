@@ -6,6 +6,7 @@ require.config({
         bootstrapButton: '../bower_components/sass-bootstrap/js/button',
         bootstrapCarousel: '../bower_components/sass-bootstrap/js/carousel',
         bootstrapCollapse: '../bower_components/sass-bootstrap/js/collapse',
+        bootstrapDropdown: '../bower_components/sass-bootstrap/js/dropdown',
         bootstrapPopover: '../bower_components/sass-bootstrap/js/popover',
         bootstrapScrollspy: '../bower_components/sass-bootstrap/js/scrollspy',
         bootstrapTab: '../bower_components/sass-bootstrap/js/tab',
@@ -26,6 +27,9 @@ require.config({
             deps: ['jquery']
         },
         bootstrapCollapse: {
+            deps: ['jquery']
+        },
+        bootstrapDropdown: {
             deps: ['jquery']
         },
         bootstrapPopover: {
