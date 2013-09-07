@@ -13,14 +13,12 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
-    // configurable paths
-    var yeomanConfig = {
-        app: 'app',
-        dist: 'dist'
-    };
-
     grunt.initConfig({
-        yeoman: yeomanConfig,
+        // configurable paths
+        yeoman: {
+            app: 'app',
+            dist: 'dist'
+        },
         watch: {
             coffee: {
                 files: ['<%%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -62,7 +60,7 @@ module.exports = function (grunt) {
                     open: true,
                     base: [
                         '.tmp',
-                        yeomanConfig.app
+                        '<%%= yeoman.app %>'
                     ]
                 }
             },
@@ -71,14 +69,14 @@ module.exports = function (grunt) {
                     base: [
                         '.tmp',
                         'test',
-                        yeomanConfig.app,
+                        '<%%= yeoman.app %>'
                     ]
                 }
             },
             dist: {
                 options: {
                     open: true,
-                    base: yeomanConfig.dist
+                    base: '<%%= yeoman.dist %>'
                 }
             }
         },
@@ -189,7 +187,7 @@ module.exports = function (grunt) {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
                     // `name` and `out` is set by grunt-usemin
-                    baseUrl: yeomanConfig.app + '/scripts',
+                    baseUrl: '<%%= yeoman.app %>/scripts',
                     optimize: 'none',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
