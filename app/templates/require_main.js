@@ -7,6 +7,7 @@ require.config({
         bootstrapCarousel: '../bower_components/sass-bootstrap/js/carousel',
         bootstrapCollapse: '../bower_components/sass-bootstrap/js/collapse',
         bootstrapDropdown: '../bower_components/sass-bootstrap/js/dropdown',
+        bootstrapModal: '../bower_components/sass-bootstrap/js/modal',
         bootstrapPopover: '../bower_components/sass-bootstrap/js/popover',
         bootstrapScrollspy: '../bower_components/sass-bootstrap/js/scrollspy',
         bootstrapTab: '../bower_components/sass-bootstrap/js/tab',
@@ -18,31 +19,34 @@ require.config({
             deps: ['jquery']
         },
         bootstrapAlert: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTransition']
         },
         bootstrapButton: {
             deps: ['jquery']
         },
         bootstrapCarousel: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTransition']
         },
         bootstrapCollapse: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTransition']
         },
         bootstrapDropdown: {
             deps: ['jquery']
         },
+        bootstrapModal:{
+            deps: ['jquery', 'bootstrapTransition']
+        },
         bootstrapPopover: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTooltip']
         },
         bootstrapScrollspy: {
             deps: ['jquery']
         },
         bootstrapTab: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTransition']
         },
         bootstrapTooltip: {
-            deps: ['jquery']
+            deps: ['jquery', 'bootstrapTransition']
         },
         bootstrapTransition: {
             deps: ['jquery']
