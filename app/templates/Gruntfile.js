@@ -19,7 +19,7 @@ module.exports = function (grunt) {
             app: 'app',
             dist: 'dist'
         },
-        watch: {
+        watch: {<% if (coffee) { %>
             coffee: {
                 files: ['<%%= yeoman.app %>/scripts/{,*/}*.coffee'],
                 tasks: ['coffee:dist']
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
             coffeeTest: {
                 files: ['test/spec/{,*/}*.coffee'],
                 tasks: ['coffee:test']
-            },
+            },<% } %>
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server', 'autoprefixer']
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
                     specs: 'test/spec/{,*/}*.js'
                 }
             }
-        },<% } %>
+        },<% } %><% if (coffee) { %>
         coffee: {
             dist: {
                 files: [{
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
                     ext: '.js'
                 }]
             }
-        },
+        },<% } %>
         compass: {
             options: {
                 sassDir: '<%%= yeoman.app %>/styles',
@@ -333,16 +333,16 @@ module.exports = function (grunt) {
         },<% } %>
         concurrent: {
             server: [
-                'compass',
-                'coffee:dist',
+                'compass',<% if (coffee) { %>
+                'coffee:dist',<% } %>
                 'copy:styles'
             ],
-            test: [
-                'coffee',
+            test: [<% if (coffee) { %>
+                'coffee',<% } %>
                 'copy:styles'
             ],
-            dist: [
-                'coffee',
+            dist: [<% if (coffee) { %>
+                'coffee',<% } %>
                 'compass',
                 'copy:styles',
                 'imagemin',

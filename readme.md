@@ -34,6 +34,9 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
   Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
+* `--coffee`
+
+  Add support for [CoffeeScript](http://coffeescript.org/).
 
 ## Contribute
 

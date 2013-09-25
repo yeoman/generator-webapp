@@ -10,6 +10,7 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
 
   // setup the test-framework property, Gruntfile template will need this
   this.testFramework = options['test-framework'] || 'mocha';
+  this.coffee = options.coffee;
 
   // for hooks to resolve on mocha by default
   if (!options['test-framework']) {
@@ -127,13 +128,15 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
       'scripts/main.js'
     ]);
 
-    this.indexFile = this.appendFiles({
-      html: this.indexFile,
-      fileType: 'js',
-      optimizedPath: 'scripts/coffee.js',
-      sourceFileList: ['scripts/hello.js'],
-      searchPath: '.tmp'
-    });
+    if (this.coffee) {
+      this.indexFile = this.appendFiles({
+        html: this.indexFile,
+        fileType: 'js',
+        optimizedPath: 'scripts/coffee.js',
+        sourceFileList: ['scripts/hello.js'],
+        searchPath: '.tmp'
+      });
+    }
   }
 
   if (this.compassBootstrap && !this.includeRequireJS) {
@@ -183,7 +186,11 @@ AppGenerator.prototype.app = function app() {
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
-  this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
+
+  if (this.coffee) {
+    this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
+  }
+
   if (!this.includeRequireJS) {
     this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
   }
