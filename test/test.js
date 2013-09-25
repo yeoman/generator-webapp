@@ -45,6 +45,7 @@ describe('Webapp generator test', function () {
       features: ['compassBootstrap', 'includeRequireJS']
     });
 
+    this.webapp.coffee = true;
     this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
