@@ -76,7 +76,8 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     open: true,
-                    base: '<%%= yeoman.dist %>'
+                    base: '<%%= yeoman.dist %>',
+                    livereload: false
                 }
             }
         },
