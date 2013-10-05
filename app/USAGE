@@ -3,7 +3,6 @@ Description:
 
 Options:
     Twitter Bootstrap: Include Twitter Bootstrap for Sass
-    RequireJS: Add support for AMD-loading via RequireJS
 
 Example:
     yo webapp [--coffee]

@@ -27,7 +27,7 @@ describe('Webapp generator test', function () {
     this.app = require('../app');
   });
 
-  it('creates expected files in non-AMD mode', function (done) {
+  it('creates expected files', function (done) {
     var expected = [
       ['bower.json', /"name": "temp"/],
       ['package.json', /"name": "temp"/],
@@ -42,7 +42,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap', 'includeRequireJS']
+      features: ['compassBootstrap']
     });
 
     this.webapp.coffee = true;
@@ -67,7 +67,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap', 'includeRequireJS']
+      features: ['compassBootstrap']
     });
 
     this.webapp.coffee = false;
@@ -87,12 +87,12 @@ describe('Webapp generator test', function () {
       'app/favicon.ico',
       'app/robots.txt',
       'app/index.html',
-      ['app/scripts/main.js', /require\.config/],
+      'app/scripts/main.js',
       'app/styles/main.scss'
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap', 'includeRequireJS']
+      features: ['compassBootstrap']
     });
 
     this.webapp.options['skip-install'] = true;
