@@ -216,7 +216,7 @@ module.exports = function (grunt) {
         },
         usemin: {
             options: {
-                dirs: ['<%%= yeoman.dist %>']
+                assetsDirs: ['<%%= yeoman.dist %>']
             },
             html: ['<%%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%%= yeoman.dist %>/styles/{,*/}*.css']
