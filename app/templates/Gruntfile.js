@@ -290,7 +290,7 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
-                        'images/{,*/}*.{webp,gif}',
+                        'images/{,*/}*.webp',
                         'styles/fonts/{,*/}*.*'<% if (compassBootstrap) { %>,
                         'bower_components/sass-bootstrap/fonts/*.*'<% } %>
                     ]
