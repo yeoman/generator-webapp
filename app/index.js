@@ -13,9 +13,7 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   this.coffee = options.coffee;
 
   // for hooks to resolve on mocha by default
-  if (!options['test-framework']) {
-    options['test-framework'] = 'mocha';
-  }
+  options['test-framework'] = this.testFramework;
 
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
