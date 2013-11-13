@@ -29,7 +29,7 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
-* `--test-framework <framework>`
+* `--test-framework=<framework>`
 
   Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
