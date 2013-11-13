@@ -316,7 +316,7 @@ module.exports = function (grunt) {
         },<% } %>
         concurrent: {
             server: [
-                'compass',<% if (coffee) { %>
+                'compass:server',<% if (coffee) { %>
                 'coffee:dist',<% } %>
                 'copy:styles'
             ],
