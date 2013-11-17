@@ -28,6 +28,9 @@ module.exports = function (grunt) {
                 files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
                 tasks: ['coffee:test']
             },<% } %>
+            gruntfile: {
+                files: ['Gruntfile.js']
+            },
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server', 'autoprefixer']
