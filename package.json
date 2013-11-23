@@ -22,7 +22,7 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.13.1",
+    "yeoman-generator": "~0.14.0",
     "cheerio": "~0.12.1"
   },
   "peerDependencies": {
