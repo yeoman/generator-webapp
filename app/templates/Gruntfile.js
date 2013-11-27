@@ -33,7 +33,11 @@ module.exports = function (grunt) {
             },
             coffeeTest: {
                 files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
-                tasks: ['coffee:test']
+                tasks: ['coffee:test', 'test:watch']
+            },<% } else { %>
+            jstest: {
+                files: ['test/spec/{,*/}*.js'],
+                tasks: ['test:watch']
             },<% } %>
             gruntfile: {
                 files: ['Gruntfile.js']
@@ -78,6 +82,7 @@ module.exports = function (grunt) {
             },
             test: {
                 options: {
+                    port: 9001,
                     base: [
                         '.tmp',
                         'test',
@@ -399,14 +404,21 @@ module.exports = function (grunt) {
         grunt.task.run(['serve']);
     });
 
-    grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'connect:test',<% if (testFramework === 'mocha') { %>
-        'mocha'<% } else if (testFramework === 'jasmine') { %>
-        'jasmine'<% } %>
-    ]);
+    grunt.registerTask('test', function(target) {
+        if (target !== 'watch') {
+            grunt.task.run([
+                'clean:server',
+                'concurrent:test',
+                'autoprefixer',
+            ]);
+        }
+
+        grunt.task.run([
+            'connect:test',<% if (testFramework === 'mocha') { %>
+            'mocha'<% } else if (testFramework === 'jasmine') { %>
+            'jasmine'<% } %>
+        ]);
+    });
 
     grunt.registerTask('build', [
         'clean:dist',
