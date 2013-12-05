@@ -18,8 +18,6 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', { as: 'app' });
 
-  this.mainCoffeeFile = 'console.log "\'Allo from CoffeeScript!"';
-
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'],
@@ -104,14 +102,12 @@ AppGenerator.prototype.h5bp = function h5bp() {
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
-  if (this.compassBootstrap) {
-    this.copy('main.scss', 'app/styles/main.scss');
-  } else {
-    this.copy('main.css', 'app/styles/main.css');
-  }
+  var css = 'main.' + (this.compassBootstrap ? 's' : '') + 'css';
+  this.copy(css, 'app/styles/' + css);
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
+  var bs;
 
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
@@ -119,31 +115,22 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     'scripts/main.js'
   ]);
 
-  if (this.coffee) {
-    this.indexFile = this.appendFiles({
-      html: this.indexFile,
-      fileType: 'js',
-      optimizedPath: 'scripts/coffee.js',
-      sourceFileList: ['scripts/hello.js'],
-      searchPath: '.tmp'
-    });
-  }
-
   if (this.compassBootstrap) {
     // wire Twitter Bootstrap plugins
+    bs = 'bower_components/sass-bootstrap/js/';
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-      'bower_components/sass-bootstrap/js/affix.js',
-      'bower_components/sass-bootstrap/js/alert.js',
-      'bower_components/sass-bootstrap/js/dropdown.js',
-      'bower_components/sass-bootstrap/js/tooltip.js',
-      'bower_components/sass-bootstrap/js/modal.js',
-      'bower_components/sass-bootstrap/js/transition.js',
-      'bower_components/sass-bootstrap/js/button.js',
-      'bower_components/sass-bootstrap/js/popover.js',
-      'bower_components/sass-bootstrap/js/carousel.js',
-      'bower_components/sass-bootstrap/js/scrollspy.js',
-      'bower_components/sass-bootstrap/js/collapse.js',
-      'bower_components/sass-bootstrap/js/tab.js'
+      bs + 'affix.js',
+      bs + 'alert.js',
+      bs + 'dropdown.js',
+      bs + 'tooltip.js',
+      bs + 'modal.js',
+      bs + 'transition.js',
+      bs + 'button.js',
+      bs + 'popover.js',
+      bs + 'carousel.js',
+      bs + 'scrollspy.js',
+      bs + 'collapse.js',
+      bs + 'tab.js'
     ]);
   }
 };
@@ -156,8 +143,12 @@ AppGenerator.prototype.app = function app() {
   this.write('app/index.html', this.indexFile);
 
   if (this.coffee) {
-    this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
+    this.write(
+      'app/scripts/main.coffee',
+      'console.log "\'Allo from CoffeeScript!"'
+    );
   }
-
-  this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
+  else {
+    this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
+  }
 };
