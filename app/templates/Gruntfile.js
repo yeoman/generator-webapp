@@ -434,9 +434,9 @@ module.exports = function (grunt) {
         'autoprefixer',
         'concat',
         'cssmin',
-        'uglify',<% if (includeModernizr) { %>
+        'uglify',
+        'copy:dist',<% if (includeModernizr) { %>
         'modernizr',<% } %>
-        'copy:dist',
         'rev',
         'usemin'
     ]);
