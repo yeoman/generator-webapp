@@ -35,6 +35,13 @@ module.exports = function (grunt) {
                 files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
                 tasks: ['coffee:test', 'test:watch']
             },<% } else { %>
+            js: {
+                files: ['<%%= yeoman.app %>/scripts/{,*/}*.js'],
+                tasks: ['jshint'],
+                options: {
+                    livereload: true
+                }
+            },
             jstest: {
                 files: ['test/spec/{,*/}*.js'],
                 tasks: ['test:watch']
@@ -56,8 +63,8 @@ module.exports = function (grunt) {
                 },
                 files: [
                     '<%%= yeoman.app %>/*.html',
-                    '.tmp/styles/{,*/}*.css',
-                    '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '.tmp/styles/{,*/}*.css',<% if (coffee) { %>
+                    '.tmp/scripts/{,*/}*.js',<% } %>
                     '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
                 ]
             }
@@ -128,7 +135,7 @@ module.exports = function (grunt) {
             ]
         },
 
-        <% if (testFramework === 'mocha') { %>
+<% if (testFramework === 'mocha') { %>
         // Mocha testing framework configuration options
         mocha: {
             all: {
@@ -147,7 +154,7 @@ module.exports = function (grunt) {
             }
         },<% } %>
 
-        <% if (coffee) { %>
+<% if (coffee) { %>
         // Compiles CoffeeScript to JavaScript
         coffee: {
             dist: {
@@ -348,7 +355,7 @@ module.exports = function (grunt) {
             }
         },
 
-        <% if (includeModernizr) { %>
+<% if (includeModernizr) { %>
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
         modernizr: {
