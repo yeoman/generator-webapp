@@ -1,6 +1,6 @@
 {
   "name": "<%= _.slugify(appname) %>",
-  "version": "0.0.0",
+  "private": true,
   "dependencies": {<% if (compassBootstrap) { %>
     "sass-bootstrap": "~3.0.0",<% } %><% if (includeModernizr) { %>
     "modernizr": "~2.6.2",<% } %>
