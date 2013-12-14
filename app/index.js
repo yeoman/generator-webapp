@@ -15,13 +15,24 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   // for hooks to resolve on mocha by default
   options['test-framework'] = this.testFramework;
 
+  var skipMessage = options['skip-install-message'];
+  var skipInstall = options['skip-install'];
+
   // resolved to mocha by default (could be switched to jasmine for instance)
-  this.hookFor('test-framework', { as: 'app' });
+  this.hookFor('test-framework', {
+    as: 'app',
+    options: {
+      options: {
+        'skip-install': skipInstall,
+        'skip-message': skipMessage
+      }
+    }
+  });
 
   this.on('end', function () {
     this.installDependencies({
-      skipInstall: options['skip-install'],
-      skipMessage: options['skip-install-message']
+      skipInstall: skipInstall,
+      skipMessage: skipMessage
     });
   });
 
