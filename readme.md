@@ -22,6 +22,7 @@ For more information on what `generator-webapp` can do for you, take a look at t
 - Run: `yo webapp`
 - Run `grunt` for building and `grunt serve` for preview
 
+Note: `grunt server` was previously used for previewing in earlier versions of the project and is being deprecated in favor of `grunt serve`.
 
 ## Options
 
