@@ -15,26 +15,18 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   // for hooks to resolve on mocha by default
   options['test-framework'] = this.testFramework;
 
-  var skipMessage = options['skip-install-message'];
-  var skipInstall = options['skip-install'];
-
   // resolved to mocha by default (could be switched to jasmine for instance)
   this.hookFor('test-framework', {
     as: 'app',
     options: {
       options: {
-        'skip-install': skipInstall,
-        'skip-message': skipMessage
+        'skip-install': options['skip-install-message'],
+        'skip-message': options['skip-install']
       }
     }
   });
 
-  this.on('end', function () {
-    this.installDependencies({
-      skipInstall: skipInstall,
-      skipMessage: skipMessage
-    });
-  });
+  this.options = options;
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
@@ -163,3 +155,16 @@ AppGenerator.prototype.app = function app() {
     this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
   }
 };
+
+AppGenerator.prototype.install = function () {
+  if (this.options['skip-install']) {
+    return;
+  }
+
+  var done = this.async();
+  this.installDependencies({
+    skipMessage: this.options['skip-install-message'],
+    skipInstall: this.options['skip-install'],
+    callback: done
+  });
+}
