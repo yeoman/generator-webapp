@@ -114,9 +114,6 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
-  this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-    'scripts/main.js'
-  ]);
 
   if (this.compassBootstrap) {
     // wire Twitter Bootstrap plugins
@@ -136,6 +133,14 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
       bs + 'tab.js'
     ]);
   }
+
+  this.indexFile = this.appendFiles({
+    html: this.indexFile,
+    fileType: 'js',
+    optimizedPath: 'scripts/main.js',
+    sourceFileList: ['scripts/main.js'],
+    searchPath: '{app,.tmp}'
+  });
 };
 
 AppGenerator.prototype.app = function app() {
@@ -167,4 +172,4 @@ AppGenerator.prototype.install = function () {
     skipInstall: this.options['skip-install'],
     callback: done
   });
-}
+};
