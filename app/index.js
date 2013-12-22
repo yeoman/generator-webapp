@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
 
 
 var AppGenerator = module.exports = function Appgenerator(args, options, config) {
@@ -39,7 +40,7 @@ AppGenerator.prototype.askFor = function askFor() {
   // welcome message
   if (!this.options['skip-welcome-message']) {
     console.log(this.yeoman);
-    console.log('Out of the box I include HTML5 Boilerplate and jQuery.');
+    console.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a Gruntfile.js to build your app.'));
   }
 
   var prompts = [{
