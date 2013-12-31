@@ -8,7 +8,7 @@ Yeoman generator that scaffolds out a front-end web app.
 * Built-in preview server with LiveReload
 * Automagically compile CoffeeScript & Compass
 * Automagically lint your scripts
-* Automagically wire up your Bower components with [bower-install](https://github.com/stephenplusplus/grunt-bower-install).
+* Automagically wire up your Bower components with [bower-install](#3rd-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
 * Mocha Unit Testing with PhantomJS
 * Optional - Twitter Bootstrap for SASS
@@ -20,8 +20,24 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
 - Install: `npm install -g generator-webapp`
 - Run: `yo webapp`
-- Run `grunt` for building and `grunt serve` for preview
+- Run `grunt` for building and `grunt serve` for preview [*](#serve-note)
 
+#### 3rd Party Dependencies
+
+(HTML/CSS/JS/Images/etc)
+
+3rd party Dependencies are managed with [bower-install](https://github.com/stephenplusplus/grunt-bower-install). Add new dependencies using **Bower** and then run the **Grunt** task to load them:
+
+```bash
+  bower install jquery --save
+  grunt bower-install
+```
+
+This works if the package author has followed the [Bower spec](https://github.com/bower/bower.json-spec). If the files are not automatically added to your index.html, check with the package's repo for support and/or file an issue with them to have it updated.
+
+To manually add dependencies, `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or other appropriate place.
+
+#### Grunt Serve Note
 Note: `grunt server` was previously used for previewing in earlier versions of the project and is being deprecated in favor of `grunt serve`.
 
 ## Options
