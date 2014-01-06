@@ -48,7 +48,7 @@ module.exports = function (grunt) {
             },<% } %>
             gruntfile: {
                 files: ['Gruntfile.js']
-            },<% if (compassBootstrap) { %>
+            },<% if (includeCompass) { %>
             compass: {
                 files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server', 'autoprefixer']
@@ -177,7 +177,7 @@ module.exports = function (grunt) {
             }
         },<% } %>
 
-<% if (compassBootstrap) { %>
+<% if (includeCompass) { %>
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
@@ -343,8 +343,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'<% if (compassBootstrap) { %>,
-                        'bower_components/sass-bootstrap/fonts/*.*'<% } %>
+                        'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,
+                        'bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/' + (this.includeCompass ? 'fonts/' : 'dist/fonts/') +'*.*'<% } %>
                     ]
                 }]
             },
@@ -373,7 +373,7 @@ module.exports = function (grunt) {
 
         // Run some tasks in parallel to speed up build process
         concurrent: {
-            server: [<% if (compassBootstrap) { %>
+            server: [<% if (includeCompass) { %>
                 'compass:server',<% } if (coffee) { %>
                 'coffee:dist',<% } %>
                 'copy:styles'
@@ -383,7 +383,7 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [<% if (coffee) { %>
-                'coffee',<% } if (compassBootstrap) { %>
+                'coffee',<% } if (includeCompass) { %>
                 'compass',<% } %>
                 'copy:styles',
                 'imagemin',
