@@ -12,6 +12,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <% if (includeBootstrap && !includeCompass) { %><link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"><% } %>
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -25,7 +26,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <% if (compassBootstrap) { %>
+        <% if (includeBootstrap) { %>
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
@@ -47,6 +48,10 @@
                     <h4>HTML5 Boilerplate</h4>
                     <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
 
+                    <% if (includeCompass) { %><h4>Sass with Compass</h4>
+                    <p>Compass is an open-source CSS Authoring Framework that uses Sass.</p>
+                    <% } %>
+
                     <h4>Bootstrap</h4>
                     <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
 
@@ -61,16 +66,17 @@
             </div>
 
         </div>
-        <% } else { // compassBootstrap %>
+        <% } else { %>
         <div class="hero-unit">
           <h1>'Allo, 'Allo!</h1>
           <p>You now have</p>
           <ul>
             <li>HTML5 Boilerplate</li>
+            <% if (includeCompass) { %><li>Sass with Compass</li><% } %>
             <% if (includeModernizr) { %><li>Modernizr</li><% } %>
           </ul>
         </div>
-        <% } // compassBootstrap %>
+        <% } %>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->

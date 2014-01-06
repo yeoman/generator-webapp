@@ -41,7 +41,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap']
+      features: ['includeCompass']
     });
 
     this.webapp.coffee = true;
@@ -66,7 +66,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap']
+      features: ['includeCompass']
     });
 
     this.webapp.coffee = false;
@@ -91,7 +91,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['compassBootstrap']
+      features: ['includeCompass']
     });
 
     this.webapp.options['skip-install'] = true;
