@@ -1,3 +1,24 @@
+### v0.4.7
+
+* 8d6962e Update .travis.yml
+* 3faf45b Merge pull request #240 from alrra/update-htaccess
+* 2410b17 Update to Apache Server Configs v2.1.0
+* dcf330a Readme: adds screenshot of latest
+* 52403a7 Readme: link up to Yeoman.io
+* c50a4e2 Separate Bootstrap from Sass with Compass
+* a84ee60 Bind Compass functions to compassBootstrap variable
+* 35d3313 Merge pull request #234 from eddiemonge/js
+* 80e88c2 readme - various improvements
+* cacce74 Merge pull request #231 from eddiemonge/readdeps
+* 012f34d note about 3rd party resources
+* a723d21 improve package.json
+* e4b80ef improve description message
+* a6688c9 generate main.js when using coffee and allow it to come after plugins
+
+### v0.4.6
+
+TODO.
+
 ### v0.4.5
 
 - Update to Apache Server Configs v2.1.0
