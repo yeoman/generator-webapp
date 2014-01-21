@@ -407,9 +407,15 @@ module.exports = function (grunt) {
         ]);
     });
 
-    grunt.registerTask('server', function () {
+    grunt.registerTask('server', function (target) {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
+
+        if (target) {
+            grunt.task.run(['serve:' + target]);
+        }
+        else {
+            grunt.task.run(['serve']);
+        }
     });
 
     grunt.registerTask('test', function(target) {
