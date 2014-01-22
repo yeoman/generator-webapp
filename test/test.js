@@ -2,8 +2,6 @@
 
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
-var assert  = require('assert');
-
 
 describe('Webapp generator test', function () {
   beforeEach(function (done) {
@@ -18,6 +16,8 @@ describe('Webapp generator test', function () {
           'mocha:app'
         ]
       ]);
+      this.webapp.options['skip-install'] = true;
+
       done();
     }.bind(this));
   });
@@ -45,7 +45,6 @@ describe('Webapp generator test', function () {
     });
 
     this.webapp.coffee = true;
-    this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
       done();
@@ -70,7 +69,6 @@ describe('Webapp generator test', function () {
     });
 
     this.webapp.coffee = false;
-    this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
       done();
@@ -78,7 +76,7 @@ describe('Webapp generator test', function () {
   });
 
   it('creates expected files in AMD mode', function (done) {
-    var expected= [
+    var expected = [
       ['bower.json', /"name": "temp"/],
       ['package.json', /"name": "temp"/],
       'Gruntfile.js',
@@ -94,7 +92,6 @@ describe('Webapp generator test', function () {
       features: ['includeCompass']
     });
 
-    this.webapp.options['skip-install'] = true;
     this.webapp.run({}, function () {
       helpers.assertFiles(expected);
       done();
