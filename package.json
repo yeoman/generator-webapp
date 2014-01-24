@@ -4,7 +4,7 @@
   "description": "Scaffold out a front-end web app",
   "license": "BSD",
   "repository": "yeoman/generator-webapp",
-  "author": "Chrome Developer Relations",
+  "author": "The Yeoman Team",
   "main": "app/index.js",
   "engines": {
     "node": ">=0.10.0",
