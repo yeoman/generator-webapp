@@ -412,12 +412,12 @@ module.exports = function (grunt) {
         grunt.task.run([target ? ('serve:' + target) : 'serve']);
     });
 
-    grunt.registerTask('test', function(target) {
+    grunt.registerTask('test', function (target) {
         if (target !== 'watch') {
             grunt.task.run([
                 'clean:server',
                 'concurrent:test',
-                'autoprefixer',
+                'autoprefixer'
             ]);
         }
 
