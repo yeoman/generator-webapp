@@ -344,7 +344,7 @@ module.exports = function (grunt) {
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,
-                        'bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/' + (this.includeCompass ? 'fonts/' : 'dist/fonts/') +'*.*'<% } %>
+                        'bower_components/' + 'bootstrap' + (this.includeCompass ? '-sass/' : '/') + (this.includeCompass ? 'vendor/assets/fonts/' : 'dist/fonts/') +'*.*'<% } %>
                     ]
                 }]
             },
