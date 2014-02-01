@@ -122,7 +122,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // wire Twitter Bootstrap plugins
   if (this.includeBootstrap) {
-    var bs = 'bower_components/' + 'bootstrap' + (this.includeCompass ? '-sass/vendor/assets/javascripts/' : '/js/');
+    var bs = 'bower_components/bootstrap' + (this.includeCompass ? '-sass/vendor/assets/javascripts/bootstrap/' : '/js/');
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       bs + 'affix.js',
       bs + 'alert.js',
