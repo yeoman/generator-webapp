@@ -21,7 +21,10 @@ var server = lr();
 // Styles
 gulp.task('styles', function() {
   return gulp.src('app/styles/main.scss')
-    .pipe(sass({ style: 'expanded', }))
+    .pipe(sass({
+      style: 'expanded',
+      loadPath: ['app/bower_components']
+    }))
     .pipe(autoprefixer('last 1 version'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(csso())
