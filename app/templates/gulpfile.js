@@ -44,6 +44,14 @@ gulp.task('scripts', function() {
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
+// HTML
+gulp.task('html', function() {
+  return gulp.src('app/*.html')
+    .pipe(livereload(server))
+    .pipe(gulp.dest('dist'))
+    .pipe(notify({ message: 'HTML task complete' }));
+});
+
 // Images
 gulp.task('images', function() {
   return gulp.src('app/images/**/*')
@@ -61,7 +69,7 @@ gulp.task('clean', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'images');
+    gulp.start('html', 'styles', 'scripts', 'images');
 });
 
 // Watch
