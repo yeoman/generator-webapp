@@ -75,9 +75,12 @@ gulp.task('clean', function () {
     return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false}).pipe(clean());
 });
 
+// Build
+gulp.task('build', ['html', 'styles', 'scripts', 'images']);
+
 // Default task
 gulp.task('default', ['clean'], function () {
-    gulp.start('html', 'styles', 'scripts', 'images');
+    gulp.start('build');
 });
 
 // Watch
