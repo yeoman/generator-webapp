@@ -9,7 +9,7 @@ var chalk = require('chalk');
 var AppGenerator = module.exports = function Appgenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
-  // setup the test-framework property, Gruntfile template will need this
+  // setup the test-framework property, gulpfile template will need this
   this.testFramework = options['test-framework'] || 'mocha';
   this.coffee = options.coffee;
 
@@ -40,7 +40,7 @@ AppGenerator.prototype.askFor = function askFor() {
   // welcome message
   if (!this.options['skip-welcome-message']) {
     console.log(this.yeoman);
-    console.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a Gruntfile.js to build your app.'));
+    console.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile.js to build your app.'));
   }
 
   var prompts = [{
@@ -77,8 +77,8 @@ AppGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
-AppGenerator.prototype.gruntfile = function gruntfile() {
-  this.template('Gruntfile.js');
+AppGenerator.prototype.gulpfile = function gulpfile() {
+  this.template('gulpfile.js');
 };
 
 AppGenerator.prototype.packageJSON = function packageJSON() {
