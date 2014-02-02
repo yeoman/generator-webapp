@@ -5,7 +5,7 @@ Options:
     Twitter Bootstrap: Include Twitter Bootstrap for Sass
 
 Example:
-    yo webapp [--coffee]
+    yo gulp-webapp [--coffee]
 
     This will create:
         Gruntfile.js: Configuration for the task runner.

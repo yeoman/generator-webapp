@@ -1,4 +1,4 @@
-# Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-webapp.png?branch=master)](http://travis-ci.org/yeoman/generator-webapp) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-gulp-webapp.png?branch=master)](http://travis-ci.org/yeoman/generator-gulp-webapp) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app.
 
@@ -16,13 +16,13 @@
 * Optional - Twitter Bootstrap for SASS
 * Optional - Leaner Modernizr builds *(new)*
 
-For more information on what `generator-webapp` can do for you, take a look at the [Grunt tasks](https://github.com/yeoman/generator-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
+For more information on what `generator-gulp-webapp` can do for you, take a look at the [Grunt tasks](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
 
 
 ## Getting Started
 
-- Install: `npm install -g generator-webapp`
-- Run: `yo webapp`
+- Install: `npm install -g generator-gulp-webapp`
+- Run: `yo gulp-webapp`
 - Run `grunt` for building and `grunt serve` for preview [*](#serve-note)
 
 
@@ -68,7 +68,7 @@ See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contrib
 
 Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it.
 
-If not, `generator-webapp` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo webapp` or a name of your choosing.
+If not, `generator-gulp-webapp` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo gulp-webapp` or a name of your choosing.
 
 
 ## License
