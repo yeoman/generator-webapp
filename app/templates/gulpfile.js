@@ -12,7 +12,6 @@ var imagemin = require('gulp-imagemin');
 var sass = require('gulp-ruby-sass');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
-var notify = require('gulp-notify');
 var cache = require('gulp-cache');
 var size = require('gulp-size');
 var livereload = require('gulp-livereload');
@@ -30,8 +29,7 @@ gulp.task('styles', function () {
         .pipe(csso())
         .pipe(livereload(server))
         .pipe(size())
-        .pipe(gulp.dest('dist/styles'))
-        .pipe(notify({ message: 'Styles task complete' }));
+        .pipe(gulp.dest('dist/styles'));
 });
 
 // Scripts
@@ -43,8 +41,7 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest('dist/scripts'))
         .pipe(uglify())
         .pipe(livereload(server))
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(notify({ message: 'Scripts task complete' }));
+        .pipe(gulp.dest('dist/scripts'));
 });
 
 // HTML
@@ -52,8 +49,7 @@ gulp.task('html', function () {
      return gulp.src('app/*.html')
         .pipe(livereload(server))
         .pipe(size())
-        .pipe(gulp.dest('dist'))
-        .pipe(notify({ message: 'HTML task complete' }));
+        .pipe(gulp.dest('dist'));
 });
 
 // Images
@@ -66,8 +62,7 @@ gulp.task('images', function () {
         })))
         .pipe(livereload(server))
         .pipe(size())
-        .pipe(gulp.dest('dist/images'))
-        .pipe(notify({ message: 'Images task complete' }));
+        .pipe(gulp.dest('dist/images'));
 });
 
 // Clean
