@@ -1,10 +1,12 @@
-# Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-gulp-webapp.png?branch=master)](http://travis-ci.org/yeoman/generator-gulp-webapp) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-gulp-webapp.png?branch=master)](http://travis-ci.org/yeoman/generator-gulp-webapp)
 
 [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app.
 
 ![](http://i.imgur.com/rwDYkQy.png)
 
 ## Features
+
+Note: the below are the list of `generator-webapp` features we are aiming to reach parity with for this project. Please see our `gulpfile.js` for up to date information on what we support.
 
 * CSS Autoprefixing *(new)*
 * Built-in preview server with LiveReload
@@ -16,14 +18,14 @@
 * Optional - Twitter Bootstrap for SASS
 * Optional - Leaner Modernizr builds *(new)*
 
-For more information on what `generator-gulp-webapp` can do for you, take a look at the [Grunt tasks](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
+For more information on what `generator-gulp-webapp` can do for you, take a look at the [Gulp plugins](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
 
 
 ## Getting Started
 
 - Install: `npm install -g generator-gulp-webapp`
 - Run: `yo gulp-webapp`
-- Run `grunt` for building and `grunt serve` for preview [*](#serve-note)
+- Run `gulp` for building and `gulp watch` for preview
 
 
 #### Third-Party Dependencies
@@ -40,11 +42,6 @@ Third-party dependencies are managed with [bower-install](https://github.com/ste
 This works if the package author has followed the [Bower spec](https://github.com/bower/bower.json-spec). If the files are not automatically added to your index.html, check with the package's repo for support and/or file an issue with them to have it updated.
 
 To manually add dependencies, `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
-
-
-#### Grunt Serve Note
-
-Note: `grunt server` was previously used for previewing in earlier versions of the project and is being deprecated in favor of `grunt serve`.
 
 
 ## Options
