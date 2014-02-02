@@ -73,6 +73,9 @@ gulp.task('watch', function() {
       return console.log(err)
     };
 
+    // Watch .html files
+    gulp.watch('app/*.html');
+
     // Watch .scss files
     gulp.watch('app/styles/**/*.scss', ['styles']);
 
