@@ -13,6 +13,7 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var notify = require('gulp-notify');
 var cache = require('gulp-cache');
+var size = require('gulp-size');
 var livereload = require('gulp-livereload');
 var lr = require('tiny-lr');
 var server = lr();
@@ -26,6 +27,7 @@ gulp.task('styles', function() {
     .pipe(rename({ suffix: '.min' }))
     .pipe(csso())
     .pipe(livereload(server))
+    .pipe(size())
     .pipe(gulp.dest('dist/styles'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
@@ -48,6 +50,7 @@ gulp.task('scripts', function() {
 gulp.task('html', function() {
   return gulp.src('app/*.html')
     .pipe(livereload(server))
+    .pipe(size())
     .pipe(gulp.dest('dist'))
     .pipe(notify({ message: 'HTML task complete' }));
 });
@@ -57,6 +60,7 @@ gulp.task('images', function() {
   return gulp.src('app/images/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(livereload(server))
+    .pipe(size())
     .pipe(gulp.dest('dist/images'))
     .pipe(notify({ message: 'Images task complete' }));
 });

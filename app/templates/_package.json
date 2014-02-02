@@ -18,7 +18,8 @@
     "gulp-concat": "~2.1.7",
     "gulp-cache": "~0.1.1",
     "gulp-ruby-sass": "~0.3.0",
-    "gulp-notify": "~0.4.0"
+    "gulp-notify": "~0.4.0",
+    "gulp-size": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"
