@@ -62,7 +62,11 @@ gulp.task('html', function () {
 // Images
 gulp.task('images', function () {
     return gulp.src('app/images/**/*')
-        .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+        .pipe(cache(imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true
+        })))
         .pipe(livereload(server))
         .pipe(size())
         .pipe(gulp.dest('dist/images'))
@@ -84,7 +88,7 @@ gulp.task('watch', function () {
     // Listen on port 35729
     server.listen(35729, function (err) {
         if (err) {
-          return console.error(err);
+            return console.error(err);
         };
 
         // Watch .html files
