@@ -3,7 +3,7 @@
 // Load plugins
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
-var minifycss = require('gulp-minify-css');
+var csso = require('gulp-csso');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
@@ -24,7 +24,7 @@ gulp.task('styles', function() {
     .pipe(autoprefixer('last 1 version'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(minifycss())
+    .pipe(csso())
     .pipe(livereload(server))
     .pipe(gulp.dest('dist/styles'))
     .pipe(notify({ message: 'Styles task complete' }));
