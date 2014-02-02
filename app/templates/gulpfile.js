@@ -9,7 +9,6 @@ var csso = require('gulp-csso');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
-var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
@@ -28,7 +27,6 @@ gulp.task('styles', function () {
           loadPath: ['app/bower_components']
         }))
         .pipe(autoprefixer('last 1 version'))
-        .pipe(rename({ suffix: '.min' }))
         .pipe(csso())
         .pipe(livereload(server))
         .pipe(size())
@@ -43,7 +41,6 @@ gulp.task('scripts', function () {
         .pipe(jshint.reporter('default'))
         .pipe(concat('main.js'))
         .pipe(gulp.dest('dist/scripts'))
-        .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
         .pipe(livereload(server))
         .pipe(gulp.dest('dist/scripts'))
