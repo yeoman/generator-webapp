@@ -6,7 +6,7 @@
     "gulp": "~3.5.0",
     "gulp-util": "~2.2.9",
     "tiny-lr": "~0.0.5",
-    "gulp-livereload": "~0.1.1",    
+    "gulp-livereload": "~0.1.1",
     "gulp-autoprefixer": "~0.0.6",
     "gulp-csso": "~0.2.3",
     "gulp-jshint": "~1.3.4",
@@ -22,6 +22,6 @@
     "gulp-size": "~0.1.2"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   }
 }

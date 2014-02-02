@@ -22,57 +22,56 @@ var server = lr();
 
 // Styles
 gulp.task('styles', function () {
-  return gulp.src('app/styles/main.scss')
-    .pipe(sass({
-      style: 'expanded',
-      loadPath: ['app/bower_components']
-    }))
-    .pipe(autoprefixer('last 1 version'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(csso())
-    .pipe(livereload(server))
-    .pipe(size())
-    .pipe(gulp.dest('dist/styles'))
-    .pipe(notify({ message: 'Styles task complete' }));
+    return gulp.src('app/styles/main.scss')
+        .pipe(sass({
+          style: 'expanded',
+          loadPath: ['app/bower_components']
+        }))
+        .pipe(autoprefixer('last 1 version'))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(csso())
+        .pipe(livereload(server))
+        .pipe(size())
+        .pipe(gulp.dest('dist/styles'))
+        .pipe(notify({ message: 'Styles task complete' }));
 });
 
 // Scripts
 gulp.task('scripts', function () {
-  return gulp.src('app/scripts/**/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('default'))
-    .pipe(concat('main.js'))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
-    .pipe(livereload(server))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(notify({ message: 'Scripts task complete' }));
+    return gulp.src('app/scripts/**/*.js')
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('default'))
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest('dist/scripts'))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(uglify())
+        .pipe(livereload(server))
+        .pipe(gulp.dest('dist/scripts'))
+        .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // HTML
 gulp.task('html', function () {
-  return gulp.src('app/*.html')
-    .pipe(livereload(server))
-    .pipe(size())
-    .pipe(gulp.dest('dist'))
-    .pipe(notify({ message: 'HTML task complete' }));
+     return gulp.src('app/*.html')
+        .pipe(livereload(server))
+        .pipe(size())
+        .pipe(gulp.dest('dist'))
+        .pipe(notify({ message: 'HTML task complete' }));
 });
 
 // Images
 gulp.task('images', function () {
-  return gulp.src('app/images/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-    .pipe(livereload(server))
-    .pipe(size())
-    .pipe(gulp.dest('dist/images'))
-    .pipe(notify({ message: 'Images task complete' }));
+    return gulp.src('app/images/**/*')
+        .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+        .pipe(livereload(server))
+        .pipe(size())
+        .pipe(gulp.dest('dist/images'))
+        .pipe(notify({ message: 'Images task complete' }));
 });
 
 // Clean
 gulp.task('clean', function () {
-  return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
-    .pipe(clean());
+    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false}).pipe(clean());
 });
 
 // Default task
@@ -82,22 +81,22 @@ gulp.task('default', ['clean'], function () {
 
 // Watch
 gulp.task('watch', function () {
-  // Listen on port 35729
-  server.listen(35729, function (err) {
-      if (err) {
-        return console.log(err);
-      };
+    // Listen on port 35729
+    server.listen(35729, function (err) {
+        if (err) {
+          return console.error(err);
+        };
 
-      // Watch .html files
-      gulp.watch('app/*.html');
+        // Watch .html files
+        gulp.watch('app/*.html');
 
-      // Watch .scss files
-      gulp.watch('app/styles/**/*.scss', ['styles']);
+        // Watch .scss files
+        gulp.watch('app/styles/**/*.scss', ['styles']);
 
-      // Watch .js files
-      gulp.watch('app/scripts/**/*.js', ['scripts']);
+        // Watch .js files
+        gulp.watch('app/scripts/**/*.js', ['scripts']);
 
-      // Watch image files
-      gulp.watch('app/images/**/*', ['images']);
-  });
+        // Watch image files
+        gulp.watch('app/images/**/*', ['images']);
+    });
 });
