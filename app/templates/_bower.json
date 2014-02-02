@@ -2,7 +2,7 @@
   "name": "<%= _.slugify(appname) %>",
   "private": true,
   "dependencies": {<% if (includeBootstrap) { if (includeCompass) { %>
-    "sass-bootstrap": "~3.0.0",<% } else { %>
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0",<% } else { %>
     "bootstrap": "~3.0.3",<% }} if (includeModernizr) { %>
     "modernizr": "~2.6.2",<% } %>
     "jquery": "~1.10.2"
