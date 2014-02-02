@@ -23,7 +23,6 @@ gulp.task('styles', function() {
   return gulp.src('app/styles/main.scss')
     .pipe(sass({ style: 'expanded', }))
     .pipe(autoprefixer('last 1 version'))
-    .pipe(gulp.dest('dist/styles'))
     .pipe(rename({ suffix: '.min' }))
     .pipe(csso())
     .pipe(livereload(server))
