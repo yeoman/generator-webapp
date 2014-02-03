@@ -3,20 +3,8 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
 // Load plugins
-var gulp = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
-var csso = require('gulp-csso');
-var jshint = require('gulp-jshint');
-var uglify = require('gulp-uglify');
-var imagemin = require('gulp-imagemin');
-var sass = require('gulp-ruby-sass');
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var cache = require('gulp-cache');
-var size = require('gulp-size');
-var livereload = require('gulp-livereload');
-var lr = require('tiny-lr');
-var server = lr();
+var plugins = require("gulp-load-plugins")();
+var server = plugins['tiny-lr']();
 
 // Styles
 gulp.task('styles', function () {
