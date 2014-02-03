@@ -344,8 +344,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,
-                        'bower_components/bootstrap' + (this.includeCompass ? '-sass/' : '/') + (this.includeCompass ? 'vendor/assets/fonts/bootstrap/' : 'dist/fonts/') +'*.*'<% } %>
+                        'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,<% if (includeCompass) { %>
+                        'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*'<% } else { %>
+                        'bower_components/bootstrap/dist/fonts/*.*'<% } %><% } %>
                     ]
                 }]
             },

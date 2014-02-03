@@ -1,4 +1,4 @@
-<% if (includeBootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass/vender/assets/fonts/";
+<% if (includeBootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass/vendor/assets/fonts/";
 
 @import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap';
 
@@ -83,7 +83,7 @@ body {
     .header {
         margin-bottom: 30px;
     }
-    
+
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
