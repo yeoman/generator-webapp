@@ -1,9 +1,9 @@
 'use strict';
-
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
-// Load all the plugins.
 var gulp = require('gulp');
+
+// Load plugins
 var $ = require('gulp-load-plugin')({camelize: true});
 var server = $.tinyLr();
 
@@ -26,7 +26,7 @@ gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.jshint('.jshintrc'))
         .pipe($.jshint.reporter('default'))
-        .pipe(concat('main.js'))
+        .pipe($.concat('main.js'))
         .pipe($.livereload(server))
         .pipe($.uglify())
         .pipe(gulp.dest('dist/scripts'))
@@ -54,7 +54,7 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
-//clean
+// Clean
 gulp.task('clean', function () {
     return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false}).pipe($.clean());
 });
