@@ -4,6 +4,7 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "~3.5.0",
+    "gulp-load-plugins": "~0.2.0",
     "gulp-util": "~2.2.9",
     "tiny-lr": "~0.0.5",
     "gulp-livereload": "~0.1.1",
