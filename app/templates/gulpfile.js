@@ -5,7 +5,7 @@ var gulp = require('gulp');
 
 // Load plugins
 var $ = require('gulp-load-plugins')({camelize: true});
-var server = $.tinyLr();
+var server = require('tiny-lr');
 
 // Styles
 gulp.task('styles', function () {
