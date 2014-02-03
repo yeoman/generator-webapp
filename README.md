@@ -6,17 +6,16 @@
 
 ## Features
 
-Note: the below are the list of `generator-webapp` features we are aiming to reach parity with for this project. Please see our `gulpfile.js` for up to date information on what we support.
+Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/gulpfile.js) for up to date information on what we support.
 
 * CSS Autoprefixing *(new)*
 * Built-in preview server with LiveReload
-* Automagically compile CoffeeScript & Compass
+* Automagically compile Sass
 * Automagically lint your scripts
-* Automagically wire up your Bower components with [bower-install](#third-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
-* Mocha Unit Testing with PhantomJS
-* Optional - Twitter Bootstrap for SASS
-* Optional - Leaner Modernizr builds *(new)*
+* TODO: Mocha Unit Testing with PhantomJS
+* TODO: Optional - Twitter Bootstrap for SASS
+* TODO: Optional - Leaner Modernizr builds *(new)*
 
 For more information on what `generator-gulp-webapp` can do for you, take a look at the [Gulp plugins](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
 
