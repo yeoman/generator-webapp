@@ -53,10 +53,6 @@ To manually add dependencies, `bower install depName --save` to get the files, t
 
   Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
-* `--coffee`
-
-  Add support for [CoffeeScript](http://coffeescript.org/).
-
 
 ## Contribute
 

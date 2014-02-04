@@ -11,7 +11,6 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
 
   // setup the test-framework property, gulpfile template will need this
   this.testFramework = options['test-framework'] || 'mocha';
-  this.coffee = options.coffee;
 
   // for hooks to resolve on mocha by default
   options['test-framework'] = this.testFramework;
@@ -28,7 +27,6 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
   });
 
   this.options = options;
-
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
@@ -116,7 +114,6 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
-
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
@@ -144,7 +141,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     fileType: 'js',
     optimizedPath: 'scripts/main.js',
     sourceFileList: ['scripts/main.js'],
-    searchPath: '{app,.tmp}'
+    searchPath: 'app'
   });
 };
 
@@ -154,16 +151,7 @@ AppGenerator.prototype.app = function app() {
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
-
-  if (this.coffee) {
-    this.write(
-      'app/scripts/main.coffee',
-      'console.log "\'Allo from CoffeeScript!"'
-    );
-  }
-  else {
-    this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
-  }
+  this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
 };
 
 AppGenerator.prototype.install = function () {
