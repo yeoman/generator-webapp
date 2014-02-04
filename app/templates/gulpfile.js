@@ -76,7 +76,7 @@ gulp.task('watch', ['connect'], function () {
         'app/*.html',
         'app/styles/**/*.css',
         'app/scripts/**/*.js',
-        'app/images/**/*.{gif,jpg,png}'
+        'app/images/**/*'
     ], $.connect.reload);
 
     // Watch .scss files
