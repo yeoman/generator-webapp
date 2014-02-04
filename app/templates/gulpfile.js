@@ -5,7 +5,6 @@ var gulp = require('gulp');
 
 // Load plugins
 var $ = require('gulp-load-plugins')({camelize: true});
-var server = require('tiny-lr');
 
 // Styles
 gulp.task('styles', function () {
@@ -14,7 +13,6 @@ gulp.task('styles', function () {
           style: 'expanded',
           loadPath: ['app/bower_components']
         }))
-        .pipe($.livereload(server))
         .pipe($.autoprefixer('last 1 version'))
         .pipe($.csso())
         .pipe(gulp.dest('dist/styles'))
@@ -27,7 +25,6 @@ gulp.task('scripts', function () {
         .pipe($.jshint('.jshintrc'))
         .pipe($.jshint.reporter('default'))
         .pipe($.concat('main.js'))
-        .pipe($.livereload(server))
         .pipe($.uglify())
         .pipe(gulp.dest('dist/scripts'))
         .pipe($.size());
@@ -35,16 +32,14 @@ gulp.task('scripts', function () {
 
 // HTML
 gulp.task('html', function () {
-     return gulp.src('app/*.html')
-        .pipe($.livereload(server))
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());
+    return gulp.src('app/*.html')
+      .pipe(gulp.dest('dist'))
+      .pipe($.size());
 });
 
 // Images
 gulp.task('images', function () {
     return gulp.src('app/images/**/*')
-        .pipe($.livereload(server))
         .pipe($.cache($.imagemin({
             optimizationLevel: 3,
             progressive: true,
@@ -67,24 +62,29 @@ gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
+// Connect
+gulp.task('connect', $.connect.server({
+    root: __dirname + '/app',
+    port: 9000,
+    livereload: true
+}));
+
 // Watch
-gulp.task('watch', function () {
-    // Listen on port 35729
-    server.listen(35729, function (err) {
-        if (err) {
-            return console.error(err);
-        };
+gulp.task('watch', ['connect'], function () {
+    // Watch for changes in `app` folder
+    gulp.watch([
+        'app/*.html',
+        'app/styles/**/*.css',
+        'app/scripts/**/*.js',
+        'app/images/**/*.{gif,jpg,png}'
+    ], $.connect.reload);
 
-        // Watch .html files
-        gulp.watch('app/*.html');
+    // Watch .scss files
+    gulp.watch('app/styles/**/*.scss', ['styles']);
 
-        // Watch .scss files
-        gulp.watch('app/styles/**/*.scss', ['styles']);
+    // Watch .js files
+    gulp.watch('app/scripts/**/*.js', ['scripts']);
 
-        // Watch .js files
-        gulp.watch('app/scripts/**/*.js', ['scripts']);
-
-        // Watch image files
-        gulp.watch('app/images/**/*', ['images']);
-    });
+    // Watch image files
+    gulp.watch('app/images/**/*', ['images']);
 });
