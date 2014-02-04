@@ -4,7 +4,7 @@
 var gulp = require('gulp');
 
 // Load plugins
-var $ = require('gulp-load-plugins')({camelize: true});
+var $ = require('gulp-load-plugins')();
 
 // Styles
 gulp.task('styles', function () {
