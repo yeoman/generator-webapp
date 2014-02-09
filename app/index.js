@@ -140,8 +140,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
     html: this.indexFile,
     fileType: 'js',
     optimizedPath: 'scripts/main.js',
-    sourceFileList: ['scripts/main.js'],
-    searchPath: 'app'
+    sourceFileList: ['scripts/main.js']
   });
 };
 

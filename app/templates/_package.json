@@ -7,16 +7,15 @@
     "gulp-load-plugins": "~0.3.0",
     "gulp-util": "~2.2.9",
     "gulp-autoprefixer": "~0.0.6",
-    "gulp-csso": "~0.2.3",
     "gulp-jshint": "~1.4.0",
     "gulp-imagemin": "~0.1.4",
     "gulp-clean": "~0.2.4",
-    "gulp-uglify": "~0.2.0",
-    "gulp-concat": "~2.1.7",
     "gulp-cache": "~0.1.1",
     "gulp-ruby-sass": "~0.3.0",
     "gulp-size": "~0.1.2",
-    "gulp-connect": "~0.3.0"
+    "gulp-connect": "~0.3.0",
+    "gulp-useref": "~0.1.2",
+    "gulp-bundle": "~0.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
