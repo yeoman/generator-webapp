@@ -24,7 +24,7 @@
     "h5bp",
     "modernizr",
     "jquery",
-    "grunt"
+    "gulp"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",
