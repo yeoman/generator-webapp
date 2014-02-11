@@ -14,8 +14,7 @@ gulp.task('styles', function () {
           loadPath: ['app/bower_components']
         }))
         .pipe($.autoprefixer('last 1 version'))
-        .pipe($.csso())
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('app/styles'))
         .pipe($.size());
 });
 
@@ -24,15 +23,13 @@ gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.jshint('.jshintrc'))
         .pipe($.jshint.reporter('default'))
-        .pipe($.concat('main.js'))
-        .pipe($.uglify())
-        .pipe(gulp.dest('dist/scripts'))
         .pipe($.size());
 });
 
 // HTML
 gulp.task('html', function () {
     return gulp.src('app/*.html')
+      .pipe($.useref())
       .pipe(gulp.dest('dist'))
       .pipe($.size());
 });
@@ -54,8 +51,11 @@ gulp.task('clean', function () {
     return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false}).pipe($.clean());
 });
 
+// Bundle
+gulp.task('bundle', ['styles', 'scripts'], $.bundle('./app/*.html'));
+
 // Build
-gulp.task('build', ['html', 'styles', 'scripts', 'images']);
+gulp.task('build', ['html', 'bundle', 'images']);
 
 // Default task
 gulp.task('default', ['clean'], function () {
