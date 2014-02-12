@@ -29,8 +29,8 @@ describe('Gulp webapp generator test', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      ['bower.json', /"name": "temp"/],
-      ['package.json', /"name": "temp"/],
+      'bower.json',
+      'package.json',
       'gulpfile.js',
       'app/404.html',
       'app/favicon.ico',
@@ -45,7 +45,7 @@ describe('Gulp webapp generator test', function () {
     });
 
     this.webapp.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expected);
       done();
     });
   });
