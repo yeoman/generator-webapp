@@ -6,6 +6,7 @@ var gulp = require('gulp');
 // Load plugins
 var $ = require('gulp-load-plugins')();
 
+<% if (includeCompass) { %>
 // Styles
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
@@ -17,7 +18,7 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('app/styles'))
         .pipe($.size());
 });
-
+<% } %>
 // Scripts
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
@@ -48,11 +49,11 @@ gulp.task('images', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false}).pipe($.clean());
+    return gulp.src([<% if (includeCompass) { %>'dist/styles', <% } %>'dist/scripts', 'dist/images'], {read: false}).pipe($.clean());
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts'], $.bundle('./app/*.html'));
+gulp.task('bundle', [<% if (includeCompass) { %>'styles', <% } %>'scripts'], $.bundle('./app/*.html'));
 
 // Build
 gulp.task('build', ['html', 'bundle', 'images']);
@@ -74,13 +75,14 @@ gulp.task('watch', ['connect'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',
-        'app/styles/**/*.css',
+        <% if (includeCompass) { %>'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
         'app/images/**/*'
     ], $.connect.reload);
-
+    <% if (includeCompass) { %>
     // Watch .scss files
     gulp.watch('app/styles/**/*.scss', ['styles']);
+    <% } %>
 
     // Watch .js files
     gulp.watch('app/scripts/**/*.js', ['scripts']);
