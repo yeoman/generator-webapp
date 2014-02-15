@@ -31,17 +31,7 @@ For more information on what `generator-gulp-webapp` can do for you, take a look
 
 *(HTML/CSS/JS/Images/etc)*
 
-Third-party dependencies are managed with [bower-install](https://github.com/stephenplusplus/grunt-bower-install). Add new dependencies using **Bower** and then run the **Grunt** task to load them:
-
-```bash
-  bower install --save jquery
-  grunt bower-install
-```
-
-This works if the package author has followed the [Bower spec](https://github.com/bower/bower.json-spec). If the files are not automatically added to your index.html, check with the package's repo for support and/or file an issue with them to have it updated.
-
-To manually add dependencies, `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
-
+To install dependencies, run `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
 
 ## Options
 
