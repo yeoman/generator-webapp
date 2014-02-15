@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <% if (includeBootstrap && !includeCompass) { %>
+        <% if (includeBootstrap && !includeSass) { %>
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -51,7 +51,7 @@
                     <h4>HTML5 Boilerplate</h4>
                     <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
 
-                    <% if (includeCompass) { %><h4>Sass with Compass</h4>
+                    <% if (includeSass) { %><h4>Sass with Compass</h4>
                     <p>Compass is an open-source CSS Authoring Framework that uses Sass.</p>
                     <% } %>
 
@@ -75,7 +75,7 @@
           <p>You now have</p>
           <ul>
             <li>HTML5 Boilerplate</li>
-            <% if (includeCompass) { %><li>Sass with Compass</li><% } %>
+            <% if (includeSass) { %><li>Sass with Compass</li><% } %>
             <% if (includeModernizr) { %><li>Modernizr</li><% } %>
           </ul>
         </div>

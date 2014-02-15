@@ -47,7 +47,7 @@ AppGenerator.prototype.askFor = function askFor() {
     message: 'What more would you like?',
     choices: [{
       name: 'Sass with Compass',
-      value: 'includeCompass',
+      value: 'includeSass',
       checked: true
     }, {
       name: 'Bootstrap',
@@ -67,7 +67,7 @@ AppGenerator.prototype.askFor = function askFor() {
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.includeCompass = hasFeature('includeCompass');
+    this.includeSass = hasFeature('includeSass');
     this.includeBootstrap = hasFeature('includeBootstrap');
     this.includeModernizr = hasFeature('includeModernizr');
 
@@ -109,7 +109,7 @@ AppGenerator.prototype.h5bp = function h5bp() {
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
-  var css = 'main.' + (this.includeCompass ? 's' : '') + 'css';
+  var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
   this.copy(css, 'app/styles/' + css);
 };
 
@@ -119,7 +119,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // wire Twitter Bootstrap plugins
   if (this.includeBootstrap) {
-    var bs = 'bower_components/bootstrap' + (this.includeCompass ? '-sass/vendor/assets/javascripts/bootstrap/' : '/js/');
+    var bs = 'bower_components/bootstrap' + (this.includeSass ? '-sass/vendor/assets/javascripts/bootstrap/' : '/js/');
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       bs + 'affix.js',
       bs + 'alert.js',

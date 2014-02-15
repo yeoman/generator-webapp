@@ -1,7 +1,7 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "private": true,
-  "dependencies": {<% if (includeBootstrap) { if (includeCompass) { %>
+  "dependencies": {<% if (includeBootstrap) { if (includeSass) { %>
     "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0",<% } else { %>
     "bootstrap": "~3.0.3",<% }} if (includeModernizr) { %>
     "modernizr": "~2.6.2",<% } %>

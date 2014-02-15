@@ -41,7 +41,7 @@ describe('Gulp webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['includeCompass']
+      features: ['includeSass']
     });
 
     this.webapp.run({}, function () {
