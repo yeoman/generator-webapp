@@ -14,7 +14,6 @@ Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blo
 * Automagically lint your scripts
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
 * TODO: Mocha Unit Testing with PhantomJS
-* TODO: Optional - Twitter Bootstrap for SASS
 * TODO: Optional - Leaner Modernizr builds *(new)*
 
 For more information on what `generator-gulp-webapp` can do for you, take a look at the [Gulp plugins](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
