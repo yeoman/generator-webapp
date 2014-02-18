@@ -64,7 +64,7 @@ gulp.task('default', ['clean'], function () {
 
 // Connect
 gulp.task('connect', $.connect.server({
-    root: __dirname + '/app',
+    root: ['app'],
     port: 9000,
     livereload: true
 }));
