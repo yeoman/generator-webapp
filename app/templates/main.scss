@@ -1,6 +1,8 @@
 <% if (includeBootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass/vendor/assets/fonts/";
 
-@import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap';
+// bower:scss
+@import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap.scss';
+// endbower
 
 .browsehappy {
     margin: 0.2em 0;
@@ -88,7 +90,10 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
-}<% } else { %>body {
+}<% } else { %>// bower:scss
+// endbower
+
+body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;

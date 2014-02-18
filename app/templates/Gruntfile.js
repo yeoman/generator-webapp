@@ -133,9 +133,8 @@ module.exports = function (grunt) {
                 '!<%%= yeoman.app %>/scripts/vendor/*',
                 'test/spec/{,*/}*.js'
             ]
-        },
+        },<% if (testFramework === 'mocha') { %>
 
-<% if (testFramework === 'mocha') { %>
         // Mocha testing framework configuration options
         mocha: {
             all: {
@@ -145,6 +144,7 @@ module.exports = function (grunt) {
                 }
             }
         },<% } else if (testFramework === 'jasmine') { %>
+
         // Jasmine testing framework configuration options
         jasmine: {
             all: {
@@ -152,9 +152,8 @@ module.exports = function (grunt) {
                     specs: 'test/spec/{,*/}*.js'
                 }
             }
-        },<% } %>
+        },<% } %><% if (coffee) { %>
 
-<% if (coffee) { %>
         // Compiles CoffeeScript to JavaScript
         coffee: {
             dist: {
@@ -175,9 +174,8 @@ module.exports = function (grunt) {
                     ext: '.js'
                 }]
             }
-        },<% } %>
+        },<% } %><% if (includeCompass) { %>
 
-<% if (includeCompass) { %>
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
@@ -222,12 +220,17 @@ module.exports = function (grunt) {
         },
 
         // Automatically inject Bower components into the HTML file
-        'bower-install': {
+        bowerInstall: {
             app: {
-                html: '<%%= yeoman.app %>/index.html',
-                ignorePath: '<%%= yeoman.app %>/',
-                exclude: [<% if (includeCompass) { %> '<%%= yeoman.app %>/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js' <% } %>]
-            }
+                src: ['<%%= yeoman.app %>/index.html'],
+                ignorePath: '<%%= yeoman.app %>/'<% if (includeCompass) { %>,
+                exclude: ['<%%= yeoman.app %>/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js']
+            },
+            sass: {
+                src: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                ignorePath: '<%%= yeoman.app %>/bower_components/'
+            }<% } else { %>
+            }<% } %>
         },
 
         // Renames files for browser caching purposes
@@ -274,6 +277,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
+
         svgmin: {
             dist: {
                 files: [{
@@ -284,6 +288,7 @@ module.exports = function (grunt) {
                 }]
             }
         },
+
         htmlmin: {
             dist: {
                 options: {
@@ -357,9 +362,8 @@ module.exports = function (grunt) {
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             }
-        },
+        },<% if (includeModernizr) { %>
 
-<% if (includeModernizr) { %>
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
         modernizr: {
