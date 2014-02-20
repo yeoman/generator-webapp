@@ -13,7 +13,7 @@
     "gulp-cache": "~0.1.1",<% if (includeSass) { %>
     "gulp-ruby-sass": "~0.3.0",<% } %>
     "gulp-size": "~0.1.2",
-    "gulp-connect": "~0.3.0",
+    "gulp-connect": "~1.0.0",
     "gulp-useref": "~0.1.2",
     "gulp-bundle": "~0.2.0"
   },
