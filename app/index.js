@@ -120,7 +120,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
-  // wire Twitter Bootstrap plugins
+  // wire Bootstrap plugins
   if (this.includeBootstrap) {
     var bs = 'bower_components/bootstrap' + (this.includeCompass ? '-sass/vendor/assets/javascripts/bootstrap/' : '/js/');
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
