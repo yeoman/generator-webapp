@@ -78,7 +78,10 @@ gulp.task('watch', ['connect'], function () {
         <% if (includeSass) { %>'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
         'app/images/**/*'
-    ], $.connect.reload);
+    ], function(event) {
+        return gulp.src(event.path)
+            .pipe($.connect.reload());
+    });
     <% if (includeSass) { %>
     // Watch .scss files
     gulp.watch('app/styles/**/*.scss', ['styles']);
