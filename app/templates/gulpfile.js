@@ -2,6 +2,7 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
 var gulp = require('gulp');
+var wiredep = require('wiredep').stream;
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -70,6 +71,23 @@ gulp.task('connect', $.connect.server({
     livereload: true
 }));
 
+// Inject Bower components
+gulp.task('wiredep', function () {
+    gulp.src('app/styles/*.scss')
+        .pipe(wiredep({
+            directory: 'app/bower_components',
+            ignorePath: 'app/bower_components/'
+        }))
+        .pipe(gulp.dest('app/styles'));
+
+    gulp.src('app/*.html')
+        .pipe(wiredep({
+            directory: 'app/bower_components',
+            ignorePath: 'app/'
+        }))
+        .pipe(gulp.dest('app'));
+});
+
 // Watch
 gulp.task('watch', ['connect'], function () {
     // Watch for changes in `app` folder
@@ -92,4 +110,7 @@ gulp.task('watch', ['connect'], function () {
 
     // Watch image files
     gulp.watch('app/images/**/*', ['images']);
+
+    // Watch bower files
+    gulp.watch('app/bower_components/*', ['wiredep']);
 });
