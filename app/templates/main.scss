@@ -1,6 +1,8 @@
 <% if (includeBootstrap) { %>$icon-font-path: "/bower_components/bootstrap-sass/vender/assets/fonts/";
 
-@import 'bootstrap-sass/vendor/assets/stylesheets/bootstrap';
+// bower:scss
+@import "bootstrap-sass/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
 
 .browsehappy {
     margin: 0.2em 0;
@@ -83,7 +85,7 @@ body {
     .header {
         margin-bottom: 30px;
     }
-    
+
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
