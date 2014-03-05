@@ -48,17 +48,17 @@ AppGenerator.prototype.askFor = function askFor() {
     name: 'features',
     message: 'What more would you like?',
     choices: [{
-      name: 'Sass with Compass',
-      value: 'includeCompass',
-      checked: true
-    }, {
       name: 'Bootstrap',
       value: 'includeBootstrap',
       checked: true
-    }, {
+    },{
+      name: 'Sass with Compass',
+      value: 'includeCompass',
+      checked: false
+    },{
       name: 'Modernizr',
       value: 'includeModernizr',
-      checked: true
+      checked: false
     }]
   }];
 
