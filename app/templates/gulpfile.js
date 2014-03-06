@@ -112,5 +112,5 @@ gulp.task('watch', ['connect'], function () {
     gulp.watch('app/images/**/*', ['images']);
 
     // Watch bower files
-    gulp.watch('app/bower_components/*', ['wiredep']);
+    gulp.watch('bower.json', ['wiredep']);
 });
