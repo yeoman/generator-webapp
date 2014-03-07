@@ -355,7 +355,7 @@ module.exports = function (grunt) {
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,<% if (includeCompass) { %>
-                        'bower_components/bootstrap-sass/vendor/assets/fonts/bootstrap/*.*'<% } else { %>
+                        'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'<% } else { %>
                         'bower_components/bootstrap/dist/fonts/*.*'<% } %><% } %>
                     ]
                 }]
