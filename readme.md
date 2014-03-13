@@ -34,7 +34,7 @@ Third-party dependencies are managed with [bower-install](https://github.com/ste
 
 ```bash
   bower install --save jquery
-  grunt bower-install
+  grunt bowerInstall
 ```
 
 This works if the package author has followed the [Bower spec](https://github.com/bower/bower.json-spec). If the files are not automatically added to your index.html, check with the package's repo for support and/or file an issue with them to have it updated.
