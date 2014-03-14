@@ -34,17 +34,17 @@ gulp.task('html', [<% if (includeSass) { %>'styles', <% } %>'scripts'], function
     var cssFilter = $.filter('**/*.css');
 
     return gulp.src('app/*.html')
-      .pipe($.useref.assets())
-      .pipe(jsFilter)
-      .pipe($.uglify())
-      .pipe(jsFilter.restore())
-      .pipe(cssFilter)
-      .pipe($.csso())
-      .pipe(cssFilter.restore())
-      .pipe($.useref.restore())
-      .pipe($.useref())
-      .pipe(gulp.dest('dist'))
-      .pipe($.size());
+        .pipe($.useref.assets())
+        .pipe(jsFilter)
+        .pipe($.uglify())
+        .pipe(jsFilter.restore())
+        .pipe(cssFilter)
+        .pipe($.csso())
+        .pipe(cssFilter.restore())
+        .pipe($.useref.restore())
+        .pipe($.useref())
+        .pipe(gulp.dest('dist'))
+        .pipe($.size());
 });
 
 // Images
@@ -61,7 +61,7 @@ gulp.task('images', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src([<% if (includeSass) { %>'dist/styles', <% } %>'dist/scripts', 'dist/images'], {read: false}).pipe($.clean());
+    return gulp.src([<% if (includeSass) { %>'dist/styles', <% } %>'dist/scripts', 'dist/images'], { read: false }).pipe($.clean());
 });
 
 // Build
@@ -100,20 +100,19 @@ gulp.task('wiredep', function () {
 gulp.task('watch', ['connect'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
-        'app/*.html',
-        <% if (includeSass) { %>'app/styles/**/*.css',<% } %>
+        'app/*.html',<% if (includeSass) { %>
+        'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
         'app/images/**/*'
-    ], function(event) {
+    ], function (event) {
         return gulp.src(event.path)
             .pipe($.connect.reload());
     });
-    <% if (includeSass) { %>
-    // Watch .scss files
-    gulp.watch('app/styles/**/*.scss', ['styles']);
-    <% } %>
 
-    // Watch .js files
+    <% if (includeSass) { %>// Watch .scss files
+    gulp.watch('app/styles/**/*.scss', ['styles']);
+
+    <% } %>// Watch .js files
     gulp.watch('app/scripts/**/*.js', ['scripts']);
 
     // Watch image files
