@@ -13,7 +13,7 @@
 * Automagically wire up your Bower components with [bower-install](#third-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
 * Mocha Unit Testing with PhantomJS
-* Optional - Bootstrap for SASS
+* Optional - Bootstrap for Sass
 * Optional - Leaner Modernizr builds *(new)*
 
 For more information on what `generator-webapp` can do for you, take a look at the [Grunt tasks](https://github.com/yeoman/generator-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
