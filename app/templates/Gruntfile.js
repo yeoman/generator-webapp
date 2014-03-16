@@ -228,7 +228,7 @@ module.exports = function (grunt) {
             app: {
                 src: ['<%%= config.app %>/index.html'],
                 ignorePath: '<%%= config.app %>/'<% if (includeCompass) { %>,
-                exclude: ['<%%= config.app %>/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js']
+                exclude: ['<%%= config.app %>/bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
             },
             sass: {
                 src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
