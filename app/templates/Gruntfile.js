@@ -366,13 +366,12 @@ module.exports = function (grunt) {
                     ]
                 }<% if (includeBootstrap) { %>, {
                     expand: true,
-                    dot: true,
+                    dot: true,<% if (includeCompass) { %>
                     cwd: '.',
-                    dest: '<%%= config.dist %>',
-                    src: [<% if (includeCompass) { %>
-                        'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'<% } else { %>
-                        'bower_components/bootstrap/dist/fonts/*.*'<% } %>
-                    ]
+                    src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],<% } else { %>
+                    cwd: 'bower_components/bootstrap/dist',
+                    src: ['fonts/*.*'],<% } %>
+                    dest: '<%%= config.dist %>'
                 }<% } %>]
             },
             styles: {
