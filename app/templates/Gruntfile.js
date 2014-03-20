@@ -236,7 +236,7 @@ module.exports = function (grunt) {
             app: {
                 src: ['<%%= config.app %>/index.html'],
                 ignorePath: '<%%= config.app %>/'<% if (includeCompass) { %>,
-                exclude: ['./bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
+                exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
             },
             sass: {
                 src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -387,7 +387,7 @@ module.exports = function (grunt) {
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
         modernizr: {
-            devFile: './bower_components/modernizr/modernizr.js',
+            devFile: 'bower_components/modernizr/modernizr.js',
             outputFile: '<%%= config.dist %>/scripts/vendor/modernizr.js',
             files: [
                 '<%%= config.dist %>/scripts/{,*/}*.js',
