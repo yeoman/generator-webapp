@@ -235,13 +235,13 @@ module.exports = function (grunt) {
         bowerInstall: {
             app: {
                 src: ['<%%= config.app %>/index.html'],
-                ignorePath: '<%%= config.app %>/'<% if (includeCompass) { %>,
-                exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
-            },
+                ignorePath: '<%%= config.app %>/',<% if (includeCompass) { %>
+                exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
+                exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } %>
+            }<% if (includeCompass) { %>,
             sass: {
                 src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
                 ignorePath: '<%%= config.app %>/bower_components/'
-            }<% } else { %>
             }<% } %>
         },
 
