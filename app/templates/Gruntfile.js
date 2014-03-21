@@ -54,10 +54,10 @@ module.exports = function (grunt) {
             },<% } %>
             gruntfile: {
                 files: ['Gruntfile.js']
-            },<% if (includeCompass) { %>
-            compass: {
+            },<% if (includeSass) { %>
+            sass: {
                 files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-                tasks: ['compass:server', 'autoprefixer']
+                tasks: ['sass:server', 'autoprefixer']
             },<% } %>
             styles: {
                 files: ['<%%= config.app %>/styles/{,*/}*.css'],
@@ -186,33 +186,35 @@ module.exports = function (grunt) {
                     ext: '.js'
                 }]
             }
-        },<% } %><% if (includeCompass) { %>
+        },<% } %><% if (includeSass) { %>
 
         // Compiles Sass to CSS and generates necessary files if requested
-        compass: {
-            options: {
-                sassDir: '<%%= config.app %>/styles',
-                cssDir: '.tmp/styles',
-                generatedImagesDir: '.tmp/images/generated',
-                imagesDir: '<%%= config.app %>/images',
-                javascriptsDir: '<%%= config.app %>/scripts',
-                fontsDir: '<%%= config.app %>/styles/fonts',
-                importPath: './bower_components',
-                httpImagesPath: '/images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/styles/fonts',
-                relativeAssets: false,
-                assetCacheBuster: false
+        sass: {
+            options: {<% if (includeLibSass) { %>
+                includePaths: [
+                    'bower_components'
+                ]<% } if (includeRubySass) { %>
+                loadPath: [
+                    'bower_components'
+                ]<% } %>
             },
             dist: {
-                options: {
-                    generatedImagesDir: '<%%= config.dist %>/images/generated'
-                }
+                files: [{
+                    expand: true,
+                    cwd: '<%%= config.app %>/styles',
+                    src: ['*.scss'],
+                    dest: '.tmp/styles',
+                    ext: '.css'
+                }]
             },
             server: {
-                options: {
-                    debugInfo: true
-                }
+                files: [{
+                    expand: true,
+                    cwd: '<%%= config.app %>/styles',
+                    src: ['*.scss'],
+                    dest: '.tmp/styles',
+                    ext: '.css'
+                }]
             }
         },<% } %>
 
@@ -235,10 +237,10 @@ module.exports = function (grunt) {
         bowerInstall: {
             app: {
                 src: ['<%%= config.app %>/index.html'],
-                ignorePath: '<%%= config.app %>/',<% if (includeCompass) { %>
+                ignorePath: '<%%= config.app %>/',<% if (includeSass) { %>
                 exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
                 exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } %>
-            }<% if (includeCompass) { %>,
+            }<% if (includeSass) { %>,
             sass: {
                 src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
                 ignorePath: '<%%= config.app %>/bower_components/'
@@ -366,7 +368,7 @@ module.exports = function (grunt) {
                     ]
                 }<% if (includeBootstrap) { %>, {
                     expand: true,
-                    dot: true,<% if (includeCompass) { %>
+                    dot: true,<% if (includeSass) { %>
                     cwd: '.',
                     src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],<% } else { %>
                     cwd: 'bower_components/bootstrap/dist',
@@ -398,8 +400,8 @@ module.exports = function (grunt) {
 
         // Run some tasks in parallel to speed up build process
         concurrent: {
-            server: [<% if (includeCompass) { %>
-                'compass:server',<% } if (coffee) { %>
+            server: [<% if (includeSass) { %>
+                'sass:server',<% } if (coffee) {  %>
                 'coffee:dist',<% } %>
                 'copy:styles'
             ],
@@ -408,8 +410,8 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [<% if (coffee) { %>
-                'coffee',<% } if (includeCompass) { %>
-                'compass',<% } %>
+                'coffee',<% } if (includeSass) { %>
+                'sass',<% } %>
                 'copy:styles',
                 'imagemin',
                 'svgmin'
