@@ -19,6 +19,14 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('app/styles'))
         .pipe($.size());
 });
+<% } else { %>
+// Styles
+gulp.task('styles', function () {
+    return gulp.src('app/styles/main.css')
+        .pipe($.autoprefixer('last 1 version'))
+        .pipe(gulp.dest('app/styles'))
+        .pipe($.size());
+});
 <% } %>
 // Scripts
 gulp.task('scripts', function () {
@@ -29,7 +37,7 @@ gulp.task('scripts', function () {
 });
 
 // HTML
-gulp.task('html', [<% if (includeSass) { %>'styles', <% } %>'scripts'], function () {
+gulp.task('html', ['styles', 'scripts'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
@@ -61,7 +69,7 @@ gulp.task('images', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src([<% if (includeSass) { %>'dist/styles', <% } %>'dist/scripts', 'dist/images'], { read: false }).pipe($.clean());
+    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], { read: false }).pipe($.clean());
 });
 
 // Build
@@ -81,7 +89,7 @@ gulp.task('connect', $.connect.server({
 
 // Inject Bower components
 gulp.task('wiredep', function () {
-    gulp.src('app/styles/*.scss')
+    gulp.src('app/styles/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
         .pipe(wiredep({
             directory: 'app/bower_components',
             ignorePath: 'app/bower_components/'
@@ -101,6 +109,7 @@ gulp.task('watch', ['connect'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',<% if (includeSass) { %>
+        'app/styles/**/*.scss',<% } else { %>
         'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
         'app/images/**/*'
@@ -112,7 +121,10 @@ gulp.task('watch', ['connect'], function () {
     <% if (includeSass) { %>// Watch .scss files
     gulp.watch('app/styles/**/*.scss', ['styles']);
 
-    <% } %>// Watch .js files
+    <% } else { %>// Watch .css files
+    gulp.watch('app/styles/**/*.css', ['styles']);
+
+    <% }  %>// Watch .js files
     gulp.watch('app/scripts/**/*.js', ['scripts']);
 
     // Watch image files
