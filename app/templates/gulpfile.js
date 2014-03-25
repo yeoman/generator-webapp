@@ -89,7 +89,7 @@ gulp.task('connect', $.connect.server({
 }));
 
 // Open
-gulp.task('serve', function() {
+gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function() {
   open("http://localhost:9000");
 });
 
