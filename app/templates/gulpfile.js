@@ -2,6 +2,7 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
 var gulp = require('gulp');
+var open = require('open');
 var wiredep = require('wiredep').stream;
 
 // Load plugins
@@ -87,6 +88,11 @@ gulp.task('connect', $.connect.server({
     livereload: true
 }));
 
+// Open
+gulp.task('serve', function() {
+  open("http://localhost:9000");
+});
+
 // Inject Bower components
 gulp.task('wiredep', function () {
     gulp.src('app/styles/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
@@ -105,7 +111,7 @@ gulp.task('wiredep', function () {
 });
 
 // Watch
-gulp.task('watch', ['connect'], function () {
+gulp.task('watch', ['connect', 'serve'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',<% if (includeSass) { %>
