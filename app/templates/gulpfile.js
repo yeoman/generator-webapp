@@ -11,13 +11,13 @@ var $ = require('gulp-load-plugins')();
 <% if (includeSass) { %>
 // Styles
 gulp.task('styles', function () {
-    return gulp.src('app/styles/main.scss')
+    return gulp.src('app/styles/**/*.scss')
         .pipe($.rubySass({
           style: 'expanded',
           loadPath: ['app/bower_components']
         }))
         .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('app/styles'))
+        .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
 });
 <% } else { %>
@@ -83,7 +83,7 @@ gulp.task('default', ['clean'], function () {
 
 // Connect
 gulp.task('connect', $.connect.server({
-    root: ['app'],
+    root: ['app', '.tmp'],
     port: 9000,
     livereload: true
 }));
@@ -95,7 +95,7 @@ gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], functio
 
 // Inject Bower components
 gulp.task('wiredep', function () {
-    gulp.src('app/styles/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
+    gulp.src('app/styles/**/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
         .pipe(wiredep({
             directory: 'app/bower_components',
             ignorePath: 'app/bower_components/'
@@ -114,11 +114,11 @@ gulp.task('wiredep', function () {
 gulp.task('watch', ['connect', 'serve'], function () {
     // Watch for changes in `app` folder
     gulp.watch([
-        'app/*.html',<% if (includeSass) { %>
-        'app/styles/**/*.scss',<% } else { %>
+        'app/*.html',<% if (!includeSass) { %>
         'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
-        'app/images/**/*'
+        'app/images/**/*'<% if (includeSass) { %>,
+        '.tmp/styles/**/*.css'<% } %>
     ], function (event) {
         return gulp.src(event.path)
             .pipe($.connect.reload());
