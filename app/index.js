@@ -52,26 +52,37 @@ AppGenerator.prototype.askFor = function askFor() {
       value: 'includeBootstrap',
       checked: true
     },{
-      name: 'Sass with Compass',
-      value: 'includeCompass',
+      name: 'Sass',
+      value: 'includeSass',
       checked: false
     },{
       name: 'Modernizr',
       value: 'includeModernizr',
       checked: false
     }]
+  }, {
+    when: function (answers) {
+      return answers.features.indexOf('includeSass') !== -1;
+    },
+    type: 'confirm',
+    name: 'libsass',
+    value: 'includeLibSass',
+    message: 'Would you like to use libsass? Read up more at \n' + chalk.green('https://github.com/yeoman/generator-webapp/blob/master/libsass.md'),
+    default: false
   }];
 
   this.prompt(prompts, function (answers) {
     var features = answers.features;
 
     function hasFeature(feat) { return features.indexOf(feat) !== -1; }
-
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.includeCompass = hasFeature('includeCompass');
+    this.includeSass = hasFeature('includeSass');
     this.includeBootstrap = hasFeature('includeBootstrap');
     this.includeModernizr = hasFeature('includeModernizr');
+
+    this.includeLibSass = answers.libsass;
+    this.includeRubySass = !(answers.libsass);
 
     cb();
   }.bind(this));
@@ -111,7 +122,7 @@ AppGenerator.prototype.h5bp = function h5bp() {
 };
 
 AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
-  var css = 'main.' + (this.includeCompass ? 's' : '') + 'css';
+  var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
   this.copy(css, 'app/styles/' + css);
 };
 
@@ -122,7 +133,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
 
   // wire Bootstrap plugins
   if (this.includeBootstrap) {
-    var bs = '../bower_components/bootstrap' + (this.includeCompass ? '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/');
+    var bs = '../bower_components/bootstrap' + (this.includeSass ? '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/');
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       bs + 'affix.js',
       bs + 'alert.js',

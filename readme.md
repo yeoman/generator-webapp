@@ -8,7 +8,7 @@
 
 * CSS Autoprefixing *(new)*
 * Built-in preview server with LiveReload
-* Automagically compile CoffeeScript & Compass
+* Automagically compile CoffeeScript & Sass
 * Automagically lint your scripts
 * Automagically wire up your Bower components with [bower-install](#third-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)

@@ -41,7 +41,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['includeCompass']
+      features: ['includeSass']
     });
 
     this.webapp.coffee = true;
@@ -65,7 +65,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['includeCompass']
+      features: ['includeSass']
     });
 
     this.webapp.coffee = false;
@@ -89,7 +89,7 @@ describe('Webapp generator test', function () {
     ];
 
     helpers.mockPrompt(this.webapp, {
-      features: ['includeCompass']
+      features: ['includeSass']
     });
 
     this.webapp.run({}, function () {
