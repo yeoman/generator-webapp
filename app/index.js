@@ -21,8 +21,8 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
     as: 'app',
     options: {
       options: {
-        'skip-install': options['skip-install-message'],
-        'skip-message': options['skip-install']
+        'skip-message': options['skip-install-message'],
+        'skip-install': options['skip-install']
       }
     }
   });
