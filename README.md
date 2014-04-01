@@ -13,6 +13,7 @@ Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blo
 * Automagically compile Sass
 * Automagically lint your scripts
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
+* Automagically wire-up dependencies installed with [Bower](http://bower.io)
 * TODO: Mocha Unit Testing with PhantomJS
 * TODO: Optional - Leaner Modernizr builds *(new)*
 
