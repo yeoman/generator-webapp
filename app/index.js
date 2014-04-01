@@ -1,10 +1,11 @@
 'use strict';
+var fs = require('fs');
 var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
-
+var wiredep = require('wiredep');
 
 var AppGenerator = module.exports = function Appgenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -154,7 +155,14 @@ AppGenerator.prototype.app = function app() {
 };
 
 AppGenerator.prototype.install = function () {
+  var howToInstall =
+    '\nAfter running `npm install & bower install`, inject your front end dependencies into' +
+    '\nyour HTML by running:' +
+    '\n' +
+    chalk.yellow.bold('\n  gulp wiredep');
+
   if (this.options['skip-install']) {
+    console.log(howToInstall);
     return;
   }
 
@@ -162,6 +170,28 @@ AppGenerator.prototype.install = function () {
   this.installDependencies({
     skipMessage: this.options['skip-install-message'],
     skipInstall: this.options['skip-install'],
-    callback: done
+    callback: function () {
+      var bowerJson = JSON.parse(fs.readFileSync('./bower.json'));
+
+      // wire Bower packages to .html
+      wiredep({
+        bowerJson: bowerJson,
+        directory: 'app/bower_components',
+        ignorePath: 'app/',
+        src: 'app/index.html'
+      });
+
+      if (this.includeSass) {
+        // wire Bower packages to .scss
+        wiredep({
+          bowerJson: bowerJson,
+          directory: 'app/bower_components',
+          ignorePath: '../bower_components/',
+          src: 'app/styles/*.scss'
+        });
+      }
+
+      done();
+    }.bind(this)
   });
 };
