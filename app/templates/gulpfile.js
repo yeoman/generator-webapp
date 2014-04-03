@@ -82,11 +82,13 @@ gulp.task('default', ['clean'], function () {
 });
 
 // Connect
-gulp.task('connect', $.connect.server({
+gulp.task('connect', function () {
+  $.connect.server({
     root: ['app'],
     port: 9000,
     livereload: true
-}));
+  });
+});
 
 // Open
 gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function() {
