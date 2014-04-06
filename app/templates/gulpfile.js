@@ -68,13 +68,26 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
+gulp.task('fonts', function () {
+    return $.bowerFiles()
+        .pipe($.filter([
+            '**/*.eot',
+            '**/*.svg',
+            '**/*.ttf',
+            '**/*.woff'
+        ]))
+        .pipe($.flatten())
+        .pipe(gulp.dest('dist/fonts'))
+        .pipe($.size());
+});
+
 // Clean
 gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], { read: false }).pipe($.clean());
+    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images', 'dist/fonts'], { read: false }).pipe($.clean());
 });
 
 // Build
-gulp.task('build', ['html', 'images']);
+gulp.task('build', ['html', 'images', 'fonts']);
 
 // Default task
 gulp.task('default', ['clean'], function () {

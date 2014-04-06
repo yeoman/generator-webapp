@@ -63,6 +63,10 @@ describe('Gulp Webapp generator: tasks', function () {
     assertTaskExists(this.webapp, "images", [], done);
   });
 
+  it('should contain fonts task', function (done) {
+    assertTaskExists(this.webapp, "fonts", [], done);
+  });
+
   it('should contain clean task', function (done) {
     assertTaskExists(this.webapp, "clean", [], done);
   });
