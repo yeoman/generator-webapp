@@ -67,7 +67,7 @@ AppGenerator.prototype.askFor = function askFor() {
     type: 'confirm',
     name: 'libsass',
     value: 'includeLibSass',
-    message: 'Would you like to use libsass? Read up more at \n' + chalk.green('https://github.com/yeoman/generator-webapp/blob/master/libsass.md'),
+    message: 'Would you like to use libsass? Read up more at \n' + chalk.green('https://github.com/andrew/node-sass#reporting-sass-compilation-and-syntax-issues'),
     default: false
   }];
 
