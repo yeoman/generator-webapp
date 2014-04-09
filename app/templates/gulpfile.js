@@ -14,7 +14,8 @@ gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({
           style: 'expanded',
-          loadPath: ['app/bower_components']
+          loadPath: ['app/bower_components'],
+          compass: true
         }))
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('app/styles'))
