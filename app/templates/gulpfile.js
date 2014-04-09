@@ -13,8 +13,8 @@ var $ = require('gulp-load-plugins')();
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({
-          style: 'expanded',
-          loadPath: ['app/bower_components']
+            style: 'expanded',
+            loadPath: ['app/bower_components']
         }))
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('app/styles'))
@@ -96,16 +96,16 @@ gulp.task('default', ['clean'], function () {
 
 // Connect
 gulp.task('connect', function () {
-  $.connect.server({
-    root: ['app'],
-    port: 9000,
-    livereload: true
-  });
+    $.connect.server({
+        root: ['app'],
+        port: 9000,
+        livereload: true
+    });
 });
 
 // Open
 gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function() {
-  open("http://localhost:9000");
+    open('http://localhost:9000');
 });
 
 // Inject Bower components
