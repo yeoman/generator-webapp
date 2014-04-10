@@ -2,6 +2,8 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
 var gulp = require('gulp');
+var connect = require('connect');
+var http = require('http');
 var open = require('open');
 var wiredep = require('wiredep').stream;
 
@@ -95,12 +97,17 @@ gulp.task('default', ['clean'], function () {
 });
 
 // Connect
-gulp.task('connect', function () {
-    $.connect.server({
-        root: ['app'],
-        port: 9000,
-        livereload: true
-    });
+gulp.task('connect', function() {
+    var app = connect()
+        .use(require('connect-livereload')({ port: 35729 }))
+        .use(connect.static('app'))
+        .use(connect.directory('app'));
+
+    http.createServer(app)
+        .listen(9000)
+        .on('listening', function() {
+            console.log('Started connect web server on http://localhost:9000');
+        });
 });
 
 // Open
@@ -127,6 +134,8 @@ gulp.task('wiredep', function () {
 
 // Watch
 gulp.task('watch', ['connect', 'serve'], function () {
+    var server = $.livereload();
+
     // Watch for changes in `app` folder
     gulp.watch([
         'app/*.html',<% if (includeSass) { %>
@@ -134,9 +143,8 @@ gulp.task('watch', ['connect', 'serve'], function () {
         'app/styles/**/*.css',<% } %>
         'app/scripts/**/*.js',
         'app/images/**/*'
-    ], function (event) {
-        return gulp.src(event.path)
-            .pipe($.connect.reload());
+    ]).on('change', function (file) {
+        server.changed(file.path);
     });
 
     <% if (includeSass) { %>// Watch .scss files
