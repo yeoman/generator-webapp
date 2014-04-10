@@ -120,14 +120,13 @@ gulp.task('wiredep', function () {
     gulp.src('app/styles/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
         .pipe(wiredep({
             directory: 'app/bower_components',
-            ignorePath: 'app/bower_components/'
+            ignorePath: '../bower_components/'
         }))
         .pipe(gulp.dest('app/styles'));
 
     gulp.src('app/*.html')
         .pipe(wiredep({
-            directory: 'app/bower_components',
-            ignorePath: 'app/'
+            directory: 'app/bower_components'
         }))
         .pipe(gulp.dest('app'));
 });
