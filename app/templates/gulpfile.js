@@ -70,6 +70,7 @@ gulp.task('images', function () {
         .pipe($.size());
 });
 
+// Fonts
 gulp.task('fonts', function () {
     return $.bowerFiles()
         .pipe($.filter([
