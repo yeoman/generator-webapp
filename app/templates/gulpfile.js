@@ -128,7 +128,8 @@ gulp.task('wiredep', function () {
     gulp.src('app/*.html')
         .pipe(wiredep({
             directory: 'app/bower_components',
-            ignorePath: 'app/'
+            ignorePath: 'app/',
+            exclude: ['app/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js']
         }))
         .pipe(gulp.dest('app'));
 });
