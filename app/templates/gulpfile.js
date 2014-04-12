@@ -15,8 +15,7 @@ var $ = require('gulp-load-plugins')();
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({
-            style: 'expanded',
-            loadPath: ['app/bower_components']
+            style: 'expanded'
         }))
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('app/styles'))
@@ -117,19 +116,17 @@ gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], functio
 });
 
 // Inject Bower components
-gulp.task('wiredep', function () {
-    gulp.src('app/styles/*.<% if (includeSass) { %>scss<% } else { %>css<% } %>')
+gulp.task('wiredep', function () {<% if (includeSass) { %>
+    gulp.src('app/styles/*.scss')
         .pipe(wiredep({
-            directory: 'app/bower_components',
-            ignorePath: 'app/bower_components/'
+            directory: 'app/bower_components'
         }))
         .pipe(gulp.dest('app/styles'));
-
+<% } %>
     gulp.src('app/*.html')
         .pipe(wiredep({
-            directory: 'app/bower_components',
-            ignorePath: 'app/',
-            exclude: ['app/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap.js']
+            directory: 'app/bower_components'<% if (includeSass && includeBootstrap) { %>,
+            exclude: ['bootstrap-sass']<% } %>
         }))
         .pipe(gulp.dest('app'));
 });

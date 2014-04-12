@@ -177,7 +177,7 @@ AppGenerator.prototype.install = function () {
       wiredep({
         bowerJson: bowerJson,
         directory: 'app/bower_components',
-        ignorePath: 'app/',
+        exclude: ['bootstrap-sass'],
         src: 'app/index.html'
       });
 
@@ -186,7 +186,6 @@ AppGenerator.prototype.install = function () {
         wiredep({
           bowerJson: bowerJson,
           directory: 'app/bower_components',
-          ignorePath: '../bower_components/',
           src: 'app/styles/*.scss'
         });
       }
