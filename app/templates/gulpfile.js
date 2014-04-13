@@ -4,7 +4,7 @@
 var gulp = require('gulp');
 var connect = require('connect');
 var http = require('http');
-var open = require('open');
+var open = require('opn');
 var wiredep = require('wiredep').stream;
 
 // Load plugins
