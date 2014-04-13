@@ -6,24 +6,17 @@ var gulp = require('gulp');
 // load plugins
 var $ = require('gulp-load-plugins')();
 
-<% if (includeSass) { %>
-gulp.task('styles', function () {
+gulp.task('styles', function () {<% if (includeSass) { %>
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({
             style: 'expanded'
-        }))
+        }))<% } else { %>
+    return gulp.src('app/styles/main.css')<% } %>
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('app/styles'))
         .pipe($.size());
 });
-<% } else { %>
-gulp.task('styles', function () {
-    return gulp.src('app/styles/main.css')
-        .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('app/styles'))
-        .pipe($.size());
-});
-<% } %>
+
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.jshint())
