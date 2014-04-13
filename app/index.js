@@ -64,7 +64,9 @@ AppGenerator.prototype.askFor = function askFor() {
   this.prompt(prompts, function (answers) {
     var features = answers.features;
 
-    function hasFeature(feat) { return features.indexOf(feat) !== -1; }
+    var hasFeature = function (feat) {
+      return features.indexOf(feat) !== -1;
+    }
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
@@ -76,45 +78,45 @@ AppGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
-AppGenerator.prototype.gulpfile = function gulpfile() {
+AppGenerator.prototype.gulpfile = function () {
   this.template('gulpfile.js');
 };
 
-AppGenerator.prototype.packageJSON = function packageJSON() {
+AppGenerator.prototype.packageJSON = function () {
   this.template('_package.json', 'package.json');
 };
 
-AppGenerator.prototype.git = function git() {
+AppGenerator.prototype.git = function () {
   this.copy('gitignore', '.gitignore');
   this.copy('gitattributes', '.gitattributes');
 };
 
-AppGenerator.prototype.bower = function bower() {
+AppGenerator.prototype.bower = function () {
   this.copy('bowerrc', '.bowerrc');
   this.copy('bower.json', 'bower.json');
 };
 
-AppGenerator.prototype.jshint = function jshint() {
+AppGenerator.prototype.jshint = function () {
   this.copy('jshintrc', '.jshintrc');
 };
 
-AppGenerator.prototype.editorConfig = function editorConfig() {
+AppGenerator.prototype.editorConfig = function () {
   this.copy('editorconfig', '.editorconfig');
 };
 
-AppGenerator.prototype.h5bp = function h5bp() {
+AppGenerator.prototype.h5bp = function () {
   this.copy('favicon.ico', 'app/favicon.ico');
   this.copy('404.html', 'app/404.html');
   this.copy('robots.txt', 'app/robots.txt');
   this.copy('htaccess', 'app/.htaccess');
 };
 
-AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
+AppGenerator.prototype.mainStylesheet = function () {
   var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
   this.copy(css, 'app/styles/' + css);
 };
 
-AppGenerator.prototype.writeIndex = function writeIndex() {
+AppGenerator.prototype.writeIndex = function () {
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
@@ -145,7 +147,7 @@ AppGenerator.prototype.writeIndex = function writeIndex() {
   });
 };
 
-AppGenerator.prototype.app = function app() {
+AppGenerator.prototype.app = function () {
   this.mkdir('app');
   this.mkdir('app/scripts');
   this.mkdir('app/styles');

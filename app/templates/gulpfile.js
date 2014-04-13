@@ -85,7 +85,12 @@ gulp.task('fonts', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src(['dist/styles', 'dist/scripts', 'dist/images', 'dist/fonts'], { read: false }).pipe($.clean());
+    return gulp.src([
+        'dist/styles',
+        'dist/scripts',
+        'dist/images',
+        'dist/fonts'
+    ], { read: false }).pipe($.clean());
 });
 
 // Build
@@ -97,7 +102,7 @@ gulp.task('default', ['clean'], function () {
 });
 
 // Connect
-gulp.task('connect', function() {
+gulp.task('connect', function () {
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
         .use(connect.static('app'))
@@ -105,13 +110,13 @@ gulp.task('connect', function() {
 
     http.createServer(app)
         .listen(9000)
-        .on('listening', function() {
+        .on('listening', function () {
             console.log('Started connect web server on http://localhost:9000');
         });
 });
 
 // Open
-gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function() {
+gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function () {
     open('http://localhost:9000');
 });
 
