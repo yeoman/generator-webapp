@@ -80,12 +80,7 @@ gulp.task('fonts', function () {
 
 // Clean
 gulp.task('clean', function () {
-    return gulp.src([
-        'dist/styles',
-        'dist/scripts',
-        'dist/images',
-        'dist/fonts'
-    ], { read: false }).pipe($.clean());
+    return gulp.src(['dist'], { read: false }).pipe($.clean());
 });
 
 // Build
