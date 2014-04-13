@@ -2,10 +2,6 @@
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 
 var gulp = require('gulp');
-var connect = require('connect');
-var http = require('http');
-var open = require('opn');
-var wiredep = require('wiredep').stream;
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -93,12 +89,13 @@ gulp.task('default', ['clean'], function () {
 
 // Connect
 gulp.task('connect', function () {
+    var connect = require('connect');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
         .use(connect.static('app'))
         .use(connect.directory('app'));
 
-    http.createServer(app)
+    require('http').createServer(app)
         .listen(9000)
         .on('listening', function () {
             console.log('Started connect web server on http://localhost:9000');
@@ -107,11 +104,13 @@ gulp.task('connect', function () {
 
 // Open
 gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function () {
-    open('http://localhost:9000');
+    require('opn')('http://localhost:9000');
 });
 
 // Inject Bower components
-gulp.task('wiredep', function () {<% if (includeSass) { %>
+gulp.task('wiredep', function () {
+    var wiredep = require('wiredep').stream;
+<% if (includeSass) { %>
     gulp.src('app/styles/*.scss')
         .pipe(wiredep({
             directory: 'app/bower_components'
