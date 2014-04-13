@@ -33,7 +33,7 @@ gulp.task('styles', function () {
 // Scripts
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
-        .pipe($.jshint.reporter('default'))
+        .pipe($.jshint.reporter($.jshintStylish))
         .pipe($.size());
 });
 
