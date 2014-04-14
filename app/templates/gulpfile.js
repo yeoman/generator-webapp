@@ -13,7 +13,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
         }))<% } else { %>
     return gulp.src('app/styles/main.css')<% } %>
         .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('app/styles'))
+        .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
 });
 
@@ -62,7 +62,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src(['dist'], { read: false }).pipe($.clean());
+    return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
 gulp.task('build', ['html', 'images', 'fonts']);
@@ -76,6 +76,7 @@ gulp.task('connect', function () {
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
         .use(connect.static('app'))
+        .use(connect.static('.tmp'))
         .use(connect.directory('app'));
 
     require('http').createServer(app)
@@ -110,10 +111,11 @@ gulp.task('wiredep', function () {
 gulp.task('watch', ['connect', 'serve'], function () {
     var server = $.livereload();
 
-    // watch for changes in the `app` folder
+    // watch for changes
+
     gulp.watch([
         'app/*.html',
-        'app/styles/**/*.css',
+        '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*'
     ]).on('change', function (file) {
