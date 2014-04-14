@@ -103,7 +103,7 @@ gulp.task('wiredep', function () {
     gulp.src('app/*.html')
         .pipe(wiredep({
             directory: 'app/bower_components'<% if (includeSass && includeBootstrap) { %>,
-            exclude: ['bootstrap-sass']<% } %>
+            exclude: ['bootstrap-sass-official']<% } %>
         }))
         .pipe(gulp.dest('app'));
 });
