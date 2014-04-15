@@ -6,7 +6,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 
 
-var AppGenerator = module.exports = function Appgenerator(args, options, config) {
+var AppGenerator = module.exports = function Appgenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
 
   // setup the test-framework property, Gruntfile template will need this
@@ -29,7 +29,9 @@ var AppGenerator = module.exports = function Appgenerator(args, options, config)
 
   this.options = options;
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.pkg = JSON.parse(this.readFileAsString(
+    path.join(__dirname, '../package.json')
+  ));
 };
 
 util.inherits(AppGenerator, yeoman.generators.Base);
@@ -40,7 +42,10 @@ AppGenerator.prototype.askFor = function askFor() {
   // welcome message
   if (!this.options['skip-welcome-message']) {
     console.log(this.yeoman);
-    console.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a Gruntfile.js to build your app.'));
+    console.log(chalk.magenta(
+      'Out of the box I include HTML5 Boilerplate, jQuery, and a ' +
+      'Gruntfile.js to build your app.'
+    ));
   }
 
   var prompts = [{
@@ -67,22 +72,24 @@ AppGenerator.prototype.askFor = function askFor() {
     type: 'confirm',
     name: 'libsass',
     value: 'includeLibSass',
-    message: 'Would you like to use libsass? Read up more at \n' + chalk.green('https://github.com/andrew/node-sass#reporting-sass-compilation-and-syntax-issues'),
+    message: 'Would you like to use libsass? Read up more at \n' +
+      chalk.green('https://github.com/andrew/node-sass#node-sass'),
     default: false
   }];
 
   this.prompt(prompts, function (answers) {
     var features = answers.features;
 
-    function hasFeature(feat) { return features.indexOf(feat) !== -1; }
-    // manually deal with the response, get back and store the results.
-    // we change a bit this way of doing to automatically do this in the self.prompt() method.
+    function hasFeature(feat) {
+      return features.indexOf(feat) !== -1;
+    }
+
     this.includeSass = hasFeature('includeSass');
     this.includeBootstrap = hasFeature('includeBootstrap');
     this.includeModernizr = hasFeature('includeModernizr');
 
     this.includeLibSass = answers.libsass;
-    this.includeRubySass = !(answers.libsass);
+    this.includeRubySass = !answers.libsass;
 
     cb();
   }.bind(this));
@@ -97,12 +104,12 @@ AppGenerator.prototype.packageJSON = function packageJSON() {
 };
 
 AppGenerator.prototype.git = function git() {
-  this.copy('gitignore', '.gitignore');
+  this.template('gitignore', '.gitignore');
   this.copy('gitattributes', '.gitattributes');
 };
 
 AppGenerator.prototype.bower = function bower() {
-  this.copy('_bower.json', 'bower.json');
+  this.template('_bower.json', 'bower.json');
 };
 
 AppGenerator.prototype.jshint = function jshint() {
@@ -127,12 +134,16 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
 
-  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+  this.indexFile = this.readFileAsString(
+    path.join(this.sourceRoot(), 'index.html')
+  );
   this.indexFile = this.engine(this.indexFile, this);
 
   // wire Bootstrap plugins
   if (this.includeBootstrap) {
-    var bs = '../bower_components/bootstrap' + (this.includeSass ? '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/');
+    var bs = '../bower_components/bootstrap';
+    bs += this.includeSass ?
+      '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/';
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       bs + 'affix.js',
       bs + 'alert.js',
