@@ -2,7 +2,7 @@
 
 [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [Gulp](http://gulpjs.com/) for the build process.
 
-![](http://i.imgur.com/Ba1XYSc.png)
+![](screenshot.png)
 
 ## Features
 
