@@ -152,6 +152,7 @@ AppGenerator.prototype.app = function () {
   this.mkdir('app/scripts');
   this.mkdir('app/styles');
   this.mkdir('app/images');
+  this.mkdir('app/fonts');
   this.write('app/index.html', this.indexFile);
   this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
 };

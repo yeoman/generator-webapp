@@ -23,6 +23,7 @@
     "gulp-useref": "^0.3.1",
     "jshint-stylish": "^0.1.5",
     "opn": "^0.1.1",
+    "streamqueue": "^0.0.6",
     "wiredep": "^1.4.3"
   },
   "engines": {
