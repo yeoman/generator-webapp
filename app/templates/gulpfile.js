@@ -20,7 +20,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.jshint())
-        .pipe($.jshint.reporter($.jshintStylish))
+        .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
 });
 
