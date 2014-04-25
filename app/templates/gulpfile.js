@@ -82,6 +82,7 @@ gulp.task('connect', function () {
         .use(require('connect-livereload')({ port: 35729 }))
         .use(connect.static('app'))
         .use(connect.static('.tmp'))
+        .use('/bower_components', connect.static('bower_components'))
         .use(connect.directory('app'));
 
     require('http').createServer(app)
@@ -101,13 +102,13 @@ gulp.task('wiredep', function () {
 <% if (includeSass) { %>
     gulp.src('app/styles/*.scss')
         .pipe(wiredep({
-            directory: 'app/bower_components'
+            directory: 'bower_components'
         }))
         .pipe(gulp.dest('app/styles'));
 <% } %>
     gulp.src('app/*.html')
         .pipe(wiredep({
-            directory: 'app/bower_components'<% if (includeSass && includeBootstrap) { %>,
+            directory: 'bower_components'<% if (includeSass && includeBootstrap) { %>,
             exclude: ['bootstrap-sass-official']<% } %>
         }))
         .pipe(gulp.dest('app'));
