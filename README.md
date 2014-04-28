@@ -9,7 +9,7 @@
 Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/gulpfile.js) for up to date information on what we support.
 
 * CSS Autoprefixing *(new)*
-* Built-in preview server with LiveReload
+* Built-in preview server with LiveReload (requires the [browser extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-))
 * Automagically compile Sass
 * Automagically lint your scripts
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
