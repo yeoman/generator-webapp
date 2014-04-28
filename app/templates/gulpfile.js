@@ -9,7 +9,8 @@ var $ = require('gulp-load-plugins')();
 gulp.task('styles', function () {<% if (includeSass) { %>
     return gulp.src('app/styles/main.scss')
         .pipe($.rubySass({
-            style: 'expanded'
+            style: 'expanded',
+            precision: 10
         }))<% } else { %>
     return gulp.src('app/styles/main.css')<% } %>
         .pipe($.autoprefixer('last 1 version'))
