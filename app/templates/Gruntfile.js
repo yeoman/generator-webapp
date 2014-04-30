@@ -360,10 +360,9 @@ module.exports = function (grunt) {
                 }<% if (includeBootstrap) { %>, {
                     expand: true,
                     dot: true,<% if (includeSass) { %>
-                    cwd: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/',
-                    src: ['*.*'],<% } else { %>
-                    cwd: 'bower_components/bootstrap/dist/fonts/',
-                    src: ['*.*'],<% } %>
+                    cwd: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/',<% } else { %>
+                    cwd: 'bower_components/bootstrap/dist/fonts/',<% } %>
+                    src: ['*.*'],
                     dest: '<%%= config.dist %>/styles/fonts'
                 }<% } %>]
             },
