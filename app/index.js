@@ -122,7 +122,7 @@ AppGenerator.prototype.writeIndex = function () {
 
   // wire Bootstrap plugins
   if (this.includeBootstrap) {
-    var bs = 'bower_components/bootstrap' + (this.includeSass ? '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/');
+    var bs = '../bower_components/bootstrap' + (this.includeSass ? '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/');
     this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
       bs + 'affix.js',
       bs + 'alert.js',
@@ -179,7 +179,7 @@ AppGenerator.prototype.install = function () {
       // wire Bower packages to .html
       wiredep({
         bowerJson: bowerJson,
-        directory: 'app/bower_components',
+        directory: 'bower_components',
         exclude: ['bootstrap-sass'],
         src: 'app/index.html'
       });
@@ -188,7 +188,7 @@ AppGenerator.prototype.install = function () {
         // wire Bower packages to .scss
         wiredep({
           bowerJson: bowerJson,
-          directory: 'app/bower_components',
+          directory: 'bower_components',
           src: 'app/styles/*.scss'
         });
       }
