@@ -19,6 +19,8 @@ Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blo
 
 For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
 
+We also have [Recipes](https://github.com/yeoman/generator-gulp-webapp/blob/master/docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
+
 
 ## Getting Started
 
