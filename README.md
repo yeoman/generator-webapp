@@ -19,7 +19,7 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 
 For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.
 
-We also have [Recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
+We also have [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
 
 
 ## Getting Started
