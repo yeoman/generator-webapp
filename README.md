@@ -1,12 +1,12 @@
 # Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-gulp-webapp.svg?branch=master)](http://travis-ci.org/yeoman/generator-gulp-webapp)
 
-[Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [Gulp](http://gulpjs.com/) for the build process.
+[Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [gulp](http://gulpjs.com/) for the build process.
 
 ![](screenshot.png)
 
 ## Features
 
-Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/gulpfile.js) for up to date information on what we support.
+Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date information on what we support.
 
 * CSS Autoprefixing *(new)*
 * Built-in preview server with LiveReload
@@ -48,7 +48,7 @@ To install dependencies, run `bower install depName --save` to get the files, th
 
 ## Contribute
 
-See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md)
+See the [contributing docs](contributing.md)
 
 Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it.
 
