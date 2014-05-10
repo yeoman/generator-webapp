@@ -6,8 +6,8 @@ With this setup you can freely mix `.js` and `.coffee` files in your `app/script
 
 ### 1. Install the [gulp-coffee](https://github.com/wearefractal/gulp-coffee) plugin
 
-```
-npm install --save-dev gulp-coffee
+```sh
+$ npm install --save-dev gulp-coffee
 ```
 
 ### 2. Create a `scripts` task
@@ -36,28 +36,28 @@ gulp.task('html', ['styles', 'scripts'], function () {
 
 ### 4. Edit your watch task
 
-Make these two changes (indicated by comments) to ensure that (1) generated `.js` files trigger a live reload, and (2) edits to `.coffee` files trigger recompilation.
+Make two changes to ensure that
 
-```js
+1. generated `.js` files trigger a live reload, and
+2. edits to `.coffee` files trigger recompilation.
+
+```diff
 gulp.task('watch', ['connect', 'serve'], function () {
-    var server = $.livereload();
+     gulp.watch([
+         'app/*.html',
+         '.tmp/styles/**/*.css',
+-        'app/scripts/**/*.js',
++        '{.tmp,app}/scripts/**/*.js',
+         'app/images/**/*'
+     ]).on('change', function (file) {
+         server.changed(file.path);
+     });
 
-    // watch for changes
-
-    gulp.watch([
-        'app/*.html',
-        '.tmp/styles/**/*.css',
-        '{.tmp,app}/scripts/**/*.js', // <--- 1. watch js files in .tmp as well as app
-        'app/images/**/*'
-    ]).on('change', function (file) {
-        server.changed(file.path);
-    });
-
-    gulp.watch('app/styles/**/*.css', ['styles']);
-    gulp.watch('app/scripts/**/*.coffee', ['scripts']); // <--- 2. recompile whenever .coffee files change
-    gulp.watch('app/images/**/*', ['images']);
-    gulp.watch('bower.json', ['wiredep']);
-});
+     gulp.watch('app/styles/**/*.scss', ['styles']);
++    gulp.watch('app/scripts/**/*.coffee', ['scripts']);
+     gulp.watch('app/images/**/*', ['images']);
+     gulp.watch('bower.json', ['wiredep']);
+ });
 ```
 
 ## Usage
