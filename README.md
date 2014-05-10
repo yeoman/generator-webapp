@@ -4,6 +4,7 @@
 
 ![](screenshot.png)
 
+
 ## Features
 
 Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date information on what we support.
@@ -19,8 +20,6 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 
 For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.
 
-We also have [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
-
 
 ## Getting Started
 
@@ -35,20 +34,24 @@ We also have [recipes](docs/recipes/README.md) for integrating other popular tec
 
 To install dependencies, run `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
 
+
+## Docs
+
+We have [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
+
+
 ## Options
 
-* `--skip-install`
-
+- `--skip-install`
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
-* `--test-framework=<framework>`
-
+- `--test-framework=<framework>`
   Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
 
 ## Contribute
 
-See the [contributing docs](contributing.md)
+See the [contributing docs](contributing.md).
 
 Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it.
 

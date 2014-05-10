@@ -1,7 +1,7 @@
-/*global describe, beforeEach, it*/
-
+/*global describe, beforeEach, it */
 'use strict';
-var path    = require('path');
+
+var path = require('path');
 var helpers = require('yeoman-generator').test;
 
 describe('Gulp webapp generator: sass feature', function () {
@@ -45,5 +45,4 @@ describe('Gulp webapp generator: sass feature', function () {
   it('should create css file', function (done) {
     assertFileExists(this.webapp, 'css', [], done);
   });
-
 });

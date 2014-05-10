@@ -1,6 +1,6 @@
 /*global describe, beforeEach, it*/
-
 'use strict';
+
 var fs = require('fs');
 var util = require('util');
 var path = require('path');

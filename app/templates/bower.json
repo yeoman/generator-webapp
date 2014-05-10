@@ -4,8 +4,7 @@
   "dependencies": {<% if (includeBootstrap) { if (includeSass) { %>
     "bootstrap-sass-official": "~3.1.1",<% } else { %>
     "bootstrap": "~3.1.1",<% }} if (includeModernizr) { %>
-    "modernizr": "~2.6.2",<% } %>
+    "modernizr": "~2.8.1",<% } %>
     "jquery": "~1.11.0"
-  },
-  "devDependencies": {}
+  }
 }
