@@ -59,5 +59,5 @@ gulp.task('watch', ['connect', 'serve'], function () {
 
 ## Usage
 
-- Just put your `.coffee` files in `app/scripts`, and include them in your HTML as if they're `.js` files (e.g. `app/scripts/foo.coffee` => `<script src="scripts/foo.js"></script>`).
+- Put your `.coffee` files in `app/scripts`, and include them in your HTML as if they're `.js` files (e.g. `app/scripts/foo.coffee` => `<script src="scripts/foo.js"></script>`).
 - It's fine to have a mixture of `.js` and `.coffee` files in your `app/scripts` directory. If two files have the same name, the `.coffee` one will take precedence (not that you'd ever have any reason to do this).
