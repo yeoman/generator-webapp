@@ -1,6 +1,6 @@
 # Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-gulp-webapp.svg?branch=master)](http://travis-ci.org/yeoman/generator-gulp-webapp)
 
-[Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [gulp](http://gulpjs.com/) for the build process.
+> [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [gulp](http://gulpjs.com/) for the build process
 
 ![](screenshot.png)
 
@@ -9,16 +9,14 @@
 
 Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date information on what we support.
 
-* CSS Autoprefixing *(new)*
-* Built-in preview server with LiveReload
+* CSS Autoprefixing
+* Built-in preview server with livereload
 * Automagically compile Sass
 * Automagically lint your scripts
-* Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
-* Automagically wire-up dependencies installed with [Bower](http://bower.io) (when `gulp watch` or `gulp wiredep`)
-* TODO: Mocha Unit Testing with PhantomJS
-* TODO: Optional - Leaner Modernizr builds *(new)*
+* Awesome image optimization
+* Automagically wire-up dependencies installed with [Bower](http://bower.io) *(when `gulp watch` or `gulp wiredep`)*
 
-For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.
+*For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
 
 
 ## Getting Started
@@ -32,7 +30,7 @@ For more information on what `generator-gulp-webapp` can do for you, take a look
 
 *(HTML/CSS/JS/Images/etc)*
 
-To install dependencies, run `bower install depName --save` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
+To install dependencies, run `bower install --save package-name` to get the files, then add a `script` or `style` tag to your `index.html` or an other appropriate place.
 
 
 ## Docs
@@ -52,10 +50,6 @@ We have [recipes](docs/recipes/README.md) for integrating other popular technolo
 ## Contribute
 
 See the [contributing docs](contributing.md).
-
-Note: We are regularly asked whether we can add or take away features. If a change is good enough to have a positive impact on all users, we are happy to consider it.
-
-If not, `generator-gulp-webapp` is fork-friendly and you can always maintain a custom version which you `npm install && npm link` to continue using via `yo gulp-webapp` or a name of your choosing.
 
 
 ## License
