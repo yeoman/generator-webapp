@@ -17,9 +17,9 @@ Please see our [gulpfile.js](https://github.com/yeoman/generator-gulp-webapp/blo
 * TODO: Mocha Unit Testing with PhantomJS
 * TODO: Optional - Leaner Modernizr builds *(new)*
 
-For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/_package.json) used in our `package.json`.
+For more information on what `generator-gulp-webapp` can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.
 
-We also have [Recipes](https://github.com/yeoman/generator-gulp-webapp/blob/master/docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
+We also have [Recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
 
 
 ## Getting Started
