@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
+var yosay = require('yosay');
 var chalk = require('chalk');
 
 
@@ -41,8 +42,8 @@ AppGenerator.prototype.askFor = function askFor() {
 
   // welcome message
   if (!this.options['skip-welcome-message']) {
-    console.log(this.yeoman);
-    console.log(chalk.magenta(
+    this.log(yosay());
+    this.log(chalk.magenta(
       'Out of the box I include HTML5 Boilerplate, jQuery, and a ' +
       'Gruntfile.js to build your app.'
     ));
