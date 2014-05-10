@@ -36,10 +36,7 @@ gulp.task('html', ['styles', 'scripts'], function () {
 
 ### 4. Edit your `watch` task
 
-These changes ensure that
-
-1. generated `.js` files trigger a live reload, and
-2. edits to `.coffee` files trigger recompilation.
+These changes ensure that (1) generated `.js` files trigger a live reload, and (2) edits to `.coffee` files trigger recompilation.
 
 ```diff
 gulp.task('watch', ['connect', 'serve'], function () {
