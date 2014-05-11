@@ -40,7 +40,7 @@ gulp.task('html', ['styles', 'scripts'], function () {
 These changes ensure that (1) generated `.js` files trigger a live reload, and (2) edits to `.coffee` files trigger recompilation.
 
 ```diff
-gulp.task('watch', ['connect', 'serve'], function () {
+ gulp.task('watch', ['connect', 'serve'], function () {
      gulp.watch([
          'app/*.html',
          '.tmp/styles/**/*.css',
