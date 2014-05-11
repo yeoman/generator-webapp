@@ -1,6 +1,7 @@
 # Recipes
 
 - [Setting up CoffeeScript](coffeescript.md)
+- [Setting up Handlebars](handlebars.md)
 
 
 -
