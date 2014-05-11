@@ -1,6 +1,6 @@
 # Setting up Handlebars.js
 
-This recipe shows how to set up Handlebars to precompile your templates.
+This recipe shows how to set up Handlebars to precompile your templates, including full integration with `watch` and LiveReload.
 
 
 ## Steps
