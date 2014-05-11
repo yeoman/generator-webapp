@@ -72,11 +72,10 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
-    return gulp.src('dist/**/*')
-        .pipe($.size({
-            showFiles: true,
-            gzip: true
-        }));
+    return gulp.src('dist/**/*').pipe($.size({
+        showFiles: true,
+        gzip: true
+    }));
 });
 
 gulp.task('default', ['clean'], function () {
