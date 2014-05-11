@@ -1,4 +1,4 @@
-# Setting up Handlebars.js
+# Setting up Handlebars
 
 This recipe shows how to set up Handlebars to precompile your templates, including full integration with `watch` and LiveReload.
 
@@ -17,7 +17,7 @@ $ npm install --save-dev gulp-handlebars gulp-define-module gulp-declare
 > * [gulp-handlebars](https://github.com/lazd/gulp-handlebars) precompiles raw `.hbs` templates into JavaScript
 > * [gulp-define-module](https://github.com/wbyoung/gulp-define-module) and [gulp-declare](https://github.com/lazd/gulp-declare) are used together to package up the compiled JavaScript template into a namespaced module
 
-Install Handlebars.js as a bower component:
+Install Handlebars as a bower component:
 
 ```sh
 $ bower install --save handlebars
