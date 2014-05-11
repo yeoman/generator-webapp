@@ -4,6 +4,7 @@ var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
+var yosay = require('yosay');
 var chalk = require('chalk');
 var wiredep = require('wiredep');
 
@@ -38,8 +39,8 @@ AppGenerator.prototype.askFor = function askFor() {
 
   // welcome message
   if (!this.options['skip-welcome-message']) {
-    console.log(this.yeoman);
-    console.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile.js to build your app.'));
+    this.log(yosay());
+    this.log(chalk.magenta('Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile.js to build your app.'));
   }
 
   var prompts = [{
@@ -165,7 +166,7 @@ AppGenerator.prototype.install = function () {
     chalk.yellow.bold('\n  gulp wiredep');
 
   if (this.options['skip-install']) {
-    console.log(howToInstall);
+    this.log(howToInstall);
     return;
   }
 
