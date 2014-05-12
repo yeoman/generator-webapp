@@ -101,9 +101,9 @@ $ bower install --save bootstrap
 Now you have two options for including Bootstrap in your page:
 
 - **Option 1**: Run `$ gulp wiredep`
-  - This automatically inserts the complete Bootstrap stylesheet and script into your `index.html`
+  - This automatically inserts `<link>` and `<script>` tags for Bootstrap in your `index.html`
 
 - **Option 2**: Include the parts you want manually
-  - For example, in your `main.less`, add `@import "../bower_components/bootstrap/less/bootstrap.less";` – or you could do something more granular
+  - For example, in your `main.less`, add `@import "../bower_components/bootstrap/less/bootstrap.less";` – or you could do [something more granular](http://www.helloerik.com/bootstrap-3-less-workflow-tutorial)
   - In your `index.html`, add script tags for the individual components you want, e.g. `<script src="bower_components/bootstrap/js/affix.js"></script>`
     - NB: Some modules depend on others, e.g. `popover.js` depends on `tooltip.js` – see [docs](http://getbootstrap.com/javascript/)
