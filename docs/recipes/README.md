@@ -3,6 +3,7 @@
 - [CoffeeScript](coffeescript.md)
 - [Handlebars](handlebars.md)
 - [Less](less.md)
+- [Jade](jade.md)
 
 
 -
