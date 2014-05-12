@@ -5,7 +5,7 @@ This is an easy way to set up Less, including integration with `watch` and LiveR
 
 ## Steps
 
-### 1. Choose Sass when running the generator!
+### 1. Choose *Sass* when running the generator
 
 This is the easiest way, because the task tree will be set up correctly for CSS preprocessing, and you can just switch out all the Sass references to Less ones.
 
