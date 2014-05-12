@@ -29,8 +29,6 @@ $ bower install --save handlebars
 
 ### 2. Create a `templates` task
 
-This compiles `.hbs` files into `.js` files in the `.tmp` directory.
-
 ```js
 gulp.task('templates', function () {
     return gulp.src('app/templates/**/*.hbs')
@@ -42,6 +40,8 @@ gulp.task('templates', function () {
         .pipe(gulp.dest('.tmp/templates'));
 });
 ```
+
+> This compiles `.hbs` files into `.js` files in the `.tmp` directory.
 
 
 ### 3. Add `templates` as a dependency of both `html` and `serve`
@@ -59,7 +59,7 @@ gulp.task('html', ['styles', 'templates'], function () {
 
 ### 4. Configure watch
 
-Edit your `watch` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the LiveReload server is triggered whenever a `.js` file is generated in `.tmp/templates`.
+Edit your `watch` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the LiveReload server is triggered whenever a `.js` file is generated in `.tmp/templates`:
 
 ```diff
  gulp.task('watch', ['connect', 'serve'], function () {
@@ -99,4 +99,4 @@ You would then render the template like this:
 var html = MyApp.templates.foo();
 ```
 
-(The `MyApp.templates` namespace can be anything you want – change it in the `templates` task.)
+> The `MyApp.templates` namespace can be anything you want – change it in the `templates` task.
