@@ -5,7 +5,6 @@ This recipe shows how to set up Handlebars to precompile your templates, includi
 
 ## Steps
 
-
 ### 1. Install dependencies
 
 Install some gulp plugins:
@@ -26,7 +25,6 @@ $ bower install --save handlebars
 > * You need this so you can include the Handlebars runtime in your page – even compiled templates depend on this. (You won't need to include the entire Handlebars library though.)
 > * It's a good idea to verify you've installed the same version of Handlebars as the one used by internally by gulp-handlebars, to guarantee compatibility between the runtime and your compiled templates. Look in `node_modules/gulp-handlebars/package.json` under `"dependencies"` and check the handlebars version – if necessary, you can ask bower to install that specific version, e.g. `bower install --save handlebars#^1.3.0`.
 
-
 ### 2. Create a `templates` task
 
 ```js
@@ -43,7 +41,6 @@ gulp.task('templates', function () {
 
 > This compiles `.hbs` files into `.js` files in the `.tmp` directory.
 
-
 ### 3. Add `templates` as a dependency of both `html` and `serve`
 
 ```js
@@ -55,7 +52,6 @@ gulp.task('serve', ['connect', 'styles', 'templates'], function () {
 gulp.task('html', ['styles', 'templates'], function () {
     ...
 ```
-
 
 ### 4. Configure watch
 

@@ -1,4 +1,6 @@
-# Setting up Les
+# Setting up Less
+
+This is an easy way to set up Less, including integration with `watch` and LiveReload.
 
 
 ## Steps
@@ -7,17 +9,15 @@
 
 This is the easiest way, because the task tree will be set up correctly for CSS preprocessing, and you can just switch out all the Sass references to Less ones.
 
-Don't choose Bootstrap in the generator though – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
+> Don't choose Bootstrap in the generator – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
 
-
-### 2. Edit your NPM dependencies
+### 2. Switch your NPM dependencies
 
 Remove gulp-ruby-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
 
 ```sh
 $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 ```
-
 
 ### 3. Edit a few tasks
 
@@ -79,16 +79,18 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 ```
 
 
-### Try it out
+### 4. Check it's working
 
 Delete `app/styles/main.scss` and replace it with your own `main.less`.
 
-Then verify that `$ gulp build` and `$ gulp watch` work correctly.
+Then verify that `$ gulp build` and `$ gulp watch` work correctly. In `watch` mode, you should be able to edit your `main.less` and see the styles dynamically update in your browser.
 
 
-## Optional extras
+---
 
-# Add Bootstrap
+## Extras
+
+### Add Bootstrap
 
 Install it as a bower component:
 
