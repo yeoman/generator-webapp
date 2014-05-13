@@ -1,23 +1,24 @@
-# Deploying to GitHub Pages (gh-pages)
+# Deploying to GitHub Pages
 
-Deploying using `git subtree` allows for clean use of GitHubs gh-pages. Your `gh-pages` branch will contain the files from `dist`.
+Deploying your app using `git subtree` allows the use of [GitHub Pages](https://pages.github.com). Your `gh-pages` branch will contain the files from `dist`.
 
 ## Steps
 
-### 1. Prerequisits
-- install `git subtree` if not available ([guide](http://engineeredweb.com/blog/how-to-install-git-subtree/))
-- your generated webapp is in a git repository with GitHub as origin remote
+### Prerequisites
+1. If not already available, [install `git subtree`](http://engineeredweb.com/blog/how-to-install-git-subtree).
+2. Your generated app is in a GitHub-hosted repository and set as your `origin` remote.
 
 
-### 2. Install the [gulp-subtree](https://github.com/Snugug/gulp-subtree) plugin
+### 1. Install [`gulp-subtree`](https://github.com/Snugug/gulp-subtree)
 
 ```sh
 $ npm install --save-dev gulp-subtree
 ```
 
-### 3. Create a `deploy` task
 
-This create a new build, pushes it to the `gh-pages` branch and cleans the build afterwards
+### 2. Create a `deploy` task
+
+This will run the build task, then push it to the `gh-pages` branch.
 
 ```js
 gulp.task('deploy', ['build'], function () {
@@ -27,7 +28,8 @@ gulp.task('deploy', ['build'], function () {
 });
 ```
 
-### 4. Remove `dist` folder from `.gitignore`   
+
+### 3. Remove `dist` from `.gitignore`   
 
 ```diff
 node_modules
@@ -41,12 +43,14 @@ test/bower_components
 
 ## Usage
 
-- run `gulp deploy` to deploy `dist` to `gh-pages` branch
-- visit `http://[your-username].github.io/[repo-name]/` to see your website   
+1. Run `gulp deploy`.
+2. Visit `http://[your-username].github.io/[repo-name]`.
+
 
 ### Note
-Give it a couple of minutes for your page to show up — there will be a delay this very first time. In the future, changes will show up pretty much instantly.
+It may take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
 
-### Extra
-- see [gulp-subtree](https://github.com/Snugug/gulp-subtree) for details on changing branch and commit message 
-- see GitHub documentation on [Pages](https://pages.github.com/) for features such as custom domains
+
+### References
+- See [gulp-subtree](https://github.com/Snugug/gulp-subtree) for details on changing branch and commit message.
+- See [GitHub Pages documentation](https://pages.github.com) for features such as custom domains.
