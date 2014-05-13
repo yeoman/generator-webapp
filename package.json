@@ -27,10 +27,10 @@
     "grunt"
   ],
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
-    "cheerio": "~0.13.0",
-    "chalk": "~0.4.0",
-    "yosay": "^0.1.0"
+    "yeoman-generator": "^0.17.0",
+    "cheerio": "^0.16.0",
+    "chalk": "^0.4.0",
+    "yosay": "^0.2.0"
   },
   "peerDependencies": {
     "yo": ">=1.0.0",

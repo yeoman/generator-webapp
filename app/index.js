@@ -1,9 +1,7 @@
 'use strict';
-var util = require('util');
-var path = require('path');
-var spawn = require('child_process').spawn;
+
+var join = require('path').join;
 var yeoman = require('yeoman-generator');
-var yosay = require('yosay');
 var chalk = require('chalk');
 
 
@@ -33,14 +31,14 @@ var AppGenerator = module.exports = function Appgenerator(args, options) {
   this.pkg = require('../package.json');
 };
 
-util.inherits(AppGenerator, yeoman.generators.Base);
+require('util').inherits(AppGenerator, yeoman.generators.Base);
 
 AppGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // welcome message
   if (!this.options['skip-welcome-message']) {
-    this.log(yosay());
+    this.log(require('yosay')());
     this.log(chalk.magenta(
       'Out of the box I include HTML5 Boilerplate, jQuery, and a ' +
       'Gruntfile.js to build your app.'
@@ -133,9 +131,7 @@ AppGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 AppGenerator.prototype.writeIndex = function writeIndex() {
 
-  this.indexFile = this.readFileAsString(
-    path.join(this.sourceRoot(), 'index.html')
-  );
+  this.indexFile = this.readFileAsString(join(this.sourceRoot(), 'index.html'));
   this.indexFile = this.engine(this.indexFile, this);
 
   // wire Bootstrap plugins

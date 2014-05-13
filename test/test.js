@@ -1,9 +1,23 @@
 /*global describe, beforeEach, it*/
 
-var path    = require('path');
+var path = require('path');
+var assert = require('assert');
 var helpers = require('yeoman-generator').test;
 
 describe('Webapp generator test', function () {
+  var expectedContent = [
+    ['bower.json', /"name": "temp"/],
+    ['package.json', /"name": "temp"/]
+  ];
+  var expected = [
+    'Gruntfile.js',
+    'app/404.html',
+    'app/favicon.ico',
+    'app/robots.txt',
+    'app/index.html',
+    'app/styles/main.scss'
+  ];
+
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
@@ -15,8 +29,11 @@ describe('Webapp generator test', function () {
           helpers.createDummyGenerator(),
           'mocha:app'
         ]
-      ]);
-      this.webapp.options['skip-install'] = true;
+      ], null, {
+        'skip-install': true,
+        'skip-welcome-message': true,
+        'skip-message': true
+      });
 
       done();
     }.bind(this));
@@ -27,73 +44,31 @@ describe('Webapp generator test', function () {
     this.app = require('../app');
   });
 
-  it('creates expected files', function (done) {
-    var expected = [
-      ['bower.json', /"name": "temp"/],
-      ['package.json', /"name": "temp"/],
-      ['Gruntfile.js', /coffee:/],
-      'app/404.html',
-      'app/favicon.ico',
-      'app/robots.txt',
-      'app/index.html',
-      'app/scripts/main.coffee',
-      'app/styles/main.scss'
-    ];
-
+  it('creates expected CoffeeScript files', function (done) {
     helpers.mockPrompt(this.webapp, {
       features: ['includeSass']
     });
 
     this.webapp.coffee = true;
     this.webapp.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile([].concat(expected, ['app/scripts/main.coffee']));
+      assert.fileContent([].concat(
+        expectedContent,
+        [['Gruntfile.js', /coffee/]]
+      ));
       done();
     });
   });
 
-  it('creates expected files in non-AMD non-coffee mode', function (done) {
-    var expected = [
-      ['bower.json', /"name": "temp"/],
-      ['package.json', /"name": "temp"/],
-      'Gruntfile.js',
-      'app/404.html',
-      'app/favicon.ico',
-      'app/robots.txt',
-      'app/index.html',
-      'app/scripts/main.js',
-      'app/styles/main.scss'
-    ];
-
+  it('creates expected files in non-coffee mode', function (done) {
     helpers.mockPrompt(this.webapp, {
       features: ['includeSass']
     });
 
     this.webapp.coffee = false;
     this.webapp.run({}, function () {
-      helpers.assertFiles(expected);
-      done();
-    });
-  });
-
-  it('creates expected files in AMD mode', function (done) {
-    var expected = [
-      ['bower.json', /"name": "temp"/],
-      ['package.json', /"name": "temp"/],
-      'Gruntfile.js',
-      'app/404.html',
-      'app/favicon.ico',
-      'app/robots.txt',
-      'app/index.html',
-      'app/scripts/main.js',
-      'app/styles/main.scss'
-    ];
-
-    helpers.mockPrompt(this.webapp, {
-      features: ['includeSass']
-    });
-
-    this.webapp.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile([].concat(expected, ['app/scripts/main.js']));
+      assert.noFileContent('Gruntfile.js', /coffee/);
       done();
     });
   });
