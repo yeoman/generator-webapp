@@ -5,6 +5,7 @@
 - [Less](less.md)
 - [Jade](jade.md)
 - [GitHub Pages](gh-pages.md)
+- [Asset revisioning](revving.md)
 
 
 -
