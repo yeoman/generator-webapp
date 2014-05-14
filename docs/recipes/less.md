@@ -5,11 +5,11 @@ This is an easy way to set up Less, including integration with `watch` and LiveR
 
 ## Steps
 
-### 1. Choose *Sass* when running the generator
+### 1. *Choose Sass* when running the generator
 
-This is the easiest way, because the task tree will be set up correctly for CSS preprocessing, and you can just switch out all the Sass references to Less ones.
+It sounds odd but this is the easiest way, because the task tree will be set up correctly for CSS preprocessing, and you can just switch out all the Sass references to Less ones.
 
-> Don't choose Bootstrap in the generator – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
+> But don't choose Bootstrap in the generator – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
 
 ### 2. Switch your npm dependencies
 
@@ -77,7 +77,6 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
      gulp.watch('bower.json', ['wiredep']);
  });
 ```
-
 
 ### 4. Check it's working
 

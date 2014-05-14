@@ -2,6 +2,7 @@
 
 This recipe demonstrates how to set up [Jade](http://jade-lang.com/) as your HTML template engine. In a similar way you can implement a different engine, like [Haml](http://haml.info/).
 
+
 ## Steps
 
 ### 1. Install dependencies
@@ -14,7 +15,7 @@ $ npm install --save-dev gulp-jade
 
 ### 2. Create a `views` task
 
-Add this task to your `gulpfile.js`, it will compile `.jade` files to `.tmp`:
+Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` files in `.tmp`:
 
 ```js
 gulp.task('views', function () {
@@ -24,20 +25,20 @@ gulp.task('views', function () {
 });
 ```
 
-* This assumes your layout file is `app/layout.jade`, if it's not, rename the path accordingly.
-* We are ignoring the layout file, otherwise it would compile to `.tmp/layout.html`.
-* We are passing `pretty: true` as an option to get a nice HTML output, otherwise Jade would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
+> * This assumes your layout file is `app/layout.jade` – if not, edit accordingly.
+> * We are ignoring the layout file, otherwise it would compile to `.tmp/layout.html`.
+> * We are passing `pretty: true` as an option to get a nice HTML output, otherwise Jade would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
 
 ### 3. Add `views` as a dependency of both `html` and `serve`
 
 ```js
 gulp.task('html', ['views', 'styles', 'scripts'], function () {
-    // ...
+    ...
 ```
 
 ```js
 gulp.task('serve', ['connect', 'views', 'styles'], function () {
-    // ...
+    ...
 ```
 
 ### 4. Update other tasks
