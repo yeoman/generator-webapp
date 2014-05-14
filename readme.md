@@ -10,7 +10,7 @@
 * Built-in preview server with LiveReload
 * Automagically compile CoffeeScript & Sass
 * Automagically lint your scripts
-* Automagically wire up your Bower components with [bower-install](#third-party-dependencies).
+* Automagically wire up your Bower components with [grunt-wiredep](#third-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
 * Mocha Unit Testing with PhantomJS
 * Bootstrap for Sass (Optional)
@@ -30,11 +30,11 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
 *(HTML/CSS/JS/Images/etc)*
 
-Third-party dependencies are managed with [bower-install](https://github.com/stephenplusplus/grunt-bower-install). Add new dependencies using **Bower** and then run the **Grunt** task to load them:
+Third-party dependencies are managed with [grunt-wiredep](https://github.com/stephenplusplus/grunt-wiredep). Add new dependencies using **Bower** and then run the **Grunt** task to load them:
 
-```bash
-  bower install --save jquery
-  grunt bowerInstall
+```sh
+$ bower install --save jquery
+$ grunt wiredep
 ```
 
 This works if the package author has followed the [Bower spec](https://github.com/bower/bower.json-spec). If the files are not automatically added to your source code, check with the package's repo for support and/or file an issue with them to have it updated.
