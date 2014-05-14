@@ -4,6 +4,7 @@
 - [Handlebars](handlebars.md)
 - [Less](less.md)
 - [Jade](jade.md)
+- [React](react.md)
 
 
 -
