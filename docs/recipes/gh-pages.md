@@ -52,4 +52,4 @@ gulp.task('deploy', ['build'], function () {
 ### References
 
 - See [gulp-subtree](https://github.com/Snugug/gulp-subtree) for details on changing the branch and commit message.
-- See [GitHub Pages documentation](https://help.github.com/categories/20/articles) for features such as custom domainss.
+- See [GitHub Pages documentation](https://help.github.com/categories/20/articles) for features such as custom domains.
