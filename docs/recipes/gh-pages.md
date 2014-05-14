@@ -8,7 +8,7 @@ Deploying your app using `git subtree` allows the use of [GitHub Pages](https://
 ### Prerequisites
 
 1. If not already available, [install git-subtree](http://engineeredweb.com/blog/how-to-install-git-subtree).
-2. Ensure your generated app is in a GitHub-hosted repository that is [set as your `origin` remote](https://help.github.com/articles/adding-a-remote).
+2. Ensure your generated app is in a GitHub-hosted repository that is set as your `origin` remote.
 
 > You can check your remotes with `$ git remote -v`. See [Adding a remote](https://help.github.com/articles/adding-a-remote) for more info.
 
