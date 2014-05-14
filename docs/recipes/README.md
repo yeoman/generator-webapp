@@ -6,6 +6,7 @@
 - [Jade](jade.md)
 - [GitHub Pages](gh-pages.md)
 - [Asset revisioning](revving.md)
+- [React](react.md)
 
 
 -
