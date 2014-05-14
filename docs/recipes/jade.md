@@ -133,9 +133,9 @@ gulp.task('watch', ['connect', 'serve'], function () {
 
 ### 5. Rewrite `index.html` as `layout.jade` + `index.jade`
 
-This is just one way to do it, organize your templates however you want.
+To do this automatically, check out [html2jade](https://github.com/donpark/html2jade).
 
-`app/layout.jade`:
+#### `app/layout.jade`
 
 ```jade
 doctype html
@@ -219,7 +219,7 @@ html.no-js
         // endbuild
 ```
 
-`app/index.jade`:
+#### `app/index.jade`
 
 ```jade
 extends layout

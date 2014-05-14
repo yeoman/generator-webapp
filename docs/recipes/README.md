@@ -4,7 +4,12 @@
 - [Handlebars](handlebars.md)
 - [Less](less.md)
 - [Jade](jade.md)
+<<<<<<< HEAD
 - [React](react.md)
+=======
+- [GitHub Pages](gh-pages.md)
+- [Asset revisioning](revving.md)
+>>>>>>> master
 
 
 -
