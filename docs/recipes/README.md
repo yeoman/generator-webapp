@@ -29,7 +29,7 @@ $ cd ../
 Now the `yo gulp-webapp` command will use that version of the generator. To make sure this is actually true:
 
 ```sh
-$ npm ls -g generator-gulp-webapp`
+$ npm ls -g generator-gulp-webapp
 # you should get something like
 /usr/local/lib
 └── generator-gulp-webapp@0.1.0  -> /Users/username/generator-gulp-webapp
