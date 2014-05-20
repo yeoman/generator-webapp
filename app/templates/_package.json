@@ -16,7 +16,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-htmlmin": "~0.2.0",
     "grunt-wiredep": "^1.7.0",
-    "grunt-contrib-imagemin": "~0.6.0",
+    "grunt-contrib-imagemin": "~0.7.0",
     "grunt-contrib-watch": "~0.6.1",<% if (testFramework === 'jasmine') { %>
     "grunt-contrib-jasmine": "~0.6.3",<% } %>
     "grunt-rev": "~0.1.0",
