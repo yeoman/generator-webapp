@@ -58,7 +58,11 @@ gulp.task('images', function () {
 gulp.task('fonts', function () {
     var streamqueue = require('streamqueue');
     return streamqueue({objectMode: true},
-        $.bowerFiles(),
+        $.bowerFiles({
+        paths: {
+            bowerDirectory: 'app/bower_components'
+            }
+        }),
         gulp.src('app/fonts/**/*')
     )
         .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
