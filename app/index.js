@@ -93,7 +93,6 @@ AppGenerator.prototype.git = function () {
 };
 
 AppGenerator.prototype.bower = function () {
-  this.copy('bowerrc', '.bowerrc');
   this.copy('bower.json', 'bower.json');
 };
 
