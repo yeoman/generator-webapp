@@ -76,6 +76,10 @@ gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
+gulp.task('clearcache', function () {
+    return $.cache.clearAll();
+});
+
 gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras']);
 
 gulp.task('default', ['clean'], function () {
