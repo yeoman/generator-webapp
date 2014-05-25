@@ -21,6 +21,7 @@
     "gulp-size": "^0.3.0",
     "gulp-uglify": "^0.3.0",
     "gulp-useref": "^0.4.2",
+    "gulp-replace": "0.3.x",
     "jshint-stylish": "^0.2.0",
     "opn": "^0.1.1",
     "streamqueue": "0.0.7",

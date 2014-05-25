@@ -37,6 +37,7 @@ gulp.task('html', ['styles'], function () {
         .pipe(jsFilter.restore())
         .pipe(cssFilter)
         .pipe($.csso())
+        .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
         .pipe(cssFilter.restore())
         .pipe($.useref.restore())
         .pipe($.useref())
