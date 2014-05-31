@@ -88,7 +88,7 @@ describe('Gulp Webapp generator: tasks', function () {
   });
 
   it('should contain default task', function (done) {
-    assertTaskExists(this.webapp, 'watch', [], done);
+    assertTaskExists(this.webapp, 'default', [], done);
   });
 
   it('should contain default serve', function (done) {
