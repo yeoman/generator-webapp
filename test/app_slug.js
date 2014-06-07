@@ -29,7 +29,6 @@ describe('Gulp Webapp generator slug name', function () {
   it('should generate the same appName in every file', function (done) {
     var expectedAppName = 'slug';
     var expected = [
-      'package.json',
       'bower.json',
       'app/index.html'
     ];
@@ -42,12 +41,10 @@ describe('Gulp Webapp generator slug name', function () {
       helpers.assertFile(expected);
 
       // read JS Files
-      var packageJson = fs.readFileSync('package.json', 'utf8');
       var bowerJson = fs.readFileSync('bower.json', 'utf8');
 
       // Test JS Files
       var regexJs = new RegExp('"name": "' + expectedAppName + '"');
-      assert.ok(regexJs.test(packageJson), 'package.json template using a wrong appName');
       assert.ok(regexJs.test(bowerJson), 'bower.json template using a wrong appName');
 
       // read HTML file
