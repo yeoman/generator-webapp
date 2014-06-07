@@ -23,17 +23,10 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('html', ['styles'], function () {
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
-
     return gulp.src('app/*.html')
         .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe($.csso())
-        .pipe(cssFilter.restore())
+        .pipe($.if('*.js', $.uglify()))
+        .pipe($.if('*.css', $.csso()))
         .pipe($.useref.restore())
         .pipe($.useref())
         .pipe(gulp.dest('dist'));
