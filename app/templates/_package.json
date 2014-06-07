@@ -1,7 +1,8 @@
 {
-  "name": "<%= _.slugify(appname) %>",
-  "version": "0.0.0",
-  "dependencies": {},
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "devDependencies": {
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
@@ -26,8 +27,5 @@
     "rimraf": "^2.2.8",
     "streamqueue": "^0.1.1",
     "wiredep": "^1.4.3"
-  },
-  "engines": {
-    "node": ">=0.10.0"
   }
 }
