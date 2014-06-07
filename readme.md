@@ -41,7 +41,7 @@ This works if the package author has followed the [Bower spec](https://github.co
 
 To manually add dependencies, `bower install --save depName` to get the files, then add a `script` or `style` tag to your `index.html` or another appropriate place.
 
-The components are installed in the root of the project at `/bower_components`. To reference them from index.html, use `src="../bower_components"` or `src="/bower_components"`. Treat the `bower_components` directory as if it was a sibling to the parent of `index.html`.
+The components are installed in the root of the project at `/bower_components`. To reference them from index.html, use `src="bower_components"` or `src="/bower_components"`. Treat the `bower_components` directory as if it was a sibling to `index.html`.
 
 *Testing Note*: a project checked into source control and later checked out needs to have `bower install` run from the `test` folder as well as from the project root.
 
