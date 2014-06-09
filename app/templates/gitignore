@@ -3,4 +3,3 @@ dist
 .tmp<% if (includeSass) { %>
 .sass-cache<% } %>
 bower_components
-test/bower_components
