@@ -102,7 +102,7 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('watch', ['connect', 'serve'], function () {
-    var server = $.livereload();
+    $.livereload.listen();
 
     // watch for changes
     gulp.watch([
@@ -110,9 +110,7 @@ gulp.task('watch', ['connect', 'serve'], function () {
         '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*'
-    ]).on('change', function (file) {
-        server.changed(file.path);
-    });
+    ]).on('change', $.livereload.changed);
 
     gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
     gulp.watch('bower.json', ['wiredep']);
