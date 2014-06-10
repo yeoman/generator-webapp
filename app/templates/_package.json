@@ -17,12 +17,14 @@
     "gulp-imagemin": "^0.6.0",
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^2.0.0",
-    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { %>
+    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
+    "gulp-replace": "^0.3.0",<% } %>
     "gulp-ruby-sass": "^0.5.0",<% } %>
     "gulp-size": "^0.4.0",
     "gulp-uglify": "^0.3.0",
     "gulp-useref": "^0.4.2",
-    "jshint-stylish": "^0.2.0",
+    "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
+    "lazypipe": "^0.2.1",<% } %>
     "opn": "^0.1.1",
     "rimraf": "^2.2.8",
     "streamqueue": "^0.1.1",
