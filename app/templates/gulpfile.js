@@ -6,6 +6,7 @@ var rimraf = require('rimraf');
 
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
+    .pipe($.plumber())
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10
