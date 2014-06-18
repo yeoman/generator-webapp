@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         tasks: ['test:watch']
       },<% } %>
       gruntfile: {
-        files: ['Gruntfile.js']
+        files: ['Gruntfile.{js,coffee}']
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
