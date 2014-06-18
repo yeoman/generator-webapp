@@ -1,0 +1,12 @@
+# Site settings
+title: A gulp.js generator for modern webapps
+description: "A gulp.js generator for modern webapps"
+baseurl: ""
+url: "http://yeoman.io/generator-gulp-webapp"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+sass:
+  sass_dir: styles

@@ -1,0 +1,29 @@
+$font-family-base:           roboto, "helvetica neue", helvetica, arial, sans-serif;
+$font-family-mono:           monaco, consolas, "lucida console", monospace;
+
+$font-size-base:             18px;
+$line-height-computed:       30px;
+$line-height-base:           $line-height-computed / $font-size-base;
+
+$sub:                        $line-height-computed;
+$suh:                        $line-height-computed / 2;
+
+$columns:                    12;
+$gutter:                     $sub;
+
+$screen-xs-min:              480px;
+$screen-sm-min:              768px;
+$screen-md-min:              992px;
+$screen-lg-min:              1200px;
+
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+$screen-md-max:              ($screen-lg-min - 1);
+
+$color-blue:                 #00a5df;
+$color-blue-light:           #bbe4f8;
+$color-blue-lighter:         #ecf7fd;
+$color-brown:                #c19b6a;
+$color-red:                  #cf4842; // yeoman red
+$color-green:                #759600;
+$color-violet:               #af588f;

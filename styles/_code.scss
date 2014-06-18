@@ -1,0 +1,42 @@
+code {
+  margin-bottom: $sub;
+
+  &.sh {
+    &::before {
+      content: "$";
+      display: inline-block;
+      margin-right: $suh/2;
+      color: inherit;
+      opacity: .5;
+    }
+  }
+}
+
+.code {
+  margin-bottom: $sub;
+  padding-top: $suh;
+  padding-bottom: $suh;
+  background-color: #333;
+  color: #fff;
+  overflow-x: auto;
+
+  @include query(sm) {
+    padding-top: $sub;
+    padding-bottom: $sub;
+  }
+
+  .code-group {
+    margin-top: $suh;
+    margin-bottom: $suh;
+  }
+
+  .nv {
+    @include user-select(none);
+    color: darken($color-red, 0%);
+    cursor: default;
+  }
+
+  .c {
+    color: gray;
+  }
+}

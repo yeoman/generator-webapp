@@ -1,0 +1,21 @@
+.container {
+  @include clearfix;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $suh;
+  padding-right: $suh;
+
+  @include query(sm) {
+    padding-left: $sub;
+    padding-right: $sub;
+  }
+}
+
+.main {
+  margin-bottom: $sub;
+
+  @include query(sm) {
+    margin-bottom: $sub * 1.5;
+  }
+}

@@ -1,0 +1,22 @@
+.btn {
+  display: inline-block;
+  padding: $suh/2 $sub * .75;
+  border-radius: 4px;
+  color: #fff;
+  background-color: $color-red;
+
+  @include query(sm) {
+    @include font-size(18px, 1.5);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken($color-red, 5%);
+  }
+
+  img {
+    position: relative;
+    bottom: 2px;
+    margin-right: $suh/2;
+  }
+}

@@ -1,0 +1,18 @@
+.intro {
+  &-img {
+    display: none;
+    width: $sub * 5.5;
+    margin-bottom: $sub;
+
+    @include query(sm) {
+      display: block;
+      float: left;
+      margin-top: $sub;
+      margin-right: $sub * 2;
+    }
+  }
+
+  &-text {
+    overflow: hidden;
+  }
+}

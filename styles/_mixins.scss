@@ -1,0 +1,47 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin font-size($font-size, $line-height: 1) {
+  font-size: $font-size;
+  line-height: ($line-height * $line-height-computed) / $font-size;
+}
+
+@mixin list-unstyled {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+@mixin query($size) {
+  @if $size == xs {
+    @media (min-width: $screen-xs-min) { @content; }
+  }
+  @else if $size == sm {
+    @media (min-width: $screen-sm-min) { @content; }
+  }
+  @else if $size == md {
+    @media (min-width: $screen-md-min) { @content; }
+  }
+  @else if $size == lg {
+    @media (min-width: $screen-lg-min) { @content; }
+  }
+  @else {
+    @media (min-width: $size) { @content; }
+  }
+}
+
+// http://css-tricks.com/almanac/properties/u/user-select/
+@mixin user-select($value) {
+  -webkit-user-select: $value;  /* Chrome all / Safari all */
+  -moz-user-select: $value;     /* Firefox all */
+  -ms-user-select: $value;      /* IE 10+ */
+
+  /* No support for these yet, use at own risk */
+  -o-user-select: $value;
+  user-select: $value;
+}

@@ -1,0 +1,20 @@
+@include query(sm) {
+  .row {
+    @include clearfix;
+    margin-left: - $gutter/2;
+    margin-right: - $gutter/2;
+    margin-bottom: $sub;
+  }
+
+  [class*="col-"] {
+    float: left;
+    padding-left: $gutter/2;
+    padding-right: $gutter/2;
+  }
+
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      width: ($i/$columns * 100%);
+    }
+  }
+}

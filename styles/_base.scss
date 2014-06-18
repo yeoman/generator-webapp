@@ -1,0 +1,64 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  @include font-size(16px);
+  margin: 0;
+  font-family: $font-family-base;
+  color: #000;
+
+  @include query(sm) {
+    @include font-size($font-size-base);
+  }
+}
+
+h1, h2, h3, h4, h5, h6,
+p, ol, ul {
+  margin-top: 0;
+  margin-bottom: $sub;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: $suh;
+
+  @include query(sm) {
+    margin-bottom: $sub;
+  }
+}
+
+h2 {
+  @include font-size(28px, 1.5);
+  font-weight: 400;
+
+  @include query(sm) {
+    @include font-size(42px, 3);
+  }
+}
+
+h3 {
+  @include font-size(28px, 1.5);
+  font-weight: 300;
+}
+
+a {
+  color: $color-red;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: adjust-color($color-red, $lightness: -20%);
+  }
+}
+
+img {
+  vertical-align: middle;
+}
+
+pre {
+  margin: 0;
+}
+
+code {
+  font-family: $font-family-mono;
+}

@@ -1,0 +1,25 @@
+.brand {
+  &-logo {
+    @include font-size(24px);
+    margin-bottom: 0;
+    font-weight: 700;
+
+    @include query(sm) {
+      @include font-size(48px, 2);
+    }
+
+    @include query(md) {
+      @include font-size(60px, 3);
+    }
+  }
+
+  &-tagline {
+    @include font-size(20px);
+    margin-bottom: 0;
+    font-weight: 300;
+
+    @include query(sm) {
+      @include font-size(32px, 2.5);
+    }
+  }
+}

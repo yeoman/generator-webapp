@@ -1,0 +1,18 @@
+.navigation {
+  position: absolute;
+  top: -18px;
+  left: -32px;
+
+  @include query(sm) {
+    top: -19px;
+    left: 10px;
+  }
+
+  img {
+    width: 75px;
+
+    @include query(sm) {
+      width: 112px;
+    }
+  }
+}
