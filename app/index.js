@@ -24,27 +24,10 @@ module.exports = yeoman.generators.Base.extend({
     this.coffee = this.options.coffee;
 
     this.pkg = require('../package.json');
-
-    this.on('end', function () {
-      this.invoke(this.options['test-framework']+':app', {
-        options: {
-          'skip-message': this.options['skip-install-message'],
-          'skip-install': this.options['skip-install'],
-          'coffee': this.options.coffee
-        }
-      });
-
-      if (!this.options['skip-install']) {
-        this.installDependencies({
-          skipMessage: this.options['skip-install-message'],
-          skipInstall: this.options['skip-install']
-        });
-      }
-    });
   },
 
   askFor: function () {
-    var cb = this.async();
+    var done = this.async();
 
     // welcome message
     if (!this.options['skip-welcome-message']) {
@@ -88,7 +71,7 @@ module.exports = yeoman.generators.Base.extend({
       var features = answers.features;
 
       function hasFeature(feat) {
-        return features.indexOf(feat) !== -1;
+        return features && features.indexOf(feat) !== -1;
       }
 
       this.includeSass = hasFeature('includeSass');
@@ -98,7 +81,7 @@ module.exports = yeoman.generators.Base.extend({
       this.includeLibSass = answers.libsass;
       this.includeRubySass = !answers.libsass;
 
-      cb();
+      done();
     }.bind(this));
   },
 
@@ -189,5 +172,24 @@ module.exports = yeoman.generators.Base.extend({
     else {
       this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
     }
+  },
+
+  install: function () {
+    this.on('end', function () {
+      this.invoke(this.options['test-framework'], {
+        options: {
+          'skip-message': this.options['skip-install-message'],
+          'skip-install': this.options['skip-install'],
+          'coffee': this.options.coffee
+        }
+      });
+
+      if (!this.options['skip-install']) {
+        this.installDependencies({
+          skipMessage: this.options['skip-install-message'],
+          skipInstall: this.options['skip-install']
+        });
+      }
+    });
   }
 });

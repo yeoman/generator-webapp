@@ -37,6 +37,7 @@
     "generator-mocha": ">=0.1.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "*",
+    "underscore": "^1.6.0"
   }
 }
