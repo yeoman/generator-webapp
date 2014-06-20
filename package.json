@@ -1,6 +1,6 @@
 {
   "name": "generator-webapp",
-  "version": "0.4.9",
+  "version": "0.5.0-1",
   "description": "Scaffold out a front-end web app",
   "license": "BSD",
   "repository": "yeoman/generator-webapp",
@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^0.4.0",
     "cheerio": "^0.17.0",
-    "yeoman-generator": "^0.17.0",
+    "yeoman-generator": "git://github.com/yeoman/generator#02dc62715d0bc0550def40290fd38a48bd6e63d3",
     "yosay": "^0.2.0"
   },
   "peerDependencies": {
