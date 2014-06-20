@@ -116,32 +116,39 @@ module.exports = yeoman.generators.Base.extend({
 
   mainStylesheet: function () {
     var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
-    this.copy(css, 'app/styles/' + css);
+    this.template(css, 'app/styles/' + css);
   },
-  writeIndex: function () {
 
+  writeIndex: function () {
     this.indexFile = this.readFileAsString(join(this.sourceRoot(), 'index.html'));
     this.indexFile = this.engine(this.indexFile, this);
 
     // wire Bootstrap plugins
     if (this.includeBootstrap) {
-      var bs = '../bower_components/bootstrap';
+      var bs = 'bower_components/bootstrap';
       bs += this.includeSass ?
         '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/';
-      this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-        bs + 'affix.js',
-        bs + 'alert.js',
-        bs + 'dropdown.js',
-        bs + 'tooltip.js',
-        bs + 'modal.js',
-        bs + 'transition.js',
-        bs + 'button.js',
-        bs + 'popover.js',
-        bs + 'carousel.js',
-        bs + 'scrollspy.js',
-        bs + 'collapse.js',
-        bs + 'tab.js'
-      ]);
+
+      this.indexFile = this.appendFiles({
+        html: this.indexFile,
+        fileType: 'js',
+        optimizedPath: 'scripts/plugins.js',
+        sourceFileList: [
+          bs + 'affix.js',
+          bs + 'alert.js',
+          bs + 'dropdown.js',
+          bs + 'tooltip.js',
+          bs + 'modal.js',
+          bs + 'transition.js',
+          bs + 'button.js',
+          bs + 'popover.js',
+          bs + 'carousel.js',
+          bs + 'scrollspy.js',
+          bs + 'collapse.js',
+          bs + 'tab.js'
+        ],
+        searchPath: '.'
+      });
     }
 
     this.indexFile = this.appendFiles({
@@ -149,7 +156,7 @@ module.exports = yeoman.generators.Base.extend({
       fileType: 'js',
       optimizedPath: 'scripts/main.js',
       sourceFileList: ['scripts/main.js'],
-      searchPath: '{app,.tmp}'
+      searchPath: ['app', '.tmp']
     });
   },
 

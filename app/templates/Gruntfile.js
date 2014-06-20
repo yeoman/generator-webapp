@@ -191,6 +191,13 @@ module.exports = function (grunt) {
 
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
+      options: {<% if (includeLibSass) { %>
+        sourceMap: true,
+        includePaths: ['bower_components']
+        <% } else { %>
+        sourcemap: true,
+        loadPath: 'bower_components'
+      <% } %>},
       dist: {
         files: [{
           expand: true,
@@ -229,12 +236,14 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
+        ignorePath: new RegExp('^<%%= config.app %>/|../'),
         src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
         exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']<% } else { %>
         exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
       }<% if (includeSass) { %>,
       sass: {
-        src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}']
+        src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       }<% } %>
     },
 
@@ -359,11 +368,18 @@ module.exports = function (grunt) {
           ]
         }<% if (includeBootstrap) { %>, {
           expand: true,
-          dot: true,<% if (includeSass) { %>
-          cwd: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/',<% } else { %>
-          cwd: 'bower_components/bootstrap/dist/fonts/',<% } %>
-          src: ['*.*'],
-          dest: '<%%= config.dist %>/fonts'
+          dot: true,
+          cwd: '<% if (includeSass) {
+              %>.<%
+            } else {
+              %>bower_components/bootstrap/dist<%
+            } %>',
+          src: '<% if (includeSass) {
+              %>bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*<%
+            } else {
+              %>fonts/*<%
+            } %>',
+          dest: '<%%= config.dist %>'
         }<% } %>]
       },
       styles: {
@@ -424,6 +440,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -454,6 +471,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

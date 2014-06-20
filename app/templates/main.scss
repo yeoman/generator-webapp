@@ -1,7 +1,6 @@
-<% if (includeBootstrap) { %>$icon-font-path: "../styles/fonts/";
-
+<% if (includeBootstrap) { %>$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 // bower:scss
-@import '../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss';
+@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
 .browsehappy {
