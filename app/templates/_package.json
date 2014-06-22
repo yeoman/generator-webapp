@@ -1,34 +1,34 @@
 {
   "private": true,
   "engines": {
-  "node": ">=0.10.0"
+    "node": ">=0.10.0"
   },
   "devDependencies": {
-  "connect": "^2.14.4",
-  "connect-livereload": "^0.4.0",
-  "gulp": "^3.6.0",
-  "gulp-autoprefixer": "^0.0.7",
-  "gulp-bower-files": "^0.2.1",
-  "gulp-cache": "^0.1.1",
-  "gulp-csso": "^0.2.6",
-  "gulp-filter": "^0.4.1",
-  "gulp-flatten": "^0.0.2",
-  "gulp-if": "^1.2.1",
-  "gulp-imagemin": "^0.6.0",
-  "gulp-jshint": "^1.5.3",
-  "gulp-livereload": "^2.0.0",
-  "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
-  "gulp-replace": "^0.3.0",<% } %>
-  "gulp-ruby-sass": "^0.5.0",
-  "gulp-plumber": "^0.6.3",<% } %>
-  "gulp-size": "^0.4.0",
-  "gulp-uglify": "^0.3.0",
-  "gulp-useref": "^0.4.2",
-  "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
-  "lazypipe": "^0.2.1",<% } %>
-  "opn": "^0.1.1",
-  "rimraf": "^2.2.8",
-  "streamqueue": "^0.1.1",
-  "wiredep": "^1.4.3"
+    "connect": "^2.14.4",
+    "connect-livereload": "^0.4.0",
+    "gulp": "^3.6.0",
+    "gulp-autoprefixer": "^0.0.7",
+    "gulp-bower-files": "^0.2.1",
+    "gulp-cache": "^0.1.1",
+    "gulp-csso": "^0.2.6",
+    "gulp-filter": "^0.4.1",
+    "gulp-flatten": "^0.0.2",
+    "gulp-if": "^1.2.1",
+    "gulp-imagemin": "^0.6.0",
+    "gulp-jshint": "^1.5.3",
+    "gulp-livereload": "^2.0.0",
+    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
+    "gulp-replace": "^0.3.0",<% } %>
+    "gulp-ruby-sass": "^0.5.0",
+    "gulp-plumber": "^0.6.3",<% } %>
+    "gulp-size": "^0.4.0",
+    "gulp-uglify": "^0.3.0",
+    "gulp-useref": "^0.4.2",
+    "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
+    "lazypipe": "^0.2.1",<% } %>
+    "opn": "^0.1.1",
+    "rimraf": "^2.2.8",
+    "streamqueue": "^0.1.1",
+    "wiredep": "^1.4.3"
   }
 }
