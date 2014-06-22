@@ -2,7 +2,6 @@
 // generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
-var rimraf = require('rimraf');
 
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
@@ -64,11 +63,7 @@ gulp.task('extras', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function (cb) {
-  rimraf('.tmp', function () {
-    rimraf('dist', cb);
-  });
-});
+gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
 gulp.task('connect', function () {
   var connect = require('connect');
