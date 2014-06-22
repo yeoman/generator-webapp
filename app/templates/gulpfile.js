@@ -88,7 +88,7 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function () {
+gulp.task('server', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function () {
   require('opn')('http://localhost:9000');
 });
 
