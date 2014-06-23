@@ -23,7 +23,7 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 
 - Install: `npm install -g generator-gulp-webapp`
 - Run: `yo gulp-webapp`
-- Run `gulp` for building and `gulp watch` for preview
+- Run `gulp` for building and `gulp serve` for preview
 
 
 #### Third-Party Dependencies
