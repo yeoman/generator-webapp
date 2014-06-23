@@ -28,6 +28,8 @@
     "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
     "lazypipe": "^0.2.1",<% } %>
     "opn": "^0.1.1",
+    "serve-index": "^1.1.4",
+    "serve-static": "^1.2.3",
     "streamqueue": "^0.1.1",
     "wiredep": "^1.4.3"
   }
