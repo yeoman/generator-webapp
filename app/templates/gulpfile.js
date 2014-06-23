@@ -66,15 +66,19 @@ gulp.task('extras', function () {
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
 gulp.task('connect', function () {
-  var connect = require('connect');
+  var connect = require('connect'),
+      livereload = require('connect-livereload'),
+      serveStatic = require('serve-static'),
+      serveIndex = require('serve-index');
+
   var app = connect()
-    .use(require('connect-livereload')({port: 35729}))
-    .use(connect.static('app'))
-    .use(connect.static('.tmp'))
+    .use(livereload({port: 35729}))
+    .use(serveStatic('app'))
+    .use(serveStatic('.tmp'))
     // paths to bower_components should be relative to the current file
     // e.g. in app/index.html you should use ../bower_components
-    .use('/bower_components', connect.static('bower_components'))
-    .use(connect.directory('app'));
+    .use('/bower_components', serveStatic('bower_components'))
+    .use(serveIndex('app'));
 
   require('http').createServer(app)
     .listen(9000)
