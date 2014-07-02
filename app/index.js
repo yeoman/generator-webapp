@@ -99,7 +99,24 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   bower: function () {
-    this.template('_bower.json', 'bower.json');
+    var bower = {
+      name: this._.slugify(this.appname),
+      private: true,
+      dependencies: {}
+    };
+
+    if (this.includeBootstrap) {
+      var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
+      bower.dependencies[bs] = "~3.2.0";
+    } else {
+      bower.dependencies.jquery = "~1.11.1";
+    }
+
+    if (this.includeModernizr) {
+      bower.dependencies.modernizr = "~2.8.2";
+    }
+
+    this.write('bower.json', JSON.stringify(bower, null, 2));
   },
 
   jshint: function () {
@@ -110,24 +127,20 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('editorconfig', '.editorconfig');
   },
 
-  h5bp: function () {
-    this.directory('app');
-  },
-
   mainStylesheet: function () {
     var css = 'main.' + (this.includeSass ? 's' : '') + 'css';
     this.template(css, 'app/styles/' + css);
   },
 
   writeIndex: function () {
-    this.indexFile = this.readFileAsString(join(this.sourceRoot(), 'index.html'));
-    this.indexFile = this.engine(this.indexFile, this);
+    this.indexFile = this.engine(
+      this.readFileAsString(join(this.sourceRoot(), 'index.html')),
+      this
+    );
 
     // wire Bootstrap plugins
-    if (this.includeBootstrap) {
-      var bs = 'bower_components/bootstrap';
-      bs += this.includeSass ?
-        '-sass-official/vendor/assets/javascripts/bootstrap/' : '/js/';
+    if (this.includeBootstrap && !this.includeSass) {
+      var bs = 'bower_components/bootstrap/js/';
 
       this.indexFile = this.appendFiles({
         html: this.indexFile,
@@ -161,6 +174,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   app: function () {
+    this.directory('app');
     this.mkdir('app/scripts');
     this.mkdir('app/styles');
     this.mkdir('app/images');
