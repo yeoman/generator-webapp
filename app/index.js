@@ -100,12 +100,12 @@ AppGenerator.prototype.bower = function () {
         };
 
        if (this.includeBootstrap) {
-        if (this.includeSass) {
-             var sass = 'bootstrap-sass-official';
-             bower.dependencies[sass] = "~3.1.1";
-        }else{
-            bower.dependencies.bootstrap = "~3.1.1";
-        }
+        var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
+        bower.dependencies[bs] = "~3.1.1";
+       }
+
+       if (this.includeModernizr) {
+        bower.dependencies.modernizr = "~2.8.1";
        }
 
        bower.dependencies.jquery = "~2.1.1";
