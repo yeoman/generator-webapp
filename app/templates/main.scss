@@ -1,4 +1,4 @@
-<% if (includeBootstrap) { %>$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+<% if (includeBootstrap) { %>$icon-font-path: '../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/';
 
 // bower:scss
 // endbower
@@ -91,7 +91,7 @@ body {
   }
 }<% } else { %>body {
   background: #fafafa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
 

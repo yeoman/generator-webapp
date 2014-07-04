@@ -94,21 +94,21 @@ AppGenerator.prototype.git = function () {
 
 AppGenerator.prototype.bower = function () {
   var bower = {
-   name: this._.slugify(this.appname),
-   private: true,
-   dependencies: {}
+    name: this._.slugify(this.appname),
+    private: true,
+    dependencies: {}
   };
 
   if (this.includeBootstrap) {
-   var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
-   bower.dependencies[bs] = "~3.1.1";
+    var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
+    bower.dependencies[bs] = '~3.1.1';
   }
 
   if (this.includeModernizr) {
-   bower.dependencies.modernizr = "~2.8.1";
+    bower.dependencies.modernizr = '~2.8.1';
   }
 
-  bower.dependencies.jquery = "~2.1.1";
+  bower.dependencies.jquery = '~2.1.1';
   this.write('bower.json', JSON.stringify(bower, null, 2));
 };
 
