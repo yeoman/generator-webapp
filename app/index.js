@@ -93,7 +93,25 @@ AppGenerator.prototype.git = function () {
 };
 
 AppGenerator.prototype.bower = function () {
-  this.copy('bower.json', 'bower.json');
+        var bower = {
+          name: this._.slugify(this.appname),
+          private: true,
+          dependencies: {}
+        };
+
+       if (this.includeBootstrap) {
+        if (this.includeSass) {
+             var sass = 'bootstrap-sass-official';
+             bower.dependencies[sass] = "~3.1.1";
+        }else{
+            bower.dependencies.bootstrap = "~3.1.1";
+        }
+       }
+
+       bower.dependencies.jquery = "~2.1.1";
+
+
+        this.write('bower.json', JSON.stringify(bower, null, 2));
 };
 
 AppGenerator.prototype.jshint = function () {
