@@ -104,3 +104,32 @@ Now you have two options for including Bootstrap in your page:
   - In your `main.less`, add `@import "../bower_components/bootstrap/less/bootstrap.less";` – or you could do [something more granular](http://www.helloerik.com/bootstrap-3-less-workflow-tutorial)
   - In your `index.html`, add script tags for the individual components you want, e.g. `<script src="bower_components/bootstrap/js/affix.js"></script>`
     - NB: Some modules depend on others, e.g. `popover.js` depends on `tooltip.js` – see [docs](http://getbootstrap.com/javascript/)
+
+### Add Less Sourcemaps
+
+Install [gulp-sourcemap](https://github.com/floridoo/gulp-sourcemaps)
+
+```sh
+$ npm install --save-dev gulp-sourcemaps
+```
+
+Edit your less task to match the following:
+
+ ```diff
+ gulp.task('styles', function () {
+     return gulp.src('app/styles/main.less')
++       .pipe($.sourcemaps.init())
+         .pipe($.less())
+         .pipe($.autoprefixer('last 1 version'))
++       .pipe($.sourcemaps.write('.'))
+         .pipe(gulp.dest('.tmp/styles'))
+         .pipe($.size());
+ });
+ ```
+
+Note that in this example, I've specified that an external sourcemap should get written to the same directory as the css output.  The default is to write the sourcemap inline.
+
+  ```diff
+- .pipe($.sourcemaps.write('.'))
++ .pipe($.sourcemaps.write())
+  ```
