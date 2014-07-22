@@ -9,7 +9,6 @@
     "del": "^0.1.0",
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "^0.0.7",
-    "gulp-bower-files": "^0.2.1",
     "gulp-cache": "^0.2.0",
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^0.5.0",
@@ -27,8 +26,8 @@
     "gulp-useref": "^0.4.2",
     "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
     "lazypipe": "^0.2.1",<% } %>
+    "main-bower-files": "^1.0.1",
     "opn": "^0.1.1",
-    "streamqueue": "^0.1.1",
     "wiredep": "^1.4.3"
   }
 }
