@@ -27,13 +27,14 @@ gulp.task('html', ['styles'], function () {<% if (includeBootstrap && includeSas
   var cssChannel = lazypipe()
     .pipe($.csso)
     .pipe($.replace, 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts');<% } %>
+  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
   return gulp.src('app/*.html')
-    .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
+    .pipe(assets)
     .pipe($.if('*.js', $.uglify()))<% if (includeBootstrap && includeSass) { %>
     .pipe($.if('*.css', cssChannel()))<% } else { %>
     .pipe($.if('*.css', $.csso()))<% } %>
-    .pipe($.useref.restore())
+    .pipe(assets.restore())
     .pipe($.useref())
     .pipe(gulp.dest('dist'));
 });
