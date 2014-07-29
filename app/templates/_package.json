@@ -23,7 +23,7 @@
     "gulp-plumber": "^0.6.3",<% } %>
     "gulp-size": "^0.4.0",
     "gulp-uglify": "^0.3.0",
-    "gulp-useref": "^0.4.2",
+    "gulp-useref": "^0.6.0",
     "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
     "lazypipe": "^0.2.1",<% } %>
     "main-bower-files": "^1.0.1",
