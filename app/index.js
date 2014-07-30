@@ -110,6 +110,7 @@ AppGenerator.prototype.bower = function () {
     bower.dependencies.modernizr = '~2.8.1';
   }
 
+  this.copy('bowerrc', '.bowerrc');
   this.write('bower.json', JSON.stringify(bower, null, 2));
 };
 
