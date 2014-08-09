@@ -25,11 +25,9 @@ describe('Webapp generator', function () {
       'package.json',
       'bower.json',
       'Gruntfile.js',
-      'app/404.html',
       'app/favicon.ico',
       'app/robots.txt',
-      'app/index.html',
-      'app/.htaccess'
+      'app/index.html'
     ];
 
     var options = {
