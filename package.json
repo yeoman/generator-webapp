@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^0.5.1",
     "cheerio": "^0.17.0",
-    "yeoman-generator": "0.17.1",
+    "yeoman-generator": "^0.17.2",
     "yosay": "^0.3.0"
   },
   "devDependencies": {
