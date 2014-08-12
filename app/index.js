@@ -57,7 +57,8 @@ module.exports = yeoman.generators.Base.extend({
       }]
     }, {
       when: function (answers) {
-        return answers.features.indexOf('includeSass') !== -1;
+        return answers && answers.feature &&
+          answers.features.indexOf('includeSass') !== -1;
       },
       type: 'confirm',
       name: 'libsass',
