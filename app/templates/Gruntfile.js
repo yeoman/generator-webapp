@@ -309,6 +309,7 @@ module.exports = function (grunt) {
         options: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
+          conservativeCollapse: true,
           removeAttributeQuotes: true,
           removeCommentsFromCDATA: true,
           removeEmptyAttributes: true,
