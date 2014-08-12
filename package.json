@@ -27,17 +27,17 @@
     "grunt"
   ],
   "dependencies": {
-    "chalk": "^0.4.0",
+    "chalk": "^0.5.1",
     "cheerio": "^0.17.0",
-    "yeoman-generator": "git://github.com/yeoman/generator#02dc62715d0bc0550def40290fd38a48bd6e63d3",
-    "yosay": "^0.2.0"
-  },
-  "peerDependencies": {
-    "yo": ">=1.2.0",
-    "generator-mocha": ">=0.1.0"
+    "yeoman-generator": "0.17.1",
+    "yosay": "^0.3.0"
   },
   "devDependencies": {
     "mocha": "*",
     "underscore": "^1.6.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.2.0",
+    "generator-mocha": ">=0.1.0"
   }
 }
