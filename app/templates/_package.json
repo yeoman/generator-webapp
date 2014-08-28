@@ -5,11 +5,11 @@
   },
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
+    "autoprefixer-core": "^3.0.1",
     "connect": "^3.0.1",
     "connect-livereload": "^0.5.0",
     "del": "^0.1.0",
     "gulp": "^3.6.0",
-    "gulp-autoprefixer": "^1.0.1",
     "gulp-cache": "^0.2.2",
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^1.0.2",
@@ -20,8 +20,8 @@
     "gulp-livereload": "^2.0.0",
     "gulp-load-plugins": "^0.7.1",
     "gulp-minify-html": "^0.1.6",<% if (includeSass) { %>
-    "gulp-plumber": "^0.6.3",<% if (includeBootstrap) { %>
-    "gulp-replace": "^0.4.0",<% } %>
+    "gulp-plumber": "^0.6.3",<% } %>
+    "gulp-postcss": "^1.0.2",<% if (includeSass) { %>
     "gulp-ruby-sass": "^0.7.1",<% } %>
     "gulp-size": "^1.1.0",
     "gulp-uglify": "^1.0.1",
