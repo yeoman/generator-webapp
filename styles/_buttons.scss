@@ -12,6 +12,7 @@
   &:hover,
   &:focus {
     background-color: darken($color-red, 5%);
+    color: #fff;
   }
 
   img {

@@ -10,6 +10,10 @@
       margin-top: $sub;
       margin-right: $sub * 2;
     }
+
+    @include query(md) {
+      margin-top: $suh;
+    }
   }
 
   &-text {
