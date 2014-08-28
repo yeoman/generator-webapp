@@ -2,141 +2,23 @@
 layout: default
 ---
 
-<header class="header" role="banner">
-  <nav class="navigation" role="navigation">
-    <a href="http://yeoman.io"><img src="images/yeoman.png"></a>
-  </nav>
-
-  <div class="container">
-    <div class="brand">
-      <h1 class="brand-logo">Web app generator</h1>
-      <p class="brand-tagline">{{ site.description }}</p>
-    </div>
-  </div>
-</header>
+{% include header.html %}
 
 <main class="main" role="main">
-  <div class="intro">
-    <div class="container">
-      <img class="intro-img" src="images/yeoman-standing.png">
-
-      <div class="intro-text">
-        <h2>'Allo, 'allo!</h2>
-        <p>Web app generator is a <a href="http://yeoman.io/">Yeoman generator</a> for building front-end web apps. It automates common tasks such as JavaScript linting, assets compression, compiling Sass with Autoprefixer etc. so you can get that out of the way and focus on more important stuff. This generator is powered by Gulp, if Grunt is more your cup of tea, check out <a href="https://github.com/yeoman/generator-webapp">generator-webapp</a>.</p>
-      </div>
-    </div>
-  </div>
+  {% include intro.html %}
 
   <div class="container">
     <div class="row">
-      <div class="features col-6">
-        <h2>Features</h2>
-        <p>Please check out our <a href="https://github.com/yeoman/generator-gulp-webapp/blob/master/app/templates/gulpfile.js">gulpfile.js</a> for up to date information on what we support.</p>
-
-        <ul class="features-list">
-          <li class="feature">HTML5 Boilerplate</li>
-          <li class="feature">CSS Autoprefixing</li>
-          <li class="feature">Built-in preview server with LiveReload</li>
-          <li class="feature">Compile Sass</li>
-          <li class="feature">Lint your scripts</li>
-          <li class="feature">Awesome image optimization</li>
-          <li class="feature">Wire-up dependencies installed with Bower</li>
-          <li class="feature">Compress and revision your assets</li>
-        </ul>
+      <div class="col-6">
+        {% include features.html %}
       </div>
 
-      <div class="recipes col-6">
-        <h2>Recipes</h2>
-        <p>If your favorite feature is missing, we have <a href="https://github.com/yeoman/generator-gulp-webapp/tree/master/docs/recipes">recipes</a> for some common features like:</p>
-
-        <ul class="recipes-list">
-          <li class="recipe">Compile CoffeeScript</li>
-          <li class="recipe">Use Handlebars for JavaScript templates</li>
-          <li class="recipe">Compile LESS</li>
-          <li class="recipe">Use Jade for your markup</li>
-          <li class="recipe">Host your web app on GitHub Pages</li>
-          <li class="recipe">Implement asset revisioning</li>
-          <li class="recipe">Set up React and JSX</li>
-        </ul>
+      <div class="col-6">
+        {% include recipes.html %}
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <h2>Installation &amp; Usage</h2>
-  </div>
-
-  <div class="code">
-    <div class="container">
-      <div class="code-group">
-        {% highlight sh %}
-        # install dependencies
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ npm install -g gulp yo generator-gulp-webapp
-        {% endhighlight %}
-      </div>
-
-      <div class="code-group">
-        {% highlight sh %}
-        # create an empty directory for your project
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ mkdir my-webapp
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ cd my-webapp
-        {% endhighlight %}
-      </div>
-
-      <div class="code-group">
-        {% highlight sh %}
-        # scaffold
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ yo gulp-webapp
-    _-----_
-   |       |    .--------------------------.
-   |--(o)--|    |    Welcome to Yeoman,    |
-  `---------´   |   ladies and gentlemen!  |
-   ( _´U`_ )    '--------------------------'
-   /___A___\
-    |  ~  |
-  __'.___.'__
-´   `  |° ´ Y `
-        {% endhighlight %}
-      </div>
-
-      <div class="code-group">
-        {% highlight sh %}
-        # serve and watch for changes
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ gulp watch
-        {% endhighlight %}
-      </div>
-
-      <div class="code-group">
-        {% highlight sh %}
-        # build for production
-        {% endhighlight %}
-
-        {% highlight sh %}
-        $ gulp build
-        {% endhighlight %}
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <a class="btn" href="https://github.com/yeoman/generator-gulp-webapp">
-      <img src="images/github.svg" width="16" height="16" alt="GitHub icon">
-      View on GitHub
-    </a>
-  </div>
+  {% include instructions.html %}
+  {% include github.html %}
 </main>

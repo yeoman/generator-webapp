@@ -1,22 +1,3 @@
 .intro {
-  &-img {
-    display: none;
-    width: $sub * 5.5;
-    margin-bottom: $sub;
-
-    @include query(sm) {
-      display: block;
-      float: left;
-      margin-top: $sub;
-      margin-right: $sub * 2;
-    }
-
-    @include query(md) {
-      margin-top: $suh;
-    }
-  }
-
-  &-text {
-    overflow: hidden;
-  }
+  font-size: 1.25em;
 }
