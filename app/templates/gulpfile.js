@@ -50,8 +50,7 @@ gulp.task('images', function () {
 
 gulp.task('fonts', function () {
   return gulp.src(require('main-bower-files')().concat('app/fonts/**/*'))
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-    .pipe($.flatten())
+    .pipe($.if('**/*.{eot,svg,ttf,woff}', $.flatten()))
     .pipe(gulp.dest('dist/fonts'));
 });
 
