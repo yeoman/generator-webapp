@@ -1,3 +1,11 @@
 .intro {
-  font-size: 1.25em;
+  @include query(sm) {
+    font-size: 1.25em;
+  }
+
+  h2 {
+    @include query(sm) {
+      @include font-size(52px, 3);
+    }
+  }
 }
