@@ -1,0 +1,56 @@
+.vendors {
+  @include clearfix;
+  margin-bottom: $sub;
+  padding-top: $sub;
+  padding-bottom: $sub;
+  border-top: 1px solid darken(#fff, 30%);
+  border-bottom: 1px solid darken(#fff, 30%);
+  background-color: darken(#fff, 10%);
+
+  .row {
+    margin-bottom: 0;
+  }
+}
+
+.vendor {
+  display: block;
+  width: $sub * 3;
+  height: $sub * 3;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 1px 1px 1px darken(#fff, 30%);
+  background-color: #fff;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  transition: box-shadow .2s;
+
+  &:hover,
+  &:focus {
+    box-shadow: 1px 1px 1px darken(#fff, 50%);
+  }
+
+  &-autoprefixer {
+    background-image: url('../images/autoprefixer.svg');
+  }
+
+  &-bower {
+    background-image: url('../images/bower.svg');
+  }
+
+  &-gulp {
+    background-image: url('../images/gulp.png');
+  }
+
+  &-h5bp {
+    background-image: url('../images/h5bp.png');
+  }
+
+  &-livereload {
+    background-image: url('../images/livereload.png');
+  }
+
+  &-sass {
+    background-image: url('../images/sass.png');
+  }
+}
