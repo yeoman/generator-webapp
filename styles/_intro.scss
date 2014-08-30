@@ -1,11 +1,24 @@
 .intro {
   @include query(sm) {
+    @include clearfix;
+    margin-bottom: $sub;
     font-size: 1.25em;
   }
 
   &-title {
     @include query(sm) {
       @include font-size(52px, 3);
+    }
+  }
+
+  &-image {
+    display: none;
+
+    @include query(sm) {
+      display: inline-block;;
+      float: right;
+      margin-top: $suh;
+      margin-left: $suh;
     }
   }
 }
