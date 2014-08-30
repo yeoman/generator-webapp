@@ -95,14 +95,11 @@ gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
 <% if (includeSass) { %>
   gulp.src('app/styles/*.scss')
-    .pipe(wiredep({directory: 'bower_components'}))
+    .pipe(wiredep())
     .pipe(gulp.dest('app/styles'));
 <% } %>
   gulp.src('app/*.html')
-    .pipe(wiredep({
-      directory: 'bower_components'<% if (includeSass && includeBootstrap) { %>,
-      exclude: ['bootstrap-sass-official']<% } %>
-    }))
+    .pipe(wiredep(<% if (includeSass && includeBootstrap) { %>{exclude: ['bootstrap-sass-official']}<% } %>))
     .pipe(gulp.dest('app'));
 });
 
