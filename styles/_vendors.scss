@@ -1,14 +1,31 @@
 .vendors {
   @include clearfix;
   margin-bottom: $sub;
-  padding-top: $sub;
-  padding-bottom: $sub;
+  padding-top: $suh;
+  padding-bottom: $suh;
   border-top: 1px solid darken(#fff, 30%);
   border-bottom: 1px solid darken(#fff, 30%);
   background-color: darken(#fff, 10%);
 
   .row {
     margin-bottom: 0;
+  }
+
+  .col {
+    float: left;
+    width: (100%/2);
+    margin-top: $suh;
+    margin-bottom: $suh;
+    padding-left: $gutter/2;
+    padding-right: $gutter/2;
+
+    @include query(480px) {
+      width: (100%/3);
+    }
+
+    @include query(sm) {
+      width: (100%/6);
+    }
   }
 }
 
@@ -18,39 +35,22 @@
   height: $sub * 3;
   border-radius: 50%;
   border: 6px solid #fff;
-  box-shadow: 1px 1px 1px darken(#fff, 30%);
+  box-shadow: 0px 0px 0 1px darken(#fff, 30%);
   background-color: #fff;
   background-size: contain;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  transition: box-shadow .2s;
+  transform: rotate(0deg) scale(1);
+  transition: all .4s;
 
   &:hover,
   &:focus {
-    box-shadow: 1px 1px 1px darken(#fff, 50%);
+    transform: rotate(360deg) scale(1.2);
   }
 
-  &-autoprefixer {
-    background-image: url('../images/autoprefixer.svg');
-  }
-
-  &-bower {
-    background-image: url('../images/bower.svg');
-  }
-
-  &-gulp {
-    background-image: url('../images/gulp.png');
-  }
-
-  &-h5bp {
-    background-image: url('../images/h5bp.png');
-  }
-
-  &-livereload {
-    background-image: url('../images/livereload.png');
-  }
-
-  &-sass {
-    background-image: url('../images/sass.png');
+  @each $vendor in autoprefixer, bower, gulp, h5bp, livereload, sass {
+    &-#{$vendor} {
+      background-image: url('../images/vendors/#{$vendor}.png');
+    }
   }
 }
