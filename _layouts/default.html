@@ -6,6 +6,11 @@
     <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ site.description }}">
+    <meta property="og:title" content="A gulp.js generator for modern webapps">
+    <meta property="og:site_name" content="Yeoman">
+    <meta property="og:url" content="{{ site.url }}">
+    <meta property="og:description" content="Web app generator is a Yeoman generator for building front-end web apps. It automates common tasks such as JavaScript linting, asset compression, compiling Sass with Autoprefixer, etc. so you focus on more important tasks.">
+    <meta property="og:image" content="{{ site.url }}/images/yeoman-standing.png">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <link rel="stylesheet" href="styles/main.css">
     <script type="text/javascript">
