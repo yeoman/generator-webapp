@@ -7,6 +7,7 @@ body {
   margin: 0;
   font-family: $font-family-base;
   color: #000;
+  -webkit-text-size-adjust: 100%;
 
   @include query(sm) {
     @include font-size($font-size-base);
