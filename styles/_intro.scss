@@ -3,22 +3,7 @@
     font-size: 1.25em;
   }
 
-  .code {
-    padding: 0;
-    margin-bottom: $suh;
-    background-color: transparent;
-    color: lighten(#000, 30%);
-
-    @include query(sm) {
-      margin-bottom: $sub;
-    }
-
-    strong {
-      color: $color-red;
-    }
-  }
-
-  h2 {
+  &-title {
     @include query(sm) {
       @include font-size(52px, 3);
     }
