@@ -22,23 +22,19 @@ p, ol, ul {
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: $suh;
-
-  @include query(sm) {
-    margin-bottom: $sub;
-  }
 }
 
 h2 {
-  @include font-size(28px, 1.5);
+  @include font-size(28px);
   font-weight: 400;
 
   @include query(sm) {
-    @include font-size(42px, 3);
+    @include font-size(42px, 2);
   }
 }
 
 h3 {
-  @include font-size(28px, 1.5);
+  @include font-size(28px);
   font-weight: 300;
 }
 
