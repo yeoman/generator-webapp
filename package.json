@@ -29,8 +29,8 @@
   "dependencies": {
     "chalk": "^0.5.1",
     "cheerio": "^0.17.0",
-    "yeoman-generator": "^0.17.2",
-    "yosay": "^0.3.0"
+    "yeoman-generator": "~0.17.3",
+    "yosay": "~1.0.0"
   },
   "devDependencies": {
     "mocha": "*",
