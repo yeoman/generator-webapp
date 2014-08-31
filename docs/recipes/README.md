@@ -1,5 +1,9 @@
 # Recipes
 
+* [Compass](compass.md)
+
+*We welcome additional recipes for common use-cases not covered by this generator.*
+
 ## Tips for writing a recipe
 
 ### 1. Use the `master` branch of the generator
