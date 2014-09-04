@@ -3,6 +3,11 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
+var taskListing = require('gulp-task-listing');
+
+// Add a task to render the output
+gulp.task('help', taskListing);
+
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
     .pipe($.plumber())
