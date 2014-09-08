@@ -30,7 +30,7 @@
     "chalk": "^0.4.0",
     "cheerio": "^0.16.0",
     "wiredep": "^1.4.3",
-    "yeoman-generator": "^0.17.0",
+    "yeoman-generator": "^0.17.7",
     "yosay": "^0.2.0"
   },
   "peerDependencies": {
