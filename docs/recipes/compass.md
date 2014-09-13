@@ -14,6 +14,8 @@ gem install compass
 npm install --save-dev grunt-contrib-compass
 ```
 
+**Note**: `gem install`ing is global, so it doesn't matter where you're running the command from, but `npm install` should be run from inside the project directory.
+
 ### 2. Replace the `sass` task with `compass`
 
 Replace:
