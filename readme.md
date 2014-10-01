@@ -23,7 +23,7 @@ For more information on what `generator-webapp` can do for you, take a look at t
 
 - Install: `npm install -g generator-webapp`
 - Run: `yo webapp`
-- Run `grunt` for building and `grunt serve` for preview[\*](#serve-note). `--allow-remote` option for remote access.
+- Run `grunt` for building and `grunt serve` for preview[\*](#grunt-serve-note). `--allow-remote` option for remote access.
 
 
 #### Third-Party Dependencies
