@@ -24,7 +24,7 @@ $ npm install --save-dev gulp-nunjucks-render
 Create a ``app/templates/layouts`` directory structure
 
 ```sh
-$ mkdir app/templates && mkdir app/templates/layouts
+$ mkdir -p app/templates/layouts
 ```
 
 ### 3. Modify `app/index.html` to create as `app/templates/layouts/default.html` layouts template
