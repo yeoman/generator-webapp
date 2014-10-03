@@ -57,7 +57,7 @@ module.exports = yeoman.generators.Base.extend({
       }]
     }, {
       when: function (answers) {
-        return answers && answers.feature &&
+        return answers && answers.features &&
           answers.features.indexOf('includeSass') !== -1;
       },
       type: 'confirm',
