@@ -79,11 +79,11 @@ gulp.task('templates', function () {
 
   return gulp.src(['app/templates/**/*.html', '!app/templates/layouts/*.html'])
     .pipe($.nunjucksRender())
-    .pipe(gulp.dest('app'))
+    .pipe(gulp.dest('.tmp'))
 });
 ```
 
-> This compiles `app/templates/.html` files into static `.html` files in the `app` root directory.
+> This compiles `app/templates/.html` files into static `.html` files in the `.tmp` directory.
 
 ### 6. Add `templates` as a dependency of both `html` and `serve`
 
@@ -97,7 +97,24 @@ gulp.task('html', ['styles', 'templates'], function () {
     ...
 ```
 
-### 7. Configure `wiredep` task to wire bower components on layout templates only
+### 7. Configure `html` task to include files from `.tmp`
+
+```diff
+ gulp.task('html', ['styles', 'templates'], function () {
+   var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+
+-  return gulp.src('app/*.html')
++  return gulp.src(['app/*.html', '.tmp/*.html'])
+     .pipe(assets)
+     .pipe($.if('*.js', $.uglify()))
+     .pipe($.if('*.css', $.csso()))
+     .pipe(assets.restore())
+     .pipe($.useref())
+     .pipe(gulp.dest('dist'));
+ });
+```
+
+### 8. Configure `wiredep` task to wire bower components on layout templates only
 
 ```diff
     gulp.task('wiredep', function () {
@@ -116,7 +133,7 @@ gulp.task('html', ['styles', 'templates'], function () {
 ```
 
 
-### 8. Configure watch
+### 9. Configure watch
 
 Edit your `watch` task so that (a) editing an `templates/**/*.html` file triggers the `templates` task, and (b) the LiveReload server:
 
@@ -127,6 +144,7 @@ Edit your `watch` task so that (a) editing an `templates/**/*.html` file trigger
       // watch for changes
       gulp.watch([
         'app/*.html',
++       '.tmp/*.html',
         '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*'
