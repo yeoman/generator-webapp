@@ -6,7 +6,7 @@ var $ = require('gulp-load-plugins')();
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
     .pipe($.plumber())
-    .pipe($.rubySass({
+    .pipe($.sass({
       style: 'expanded',
       precision: 10
     }))<% } else { %>

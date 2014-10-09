@@ -20,7 +20,7 @@
     "gulp-livereload": "^2.0.0",
     "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
     "gulp-replace": "^0.3.0",<% } %>
-    "gulp-ruby-sass": "^0.5.0",
+    "gulp-sass": "^1.0.0",
     "gulp-plumber": "^0.6.3",<% } %>
     "gulp-size": "^0.4.0",
     "gulp-uglify": "^0.3.0",
