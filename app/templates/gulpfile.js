@@ -67,7 +67,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('connect', function () {
+gulp.task('connect',<% if (includeSass) { %> ['styles'],<% } %> function () {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = require('connect')()
@@ -86,7 +86,7 @@ gulp.task('connect', function () {
     });
 });
 
-gulp.task('serve', ['connect'<% if (includeSass) { %>, 'styles'<% } %>], function () {
+gulp.task('serve', ['connect', 'watch'], function () {
   require('opn')('http://localhost:9000');
 });
 
@@ -103,7 +103,7 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('watch', ['connect', 'serve'], function () {
+gulp.task('watch', ['connect'], function () {
   $.livereload.listen();
 
   // watch for changes
