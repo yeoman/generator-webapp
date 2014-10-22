@@ -11,6 +11,7 @@
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "^0.0.7",
     "gulp-cache": "^0.2.2",
+    "gulp-combine-media-queries": "^0.2.0",
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^0.5.0",
     "gulp-flatten": "^0.0.2",

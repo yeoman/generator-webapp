@@ -12,6 +12,9 @@ gulp.task('styles', function () {<% if (includeSass) { %>
     }))<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
     .pipe($.autoprefixer('last 1 version'))
+    .pipe($.combineMediaQueries({
+        log: true
+    }))
     .pipe(gulp.dest('.tmp/styles'));
 });
 
