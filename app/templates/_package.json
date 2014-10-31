@@ -5,8 +5,7 @@
   },
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
-    "connect": "^3.0.1",
-    "connect-livereload": "^0.4.0",
+    "browser-sync": "^1.6.2",
     "del": "^0.1.0",
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "^0.0.7",
@@ -17,7 +16,6 @@
     "gulp-if": "^1.2.1",
     "gulp-imagemin": "^0.6.0",
     "gulp-jshint": "^1.5.3",
-    "gulp-livereload": "^2.0.0",
     "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
     "gulp-replace": "^0.3.0",<% } %>
     "gulp-ruby-sass": "^0.5.0",
@@ -29,8 +27,6 @@
     "lazypipe": "^0.2.1",<% } %>
     "main-bower-files": "^1.0.1",
     "opn": "^0.1.1",
-    "serve-index": "^1.1.4",
-    "serve-static": "^1.4.0",
     "wiredep": "^1.4.3"
   }
 }

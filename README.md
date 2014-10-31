@@ -10,11 +10,11 @@
 Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date information on what we support.
 
 * CSS Autoprefixing
-* Built-in preview server with livereload
+* Built-in preview server with BrowserSync
 * Automagically compile Sass
 * Automagically lint your scripts
 * Awesome image optimization
-* Automagically wire-up dependencies installed with [Bower](http://bower.io) *(when `gulp watch` or `gulp wiredep`)*
+* Automagically wire-up dependencies installed with [Bower](http://bower.io) *(when `gulp serve` or `gulp wiredep`)*
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
 
