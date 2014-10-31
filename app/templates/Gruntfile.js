@@ -387,14 +387,14 @@ module.exports = function (grunt) {
             } %>',
           dest: '<%%= config.dist %>'
         }<% } %>]
-      },
+      }<% if (!includeSass) { %>,
       styles: {
         expand: true,
         dot: true,
         cwd: '<%%= config.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
-      }
+      }<% } %>
     },<% if (includeModernizr) { %>
 
     // Generates a custom Modernizr build that includes only the tests you
@@ -416,19 +416,19 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up build process
     concurrent: {
-      server: [<% if (includeSass) { %>
-        'sass:server',<% } if (coffee) {  %>
-        'coffee:dist',<% } %>
-        'copy:styles'
+      server: [<% if (coffee) {  %>
+        'coffee:dist'<% } %><% if (coffee && includeSass) {  %>,<% } %><% if (includeSass) { %>
+        'sass:server'<% } else { %>
+        'copy:styles'<% } %>
       ],
       test: [<% if (coffee) { %>
-        'coffee',<% } %>
-        'copy:styles'
+        'coffee',<% } %><% if (coffee && !includeSass) {  %>,<% } %><% if (!includeSass) { %>
+        'copy:styles'<% } %>
       ],
       dist: [<% if (coffee) { %>
-        'coffee',<% } if (includeSass) { %>
-        'sass',<% } %>
-        'copy:styles',
+        'coffee',<% } %><% if (includeSass) { %>
+        'sass',<% } else { %>
+        'copy:styles',<% } %>
         'imagemin',
         'svgmin'
       ]
