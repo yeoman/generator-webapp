@@ -6,31 +6,31 @@
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "connect": "^3.0.1",
-    "connect-livereload": "^0.4.0",
+    "connect-livereload": "^0.5.0",
     "del": "^0.1.0",
     "gulp": "^3.6.0",
-    "gulp-autoprefixer": "^0.0.7",
+    "gulp-autoprefixer": "^1.0.1",
     "gulp-cache": "^0.2.2",
     "gulp-csso": "^0.2.6",
-    "gulp-filter": "^0.5.0",
-    "gulp-flatten": "^0.0.2",
+    "gulp-filter": "^1.0.2",
+    "gulp-flatten": "^0.0.4",
     "gulp-if": "^1.2.1",
-    "gulp-imagemin": "^0.6.0",
+    "gulp-imagemin": "^1.2.1",
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^2.0.0",
-    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { %>
+    "gulp-load-plugins": "^0.7.1",<% if (includeSass) { %>
     "gulp-plumber": "^0.6.3",<% if (includeBootstrap) { %>
-    "gulp-replace": "^0.3.0",<% } %>
-    "gulp-ruby-sass": "^0.5.0",<% } %>
-    "gulp-size": "^0.4.0",
-    "gulp-uglify": "^0.3.0",
-    "gulp-useref": "^0.6.0",
-    "jshint-stylish": "^0.2.0",<% if (includeBootstrap && includeSass) { %>
+    "gulp-replace": "^0.4.0",<% } %>
+    "gulp-ruby-sass": "^0.7.1",<% } %>
+    "gulp-size": "^1.1.0",
+    "gulp-uglify": "^1.0.1",
+    "gulp-useref": "^1.0.2",
+    "jshint-stylish": "^1.0.0",<% if (includeBootstrap && includeSass) { %>
     "lazypipe": "^0.2.1",<% } %>
-    "main-bower-files": "^1.0.1",
-    "opn": "^0.1.1",
+    "main-bower-files": "^2.1.0",
+    "opn": "^1.0.0",
     "serve-index": "^1.1.4",
     "serve-static": "^1.4.0",
-    "wiredep": "^1.4.3"
+    "wiredep": "^2.0.0"
   }
 }

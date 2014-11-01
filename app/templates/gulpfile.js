@@ -12,7 +12,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
       precision: 10
     }))<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
-    .pipe($.autoprefixer('last 1 version'))
+    .pipe($.autoprefixer({browsers: ['last 1 version']}))
     .pipe(gulp.dest('.tmp/styles'));
 });
 
