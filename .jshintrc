@@ -10,7 +10,5 @@
 	"newcap": true,
 	"noarg": true,
 	"undef": true,
-	"strict": false,
-	"trailing": true,
-	"smarttabs": true
+	"strict": false
 }
