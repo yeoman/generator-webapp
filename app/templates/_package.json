@@ -18,10 +18,10 @@
     "gulp-imagemin": "^0.6.0",
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^2.0.0",
-    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { if (includeBootstrap) { %>
+    "gulp-load-plugins": "^0.5.0",<% if (includeSass) { %>
+    "gulp-plumber": "^0.6.3",<% if (includeBootstrap) { %>
     "gulp-replace": "^0.3.0",<% } %>
-    "gulp-ruby-sass": "^0.5.0",
-    "gulp-plumber": "^0.6.3",<% } %>
+    "gulp-ruby-sass": "^0.5.0",<% } %>
     "gulp-size": "^0.4.0",
     "gulp-uglify": "^0.3.0",
     "gulp-useref": "^0.6.0",
