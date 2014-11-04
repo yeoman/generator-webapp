@@ -18,7 +18,8 @@
     "gulp-imagemin": "^1.2.1",
     "gulp-jshint": "^1.5.3",
     "gulp-livereload": "^2.0.0",
-    "gulp-load-plugins": "^0.7.1",<% if (includeSass) { %>
+    "gulp-load-plugins": "^0.7.1",
+    "gulp-minify-html": "^0.1.6",<% if (includeSass) { %>
     "gulp-plumber": "^0.6.3",<% if (includeBootstrap) { %>
     "gulp-replace": "^0.4.0",<% } %>
     "gulp-ruby-sass": "^0.7.1",<% } %>
