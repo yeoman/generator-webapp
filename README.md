@@ -35,7 +35,8 @@ To install dependencies, run `bower install --save package-name` to get the file
 
 ## Docs
 
-We have [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript.
+* [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript
+* [details](docs/bower.md) about our Bower setup
 
 
 ## Options

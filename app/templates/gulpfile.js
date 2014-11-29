@@ -8,7 +8,8 @@ gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
     .pipe($.rubySass({
       style: 'expanded',
-      precision: 10
+      precision: 10,
+      loadPath: ['.']
     }))
     .on('error', function (err) { console.log(err.message); })<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
@@ -26,7 +27,7 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('html', ['styles'], function () {
-  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+  var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
   return gulp.src('app/*.html')
     .pipe(assets)
@@ -74,8 +75,6 @@ gulp.task('connect', ['styles', 'fonts'], function () {
     .use(require('connect-livereload')({port: 35729}))
     .use(serveStatic('.tmp'))
     .use(serveStatic('app'))
-    // paths to bower_components should be relative to the current file
-    // e.g. in app/index.html you should use ../bower_components
     .use('/bower_components', serveStatic('bower_components'))
     .use(serveIndex('app'));
 
@@ -95,11 +94,16 @@ gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
 <% if (includeSass) { %>
   gulp.src('app/styles/*.scss')
-    .pipe(wiredep())
+    .pipe(wiredep({
+      ignorePath: /^(\.\.\/)+/
+    }))
     .pipe(gulp.dest('app/styles'));
 <% } %>
   gulp.src('app/*.html')
-    .pipe(wiredep(<% if (includeSass && includeBootstrap) { %>{exclude: ['bootstrap-sass-official']}<% } %>))
+    .pipe(wiredep({<% if (includeSass && includeBootstrap) { %>
+      exclude: ['bootstrap-sass-official'],<% } %>
+      ignorePath: /^(\.\.\/)*\.\./
+    }))
     .pipe(gulp.dest('app'));
 });
 
