@@ -13,12 +13,12 @@ Install the [gulp-awspublish](https://github.com/pgherveou/gulp-awspublish) gulp
 $ npm install --save-dev gulp-awspublish
 ```
 
-### 2. Create a `publish` task
+### 2. Create a `deploy` task
 
-Add this task to your `gulpfile.js`. It will run `build` task before publishing:
+Add this task to your `gulpfile.js`. It will run `build` task before deploying:
 
 ```js
-gulp.task('publish', ['build'], function () {
+gulp.task('deploy', ['build'], function () {
   // create a new publisher
   var publisher = $.awspublish.create({
     key: '...',
@@ -47,10 +47,10 @@ gulp.task('publish', ['build'], function () {
 
 > `publisher.cache()` creates a through stream that creates or updates a cache file using file s3 path and file etag. Consecutive runs of publish will use this file to avoid reuploading identical files.
 
-### 4. Publish
+### 4. Deploy
 
 Run the following command to deploy:
 
 ```sh
-$ gulp publish
+$ gulp deploy
 ```
