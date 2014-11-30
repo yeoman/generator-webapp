@@ -8,7 +8,7 @@
 - [Asset revisioning](revving.md)
 - [React](react.md)
 - [Nunjucks](nunjucks.md)
-- [AWS S3 deployment](awspublish.md)
+- [AWS S3 deployment](aws-s3-deployment.md)
 
 
 -
