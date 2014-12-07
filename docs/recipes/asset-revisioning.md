@@ -23,23 +23,18 @@ Instead of wasting performance reading CSS and JS files into a new stream, we ca
 
 ```diff
 gulp.task('html', ['styles'], function () {
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
+  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
-    return gulp.src('app/*.html')
-        .pipe($.useref.assets({searchPath: '{.tmp,app}'}))
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe($.csso())
-        .pipe(cssFilter.restore())
-+       .pipe($.rev())
-        .pipe($.useref.restore())
-        .pipe($.useref())
-+       .pipe($.revReplace())
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());
+  return gulp.src('app/*.html')
+    .pipe(assets)
+    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.css', $.csso()))
++   .pipe($.rev())
+    .pipe(assets.restore())
+    .pipe($.useref())
++   .pipe($.revReplace())
+    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe(gulp.dest('dist'));
 });
 ```
 

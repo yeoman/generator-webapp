@@ -5,7 +5,7 @@
 - [Less](less.md)
 - [Jade](jade.md)
 - [GitHub Pages](gh-pages.md)
-- [Asset revisioning](revving.md)
+- [Asset revisioning](asset-revisioning.md)
 - [React](react.md)
 - [Nunjucks](nunjucks.md)
 - [AWS S3 deployment](aws-s3-deployment.md)
