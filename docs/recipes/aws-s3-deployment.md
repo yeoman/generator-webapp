@@ -55,6 +55,6 @@ Run the following command to deploy:
 $ gulp deploy
 ```
 
-###  4+1. Note
+###  Tip
 
-It is highly recommended to enable asset revisioning (revving). Check the according recipe.
+It is highly recommended to enable [asset revisioning](docs/recipes/asset-revisioning.md).
