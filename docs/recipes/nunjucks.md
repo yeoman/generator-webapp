@@ -7,7 +7,7 @@ This recipe shows how to set up Nunjucks to compile your templates, including Li
 
 ### 1. Install dependencies
 
-Install [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render) to render Nunjucks template language to html
+Install [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render) to render Nunjucks template language to HTML
 
 ```sh
 $ npm install --save-dev gulp-nunjucks-render
@@ -79,10 +79,10 @@ gulp.task('templates', function () {
 
 > This compiles `app/templates/.html` files into static `.html` files in the `.tmp` directory.
 
-### 6. Add `templates` as a dependency of both `html` and `serve`
+### 6. Add `templates` as a dependency of both `html` and `connect`
 
 ```js
-gulp.task('serve', ['connect', 'styles', 'templates'], function () {
+gulp.task('connect', ['styles', 'templates'], function () {
     ...
 ```
 
