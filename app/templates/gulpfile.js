@@ -23,18 +23,13 @@ gulp.task('jshint', function () {
     .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('html', ['styles'], function () {<% if (includeBootstrap && includeSass) { %>
-  var lazypipe = require('lazypipe');
-  var cssChannel = lazypipe()
-    .pipe($.csso)
-    .pipe($.replace, 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts');<% } %>
+gulp.task('html', ['styles'], function () {
   var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
   return gulp.src('app/*.html')
     .pipe(assets)
-    .pipe($.if('*.js', $.uglify()))<% if (includeBootstrap && includeSass) { %>
-    .pipe($.if('*.css', cssChannel()))<% } else { %>
-    .pipe($.if('*.css', $.csso()))<% } %>
+    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
@@ -54,6 +49,7 @@ gulp.task('fonts', function () {
   return gulp.src(require('main-bower-files')().concat('app/fonts/**/*'))
     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
     .pipe($.flatten())
+    .pipe(gulp.dest('.tmp/fonts'))
     .pipe(gulp.dest('dist/fonts'));
 });
 
@@ -69,7 +65,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('connect',<% if (includeSass) { %> ['styles'],<% } %> function () {
+gulp.task('connect', [<% if (includeSass) { %>'styles', <% } %>'fonts'], function () {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = require('connect')()
@@ -117,7 +113,7 @@ gulp.task('watch', ['connect'], function () {
   ]).on('change', $.livereload.changed);
 
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
-  gulp.watch('bower.json', ['wiredep']);
+  gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
 gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
