@@ -6,11 +6,11 @@ var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
-    .pipe($.plumber())
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10
-    }))<% } else { %>
+    }))
+    .on('error', function (err) { console.log(err.message); })<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
     .pipe($.postcss([
       require('autoprefixer-core')({browsers: ['last 1 version']})
