@@ -26,8 +26,7 @@
     "gulp-size": "^1.1.0",
     "gulp-uglify": "^1.0.1",
     "gulp-useref": "^1.0.2",
-    "jshint-stylish": "^1.0.0",<% if (includeBootstrap && includeSass) { %>
-    "lazypipe": "^0.2.1",<% } %>
+    "jshint-stylish": "^1.0.0",
     "main-bower-files": "^2.1.0",
     "opn": "^1.0.0",
     "serve-index": "^1.1.4",
