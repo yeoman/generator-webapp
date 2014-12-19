@@ -146,7 +146,7 @@ module.exports = yeoman.generators.Base.extend({
 
       // wire Bootstrap plugins
       if (this.includeBootstrap) {
-        var bs = '../bower_components/';
+        var bs = 'bower_components/';
 
         if (this.includeSass) {
           bs += 'bootstrap-sass-official/assets/javascripts/bootstrap/';
@@ -217,6 +217,7 @@ module.exports = yeoman.generators.Base.extend({
         bowerJson: bowerJson,
         directory: 'bower_components',
         exclude: ['bootstrap-sass', 'bootstrap.js'],
+        ignorePath: /^(\.\.\/)+/,
         src: 'app/index.html'
       });
 
@@ -225,6 +226,7 @@ module.exports = yeoman.generators.Base.extend({
         wiredep({
           bowerJson: bowerJson,
           directory: 'bower_components',
+          ignorePath: /^(\.\.\/)+/,
           src: 'app/styles/*.scss'
         });
       }
