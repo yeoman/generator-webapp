@@ -6,12 +6,12 @@ var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
-    .pipe($.rubySass({
-      style: 'expanded',
+    .pipe($.sass({
+      outputStyle: 'nested', // libsass doesn't support expanded yet
       precision: 10,
-      loadPath: ['.']
-    }))
-    .on('error', function (err) { console.log(err.message); })<% } else { %>
+      includePaths: ['.'],
+      onError: function (err) { console.log(err); }
+    }))<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
     .pipe($.postcss([
       require('autoprefixer-core')({browsers: ['last 1 version']})

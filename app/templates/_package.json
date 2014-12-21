@@ -21,7 +21,7 @@
     "gulp-load-plugins": "^0.7.1",
     "gulp-minify-html": "^0.1.6",
     "gulp-postcss": "^1.0.2",<% if (includeSass) { %>
-    "gulp-ruby-sass": "^0.7.1",<% } %>
+    "gulp-sass": "^1.2.4",<% } %>
     "gulp-size": "^1.1.0",
     "gulp-uglify": "^1.0.1",
     "gulp-useref": "^1.0.2",
