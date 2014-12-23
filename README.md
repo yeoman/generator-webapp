@@ -25,6 +25,8 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 - Run: `yo gulp-webapp`
 - Run `gulp` for building to the `dist` directory and `gulp serve` for preview
 
+Read [this guide](docs/README.md) for details.
+
 
 #### Third-Party Dependencies
 
