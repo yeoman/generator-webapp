@@ -20,11 +20,11 @@
     padding-right: $gutter/2;
 
     @include query(480px) {
-      width: (100%/3);
+      width: (100%/4);
     }
 
     @include query(sm) {
-      width: (100%/6);
+      width: (100%/7);
     }
   }
 }
@@ -48,7 +48,7 @@
     transform: rotate(360deg) scale(1.2);
   }
 
-  @each $vendor in autoprefixer, bower, gulp, h5bp, livereload, sass {
+  @each $vendor in autoprefixer, bower, gulp, bootstrap, h5bp, livereload, sass {
     &-#{$vendor} {
       background-image: url('../images/vendors/#{$vendor}.png');
     }
