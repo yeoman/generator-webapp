@@ -1,5 +1,4 @@
-/* jshint node:true */
-/* global -$ */
+/*global -$ */
 'use strict';
 // generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
 var gulp = require('gulp');
