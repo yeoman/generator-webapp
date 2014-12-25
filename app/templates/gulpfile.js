@@ -85,7 +85,7 @@ gulp.task('connect', ['styles', 'fonts'], function () {
     });
 });
 
-gulp.task('serve', ['connect', 'watch'], function () {
+gulp.task('serve', ['watch'], function () {
   require('opn')('http://localhost:9000');
 });
 
