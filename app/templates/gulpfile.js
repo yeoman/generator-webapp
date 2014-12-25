@@ -11,7 +11,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
       outputStyle: 'nested', // libsass doesn't support expanded yet
       precision: 10,
       includePaths: ['.'],
-      onError: function (err) { console.log(err); }
+      onError: console.error.bind(console, 'Sass error:')
     }))<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
     .pipe($.postcss([
