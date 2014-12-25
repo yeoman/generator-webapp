@@ -183,13 +183,9 @@ module.exports = yeoman.generators.Base.extend({
     this.write('app/index.html', this.indexFile);
 
     if (this.coffee) {
-      this.write(
-        'app/scripts/main.coffee',
-        'console.log "\'Allo from CoffeeScript!"'
-      );
-    }
-    else {
-      this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
+      this.copy('main.coffee', 'app/scripts/main.coffee');
+    } else {
+      this.copy('main.js', 'app/scripts/main.js');
     }
   },
 
