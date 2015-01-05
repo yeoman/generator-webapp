@@ -75,16 +75,8 @@ describe('Gulp Webapp generator: tasks', function () {
     assertTaskExists(this.webapp, 'build', [], done);
   });
 
-  it('should contain connect task', function (done) {
-    assertTaskExists(this.webapp, 'connect', [], done);
-  });
-
   it('should contain wiredep task', function (done) {
     assertTaskExists(this.webapp, 'wiredep', [], done);
-  });
-
-  it('should contain watch task', function (done) {
-    assertTaskExists(this.webapp, 'watch', [], done);
   });
 
   it('should contain default task', function (done) {
