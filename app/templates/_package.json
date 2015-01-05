@@ -6,8 +6,7 @@
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "autoprefixer-core": "^4.0.2",
-    "connect": "^3.0.1",
-    "connect-livereload": "^0.5.0",
+    "browser-sync": "^1.8.2",
     "del": "^1.1.1",
     "gulp": "^3.6.0",
     "gulp-cache": "^0.2.2",
@@ -17,7 +16,6 @@
     "gulp-if": "^1.2.1",
     "gulp-imagemin": "^2.0.0",
     "gulp-jshint": "^1.5.3",
-    "gulp-livereload": "^3.0.2",
     "gulp-load-plugins": "^0.8.0",
     "gulp-minify-html": "^0.1.6",
     "gulp-postcss": "^3.0.0",<% if (includeSass) { %>
@@ -28,8 +26,6 @@
     "jshint-stylish": "^1.0.0",
     "main-bower-files": "^2.1.0",
     "opn": "^1.0.0",
-    "serve-index": "^1.1.4",
-    "serve-static": "^1.4.0",
     "wiredep": "^2.0.0"
   }
 }
