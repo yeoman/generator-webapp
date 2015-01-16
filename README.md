@@ -11,7 +11,7 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 
 * CSS Autoprefixing
 * Built-in preview server with BrowserSync
-* Automagically compile Sass
+* Automagically compile Sass with [libsass](http://libsass.org)
 * Automagically lint your scripts
 * Awesome image optimization
 * Automagically wire-up dependencies installed with [Bower](http://bower.io) *(when `gulp serve` or `gulp wiredep`)*
@@ -21,22 +21,17 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 
 ## Getting Started
 
-- Install: `npm install -g generator-gulp-webapp`
-- Run: `yo gulp-webapp`
-- Run `gulp` for building to the `dist` directory and `gulp serve` for preview
-
-Read [this guide](docs/README.md) for details.
-
-
-#### Third-Party Dependencies
-
-*(HTML/CSS/JS/Images/etc)*
-
-To install dependencies, run `bower install --save package-name` to get the files, then add a `script` or `style` tag to your `index.html` or another appropriate place.
+- Install dependencies: `npm install -g yo bower`
+- Install the generator: `npm install -g generator-gulp-webapp`
+- Run `yo gulp-webapp` to scaffold your webapp
+- Run `gulp serve` to preview and watch for changes
+- Run `bower install --save <package>` to install frontend dependencies
+- Run `gulp` to build your webapp for production
 
 
 ## Docs
 
+* [getting started](docs/README.md) with this generator
 * [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript
 * [details](docs/bower.md) about our Bower setup
 
