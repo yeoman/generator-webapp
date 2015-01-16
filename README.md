@@ -14,9 +14,16 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 * Automagically compile Sass with [libsass](http://libsass.org)
 * Automagically lint your scripts
 * Awesome image optimization
-* Automagically wire-up dependencies installed with [Bower](http://bower.io) *(when `gulp serve` or `gulp wiredep`)*
+* Automagically wire-up dependencies installed with [Bower](http://bower.io)
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
+
+
+## libsass
+
+Keep in mind that libsass is feature-wise not fully compatible with Ruby Sass. Check out [this](http://sass-compatibility.github.io) curated list of incompatibilities to find out which features are missing.
+
+If your favorite feature is missing and you really need Ruby Sass, you can always switch to [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) and update the `styles` task in `gulpfile.js` accordingly.
 
 
 ## Getting Started
