@@ -217,7 +217,7 @@ module.exports = yeoman.generators.Base.extend({
         bowerJson: bowerJson,
         directory: 'bower_components',
         exclude: ['bootstrap-sass', 'bootstrap.js'],
-        ignorePath: /^(\.\.\/)+/,
+        ignorePath: /^(\.\.\/)*\.\./,
         src: 'app/index.html'
       });
 
