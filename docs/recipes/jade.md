@@ -86,8 +86,7 @@ We don't want to copy over `.jade` files in the build process:
    return gulp.src([
      'app/*.*',
      '!app/*.html',
-+    '!app/*.jade',
-    'node_modules/apache-server-configs/dist/.htaccess'
++    '!app/*.jade'
    ], {
      dot: true
    }).pipe(gulp.dest('dist'));
