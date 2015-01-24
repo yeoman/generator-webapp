@@ -5,7 +5,7 @@ Welcome to the [gulp][gulp] flavor of our web app generator! If you're not famil
 If you haven't already, install [yo][yo] and this generator by running:
 
 ```sh
-$ npm install -g yo generator-gulp-webapp
+$ npm install --g yo generator-gulp-webapp
 ```
 
 Now you can scaffold your very own web app:
