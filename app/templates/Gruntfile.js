@@ -376,9 +376,6 @@ module.exports = function (grunt) {
             '{,*/}*.html',
             'styles/fonts/{,*/}*.*'
           ]
-        }, {
-          src: 'node_modules/apache-server-configs/dist/.htaccess',
-          dest: '<%%= config.dist %>/.htaccess'
         }<% if (includeBootstrap) { %>, {
           expand: true,
           dot: true,
