@@ -1,7 +1,6 @@
 {
   "name": "<%= _.slugify(appname) %>",
   "devDependencies": {
-    "apache-server-configs": "^2.7.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^1.0.0",
     "grunt-concurrent": "^0.5.0",
