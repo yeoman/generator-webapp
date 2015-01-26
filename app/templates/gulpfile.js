@@ -70,7 +70,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', <% if (includeSass) { %> ['styles'],<% } %>function () {
+gulp.task('serve', [<% if (includeSass) { %>'styles', <% } %>'fonts'], function () {
   browserSync({
     notify: false,
     port: 9000,
