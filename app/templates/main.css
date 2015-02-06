@@ -1,4 +1,4 @@
-<% if (includeBootstrap) { %>.browsehappy {
+<% if (includeBootstrap) { %>.browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
@@ -109,7 +109,7 @@ body {
   letter-spacing: -1px;
 }
 
-.browsehappy {
+.browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
