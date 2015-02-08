@@ -1,6 +1,5 @@
-/*global describe, beforeEach, it*/
+/*global describe, beforeEach, it */
 'use strict';
-
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
@@ -11,7 +10,8 @@ describe('Gulp Webapp generator slug name', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'slug'), function (err) {
       if (err) {
-        return done(err);
+        done(err);
+        return;
       }
 
       this.webapp = helpers.createGenerator('gulp-webapp:app', [
@@ -36,7 +36,7 @@ describe('Gulp Webapp generator slug name', function () {
       features: ['includeSass']
     });
 
-    this.webapp.run({}, function () {
+    this.webapp.run(function () {
       // Check if all files are created for the test
       helpers.assertFile(expected);
 

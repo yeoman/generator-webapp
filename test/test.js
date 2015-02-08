@@ -1,6 +1,5 @@
 /*global describe, beforeEach, it */
 'use strict';
-
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 
@@ -8,7 +7,8 @@ describe('Gulp webapp generator test', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
-        return done(err);
+        done(err);
+        return;
       }
 
       this.webapp = helpers.createGenerator('gulp-webapp:app', [
@@ -43,7 +43,7 @@ describe('Gulp webapp generator test', function () {
       features: ['includeSass']
     });
 
-    this.webapp.run({}, function () {
+    this.webapp.run(function () {
       helpers.assertFile(expected);
       done();
     });

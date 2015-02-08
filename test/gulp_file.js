@@ -1,6 +1,5 @@
 /*global describe, beforeEach, it */
 'use strict';
-
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
@@ -11,7 +10,8 @@ describe('Gulp Webapp generator: tasks', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'gulp-file'), function (err) {
       if (err) {
-        return done(err);
+        done(err);
+        return;
       }
 
       this.webapp = helpers.createGenerator('gulp-webapp:app', [
@@ -31,7 +31,7 @@ describe('Gulp Webapp generator: tasks', function () {
       features: features
     });
 
-    generator.run({}, function () {
+    generator.run(function () {
       var gulpFile = fs.readFileSync('gulpfile.js', 'utf8');
       var regexGulp = new RegExp('gulp.task\\(\'' + taskName + '\'');
 
