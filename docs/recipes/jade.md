@@ -70,8 +70,10 @@ We want to parse the compiled HTML:
      .pipe(assets)
      .pipe($.if('*.js', $.uglify()))
      .pipe($.if('*.css', $.csso()))
+     .pipe($.rev())
      .pipe(assets.restore())
      .pipe($.useref())
+     .pipe($.revReplace())
      .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
      .pipe(gulp.dest('dist'));
 });
