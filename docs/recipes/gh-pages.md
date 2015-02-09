@@ -24,9 +24,9 @@ This will run the build task, then push it to the `gh-pages` branch:
 
 ```js
 gulp.task('deploy', ['build'], function () {
-    return gulp.src('dist')
-        .pipe($.subtree())
-        .pipe($.clean());
+  return gulp.src('dist')
+    .pipe($.subtree())
+    .pipe($.clean());
 });
 ```
 

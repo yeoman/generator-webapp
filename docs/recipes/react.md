@@ -12,7 +12,7 @@ Install [gulp-react](https://github.com/sindresorhus/gulp-react), a gulp plugin 
 $ npm install --save-dev gulp-react
 ```
 
-Install [React](https://github.com/facebook/react) itself as a bower component:
+Install [React](https://github.com/facebook/react) itself as a Bower component:
 
 ```sh
 $ bower install --save react
