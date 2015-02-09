@@ -36,7 +36,7 @@ gulp.task('templates', function () {
 });
 ```
 
-### 3. Add `templates` as a dependency of `html` and `connect`
+### 3. Add `templates` as a dependency of `html` and `serve`
 
 ```js
 gulp.task('html', ['styles', 'templates'], function () {
@@ -44,32 +44,31 @@ gulp.task('html', ['styles', 'templates'], function () {
 ```
 
 ```js
-gulp.task('connect', ['styles', 'templates', 'fonts'], function () {
+gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
   ...
 ```
 
-* The `connect` dependency means the generated `.js` files will be ready in `.tmp/scripts` before the server starts up
+* The `serve` dependency means the generated `.js` files will be ready in `.tmp/scripts` before the server starts up
 * The `html` dependency means your JSX also gets compiled as part of the `gulp build` sequence – before the `html` task starts, so that the `.js` files are generated in time for [gulp-useref](https://github.com/jonkemp/gulp-useref) to concatenate them.
 
-### 4. Edit your `watch` task
+### 4. Edit your `serve` task
 
-Edit your `watch` task so that (a) editing a `.jsx` file triggers the `templates` task, and (b) the LiveReload server is notified whenever a `.js` file is generated in `.tmp/scripts`:
+Edit your `serve` task so that (a) editing a `.jsx` file triggers the `templates` task, and (b) the browser is refreshed whenever a `.js` file is generated in `.tmp/scripts`:
 
 ```diff
- gulp.task('watch', ['connect'], function () {
+ gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+   ...
    gulp.watch([
      'app/*.html',
      '.tmp/styles/**/*.css',
      'app/scripts/**/*.js',
 +    '.tmp/scripts/**/*.js',
      'app/images/**/*'
-   ]).on('change', function (file) {
-     server.changed(file.path);
-   });
+   ]).on('change', reload);
 
-   gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/scripts/**/*.jsx', ['templates']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
+   gulp.watch('app/styles/**/*.scss', ['styles', reload]);
++  gulp.watch('app/scripts/**/*.jsx', ['templates', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
  });
 ```
 

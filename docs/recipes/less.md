@@ -51,11 +51,11 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
 ```diff
- gulp.task('watch', ['connect'], function () {
+ gulp.task('serve', ['styles', 'fonts'], function () {
    ...
--  gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/styles/**/*.less', ['styles']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
+-  gulp.watch('app/styles/**/*.scss', ['styles', reload]);
++  gulp.watch('app/styles/**/*.less', ['styles', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
  });
 ```
 
@@ -63,7 +63,7 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 
 Delete `app/styles/main.scss` and replace it with your own `main.less`.
 
-Then verify that `gulp build` and `gulp serve` work correctly. In `watch` mode, you should be able to edit your `main.less` and see the styles dynamically update in your browser.
+Then verify that `gulp build` and `gulp serve` work correctly. While `gulp serve` is running you should be able to edit your `main.less` and see the styles dynamically update in your browser.
 
 
 ## Extras
