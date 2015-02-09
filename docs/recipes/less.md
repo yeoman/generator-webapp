@@ -13,10 +13,10 @@ But don't choose Bootstrap in the generator – it's easier to manually set up t
 
 ### 2. Switch your npm dependencies
 
-Remove gulp-ruby-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
+Remove gulp-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
 
 ```sh
-$ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
+$ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
 ### 3. Edit a few tasks
@@ -24,15 +24,14 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 ```diff
  gulp.task('styles', function () {
 -  return gulp.src('app/styles/main.scss')
-+  return gulp.src('app/styles/main.less')
--    .pipe($.rubySass({
--      style: 'expanded',
+-    .pipe($.sass({
+-      outputStyle: 'nested',
 -      precision: 10,
--      loadPath: ['.']
--    }))
--    .on('error', function (err) { console.log(err.message); })
+-      includePaths: ['.'],
+-      onError: console.error.bind(console, 'Sass error:')
++  return gulp.src('app/styles/main.less')
 +    .pipe($.less({
-       paths: ['.']
++      paths: ['.']
      }))
      .pipe($.postcss([
        require('autoprefixer-core')({browsers: ['last 1 version']})
