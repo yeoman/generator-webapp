@@ -39,7 +39,7 @@ gulp.task('templates', function () {
 });
 ```
 
-> This compiles `.hbs` files into `.js` files in the `.tmp` directory.
+This compiles `.hbs` files into `.js` files in the `.tmp` directory.
 
 ### 3. Add `templates` as a dependency of both `html` and `connect`
 

@@ -47,7 +47,7 @@ gulp.task('deploy', ['build'], function () {
 1. Run `$ gulp deploy`.
 2. Visit `http://[your-username].github.io/[repo-name]`.
 
-> It might take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
+It might take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
 
 ### References
 
