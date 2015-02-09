@@ -43,7 +43,7 @@ gulp.task('views', function () {
 
 We are passing `pretty: true` as an option to get a nice HTML output, otherwise Jade would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
 
-### 3. Add `views` as a dependency of both `html` and `connect`
+### 3. Add `views` as a dependency of both `html` and `serve`
 
 ```js
 gulp.task('html', ['views', 'styles'], function () {
@@ -51,7 +51,7 @@ gulp.task('html', ['views', 'styles'], function () {
 ```
 
 ```js
-gulp.task('connect', ['views', 'styles', 'fonts'], function () {
+gulp.task('serve', ['views', 'styles', 'fonts'], function () {
     ...
 ```
 
@@ -119,28 +119,24 @@ Wiredep supports Jade:
 
 Assuming your wiredep comment blocks are in the layouts.
 
-#### `watch`
+#### `serve`
 
-Recompile Jade templates on each change and refresh the browser after an HTML file is compiled:
+Recompile Jade templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
- gulp.task('watch', ['connect'], function () {
-   var server = $.livereload();
-
-   // watch for changes
+ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+   ...
    gulp.watch([
      'app/*.html',
 +    '.tmp/*.html',
      '.tmp/styles/**/*.css',
      'app/scripts/**/*.js',
      'app/images/**/*'
-   ]).on('change', function (file) {
-     server.changed(file.path);
-   });
+   ]).on('change', reload);
 
-+  gulp.watch('app/**/*.jade', ['views']);
-   gulp.watch('app/styles/**/*.scss', ['styles']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
++  gulp.watch('app/**/*.jade', ['views', reload]);
+   gulp.watch('app/styles/**/*.scss', ['styles', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
 });
 ```
 
@@ -175,7 +171,7 @@ html.no-js
 
   body
     | <!--[if lt IE 10]>
-    |     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    |   <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     | <![endif]-->
 
     .container

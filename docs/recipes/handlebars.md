@@ -39,9 +39,9 @@ gulp.task('templates', function () {
 });
 ```
 
-> This compiles `.hbs` files into `.js` files in the `.tmp` directory.
+This compiles `.hbs` files into `.js` files in the `.tmp` directory.
 
-### 3. Add `templates` as a dependency of both `html` and `connect`
+### 3. Add `templates` as a dependency of both `html` and `serve`
 
 ```js
 gulp.task('html', ['styles', 'templates'], function () {
@@ -49,29 +49,28 @@ gulp.task('html', ['styles', 'templates'], function () {
 ```
 
 ```js
-gulp.task('connect', ['styles', 'templates', 'fonts'], function () {
+gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
     ...
 ```
 
-### 4. Configure watch
+### 4. Edit your `serve` task
 
-Edit your `watch` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the LiveReload server is triggered whenever a `.js` file is generated in `.tmp/templates`:
+Edit your `serve` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the browser is reloaded whenever a `.js` file is generated in `.tmp/templates`:
 
 ```diff
- gulp.task('watch', ['connect'], function () {
+ gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+   ...
    gulp.watch([
      'app/*.html',
      '.tmp/styles/**/*.css',
 +    '.tmp/templates/**/*.js',
      'app/scripts/**/*.js',
      'app/images/**/*'
-   ]).on('change', function (file) {
-     server.changed(file.path);
-   });
+   ]).on('change', reload);
 
-   gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/templates/**/*.hbs', ['templates']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
+   gulp.watch('app/styles/**/*.scss', ['styles', reload]);
++  gulp.watch('app/templates/**/*.hbs', ['templates', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
  });
 ```
 

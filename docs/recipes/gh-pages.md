@@ -24,9 +24,9 @@ This will run the build task, then push it to the `gh-pages` branch:
 
 ```js
 gulp.task('deploy', ['build'], function () {
-    return gulp.src('dist')
-        .pipe($.subtree())
-        .pipe($.clean());
+  return gulp.src('dist')
+    .pipe($.subtree())
+    .pipe($.clean());
 });
 ```
 
@@ -47,7 +47,7 @@ gulp.task('deploy', ['build'], function () {
 1. Run `$ gulp deploy`.
 2. Visit `http://[your-username].github.io/[repo-name]`.
 
-> It might take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
+It might take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
 
 ### References
 

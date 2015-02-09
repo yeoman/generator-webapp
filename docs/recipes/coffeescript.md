@@ -23,7 +23,7 @@ gulp.task('scripts', function () {
 });
 ```
 
-### 3. Add `scripts` as a dependency of `html` and `connect`
+### 3. Add `scripts` as a dependency of `html` and `serve`
 
 ```js
 gulp.task('html', ['styles', 'scripts'], function () {
@@ -31,29 +31,28 @@ gulp.task('html', ['styles', 'scripts'], function () {
 ```
 
 ```js
-gulp.task('connect', ['styles', 'scripts', 'fonts'], function () {
+gulp.task('serve', ['styles', 'scripts', 'fonts'], function () {
   ...
 ```
 
-### 4. Edit your `watch` task
+### 4. Edit your `serve` task
 
-These changes ensure that (1) generated `.js` files trigger a live reload, and (2) edits to `.coffee` files trigger recompilation.
+These changes ensure that (1) generated `.js` files trigger a browser reload, and (2) edits to `.coffee` files trigger recompilation.
 
 ```diff
- gulp.task('watch', ['connect'], function () {
+ gulp.task('serve', ['styles', 'fonts'], function () {
+   ...
    gulp.watch([
      'app/*.html',
      '.tmp/styles/**/*.css',
      'app/scripts/**/*.js',
 +    '.tmp/scripts/**/*.js',
      'app/images/**/*'
-   ]).on('change', function (file) {
-     server.changed(file.path);
-   });
+   ]).on('change', reload);
 
-   gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/scripts/**/*.coffee', ['scripts']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
+   gulp.watch('app/styles/**/*.scss', ['styles', reload]);
++  gulp.watch('app/scripts/**/*.coffee', ['scripts', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
  });
 ```
 

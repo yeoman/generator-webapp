@@ -9,14 +9,14 @@ This is an easy way to set up Less, including integration with `watch` and LiveR
 
 It sounds odd but this is the easiest way, because the task tree will be set up correctly for CSS preprocessing, and you can just switch out all the Sass references to Less ones.
 
-> But don't choose Bootstrap in the generator – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
+But don't choose Bootstrap in the generator – it's easier to manually set up the Less version of Bootstrap afterwards, if you need it.
 
 ### 2. Switch your npm dependencies
 
-Remove gulp-ruby-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
+Remove gulp-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
 
 ```sh
-$ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
+$ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
 ### 3. Edit a few tasks
@@ -24,15 +24,14 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 ```diff
  gulp.task('styles', function () {
 -  return gulp.src('app/styles/main.scss')
-+  return gulp.src('app/styles/main.less')
--    .pipe($.rubySass({
--      style: 'expanded',
+-    .pipe($.sass({
+-      outputStyle: 'nested',
 -      precision: 10,
--      loadPath: ['.']
--    }))
--    .on('error', function (err) { console.log(err.message); })
+-      includePaths: ['.'],
+-      onError: console.error.bind(console, 'Sass error:')
++  return gulp.src('app/styles/main.less')
 +    .pipe($.less({
-       paths: ['.']
++      paths: ['.']
      }))
      .pipe($.postcss([
        require('autoprefixer-core')({browsers: ['last 1 version']})
@@ -52,11 +51,11 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 ```
 
 ```diff
- gulp.task('watch', ['connect'], function () {
+ gulp.task('serve', ['styles', 'fonts'], function () {
    ...
--  gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/styles/**/*.less', ['styles']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
+-  gulp.watch('app/styles/**/*.scss', ['styles', reload]);
++  gulp.watch('app/styles/**/*.less', ['styles', reload]);
+   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
  });
 ```
 
@@ -64,7 +63,7 @@ $ npm uninstall --save-dev gulp-ruby-sass && npm install --save-dev gulp-less
 
 Delete `app/styles/main.scss` and replace it with your own `main.less`.
 
-Then verify that `gulp build` and `gulp serve` work correctly. In `watch` mode, you should be able to edit your `main.less` and see the styles dynamically update in your browser.
+Then verify that `gulp build` and `gulp serve` work correctly. While `gulp serve` is running you should be able to edit your `main.less` and see the styles dynamically update in your browser.
 
 
 ## Extras

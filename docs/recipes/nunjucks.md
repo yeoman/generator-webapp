@@ -87,7 +87,7 @@ gulp.task('views', function () {
 
 This compiles `app/*.html` files into static `.html` files in the `.tmp` directory.
 
-### 5. Add `views` as a dependency of both `html` and `connect`
+### 5. Add `views` as a dependency of both `html` and `serve`
 
 ```js
 gulp.task('html', ['views', 'styles'], function () {
@@ -95,7 +95,7 @@ gulp.task('html', ['views', 'styles'], function () {
 ```
 
 ```js
-gulp.task('connect', ['views', 'styles', 'fonts'], function () {
+gulp.task('serve', ['views', 'styles', 'fonts'], function () {
   ...
 ```
 
@@ -133,25 +133,25 @@ gulp.task('connect', ['views', 'styles', 'fonts'], function () {
 ```
 
 
-### 8. Configure watch
+### 8. Edit your `serve` task
 
-Edit your `watch` task so that (a) editing an `app/**/*.html` file triggers the `views` task, and (b) the LiveReload server:
+Edit your `serve` task so that (a) editing an `app/**/*.html` file triggers the `views` task, and (b) reloads the browser:
 
 ```diff
-    gulp.task('watch', ['connect'], function () {
-      $.livereload.listen();
+  gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+    ...
+    gulp.watch([
+-     'app/*.html',
++     '.tmp/*.html',
+      '.tmp/styles/**/*.css',
+      'app/scripts/**/*.js',
+      'app/images/**/*'
+    ]).on('change', reload);
 
-      // watch for changes
-      gulp.watch([
-        'app/*.html',
-+       '.tmp/*.html',
-        '.tmp/styles/**/*.css',
-        'app/scripts/**/*.js',
-        'app/images/**/*'
-      ]).on('change', $.livereload.changed);
-
-+     gulp.watch('app/**/*.html', ['views']);
-      gulp.watch('app/styles/**/*.scss', ['styles']);
-      gulp.watch('bower.json', ['wiredep', 'fonts']);
-    });
++   gulp.watch('app/**/*.html', ['views', reload]);
+    gulp.watch('app/styles/**/*.scss', ['styles', reload]);
+    gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
+  });
 ```
+
+Notice that we don't watch `.html` files in `app` anymore (unlike in the [Jade](docs/recipes/jade.md) recipe). This is because our templates and compiled files have the same extension, so we want to make sure to refresh the browser once the templates have been compiled.
