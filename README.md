@@ -13,6 +13,7 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 * Built-in preview server with BrowserSync
 * Automagically compile Sass with [libsass](http://libsass.org)
 * Automagically lint your scripts
+* Map compiled CSS to source stylesheets with source maps
 * Awesome image optimization
 * Automagically wire-up dependencies installed with [Bower](http://bower.io)
 

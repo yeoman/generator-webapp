@@ -8,6 +8,7 @@ var reload = browserSync.reload;
 
 gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/main.scss')
+    .pipe($.sourcemaps.init())
     .pipe($.sass({
       outputStyle: 'nested', // libsass doesn't support expanded yet
       precision: 10,
@@ -15,9 +16,11 @@ gulp.task('styles', function () {<% if (includeSass) { %>
       onError: console.error.bind(console, 'Sass error:')
     }))<% } else { %>
   return gulp.src('app/styles/main.css')<% } %>
+    .pipe($.sourcemaps.init())
     .pipe($.postcss([
       require('autoprefixer-core')({browsers: ['last 1 version']})
     ]))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'));
 });
 
