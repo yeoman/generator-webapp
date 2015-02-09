@@ -14,6 +14,7 @@ Please see our [gulpfile.js](app/templates/gulpfile.js) for up to date informati
 * Automagically compile Sass with [libsass](http://libsass.org)
 * Automagically lint your scripts
 * Awesome image optimization
+* Asset revisioning
 * Automagically wire-up dependencies installed with [Bower](http://bower.io)
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
