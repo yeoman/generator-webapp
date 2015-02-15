@@ -15,8 +15,8 @@ gulp.task('styles', function () {<% if (includeSass) { %>
       includePaths: ['.'],
       onError: console.error.bind(console, 'Sass error:')
     }))<% } else { %>
-  return gulp.src('app/styles/main.css')<% } %>
-    .pipe($.sourcemaps.init())
+  return gulp.src('app/styles/main.css')
+    .pipe($.sourcemaps.init())<% } %>
     .pipe($.postcss([
       require('autoprefixer-core')({browsers: ['last 1 version']})
     ]))
