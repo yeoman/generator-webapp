@@ -11,7 +11,7 @@ $ npm install --global yo generator-gulp-webapp
 Now you can scaffold your very own web app:
 
 ```sh
-$ mkdir my-webap
+$ mkdir my-webapp
 $ cd my-webapp
 $ yo gulp-webapp
 ```
