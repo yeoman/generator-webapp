@@ -200,12 +200,6 @@ module.exports = yeoman.generators.Base.extend({
       '.';
 
     if (this.options['skip-install']) {
-      this.invoke(this.options['test-framework'], {
-        options: {
-          'skip-message': this.options['skip-install-message'],
-          'skip-install': this.options['skip-install']
-        }
-      });
       this.log(howToInstall);
       return;
     }
@@ -237,7 +231,7 @@ module.exports = yeoman.generators.Base.extend({
         });
       }
 
-      // ideally we should use hookFor, but we're invoking it here
+      // ideally we should use composeWith, but we're invoking it here
       // because generator-mocha is changing the working directory
       // https://github.com/yeoman/generator-mocha/issues/28
       this.invoke(this.options['test-framework'], {
