@@ -27,10 +27,10 @@
     "grunt"
   ],
   "dependencies": {
-    "chalk": "^0.5.1",
-    "cheerio": "^0.17.0",
-    "yeoman-generator": "~0.17.3",
-    "yosay": "~1.0.0"
+    "chalk": "^1.0.0",
+    "cheerio": "^0.18.0",
+    "yeoman-generator": "^0.18.9",
+    "yosay": "^1.0.2"
   },
   "devDependencies": {
     "mocha": "*",
