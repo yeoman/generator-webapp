@@ -27,7 +27,7 @@
     "gulp"
   ],
   "dependencies": {
-    "chalk": "^0.5.1",
+    "chalk": "^1.0.0",
     "wiredep": "^2.2.2",
     "yeoman-generator": "^0.18.5",
     "yosay": "^1.0.0"
