@@ -80,20 +80,20 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: {
-    gulpfile: function() {
+    gulpfile: function () {
       this.template('gulpfile.js');
     },
 
-    packageJSON: function() {
+    packageJSON: function () {
       this.template('_package.json', 'package.json');
     },
 
-    git: function() {
+    git: function () {
       this.copy('gitignore', '.gitignore');
       this.copy('gitattributes', '.gitattributes');
     },
 
-    bower: function() {
+    bower: function () {
       var bower = {
         name: this._.slugify(this.appname),
         private: true,
