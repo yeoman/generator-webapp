@@ -85,7 +85,8 @@ gulp.task('serve', ['styles', 'fonts'], function () {
       baseDir: ['.tmp', 'app'],
       routes: {
         '/bower_components': 'bower_components'
-      }
+      },
+      directory: true
     }
   });
 
