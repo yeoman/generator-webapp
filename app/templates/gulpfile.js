@@ -85,8 +85,7 @@ gulp.task('serve', ['styles', 'fonts'], function () {
       baseDir: ['.tmp', 'app'],
       routes: {
         '/bower_components': 'bower_components'
-      },
-      directory: true
+      }
     }
   });
 
@@ -108,8 +107,7 @@ gulp.task('serve:dist', function () {
     notify: false,
     port: 9000,
     server: {
-      baseDir: ['dist'],
-      directory: true
+      baseDir: ['dist']
     }
   });
 });
