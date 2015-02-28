@@ -103,6 +103,17 @@ gulp.task('serve', ['styles', 'fonts'], function () {
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
+gulp.task('serve:dist', function () {
+  browserSync({
+    notify: false,
+    port: 9000,
+    server: {
+      baseDir: ['dist'],
+      directory: true
+    }
+  });
+});
+
 // inject bower components
 gulp.task('wiredep', function () {
   var wiredep = require('wiredep').stream;
