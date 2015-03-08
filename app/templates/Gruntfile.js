@@ -253,17 +253,15 @@ module.exports = function (grunt) {
     },
 
     // Renames files for browser caching purposes
-    rev: {
+    filerev: {
       dist: {
-        files: {
-          src: [
-            '<%%= config.dist %>/scripts/{,*/}*.js',
-            '<%%= config.dist %>/styles/{,*/}*.css',
-            '<%%= config.dist %>/images/{,*/}*.*',
-            '<%%= config.dist %>/styles/fonts/{,*/}*.*',
-            '<%%= config.dist %>/*.{ico,png}'
-          ]
-        }
+        src: [
+          '<%%= config.dist %>/scripts/{,*/}*.js',
+          '<%%= config.dist %>/styles/{,*/}*.css',
+          '<%%= config.dist %>/images/{,*/}*.*',
+          '<%%= config.dist %>/styles/fonts/{,*/}*.*',
+          '<%%= config.dist %>/*.{ico,png}'
+        ]
       }
     },
 
@@ -490,7 +488,7 @@ module.exports = function (grunt) {
     'uglify',
     'copy:dist',<% if (includeModernizr) { %>
     'modernizr',<% } %>
-    'rev',
+    'filerev',
     'usemin',
     'htmlmin'
   ]);
