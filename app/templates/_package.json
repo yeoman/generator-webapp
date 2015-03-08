@@ -13,14 +13,13 @@
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-contrib-imagemin": "^0.9.3",<% if (testFramework === 'jasmine') { %>
     "grunt-contrib-jasmine": "^0.8.2",<% } %>
-    "grunt-contrib-jshint": "^0.11.0",<% if (includeSass && includeRubySass) { %>
-    "grunt-contrib-sass": "^0.9.2",<% } %>
+    "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",<% if (testFramework === 'mocha') { %>
     "grunt-mocha": "^0.4.12",<% } %><% if (includeModernizr) { %>
     "grunt-modernizr": "^0.6.0",<% } %>
     "grunt-newer": "^1.1.0",
-    "grunt-filerev": "^2.2.0",<% if (includeSass && includeLibSass) { %>
+    "grunt-filerev": "^2.2.0",<% if (includeSass) { %>
     "grunt-sass": "^1.0.0",<% } %>
     "grunt-svgmin": "^2.0.1",
     "grunt-usemin": "^3.0.0",
