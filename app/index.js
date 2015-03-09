@@ -1,5 +1,4 @@
 'use strict';
-
 var join = require('path').join;
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
@@ -108,13 +107,13 @@ module.exports = yeoman.generators.Base.extend({
 
     if (this.includeBootstrap) {
       var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
-      bower.dependencies[bs] = "~3.2.0";
+      bower.dependencies[bs] = '~3.2.0';
     } else {
-      bower.dependencies.jquery = "~1.11.1";
+      bower.dependencies.jquery = '~1.11.1';
     }
 
     if (this.includeModernizr) {
-      bower.dependencies.modernizr = "~2.8.2";
+      bower.dependencies.modernizr = '~2.8.2';
     }
 
     this.copy('bowerrc', '.bowerrc');

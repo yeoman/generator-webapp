@@ -1,20 +1,17 @@
 {
-  "browser": true,
-  "esnext": true,
   "bitwise": true,
+  "browser": true,
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
+  "esnext": true,
   "immed": true,
-  "indent": 2,
+  "jquery": true,
   "latedef": true,
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
-  "undef": true,
-  "unused": true,
   "strict": true,
-  "trailing": true,
-  "smarttabs": true,
-  "jquery": true
+  "undef": true,
+  "unused": true
 }
