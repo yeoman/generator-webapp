@@ -41,7 +41,7 @@ function jshint (files) {
 
 gulp.task('jshint', jshint('app/scripts/**/*.js'));
 
-gulp.task('jshint:tests', jshint('test/spec/**/*.js'));
+gulp.task('jshint:test', jshint('test/spec/**/*.js'));
 
 gulp.task('html', ['styles'], function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
@@ -122,7 +122,7 @@ gulp.task('serve:dist', function () {
   });
 });
 
-gulp.task('serve:tests', function(){
+gulp.task('serve:test', function(){
   browserSync({
     notify: false,
     port: 9090,
@@ -135,7 +135,7 @@ gulp.task('serve:tests', function(){
     'test/spec/**/*.js',
   ]).on('change', reload);
 
-  gulp.watch('test/spec/**/*.js', [ 'jshint:tests' ]);
+  gulp.watch('test/spec/**/*.js', [ 'jshint:test' ]);
 });
 
 // inject bower components
