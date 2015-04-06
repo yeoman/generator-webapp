@@ -25,12 +25,8 @@ gulp.task('styles', function () {<% if (includeSass) { %>
     .pipe(reload({stream: true}));
 });
 
-/**
- * @param {String|Array} files to provide to `gulp.src`
- * @return {Function} callback for `gulp.task` et al
- */
-function jshint (files) {
-  return function(){
+function jshint(files) {
+  return function () {
     return gulp.src(files)
       .pipe(reload({stream: true, once: true}))
       .pipe($.jshint())
@@ -40,7 +36,6 @@ function jshint (files) {
 }
 
 gulp.task('jshint', jshint('app/scripts/**/*.js'));
-
 gulp.task('jshint:test', jshint('test/spec/**/*.js'));
 
 gulp.task('html', ['styles'], function () {
@@ -122,10 +117,12 @@ gulp.task('serve:dist', function () {
   });
 });
 
-gulp.task('serve:test', function(){
+gulp.task('serve:test', function () {
   browserSync({
     notify: false,
-    port: 9090,
+    open: false,
+    port: 9000,
+    ui: false,
     server: {
       baseDir: 'test'
     }
@@ -135,7 +132,7 @@ gulp.task('serve:test', function(){
     'test/spec/**/*.js',
   ]).on('change', reload);
 
-  gulp.watch('test/spec/**/*.js', [ 'jshint:test' ]);
+  gulp.watch('test/spec/**/*.js', ['jshint:test']);
 });
 
 // inject bower components
