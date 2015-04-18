@@ -57,4 +57,4 @@ $ gulp deploy
 
 ###  Tip
 
-It is highly recommended to enable [asset revisioning](docs/recipes/asset-revisioning.md).
+It is highly recommended to enable [asset revisioning](asset-revisioning.md).
