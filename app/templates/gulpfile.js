@@ -7,7 +7,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
 gulp.task('styles', function () {<% if (includeSass) { %>
-  return gulp.src('app/styles/main.scss')
+  return gulp.src('app/styles/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       outputStyle: 'nested', // libsass doesn't support expanded yet
@@ -15,7 +15,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
       includePaths: ['.'],
       onError: console.error.bind(console, 'Sass error:')
     }))<% } else { %>
-  return gulp.src('app/styles/main.css')
+  return gulp.src('app/styles/*.css')
     .pipe($.sourcemaps.init())<% } %>
     .pipe($.postcss([
       require('autoprefixer-core')({browsers: ['last 1 version']})
