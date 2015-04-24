@@ -75,7 +75,10 @@ gulp.task('extras', function () {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
+gulp.task('clean', function(done){
+  require('del')(['.tmp', 'dist']);
+  return $.cache.clearAll(done);
+});
 
 gulp.task('serve', ['styles', 'fonts'], function () {
   browserSync({
