@@ -15,7 +15,7 @@ describe('Webapp generator', function () {
 
     var expectedContent = [
       ['bower.json', /"name": "tmp"/],
-      ['package.json', /"name": "tmp"/]
+      ['package.json', /"private": true/]
     ];
     var expected = [
       '.editorconfig',
