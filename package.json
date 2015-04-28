@@ -29,6 +29,7 @@
     "yosay": "^1.0.2"
   },
   "devDependencies": {
+    "grunt-cli": "^0.1.13",
     "mocha": "*",
     "underscore": "^1.6.0"
   },
