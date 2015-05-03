@@ -38,7 +38,7 @@ describe('Gulp Webapp generator slug name', function () {
 
     this.webapp.run(function () {
       // Check if all files are created for the test
-      asssert.file(expected);
+      assert.file(expected);
 
       // read JS Files
       var bowerJson = fs.readFileSync('bower.json', 'utf8');
