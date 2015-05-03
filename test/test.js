@@ -2,6 +2,7 @@
 'use strict';
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-assert');
 
 describe('Gulp webapp generator test', function () {
   beforeEach(function (done) {
@@ -44,7 +45,7 @@ describe('Gulp webapp generator test', function () {
     });
 
     this.webapp.run(function () {
-      helpers.assertFile(expected);
+      assert.file(expected);
       done();
     });
   });

@@ -3,7 +3,7 @@
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
-var assert = require('assert');
+var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
 describe('Gulp Webapp generator slug name', function () {
@@ -38,7 +38,7 @@ describe('Gulp Webapp generator slug name', function () {
 
     this.webapp.run(function () {
       // Check if all files are created for the test
-      helpers.assertFile(expected);
+      assert.file(expected);
 
       // read JS Files
       var bowerJson = fs.readFileSync('bower.json', 'utf8');

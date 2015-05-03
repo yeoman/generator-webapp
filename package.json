@@ -30,6 +30,7 @@
     "chalk": "^1.0.0",
     "wiredep": "^2.2.2",
     "yeoman-generator": "^0.18.5",
+    "yeoman-assert": "^2.0.0",
     "yosay": "^1.0.0"
   },
   "peerDependencies": {
