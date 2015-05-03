@@ -47,7 +47,6 @@ gulp.task('html', ['styles'], function () {
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
     .pipe(gulp.dest('dist'));
 });
 
@@ -154,7 +153,12 @@ gulp.task('wiredep', function () {
 });
 
 gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
+  return gulp.src('dist/**/*', {base: 'dist'})
+    .pipe($.revAll({ignore: ['favicon.ico', 'apple-touch-icon.png', 'robots.txt', '.html']}))
+    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe($.revNapkin())
+    .pipe(gulp.dest('dist'))
+    .pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', ['clean'], function () {
