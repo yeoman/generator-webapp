@@ -3,7 +3,7 @@
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
-var assert = require('assert');
+var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
 describe('Gulp Webapp generator: tasks', function () {
