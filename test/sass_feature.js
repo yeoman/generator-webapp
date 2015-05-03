@@ -2,7 +2,7 @@
 'use strict';
 var path = require('path');
 var helpers = require('yeoman-generator').test;
-var assert = require('yeoman-generator').assert;
+var assert = require('yeoman-assert');
 
 describe('Gulp webapp generator: sass feature', function () {
   beforeEach(function (done) {
