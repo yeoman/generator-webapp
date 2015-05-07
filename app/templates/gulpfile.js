@@ -82,7 +82,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], function () {
+gulp.task('serve', ['styles', 'fonts', 'wiredep'], function () {
   browserSync({
     notify: false,
     port: 9000,
