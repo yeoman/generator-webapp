@@ -10,7 +10,7 @@ gulp.task('styles', function () {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
-      outputStyle: 'nested', // libsass doesn't support expanded yet
+      outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.'],
       onError: console.error.bind(console, 'Sass error:')
