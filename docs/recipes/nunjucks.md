@@ -124,7 +124,7 @@ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
 -   gulp.src('app/*.html')
 +   gulp.src('app/layouts/*.html')
       .pipe(wiredep({
-        exclude: ['bootstrap-sass-official'],
+        exclude: ['bootstrap-sass'],
         ignorePath: /^(\.\.\/)*\.\./
       }))
 -     .pipe(gulp.dest('app'));

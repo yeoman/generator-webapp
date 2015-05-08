@@ -147,7 +147,7 @@ gulp.task('wiredep', function () {
 <% } %>
   gulp.src('app/*.html')
     .pipe(wiredep({<% if (includeSass && includeBootstrap) { %>
-      exclude: ['bootstrap-sass-official'],<% } %>
+      exclude: ['bootstrap-sass'],<% } %>
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app'));
