@@ -150,7 +150,7 @@ module.exports = yeoman.generators.Base.extend({
         var bs = '/bower_components/';
 
         if (this.includeSass) {
-          bs += 'bootstrap-sass-official/assets/javascripts/bootstrap/';
+          bs += 'bootstrap-sass/assets/javascripts/bootstrap/';
         } else {
           bs += 'bootstrap/js/';
         }
