@@ -21,7 +21,7 @@
     "grunt-modernizr": "^0.6.0",<% } %>
     "grunt-newer": "^1.1.0",
     "grunt-filerev": "^2.2.0",<% if (includeSass && includeLibSass) { %>
-    "grunt-sass": "^0.18.1",<% } %>
+    "grunt-sass": "^1.0.0",<% } %>
     "grunt-svgmin": "^2.0.1",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
