@@ -110,7 +110,7 @@ Wiredep supports Jade:
 -  gulp.src('app/*.html')
 +  gulp.src('app/layouts/*.jade')
      .pipe(wiredep({
-       exclude: ['bootstrap-sass-official'],
+       exclude: ['bootstrap-sass'],
        ignorePath: /^(\.\.\/)*\.\./
      }))
      .pipe(gulp.dest('app/layouts'));
