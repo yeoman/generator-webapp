@@ -12,9 +12,8 @@ gulp.task('styles', function () {<% if (includeSass) { %>
     .pipe($.sass({
       outputStyle: 'expanded',
       precision: 10,
-      includePaths: ['.'],
-      onError: console.error.bind(console, 'Sass error:')
-    }))<% } else { %>
+      includePaths: ['.']
+    }).on('error', $.sass.logError))<% } else { %>
   return gulp.src('app/styles/*.css')
     .pipe($.sourcemaps.init())<% } %>
     .pipe($.postcss([
