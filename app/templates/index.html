@@ -44,17 +44,17 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
+          <h4><a href="https://html5boilerplate.com/">HTML5 Boilerplate</a></h4>
           <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
 
-          <% if (includeSass) { %><h4>Sass</h4>
+          <% if (includeSass) { %><h4><a href="http://libsass.org/">Sass</a></h4>
           <p>Sass is a mature, stable, and powerful professional grade CSS extension language.</p>
           <% } %>
 
-          <h4>Bootstrap</h4>
+          <h4><a href="http://getbootstrap.com/">Bootstrap</a></h4>
           <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
 
-          <% if (includeModernizr) { %><h4>Modernizr</h4>
+          <% if (includeModernizr) { %><h4><a href="http://modernizr.com/">Modernizr</a></h4>
           <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
           <% } %>
         </div>
@@ -70,9 +70,9 @@
       <h1>'Allo, 'Allo!</h1>
       <p>You now have</p>
       <ul>
-        <li>HTML5 Boilerplate</li><% if (includeSass) { %>
-        <li>Sass</li><% } if (includeModernizr) { %>
-        <li>Modernizr</li><% } %>
+        <li><a href="https://html5boilerplate.com/">HTML5 Boilerplate</a></li><% if (includeSass) { %>
+        <li><a href="http://libsass.org/">Sass</a></li><% } if (includeModernizr) { %>
+        <li><a href="http://modernizr.com/">Modernizr</a></li><% } %>
       </ul>
     </div>
     <% } %>
