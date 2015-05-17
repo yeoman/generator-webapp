@@ -22,13 +22,6 @@ module.exports = yeoman.generators.Base.extend({
     });
     this.babel = this.options.babel;
 
-    this.option('coffee', {
-      desc: 'Use CoffeeScript',
-      type: Boolean,
-      defaults: false
-    });
-    this.coffee = this.options.coffee;
-
     this.pkg = require('../package.json');
   },
 
@@ -174,11 +167,7 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir('app/images');
     this.write('app/index.html', this.indexFile);
 
-    if (this.coffee) {
-      this.copy('main.coffee', 'app/scripts/main.coffee');
-    } else {
-      this.copy('main.js', 'app/scripts/main.js');
-    }
+    this.copy('main.js', 'app/scripts/main.js');
   },
 
   install: function () {
@@ -187,8 +176,7 @@ module.exports = yeoman.generators.Base.extend({
         options: {
           'skip-message': this.options['skip-install-message'],
           'skip-install': this.options['skip-install'],
-          'babel': this.options.babel,
-          'coffee': this.options.coffee
+          'babel': this.options.babel
         }
       });
 

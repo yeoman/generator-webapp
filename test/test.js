@@ -53,13 +53,11 @@ describe('Webapp generator', function () {
           'app/scripts/main.js'
         ));
         assert.noFile([
-          'app/styles/main.scss',
-          'app/scripts/main.coffee'
+          'app/styles/main.scss'
         ]);
 
         assert.fileContent(expectedContent);
         assert.noFileContent([
-          ['Gruntfile.js', /coffee/],
           ['Gruntfile.js', /modernizr/],
           ['app/index.html', /modernizr/],
           ['bower.json', /modernizr/],
@@ -76,26 +74,6 @@ describe('Webapp generator', function () {
           ['app/index.html', /Sass is a mature/],
           ['bower.json', /bootstrap-sass-official/]
         ]);
-        done();
-      });
-    });
-
-    it('creates expected CoffeeScript files', function (done) {
-      runGen.withOptions(
-        _.extend(options, {coffee: true})
-      ).on('end', function () {
-
-        assert.file([].concat(
-          expected,
-          'app/scripts/main.coffee'
-        ));
-        assert.noFile('app/scripts/main.js');
-
-        assert.fileContent([].concat(
-          expectedContent,
-          [['Gruntfile.js', /coffee/]]
-        ));
-
         done();
       });
     });
