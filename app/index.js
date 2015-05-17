@@ -15,6 +15,13 @@ module.exports = yeoman.generators.Base.extend({
     });
     this.testFramework = this.options['test-framework'];
 
+    this.option('babel', {
+      desc: 'Use Babel',
+      type: Boolean,
+      defaults: true
+    });
+    this.babel = this.options.babel;
+
     this.option('coffee', {
       desc: 'Use CoffeeScript',
       type: Boolean,
@@ -180,6 +187,7 @@ module.exports = yeoman.generators.Base.extend({
         options: {
           'skip-message': this.options['skip-install-message'],
           'skip-install': this.options['skip-install'],
+          'babel': this.options.babel,
           'coffee': this.options.coffee
         }
       });

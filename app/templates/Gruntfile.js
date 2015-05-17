@@ -35,7 +35,15 @@ module.exports = function (grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },<% if (coffee) { %>
+      },<% if (babel) { %>
+      babel: {
+        files: ['<%%= config.app %>/scripts/{,*/}*.js'],
+        tasks: ['babel:dist']
+      },
+      babelTest: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['babel:test', 'test:watch']
+      },<% } else if (coffee) { %>
       coffee: {
         files: ['<%%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
         tasks: ['coffee:dist']
@@ -154,6 +162,28 @@ module.exports = function (grunt) {
         options: {
           specs: 'test/spec/{,*/}*.js'
         }
+      }
+    },<% } %><% if (babel) { %>
+
+    // Compiles ES6 with Babel
+    babel: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%%= config.app %>/scripts',
+          src: '{,*/}*.js',
+          dest: '.tmp/scripts',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.js',
+          dest: '.tmp/spec',
+          ext: '.js'
+        }]
       }
     },<% } %><% if (coffee) { %>
 
@@ -405,16 +435,19 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up build process
     concurrent: {
-      server: [<% if (coffee) {  %>
+      server: [<% if (babel) {  %>
+        'babel:dist',<% } %><% if (coffee) {  %>
         'coffee:dist',<% } %><% if (includeSass) { %>
         'sass:server'<% } else { %>
         'copy:styles'<% } %>
       ],
-      test: [<% if (coffee) { %>
+      test: [<% if (babel) {  %>
+        'babel',<% } %><% if (coffee) { %>
         'coffee'<% } %><% if (coffee && !includeSass) {  %>,<% } %><% if (!includeSass) { %>
         'copy:styles'<% } %>
       ],
-      dist: [<% if (coffee) { %>
+      dist: [<% if (babel) {  %>
+        'babel',<% } %><% if (coffee) { %>
         'coffee',<% } %><% if (includeSass) { %>
         'sass',<% } else { %>
         'copy:styles',<% } %>
