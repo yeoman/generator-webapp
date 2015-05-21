@@ -1,7 +1,7 @@
 # Adding Assemble
 
-This recipe demonstrates how to add [Assemble](http://assemble.io/) to your
-existing setup.
+This recipe demonstrates how to add [Assemble](http://assemble.io) to your existing setup.
+
 
 ## Steps
 
@@ -9,12 +9,13 @@ existing setup.
 
 Install the grunt plugin:
 
-```sh
-npm install --save-dev assemble
+```
+$ npm install --save-dev assemble
 ```
 
 
 ### 2. Load assemble
+
 ```diff
 module.exports = function (grunt) {
 + // Load assemble.io
@@ -25,6 +26,7 @@ module.exports = function (grunt) {
 ```
 
 ### 3. Update `watch` task
+
 ```diff
 // Watches files for changes and runs tasks based on the changed files
 watch: {
@@ -59,6 +61,7 @@ watch: {
 ```
 
 ### 4. Update `livereload` task
+
 ```diff
 livereload: {
   options: {
@@ -81,6 +84,7 @@ livereload: {
 ```
 
 ### 5. Update `wiredep` task
+
 ```diff
 // Automatically inject Bower components into the default handlebars template file
 wiredep: {
@@ -98,6 +102,7 @@ wiredep: {
 ```
 
 ### 6. Update `useminPrepare` task
+
 ```diff
 useminPrepare: {
   options: {
@@ -109,6 +114,7 @@ useminPrepare: {
 ```
 
 ### 7. Update `copy` task
+
 ```diff
     // Copies remaining files to places other tasks can use
     copy: {
@@ -142,6 +148,7 @@ useminPrepare: {
 ```
 
 ### 8. Create `assemble` task
+
 ```diff
 // Empties folders to start fresh
 clean: {
@@ -190,6 +197,7 @@ jshint: {
 ### 9. Add `assemble` task to existing tasks
 
 #### `serve`
+
 ```diff
 grunt.registerTask('serve', 'start the server and preview your app', function (target) {
 
@@ -230,6 +238,7 @@ grunt.registerTask('build', [
 ```
 
 #### `test`
+
 ```diff
 grunt.registerTask('test', function (target) {
   if (target !== 'watch') {
