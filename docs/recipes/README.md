@@ -1,6 +1,7 @@
 # Recipes
 
 * [Compass](compass.md)
+* [Assemble](assemble.md)
 
 *We welcome additional recipes for common use-cases not covered by this generator.*
 
