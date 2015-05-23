@@ -146,7 +146,7 @@ describe('Webapp generator', function () {
       });
     });
 
-    it('creates expected SASS and Bootstrap components', function (done) {
+    it('creates expected Sass and Bootstrap components', function (done) {
       runGen.withOptions(options).withPrompt({
         features: ['includeSass', 'includeBootstrap']
       }).on('end', function () {
