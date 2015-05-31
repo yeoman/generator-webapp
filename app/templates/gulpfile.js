@@ -7,7 +7,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
 gulp.task('styles', function () {<% if (includeSass) { %>
-  return gulp.src('app/styles/*.scss')
+  gulp.src('app/styles/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       outputStyle: 'expanded',
