@@ -56,6 +56,42 @@ These changes ensure that (1) generated `.js` files trigger a browser reload, an
  });
 ```
 
+### 4. Inject `compiled` .coffee files to html
+#### Install `gulp-inject`
+```sh
+$ npm install --save-dev gulp-inject
+```
+#### Require `gulp-inject` in `gulpfile.js` update `wiredep` task to inject compiled `.js` to html
+```diff
+    var inject = require('gulp-inject');
+    ...
+    ...
+    gulp.task('wiredep', function () {
+        ...
+        ...
+        ...
+    // INJECT COMPILED JS
+    // Refer to respective html files
++    gulp.src('app/layouts/*.html')
++        .pipe(inject(gulp.src('.tmp/scripts/**/*.js', {read: false}), {
++            relative: false,
++            transform: function(filepath){
++            filepath = filepath.replace('.tmp/','');
++            return '<script src="'+filepath+'"></script>'
++        }
++    }))
++    .pipe(gulp.dest('app/layouts'));
+```
+#### Update HTML files, addressing `gulp-inject` where to inject the `.js` files
+```diff
+  ...
+  ...
+  <!-- build:js scripts/main.js -->
++    <!-- inject:js -->
++    <!-- endinject -->
+  <!-- endbuild -->
+```
+
 
 ## Usage
 
