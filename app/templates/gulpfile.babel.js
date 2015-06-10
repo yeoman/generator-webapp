@@ -19,9 +19,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     }).on('error', $.sass.logError))<% } else { %>
   return gulp.src('app/styles/*.css')
     .pipe($.sourcemaps.init())<% } %>
-    .pipe($.postcss([
-      require('autoprefixer-core')({browsers: ['last 1 version']})
-    ]))
+    .pipe($.postcss([require('autoprefixer-core')({browsers: ['last 1 version']})]))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
@@ -100,7 +98,6 @@ gulp.task('serve', ['styles', 'fonts'], () => {
     }
   });
 
-  // watch for changes
   gulp.watch([
     'app/*.html',
     'app/scripts/**/*.js',
