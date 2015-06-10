@@ -32,7 +32,7 @@ describe('Gulp Webapp generator: tasks', function () {
     });
 
     generator.run(function () {
-      var gulpFile = fs.readFileSync('gulpfile.js', 'utf8');
+      var gulpFile = fs.readFileSync('gulpfile.babel.js', 'utf8');
       var regexGulp = new RegExp('gulp.task\\(\'' + taskName + '\'');
 
       assert.ok(
