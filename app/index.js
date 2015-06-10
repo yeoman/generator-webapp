@@ -115,10 +115,6 @@ module.exports = yeoman.generators.Base.extend({
       this.write('bower.json', JSON.stringify(bower, null, 2));
     },
 
-    jshint: function () {
-      this.copy('jshintrc', '.jshintrc');
-    },
-
     editorConfig: function () {
       this.copy('editorconfig', '.editorconfig');
     },
