@@ -3,19 +3,18 @@
     "node": ">=0.12.0"
   },
   "devDependencies": {
-    "autoprefixer-core": "^5.1.8",
     "babel": "^5.5.6",
     "browser-sync": "^2.2.1",
     "del": "^1.1.1",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
     "gulp-cache": "^0.2.8",
     "gulp-csso": "^1.0.0",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.2.1",
     "gulp-jshint": "^1.9.2",
     "gulp-load-plugins": "^0.8.1",
-    "gulp-minify-html": "^1.0.0",
-    "gulp-postcss": "^5.0.0",<% if (includeSass) { %>
+    "gulp-minify-html": "^1.0.0",<% if (includeSass) { %>
     "gulp-sass": "^2.0.0",<% } %>
     "gulp-size": "^1.2.1",
     "gulp-sourcemaps": "^1.5.0",
