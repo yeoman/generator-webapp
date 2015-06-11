@@ -109,7 +109,7 @@ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
      .pipe(assets)
      .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.csso()))
+     .pipe($.if('*.css', $.minifyCss({compatibility: 'ie8'})))
      .pipe(assets.restore())
      .pipe($.useref())
      .pipe(gulp.dest('dist'));
