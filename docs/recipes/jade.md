@@ -37,7 +37,8 @@ Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` fi
 gulp.task('views', function () {
   return gulp.src('app/*.jade')
     .pipe($.jade({pretty: true}))
-    .pipe(gulp.dest('.tmp'));
+    .pipe(gulp.dest('.tmp'))
+    .pipe(reload({stream: true}));
 });
 ```
 

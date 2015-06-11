@@ -33,7 +33,7 @@ describe('Gulp webapp generator test', function () {
     var expected = [
       'bower.json',
       'package.json',
-      'gulpfile.js',
+      'gulpfile.babel.js',
       'app/favicon.ico',
       'app/robots.txt',
       'app/index.html',

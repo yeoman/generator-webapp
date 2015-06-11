@@ -32,7 +32,7 @@ describe('Gulp Webapp generator: tasks', function () {
     });
 
     generator.run(function () {
-      var gulpFile = fs.readFileSync('gulpfile.js', 'utf8');
+      var gulpFile = fs.readFileSync('gulpfile.babel.js', 'utf8');
       var regexGulp = new RegExp('gulp.task\\(\'' + taskName + '\'');
 
       assert.ok(
@@ -51,8 +51,8 @@ describe('Gulp Webapp generator: tasks', function () {
     assertTaskExists(this.webapp, 'styles', ['includeSass'], done);
   });
 
-  it('should contain jshint task', function (done) {
-    assertTaskExists(this.webapp, 'jshint', [], done);
+  it('should contain lint task', function (done) {
+    assertTaskExists(this.webapp, 'lint', [], done);
   });
 
   it('should contain html task', function (done) {
