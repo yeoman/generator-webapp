@@ -28,7 +28,7 @@ gulp.task('html', ['styles'], function () {
   return gulp.src('app/*.html')
     .pipe(assets)
     .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.csso()))
+    .pipe($.if('*.css', $.minifyCss({compatibility: 'ie8'})))
 +   .pipe($.rev())
     .pipe(assets.restore())
     .pipe($.useref())

@@ -69,7 +69,7 @@ We want to parse the compiled HTML:
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
      .pipe(assets)
      .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.csso()))
+     .pipe($.if('*.css', $.minifyCss({compatibility: 'ie8'})))
      .pipe(assets.restore())
      .pipe($.useref())
      .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
