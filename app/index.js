@@ -76,6 +76,14 @@ module.exports = generators.Base.extend({
         value: 'includeModernizr',
         checked: true
       }]
+    }, {
+      type: 'confirm',
+      name: 'includeJQuery',
+      message: 'Would you like to include jQuery?',
+      default: true,
+      when: function (answers) {
+        return answers.features.indexOf('includeBootstrap') === -1;
+      }
     }];
 
     this.prompt(prompts, function (answers) {
@@ -90,6 +98,7 @@ module.exports = generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includeJQuery = answers.includeJQuery;
 
       done();
     }.bind(this));
@@ -143,7 +152,8 @@ module.exports = generators.Base.extend({
           name: _s.slugify(this.appname),
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          includeModernizr: this.includeModernizr
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery
         }
       );
     },
@@ -218,6 +228,7 @@ module.exports = generators.Base.extend({
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
           includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
           bsPath: bsPath,
           bsPlugins: [
             'affix',
