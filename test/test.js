@@ -138,5 +138,18 @@ describe('Webapp generator', function () {
         done();
       });
     });
+
+    it('creates the expected Babel config', function (done) {
+      runGen.withOptions(
+        _.extend(options, { babel: true })
+      ).on('end', function () {
+        assert.fileContent([
+          ['Gruntfile.js', /babel/],
+          ['package.json', /babel/]
+        ]);
+
+        done();
+      });
+    });
   });
 });
