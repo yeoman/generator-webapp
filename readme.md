@@ -8,7 +8,7 @@
 
 * CSS Autoprefixing
 * Built-in preview server with LiveReload
-* Automagically compile CoffeeScript & Sass
+* Automagically compile ES6 (with Babel) & Sass
 * Automagically lint your scripts
 * Automagically wire up your Bower components with [grunt-wiredep](#third-party-dependencies).
 * Awesome Image Optimization (via OptiPNG, pngquant, jpegtran and gifsicle)
@@ -66,10 +66,9 @@ We have [recipes](docs/recipes) for integrating other popular technologies like 
 
   Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
-* `--coffee`
+* `--babel`
 
-  Add support for [CoffeeScript](http://coffeescript.org/).
-
+  Add support for [Babel](http://babeljs.io/).
 
 ## Contribute
 

@@ -35,14 +35,14 @@ module.exports = function (grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },<% if (coffee) { %>
-      coffee: {
-        files: ['<%%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['coffee:dist']
+      },<% if (babel) { %>
+      babel: {
+        files: ['<%%= config.app %>/scripts/{,*/}*.js'],
+        tasks: ['babel:dist']
       },
-      coffeeTest: {
-        files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['coffee:test', 'test:watch']
+      babelTest: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['babel:test', 'test:watch']
       },<% } else { %>
       js: {
         files: ['<%%= config.app %>/scripts/{,*/}*.js'],
@@ -155,15 +155,15 @@ module.exports = function (grunt) {
           specs: 'test/spec/{,*/}*.js'
         }
       }
-    },<% } %><% if (coffee) { %>
+    },<% } %><% if (babel) { %>
 
-    // Compiles CoffeeScript to JavaScript
-    coffee: {
+    // Compiles ES6 with Babel
+    babel: {
       dist: {
         files: [{
           expand: true,
           cwd: '<%%= config.app %>/scripts',
-          src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+          src: '{,*/}*.js',
           dest: '.tmp/scripts',
           ext: '.js'
         }]
@@ -172,7 +172,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'test/spec',
-          src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+          src: '{,*/}*.js',
           dest: '.tmp/spec',
           ext: '.js'
         }]
@@ -405,17 +405,17 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up build process
     concurrent: {
-      server: [<% if (coffee) {  %>
-        'coffee:dist',<% } %><% if (includeSass) { %>
+      server: [<% if (babel) { %>
+        'babel:dist',<% } %><% if (includeSass) { %>
         'sass:server'<% } else { %>
         'copy:styles'<% } %>
       ],
-      test: [<% if (coffee) { %>
-        'coffee'<% } %><% if (coffee && !includeSass) {  %>,<% } %><% if (!includeSass) { %>
+      test: [<% if (babel) { %>
+        'babel'<% } %><% if (babel && !includeSass) { %>,<% } %><% if (!includeSass) { %>
         'copy:styles'<% } %>
       ],
-      dist: [<% if (coffee) { %>
-        'coffee',<% } %><% if (includeSass) { %>
+      dist: [<% if (babel) { %>
+        'babel',<% } %><% if (includeSass) { %>
         'sass',<% } else { %>
         'copy:styles',<% } %>
         'imagemin',
