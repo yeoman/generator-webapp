@@ -84,6 +84,14 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
+<% if (includeBootstrap) { -%>
+    <!-- build:js scripts/plugins.js -->
+<% bsPlugins.forEach(function (plugin) { -%>
+    <script type="<%= bsPath + plugin %>.js"></script>
+<% }) -%>
+    <!-- endbuild -->
+<% } -%>
+
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->

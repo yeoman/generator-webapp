@@ -1,5 +1,4 @@
-/*global -$ */
-// generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
+// generated on <%= date %> using <%= name %> <%= version %>
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
@@ -145,8 +144,9 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('app/styles'));
 <% } %>
   gulp.src('app/*.html')
-    .pipe(wiredep({<% if (includeSass && includeBootstrap) { %>
-      exclude: ['bootstrap-sass'],<% } %>
+    .pipe(wiredep({<% if (includeBootstrap) { if (includeSass) { %>
+      exclude: ['bootstrap-sass'],<% } else { %>
+      exclude: ['bootstrap.js'],<% }} %>
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app'));
