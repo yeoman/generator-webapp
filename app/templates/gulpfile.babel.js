@@ -10,9 +10,10 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 gulp.task('styles', () => {<% if (includeSass) { %>
-  gulp.src('app/styles/*.scss')
+  return gulp.src('app/styles/*.scss')
+    .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.sass({
+    .pipe($.sass.sync({
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
