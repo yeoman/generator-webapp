@@ -35,7 +35,9 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 - Run `yo gulp-webapp` to scaffold your webapp
 - Run `gulp serve` to preview and watch for changes
 - Run `bower install --save <package>` to install frontend dependencies
+- Run `gulp serve:test` to run the tests in the browser
 - Run `gulp` to build your webapp for production
+- Run `gulp serve:dist` to preview the production build
 
 
 ## Docs
@@ -54,7 +56,7 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 - `--skip-install`
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 - `--test-framework=<framework>`
-  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
+  Either `mocha` or `jasmine`. Defaults to `mocha`.
 
 
 ## Contribute

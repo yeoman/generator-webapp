@@ -1,6 +1,7 @@
 {
   "node": true,
   "esnext": true,
+  "mocha": true,
   "bitwise": false,
   "curly": false,
   "eqeqeq": true,
