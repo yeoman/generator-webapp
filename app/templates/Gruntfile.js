@@ -48,7 +48,7 @@ module.exports = function (grunt) {
       },<% } else { %>
       js: {
         files: ['<%%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        tasks: ['jshint']
       },
       jstest: {
         files: ['test/spec/{,*/}*.js'],
@@ -95,8 +95,9 @@ module.exports = function (grunt) {
           open: false,
           logLevel: 'silent',
           host: 'localhost',
-          server: {
-            baseDir: ['.tmp', './test', config.app],
+          server: {<% if (testFramework === 'mocha') { %>
+            baseDir: ['.tmp', './test', config.app],<% } else if (testFramework === 'jasmine') { %>
+            baseDir: ['./'],<% } %>
             routes: {
               '/bower_components': './bower_components'
             }
@@ -153,8 +154,14 @@ module.exports = function (grunt) {
     // Jasmine testing framework configuration options
     jasmine: {
       all: {
+        src: '{<%= config.app %>,.tmp}/scripts/{,*/}*.js',
         options: {
-          specs: 'test/spec/{,*/}*.js'
+          vendor: [
+            // Your bower_components scripts
+          ],
+          specs: '{test,.tmp}/spec/{,*/}*.js',
+          helpers: '{test,.tmp}/helpers/{,*/}*.js',
+          host: 'http://<%%= browserSync.test.options.host %>:<%%= browserSync.test.options.port %>'
         }
       }
     },<% } %><% if (babel) { %>
