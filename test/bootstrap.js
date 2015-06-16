@@ -16,7 +16,7 @@ describe('Bootstrap feature', function () {
         .on('end', done);
     });
 
-    it('shoud add the correct dependencies', function () {
+    it('should add the correct dependencies', function () {
       assert.fileContent('bower.json', '"bootstrap-sass"');
       assert.noFileContent('bower.json', '"jquery"');
     });
