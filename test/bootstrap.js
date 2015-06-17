@@ -22,7 +22,7 @@ describe('Bootstrap feature', function () {
     });
 
     it('should output the correct <script> paths', function () {
-      assert.fileContent('app/index.html', '/bootstrap-sass/assets/javascripts/bootstrap/');
+      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap-sass\/assets\/javascripts\/bootstrap\//);
     });
 
     it('should contain the font icon path variable', function () {
@@ -47,7 +47,7 @@ describe('Bootstrap feature', function () {
     });
 
     it('should output the correct <script> paths', function () {
-      assert.fileContent('app/index.html', '/bootstrap/js/');
+      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\//);
     });
   });
 });
