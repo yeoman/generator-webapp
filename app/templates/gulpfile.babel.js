@@ -35,13 +35,13 @@ function lint(files, options) {
   };
 }
 const testLintOptions = {
-  "env": {
-    "mocha": true
+  env: {
+    mocha: true
   },
-  "globals": {
-    "assert": false,
-    "expect": false,
-    "should": false
+  globals: {
+    assert: false,
+    expect: false,
+    should: false
   }
 };
 
