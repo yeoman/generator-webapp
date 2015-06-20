@@ -4,6 +4,44 @@ var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-assert');
 
 describe('Bootstrap feature', function () {
+  describe('on', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+        .inDir(path.join(__dirname, 'temp'))
+        .withOptions({'skip-install': true})
+        .withPrompts({features: [
+          'includeBootstrap'
+        ]})
+        .on('end', done);
+    });
+
+    it('shouldn\'t add jQuery explicitly as a dependency', function () {
+      assert.noFileContent('bower.json', '"jquery"');
+    });
+
+    it('should add the comment block', function () {
+      assert.fileContent('app/index.html', 'build:js scripts/plugins.js')
+    });
+  });
+
+  describe('off', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+        .inDir(path.join(__dirname, 'temp'))
+        .withOptions({'skip-install': true})
+        .withPrompts({features: []})
+        .on('end', done);
+    });
+
+    it('should add jQuery explicitly as a dependency', function () {
+      assert.fileContent('bower.json', '"jquery"');
+    });
+
+    it('shouldn\'t add the comment block', function () {
+      assert.noFileContent('app/index.html', 'build:js scripts/plugins.js')
+    });
+  });
+
   describe('with Sass', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
@@ -16,9 +54,8 @@ describe('Bootstrap feature', function () {
         .on('end', done);
     });
 
-    it('should add the correct dependencies', function () {
+    it('should use Bootstrap Sass', function () {
       assert.fileContent('bower.json', '"bootstrap-sass"');
-      assert.noFileContent('bower.json', '"jquery"');
     });
 
     it('should output the correct <script> paths', function () {
@@ -41,9 +78,8 @@ describe('Bootstrap feature', function () {
         .on('end', done);
     });
 
-    it('should add the correct dependencies', function () {
+    it('should use Bootstrap', function () {
       assert.fileContent('bower.json', '"bootstrap"');
-      assert.noFileContent('bower.json', '"jquery"');
     });
 
     it('should output the correct <script> paths', function () {
