@@ -65,6 +65,16 @@ describe('Bootstrap feature', function () {
     it('should contain the font icon path variable', function () {
       assert.fileContent('app/styles/main.scss', '$icon-font-path');
     });
+
+    it('should correctly override bootstrap\'s bower.json', function() {
+      assert.fileContent('bower.json', '"overrides"');
+
+      assert.fileContent('bower.json', 'assets/stylesheets/_bootstrap.scss');
+
+      assert.fileContent('bower.json', 'assets/fonts/bootstrap/*');
+
+      assert.fileContent('bower.json', 'assets/javascripts/bootstrap.js');
+    });
   });
 
   describe('without Sass', function () {
@@ -84,6 +94,18 @@ describe('Bootstrap feature', function () {
 
     it('should output the correct <script> paths', function () {
       assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\//);
+    });
+
+    it('should correctly override bootstrap\'s bower.json', function() {
+      assert.fileContent('bower.json', '"overrides"');
+
+      assert.fileContent('bower.json', 'less/bootstrap.less');
+
+      assert.fileContent('bower.json', 'dist/css/bootstrap.css');
+
+      assert.fileContent('bower.json', 'dist/js/bootstrap.js');
+
+      assert.fileContent('bower.json', 'dist/fonts/*');
     });
   });
 });
