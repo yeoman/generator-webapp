@@ -12,25 +12,20 @@ module.exports = generators.Base.extend({
 
     generators.Base.apply(this, arguments);
 
-    this.option('test-framework', {
-      desc: 'Test framework to be invoked',
-      type: String,
-      defaults: 'mocha'
-    });
-
     this.option('skip-welcome-message', {
       desc: 'Skips the welcome message',
-      type: Boolean
-    });
-
-    this.option('skip-install', {
-      desc: 'Skips the installation of dependencies',
       type: Boolean
     });
 
     this.option('skip-install-message', {
       desc: 'Skips the message after the installation of dependencies',
       type: Boolean
+    });
+
+    this.option('test-framework', {
+      desc: 'Test framework to be invoked',
+      type: String,
+      defaults: 'mocha'
     });
 
     if (this.options['test-framework'] === 'mocha') {
@@ -89,8 +84,8 @@ module.exports = generators.Base.extend({
     this.prompt(prompts, function (answers) {
       var features = answers.features;
 
-      var hasFeature = function (feat) {
-        return features.indexOf(feat) !== -1;
+      function hasFeature(feat) {
+        return features && features.indexOf(feat) !== -1;
       };
 
       // manually deal with the response, get back and store the results.

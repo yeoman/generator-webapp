@@ -69,8 +69,8 @@
       <p>You now have</p>
       <ul>
         <li>HTML5 Boilerplate</li><% if (includeSass) { %>
-        <li>Sass</li><% } %><% if (includeModernizr) { %>
-        <li>Modernizr</li><% } %><% if (includeJQuery) { %>
+        <li>Sass</li><% } if (includeModernizr) { %>
+        <li>Modernizr</li><% } if (includeJQuery) { %>
         <li>jQuery</li><% } %>
       </ul>
     </div>
@@ -89,15 +89,13 @@
     <!-- bower:js -->
     <!-- endbower -->
     <!-- endbuild -->
-
-<% if (includeBootstrap) { -%>
+    <% if (includeBootstrap) { %>
     <!-- build:js scripts/plugins.js -->
 <% bsPlugins.forEach(function (plugin) { -%>
     <script src="<%= bsPath + plugin %>.js"></script>
 <% }) -%>
     <!-- endbuild -->
-<% } -%>
-
+    <% } %>
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
