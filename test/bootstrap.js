@@ -45,8 +45,8 @@ describe('bootstrap', function () {
     });
 
     it('uses Bootstrap Sass', function () {
-      assert.fileContent('bower.json', '"bootstrap-sass-official"');
-      assert.fileContent('Gruntfile.js', '/bootstrap-sass-official/');
+      assert.fileContent('bower.json', '"bootstrap-sass"');
+      assert.fileContent('Gruntfile.js', '/bootstrap-sass/');
     });
   });
 

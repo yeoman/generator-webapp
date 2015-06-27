@@ -149,7 +149,7 @@ module.exports = generators.Base.extend({
 
       if (this.includeBootstrap) {
         if (this.includeSass) {
-          bowerJson.dependencies['bootstrap-sass-official'] = '~3.3.0';
+          bowerJson.dependencies['bootstrap-sass'] = '~3.3.0';
         } else {
           bowerJson.dependencies['bootstrap'] = '~3.3.0';
         }
@@ -216,7 +216,7 @@ module.exports = generators.Base.extend({
       // path prefix for Bootstrap JS files
       if (this.includeBootstrap) {
         if (this.includeSass) {
-          bsPath = '/bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/';
+          bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
         } else {
           bsPath = '/bower_components/bootstrap/js/';
         }

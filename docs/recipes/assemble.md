@@ -92,7 +92,7 @@ wiredep: {
     ignorePath: /^\/|\.\.\//,
 -   src: ['<%= config.app %>/index.html'],
 +   src: ['<%= config.app %>/templates/layouts/default.hbs'],
-    exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']
+    exclude: ['bower_components/bootstrap-sass/assets/javascripts/bootstrap.js']
   },
   sass: {
     src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
@@ -141,7 +141,7 @@ useminPrepare: {
           dot: true,
           cwd: '.',
           dest: '<%= config.dist %>',
-          src: 'bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'
+          src: 'bower_components/bootstrap-sass/assets/fonts/bootstrap/*'
         }]
       }
     },
