@@ -69,7 +69,7 @@ module.exports = generators.Base.extend({
       choices: [{
         name: 'Sass',
         value: 'includeSass',
-        checked: false
+        checked: true
       }, {
         name: 'Bootstrap',
         value: 'includeBootstrap',
@@ -77,7 +77,7 @@ module.exports = generators.Base.extend({
       }, {
         name: 'Modernizr',
         value: 'includeModernizr',
-        checked: false
+        checked: true
       }]
     }];
 
