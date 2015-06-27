@@ -30,8 +30,4 @@ describe('sass', function () {
   it('adds HTML description', function () {
     assert.fileContent('app/index.html', 'Sass');
   });
-
-  it('ignores .sass-cache', function () {
-    assert.fileContent('.gitignore', '.sass-cache');
-  });
 });
