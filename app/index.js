@@ -149,16 +149,35 @@ module.exports = generators.Base.extend({
 
       if (this.includeBootstrap) {
         if (this.includeSass) {
-          bowerJson.dependencies['bootstrap-sass'] = '~3.3.0';
+          bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
+          bowerJson.overrides = {
+            'bootstrap-sass': {
+              'main': [
+                'assets/stylesheets/_bootstrap.scss',
+                'assets/fonts/bootstrap/*',
+                'assets/javascripts/bootstrap.js'
+              ]
+            }
+          };
         } else {
-          bowerJson.dependencies['bootstrap'] = '~3.3.0';
+          bowerJson.dependencies['bootstrap'] = '~3.3.5';
+          bowerJson.overrides = {
+            'bootstrap': {
+              'main': [
+                'less/bootstrap.less',
+                'dist/css/bootstrap.css',
+                'dist/js/bootstrap.js',
+                'dist/fonts/*'
+              ]
+            }
+          };
         }
       } else {
-        bowerJson.dependencies['jquery'] = '~1.11.1';
+        bowerJson.dependencies['jquery'] = '~2.1.4';
       }
 
       if (this.includeModernizr) {
-        bowerJson.dependencies['modernizr'] = '~2.8.2';
+        bowerJson.dependencies['modernizr'] = '~2.8.3';
       }
 
       this.fs.writeJSON('bower.json', bowerJson);
