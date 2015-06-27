@@ -5,22 +5,32 @@
     "grunt-autoprefixer": "^2.2.0",
     "grunt-browser-sync": "^2.1.2",
     "grunt-concurrent": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0",<% if (babel) { %>
-    "grunt-babel": "^5.0.0",<% } %>
+    "grunt-contrib-clean": "^0.6.0",
+<% if (useBabel) { -%>
+    "grunt-babel": "^5.0.0",
+<% } -%>
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "^0.12.2",
     "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-imagemin": "^0.9.3",<% if (testFramework === 'jasmine') { %>
-    "grunt-contrib-jasmine": "^0.8.2",<% } %>
+    "grunt-contrib-imagemin": "^0.9.3",
+<% if (testFramework === 'jasmine') { -%>
+    "grunt-contrib-jasmine": "^0.8.2",
+<% } -%>
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.8.0",
-    "grunt-contrib-watch": "^0.6.1",<% if (testFramework === 'mocha') { %>
-    "grunt-mocha": "^0.4.12",<% } %><% if (includeModernizr) { %>
-    "grunt-modernizr": "^0.6.0",<% } %>
+    "grunt-contrib-watch": "^0.6.1",
+<% if (testFramework === 'mocha') { -%>
+    "grunt-mocha": "^0.4.12",
+<% } -%>
+<% if (includeModernizr) { -%>
+    "grunt-modernizr": "^0.6.0",
+<% } -%>
     "grunt-newer": "^1.1.0",
-    "grunt-filerev": "^2.2.0",<% if (includeSass) { %>
-    "grunt-sass": "^1.0.0",<% } %>
+    "grunt-filerev": "^2.2.0",
+<% if (includeSass) { -%>
+    "grunt-sass": "^1.0.0",
+<% } -%>
     "grunt-svgmin": "^2.0.1",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",

@@ -1,4 +1,5 @@
-<% if (includeBootstrap) { %>.browsehappy {
+<% if (includeBootstrap) { -%>
+.browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
@@ -86,7 +87,9 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>body {
+}
+<% } else { -%>
+body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
@@ -114,4 +117,5 @@ body {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
-}<% } %>
+}
+<% } -%>

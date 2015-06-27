@@ -64,7 +64,7 @@ We have [recipes](docs/recipes) for integrating other popular technologies like 
 
 * `--test-framework=<framework>`
 
-  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
+  Either `mocha` or `jasmine`. Defaults to `mocha`.
 
 * `--babel`
 

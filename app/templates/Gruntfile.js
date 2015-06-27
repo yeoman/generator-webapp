@@ -37,7 +37,7 @@ module.exports = function (grunt) {
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
-      },<% if (babel) { %>
+      },<% if (useBabel) { %>
       babel: {
         files: ['<%%= config.app %>/scripts/{,*/}*.js'],
         tasks: ['babel:dist']
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
           host: 'http://<%%= browserSync.test.options.host %>:<%%= browserSync.test.options.port %>'
         }
       }
-    },<% } %><% if (babel) { %>
+    },<% } %><% if (useBabel) { %>
 
     // Compiles ES6 with Babel
     babel: {
@@ -237,7 +237,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
-        ignorePath: /^<%= config.app %>\/|\.\.\//,
+        ignorePath: /^<%%= config.app %>\/|\.\.\//,
         src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
         exclude: ['bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js']<% } else { %>
         exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
@@ -414,16 +414,16 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up build process
     concurrent: {
-      server: [<% if (babel) { %>
+      server: [<% if (useBabel) { %>
         'babel:dist',<% } %><% if (includeSass) { %>
         'sass:server'<% } else { %>
         'copy:styles'<% } %>
       ],
-      test: [<% if (babel) { %>
-        'babel'<% } %><% if (babel && !includeSass) { %>,<% } %><% if (!includeSass) { %>
+      test: [<% if (useBabel) { %>
+        'babel'<% } %><% if (useBabel && !includeSass) { %>,<% } %><% if (!includeSass) { %>
         'copy:styles'<% } %>
       ],
-      dist: [<% if (babel) { %>
+      dist: [<% if (useBabel) { %>
         'babel',<% } %><% if (includeSass) { %>
         'sass',<% } else { %>
         'copy:styles',<% } %>

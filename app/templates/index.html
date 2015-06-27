@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+    <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <% if (includeBootstrap && !includeSass) { %><link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"><% } %>
+<% if (includeBootstrap && !includeSass) { -%>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+<% } -%>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -63,7 +65,6 @@
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
-
     </div>
     <% } else { %>
     <div class="hero-unit">
@@ -80,6 +81,18 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- endbower -->
+    <!-- endbuild -->
+
+    <% if (includeBootstrap) { %>
+    <!-- build:js(.) scripts/plugins.js -->
+<% bsPlugins.forEach(function (plugin) { -%>
+    <script src="<%= bsPath + plugin %>.js"></script>
+<% }) -%>
+    <!-- endbuild -->
+    <% } %>
+
+    <!-- build:js(.tmp/app) scripts/main.js -->
+    <script src="scripts/main.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

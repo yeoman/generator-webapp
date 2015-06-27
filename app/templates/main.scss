@@ -1,4 +1,6 @@
-<% if (includeBootstrap) { %>$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+<% if (includeBootstrap) { -%>
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
 // endbower
@@ -89,7 +91,9 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>// bower:scss
+}
+<% } else { -%>
+// bower:scss
 // endbower
 
 body {
@@ -119,4 +123,5 @@ body {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
-}<% } %>
+}
+<% } -%>

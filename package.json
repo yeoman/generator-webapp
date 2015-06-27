@@ -24,16 +24,17 @@
   ],
   "dependencies": {
     "chalk": "^1.0.0",
-    "cheerio": "^0.18.0",
-    "yeoman-generator": "^0.18.9",
-    "yosay": "^1.0.2"
+    "generator-jasmine": "^0.1.3",
+    "generator-mocha": "^0.1.8",
+    "mkdirp": "^0.5.1",
+    "wiredep": "^2.2.2",
+    "yeoman-generator": "^0.20.1",
+    "yosay": "^1.0.4"
   },
   "devDependencies": {
     "grunt-cli": "^0.1.13",
     "mocha": "*",
-    "underscore": "^1.6.0"
-  },
-  "peerDependencies": {
-    "generator-mocha": ">=0.1.0"
+    "underscore.string": "^3.1.1",
+    "yeoman-assert": "^2.0.0"
   }
 }
