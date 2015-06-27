@@ -268,10 +268,15 @@ module.exports = generators.Base.extend({
       );
     },
 
-    favicon: function () {
+    icons: function () {
       this.fs.copy(
         this.templatePath('favicon.ico'),
         this.destinationPath('app/favicon.ico')
+      );
+
+      this.fs.copy(
+        this.templatePath('apple-touch-icon.png'),
+        this.destinationPath('app/apple-touch-icon.png')
       );
     },
 
