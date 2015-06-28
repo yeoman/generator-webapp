@@ -192,6 +192,8 @@ module.exports = function (grunt) {
     sass: {
       options: {
         sourceMap: true,
+        sourceMapEmbed: true,
+        sourceMapContents: true,
         includePaths: ['bower_components']
       },
       dist: {
@@ -217,11 +219,8 @@ module.exports = function (grunt) {
     // Add vendor prefixed styles
     autoprefixer: {
       options: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']<% if (includeSass) { %>,
-        map: {
-          prev: '.tmp/styles/'
-        }
-        <% } %>
+        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
+        map: true
       },
       dist: {
         files: [{
