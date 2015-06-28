@@ -59,11 +59,11 @@ module.exports = function (grunt) {
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'autoprefixer']
+        tasks: ['sass:server', 'postcss']
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        tasks: ['newer:copy:styles', 'postcss']
       }
     },
 
@@ -216,11 +216,15 @@ module.exports = function (grunt) {
       }
     },<% } %>
 
-    // Add vendor prefixed styles
-    autoprefixer: {
+    postcss: {
       options: {
-        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
-        map: true
+        map: true,
+        processors: [
+          // Add vendor prefixed styles
+          require('autoprefixer-core')({
+            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+          })
+        ]
       },
       dist: {
         files: [{
@@ -443,7 +447,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
-      'autoprefixer',
+      'postcss',
       'browserSync:livereload',
       'watch'
     ]);
@@ -459,7 +463,7 @@ module.exports = function (grunt) {
       grunt.task.run([
         'clean:server',
         'concurrent:test',
-        'autoprefixer'
+        'postcss'
       ]);
     }
 
@@ -475,7 +479,7 @@ module.exports = function (grunt) {
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    'postcss',
     'concat',
     'cssmin',
     'uglify',
