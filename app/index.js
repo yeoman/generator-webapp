@@ -33,7 +33,7 @@ module.exports = generators.Base.extend({
     this.option('babel', {
       desc: 'Use Babel',
       type: Boolean,
-      defaults: true
+      defaults: false
     });
 
     if (this.options['test-framework'] === 'mocha') {
