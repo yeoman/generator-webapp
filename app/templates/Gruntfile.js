@@ -236,10 +236,11 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the HTML file
     wiredep: {
       app: {
-        ignorePath: /^<%%= config.app %>\/|\.\.\//,
-        src: ['<%%= config.app %>/index.html']<% if (includeBootstrap) { %>,<% if (includeSass) { %>
-        exclude: ['bower_components/bootstrap-sass/assets/javascripts/bootstrap.js']<% } else { %>
-        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']<% } } %>
+        src: ['<%%= config.app %>/index.html'],
+<% if (includeBootstrap) { -%>
+        exclude: ['bootstrap.js'],
+<% } -%>
+        ignorePath: /^<%%= config.app %>\/|\.\.\//
       }<% if (includeSass) { %>,
       sass: {
         src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],

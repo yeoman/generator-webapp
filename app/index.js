@@ -318,19 +318,17 @@ module.exports = generators.Base.extend({
     // wire Bower packages to .html
     wiredep({
       bowerJson: bowerJson,
-      directory: 'bower_components',
-      exclude: ['bootstrap-sass', 'bootstrap.js'],
-      ignorePath: /^(\.\.\/)*\.\./,
-      src: 'app/index.html'
+      src: 'app/index.html',
+      exclude: ['bootstrap.js'],
+      ignorePath: /^app\/|\.\.\//
     });
 
     if (this.includeSass) {
       // wire Bower packages to .scss
       wiredep({
         bowerJson: bowerJson,
-        directory: 'bower_components',
-        ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
+        src: 'app/styles/*.scss',
+        ignorePath: /(\.\.\/){1,2}bower_components\//
       });
     }
   }
