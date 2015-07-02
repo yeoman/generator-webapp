@@ -15,11 +15,11 @@ describe('bootstrap', function () {
         .on('end', done);
     });
 
-    it('adds Bootstrap dependency', function () {
+    it('adds the Bootstrap dependency', function () {
       assert.fileContent('bower.json', 'bootstrap');
     });
 
-    it('doesn\'t explicitly add jQuery dependency', function () {
+    it('doesn\'t explicitly add the jQuery dependency', function () {
       assert.noFileContent('bower.json', 'jquery');
     });
 
@@ -27,7 +27,7 @@ describe('bootstrap', function () {
       assert.fileContent('Gruntfile.js', 'bootstrap');
     });
 
-    it('adds HTML description', function () {
+    it('adds the HTML description', function () {
       assert.fileContent('app/index.html', 'Bootstrap');
     });
   });

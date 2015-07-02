@@ -27,7 +27,7 @@ describe('sass', function () {
     assert.fileContent('Gruntfile.js', 'sass');
   });
 
-  it('adds HTML description', function () {
+  it('adds the HTML description', function () {
     assert.fileContent('app/index.html', 'Sass');
   });
 });

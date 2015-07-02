@@ -17,9 +17,9 @@
 <% if (testFramework === 'jasmine') { -%>
     "grunt-contrib-jasmine": "^0.8.2",
 <% } -%>
-    "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^16.0.0",
     "grunt-filerev": "^2.2.0",
 <% if (testFramework === 'mocha') { -%>
     "grunt-mocha": "^0.4.12",
@@ -36,7 +36,6 @@
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
     "jit-grunt": "^0.9.1",
-    "jshint-stylish": "^1.0.1",
     "time-grunt": "^1.1.0"
   },
   "engines": {
@@ -44,5 +43,19 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true<% if (testFramework === 'mocha') { %>,
+      "mocha": true<% } else if (testFramework === 'jasmine') { %>,
+      "jasmine": true<% } %>
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
   }
 }

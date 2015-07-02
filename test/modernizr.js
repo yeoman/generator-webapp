@@ -14,19 +14,19 @@ describe('modernizr', function () {
       .on('end', done);
   });
 
-  it('adds Bower dependency', function () {
+  it('adds the Bower dependency', function () {
     assert.fileContent('bower.json', 'modernizr');
   });
 
-  it('adds Grunt plugin', function () {
+  it('adds the Grunt plugin', function () {
     assert.fileContent('package.json', 'modernizr');
   });
 
-  it('adds Grunt task', function () {
+  it('adds the Grunt task', function () {
     assert.fileContent('Gruntfile.js', 'modernizr');
   });
 
-  it('adds HTML description', function () {
+  it('adds the HTML description', function () {
     assert.fileContent('app/index.html', 'Modernizr');
   });
 });

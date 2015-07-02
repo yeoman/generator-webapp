@@ -1,5 +1,3 @@
-/*jshint node:true*/
-
 // Generated on <%= (new Date).toISOString().split('T')[0] %> using
 // <%= pkg.name %> <%= pkg.version %>
 'use strict';
@@ -48,7 +46,7 @@ module.exports = function (grunt) {
       },<% } else { %>
       js: {
         files: ['<%%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint']
+        tasks: ['eslint']
       },
       jstest: {
         files: ['test/spec/{,*/}*.js'],
@@ -129,12 +127,8 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
+    eslint: {
+      target: [
         'Gruntfile.js',
         '<%%= config.app %>/scripts/{,*/}*.js',
         '!<%%= config.app %>/scripts/vendor/*',
@@ -155,7 +149,7 @@ module.exports = function (grunt) {
     // Jasmine testing framework configuration options
     jasmine: {
       all: {
-        src: '{<%= config.app %>,.tmp}/scripts/{,*/}*.js',
+        src: '{<%%= config.app %>,.tmp}/scripts/{,*/}*.js',
         options: {
           vendor: [
             // Your bower_components scripts
@@ -495,7 +489,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
+    'newer:eslint',
     'test',
     'build'
   ]);

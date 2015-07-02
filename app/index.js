@@ -39,7 +39,7 @@ module.exports = generators.Base.extend({
     if (this.options['test-framework'] === 'mocha') {
       testLocal = require.resolve('generator-mocha/generators/app/index.js');
     } else if (this.options['test-framework'] === 'jasmine') {
-      testLocal = require.resolve('generator-jasmine/lib/generators/app/index.js');
+      testLocal = require.resolve('generator-jasmine/generators/app/index.js');
     }
 
     this.composeWith(this.options['test-framework'] + ':app', {
@@ -184,16 +184,6 @@ module.exports = generators.Base.extend({
       this.fs.copy(
         this.templatePath('bowerrc'),
         this.destinationPath('.bowerrc')
-      );
-    },
-
-    jshint: function () {
-      this.fs.copyTpl(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc'),
-        {
-          testFramework: this.options['test-framework']
-        }
       );
     },
 

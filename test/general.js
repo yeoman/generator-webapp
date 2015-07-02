@@ -30,7 +30,6 @@ describe('general', function () {
       'app/styles/main.css',
       'app/robots.txt',
       'test',
-      '.jshintrc',
       '.editorconfig',
       '.gitignore',
       '.gitattributes'

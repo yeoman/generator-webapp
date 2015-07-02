@@ -12,11 +12,11 @@ describe('babel', function () {
       .on('end', done);
   });
 
-  it('adds Grunt plugin', function () {
+  it('adds the Grunt plugin', function () {
     assert.fileContent('package.json', 'babel');
   });
 
-  it('adds Grunt task', function () {
+  it('adds the Grunt task', function () {
     assert.fileContent('Gruntfile.js', 'babel');
   });
 });
