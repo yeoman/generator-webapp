@@ -241,7 +241,7 @@ module.exports = function (grunt) {
 <% if (includeBootstrap) { -%>
         exclude: ['bootstrap.js'],
 <% } -%>
-        ignorePath: /^<%%= config.app %>\/|\.\.\//
+        ignorePath: /^(\.\.\/)*\.\./
       }<% if (includeSass) { %>,
       sass: {
         src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],

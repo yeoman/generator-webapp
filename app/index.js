@@ -310,7 +310,7 @@ module.exports = generators.Base.extend({
       bowerJson: bowerJson,
       src: 'app/index.html',
       exclude: ['bootstrap.js'],
-      ignorePath: /^app\/|\.\.\//
+      ignorePath: /^(\.\.\/)*\.\./
     });
 
     if (this.includeSass) {
