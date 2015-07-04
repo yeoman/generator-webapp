@@ -66,9 +66,9 @@ We have [recipes](docs/recipes) for integrating other popular technologies like 
 
   Either `mocha` or `jasmine`. Defaults to `mocha`.
 
-* `--babel`
+* `--no-babel`
 
-  Add support for [Babel](http://babeljs.io/).
+  Turn off [Babel](http://babeljs.io/) support.
 
 ## Contribute
 
