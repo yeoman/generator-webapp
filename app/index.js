@@ -323,7 +323,7 @@ module.exports = generators.Base.extend({
       wiredep({
         bowerJson: bowerJson,
         src: 'app/styles/*.scss',
-        ignorePath: /(\.\.\/){1,2}bower_components\//
+        ignorePath: /^(\.\.\/)+/
       });
     }
   }

@@ -192,7 +192,7 @@ module.exports = function (grunt) {
         sourceMap: true,
         sourceMapEmbed: true,
         sourceMapContents: true,
-        includePaths: ['bower_components']
+        includePaths: ['.']
       },
       dist: {
         files: [{
