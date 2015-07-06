@@ -24,7 +24,7 @@ describe('jquery', function () {
   describe('off', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
+        .inDir(path.join(__dirname, '.tmp'))
         .withOptions({'skip-install': true})
         .withPrompts({
           features: [],
