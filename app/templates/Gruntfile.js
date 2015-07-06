@@ -245,7 +245,7 @@ module.exports = function (grunt) {
       }<% if (includeSass) { %>,
       sass: {
         src: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        ignorePath: /(\.\.\/){1,2}bower_components\//
+        ignorePath: /^(\.\.\/)+/
       }<% } %>
     },
 
