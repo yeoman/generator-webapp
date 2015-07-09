@@ -119,7 +119,8 @@ module.exports = generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {
-          includeSass: this.includeSass
+          includeSass: this.includeSass,
+          testFramework: this.options['test-framework']
         }
       );
     },
