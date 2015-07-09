@@ -109,7 +109,8 @@ module.exports = generators.Base.extend({
           name: this.pkg.name,
           version: this.pkg.version,
           includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap
+          includeBootstrap: this.includeBootstrap,
+          testFramework: this.options['test-framework']
         }
       );
     },
@@ -119,8 +120,7 @@ module.exports = generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json'),
         {
-          includeSass: this.includeSass,
-          testFramework: this.options['test-framework']
+          includeSass: this.includeSass
         }
       );
     },

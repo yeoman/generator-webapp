@@ -36,12 +36,11 @@ function lint(files, options) {
 }
 const testLintOptions = {
   env: {
+<% if (testFramework === 'mocha') { -%>
     mocha: true
-  },
-  globals: {
-    assert: false,
-    expect: false,
-    should: false
+<% } else if (testFramework === 'jasmine') { -%>
+    jasmine: true
+<% } -%>
   }
 };
 

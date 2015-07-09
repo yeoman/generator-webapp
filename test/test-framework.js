@@ -17,7 +17,7 @@ describe('test framework', function () {
     });
 
     it('uses the correct ESLint environment', function () {
-      assert.fileContent('package.json', 'mocha');
+      assert.fileContent('gulpfile.babel.js', 'mocha');
     });
 
     it('generates the expected fixture', function () {
@@ -38,7 +38,7 @@ describe('test framework', function () {
     });
 
     it('uses the correct ESLint environment', function () {
-      assert.fileContent('package.json', 'jasmine');
+      assert.fileContent('gulpfile.babel.js', 'jasmine');
     });
 
     it('generates the expected fixture', function () {
