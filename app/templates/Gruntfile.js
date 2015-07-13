@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   // Automatically load required grunt tasks
   require('jit-grunt')(grunt, {
-      useminPrepare: 'grunt-usemin'
+    useminPrepare: 'grunt-usemin'
   });
 
   // Configurable paths
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
     // Compiles ES6 with Babel
     babel: {
       options: {
-          sourceMap: true
+        sourceMap: true
       },
       dist: {
         files: [{
