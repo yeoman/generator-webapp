@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   // Automatically load required grunt tasks
   require('jit-grunt')(grunt, {
-      useminPrepare: 'grunt-usemin'
+    useminPrepare: 'grunt-usemin'
   });
 
   // Configurable paths
@@ -57,7 +57,7 @@ module.exports = function (grunt) {
       },<% if (includeSass) { %>
       sass: {
         files: ['<%%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'postcss']
+        tasks: ['sass', 'postcss']
       },<% } %>
       styles: {
         files: ['<%%= config.app %>/styles/{,*/}*.css'],
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
     // Compiles ES6 with Babel
     babel: {
       options: {
-          sourceMap: true
+        sourceMap: true
       },
       dist: {
         files: [{
@@ -195,15 +195,6 @@ module.exports = function (grunt) {
         includePaths: ['.']
       },
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%%= config.app %>/styles',
-          src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
-          ext: '.css'
-        }]
-      },
-      server: {
         files: [{
           expand: true,
           cwd: '<%%= config.app %>/styles',
@@ -417,7 +408,7 @@ module.exports = function (grunt) {
     concurrent: {
       server: [<% if (useBabel) { %>
         'babel:dist',<% } %><% if (includeSass) { %>
-        'sass:server'<% } else { %>
+        'sass'<% } else { %>
         'copy:styles'<% } %>
       ],
       test: [<% if (useBabel) { %>
