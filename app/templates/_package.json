@@ -47,7 +47,8 @@
   "eslintConfig": {
     "env": {
       "node": true,
-      "browser": true<% if (testFramework === 'mocha') { %>,
+      "browser": true<% if (includeJQuery) { %>,
+      "jquery": true<% } if (testFramework === 'mocha') { %>,
       "mocha": true<% } else if (testFramework === 'jasmine') { %>,
       "jasmine": true<% } %>
     },

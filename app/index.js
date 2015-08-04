@@ -127,6 +127,7 @@ module.exports = generators.Base.extend({
         {
           includeSass: this.includeSass,
           includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeBootstrap || this.includeJQuery,
           testFramework: this.options['test-framework'],
           useBabel: this.options['babel']
         }
