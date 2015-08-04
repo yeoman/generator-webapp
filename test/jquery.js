@@ -19,6 +19,10 @@ describe('jquery', function () {
     it('adds the bower dependency', function () {
       assert.fileContent('bower.json', '"jquery"');
     });
+
+    it('uses the eslint environment', function () {
+      assert.fileContent('package.json', '"jquery"');
+    });
   });
 
   describe('off', function () {
@@ -35,6 +39,10 @@ describe('jquery', function () {
 
     it('doesn\'t add the bower dependency', function () {
       assert.noFileContent('bower.json', '"jquery"');
+    });
+
+    it('doesn\'nt uses the ESLint environment', function () {
+      assert.noFileContent('package.json', '"jquery"');
     });
   });
 });
