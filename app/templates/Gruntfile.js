@@ -149,12 +149,20 @@ module.exports = function (grunt) {
     // Jasmine testing framework configuration options
     jasmine: {
       all: {
+<% if (useBabel) { -%>
+        src: '.tmp/scripts/{,*/}.js',
+<% } else { -%>
         src: '{<%%= config.app %>,.tmp}/scripts/{,*/}*.js',
+<% } -%>
         options: {
           vendor: [
             // Your bower_components scripts
           ],
+<% if (useBabel) { -%>
+          specs: '.tmp/spec/{,*/}*.js',
+<% } else { -%>
           specs: '{test,.tmp}/spec/{,*/}*.js',
+<% } -%>
           helpers: '{test,.tmp}/helpers/{,*/}*.js',
           host: 'http://<%%= browserSync.test.options.host %>:<%%= browserSync.test.options.port %>'
         }
