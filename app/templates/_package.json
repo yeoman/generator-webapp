@@ -19,7 +19,7 @@
 <% } -%>
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-eslint": "^16.0.0",
+    "grunt-eslint": "^17.0.0",
     "grunt-filerev": "^2.2.0",
 <% if (testFramework === 'mocha') { -%>
     "grunt-mocha": "^0.4.12",
@@ -45,6 +45,9 @@
     "test": "grunt test"
   },
   "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
+    ],
     "env": {
       "node": true,
       "browser": true<% if (includeJQuery) { %>,
@@ -56,6 +59,10 @@
       "quotes": [
         2,
         "single"
+      ],
+      "indent": [
+        2,
+        2
       ]
     }
   }

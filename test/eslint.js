@@ -20,6 +20,10 @@ describe('eslint', function () {
     assert.fileContent('package.json', 'eslintConfig');
   });
 
+  it('adds eslint recommended rule', function () {
+    assert.fileContent('package.json', 'eslint:recommended');
+  });
+
   it('adds Grunt task', function () {
     assert.fileContent('Gruntfile.js', 'eslint');
   });
