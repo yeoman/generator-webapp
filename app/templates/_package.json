@@ -50,7 +50,8 @@
     ],
     "env": {
       "node": true,
-      "browser": true<% if (includeJQuery) { %>,
+      "browser": true<% if (useBabel) { %>,
+      "es6": true<% } if (includeJQuery) { %>,
       "jquery": true<% } if (testFramework === 'mocha') { %>,
       "mocha": true<% } else if (testFramework === 'jasmine') { %>,
       "jasmine": true<% } %>
