@@ -137,6 +137,7 @@ Recompile Jade templates on each change and reload the browser after an HTML fil
 
 +  gulp.watch('app/**/*.jade', ['views']);
    gulp.watch('app/styles/**/*.scss', ['styles']);
+   gulp.watch('app/fonts/**/*', ['fonts']);
    gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 ```
