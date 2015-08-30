@@ -41,7 +41,7 @@ describe('jquery', function () {
       assert.noFileContent('bower.json', '"jquery"');
     });
 
-    it('doesn\'nt uses the ESLint environment', function () {
+    it('doesn\'t uses the ESLint environment', function () {
       assert.noFileContent('package.json', '"jquery"');
     });
   });
