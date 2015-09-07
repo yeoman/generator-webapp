@@ -136,6 +136,7 @@ gulp.task('serve:test', () => {
     server: {
       baseDir: 'test',
       routes: {
+        '/scripts': 'app/scripts',
         '/bower_components': 'bower_components'
       }
     }
