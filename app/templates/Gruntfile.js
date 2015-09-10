@@ -218,8 +218,8 @@ module.exports = function (grunt) {
         map: true,
         processors: [
           // Add vendor prefixed styles
-          require('autoprefixer-core')({
-            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+          require('autoprefixer')({
+            browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']
           })
         ]
       },
