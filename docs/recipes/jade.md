@@ -34,7 +34,7 @@ $ npm install --save-dev gulp-jade
 Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` files in `.tmp`:
 
 ```js
-gulp.task('views', function () {
+gulp.task('views', () => {
   return gulp.src('app/*.jade')
     .pipe($.jade({pretty: true}))
     .pipe(gulp.dest('.tmp'))
@@ -47,12 +47,12 @@ We are passing `pretty: true` as an option to get a nice HTML output, otherwise 
 ### 3. Add `views` as a dependency of both `html` and `serve`
 
 ```js
-gulp.task('html', ['views', 'styles'], function () {
+gulp.task('html', ['views', 'styles'], () => {
     ...
 ```
 
 ```js
-gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+gulp.task('serve', ['views', 'styles', 'fonts'], () => {
     ...
 ```
 
@@ -63,7 +63,7 @@ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
 We want to parse the compiled HTML:
 
 ```diff
- gulp.task('html', ['views', 'styles'], function () {
+ gulp.task('html', ['views', 'styles'], () => {
    var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
 -  return gulp.src('app/*.html')
@@ -83,7 +83,7 @@ We want to parse the compiled HTML:
 We don't want to copy over `.jade` files in the build process:
 
 ```diff
- gulp.task('extras', function () {
+ gulp.task('extras', () => {
    return gulp.src([
      'app/*.*',
      '!app/*.html',
@@ -99,7 +99,7 @@ We don't want to copy over `.jade` files in the build process:
 Wiredep supports Jade:
 
 ```diff
- gulp.task('wiredep', function () {
+ gulp.task('wiredep', () => {
    var wiredep = require('wiredep').stream;
 
    gulp.src('app/styles/*.scss')
@@ -125,7 +125,7 @@ Assuming your wiredep comment blocks are in the layouts.
 Recompile Jade templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
- gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+ gulp.task('serve', ['views', 'styles', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
@@ -156,6 +156,7 @@ html.no-js
     title My Webapp
     meta(name='description' content='')
     meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='apple-touch-icon' href='apple-touch-icon.png')
     // Place favicon.ico and apple-touch-icon.png in the root directory
 
     // build:css styles/vendor.css
