@@ -28,7 +28,7 @@ $ bower install --save handlebars
 ### 2. Create a `templates` task
 
 ```js
-gulp.task('templates', function () {
+gulp.task('templates', () => {
   return gulp.src('app/templates/**/*.hbs')
     .pipe($.handlebars())
     .pipe($.defineModule('plain'))
@@ -44,12 +44,12 @@ This compiles `.hbs` files into `.js` files in the `.tmp` directory.
 ### 3. Add `templates` as a dependency of both `html` and `serve`
 
 ```js
-gulp.task('html', ['styles', 'templates'], function () {
+gulp.task('html', ['styles', 'templates'], () => {
   ...
 ```
 
 ```js
-gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+gulp.task('serve', ['styles', 'templates', 'fonts'], () => {
     ...
 ```
 
@@ -58,7 +58,7 @@ gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
 Edit your `serve` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the browser is reloaded whenever a `.js` file is generated in `.tmp/templates`:
 
 ```diff
- gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+ gulp.task('serve', ['styles', 'templates', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
