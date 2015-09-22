@@ -23,7 +23,7 @@ $ npm install --save-dev gulp-subtree
 This will run the build task, then push it to the `gh-pages` branch:
 
 ```js
-gulp.task('deploy', ['build'], function () {
+gulp.task('deploy', ['build'], () => {
   return gulp.src('dist')
     .pipe($.subtree())
     .pipe($.clean());
