@@ -76,7 +76,7 @@ Create `app/index.html`:
 ### 4. Create a `views` task
 
 ```js
-gulp.task('views', function () {
+gulp.task('views', () => {
   $.nunjucksRender.nunjucks.configure(['app/']);
 
   return gulp.src('app/*.html')
@@ -90,20 +90,20 @@ This compiles `app/*.html` files into static `.html` files in the `.tmp` directo
 ### 5. Add `views` as a dependency of both `html` and `serve`
 
 ```js
-gulp.task('html', ['views', 'styles'], function () {
+gulp.task('html', ['views', 'styles'], () => {
     ...
 ```
 
 ```js
-gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+gulp.task('serve', ['views', 'styles', 'fonts'], () => {
   ...
 ```
 
 ### 6. Configure `html` task to include files from `.tmp`
 
 ```diff
- gulp.task('html', ['styles', 'views'], function () {
-   var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
+ gulp.task('html', ['styles', 'views'], () => {
+   const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
 -  return gulp.src('app/*.html')
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
@@ -119,7 +119,7 @@ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
 ### 7. Configure `wiredep` task to wire Bower components on layout templates only
 
 ```diff
-  gulp.task('wiredep', function () {
+  gulp.task('wiredep', () => {
     ...
 -   gulp.src('app/*.html')
 +   gulp.src('app/layouts/*.html')
@@ -138,7 +138,7 @@ gulp.task('serve', ['views', 'styles', 'fonts'], function () {
 Edit your `serve` task so that (a) editing an `app/**/*.html` file triggers the `views` task, and (b) reloads the browser:
 
 ```diff
-  gulp.task('serve', ['views', 'styles', 'fonts'], function () {
+  gulp.task('serve', ['views', 'styles', 'fonts'], () => {
     ...
     gulp.watch([
 -     'app/*.html',
