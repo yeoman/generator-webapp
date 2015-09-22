@@ -29,7 +29,7 @@ $ gulp wiredep
 This task preprocesses `.jsx` files into pure JavaScript and outputs them in `.tmp/scripts`.
 
 ```js
-gulp.task('templates', function () {
+gulp.task('templates', () => {
   return gulp.src('app/scripts/**/*.jsx')
     .pipe($.react())
     .pipe(gulp.dest('.tmp/scripts'));
@@ -39,12 +39,12 @@ gulp.task('templates', function () {
 ### 3. Add `templates` as a dependency of `html` and `serve`
 
 ```js
-gulp.task('html', ['styles', 'templates'], function () {
+gulp.task('html', ['styles', 'templates'], () => {
   ...
 ```
 
 ```js
-gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+gulp.task('serve', ['styles', 'templates', 'fonts'], () => {
   ...
 ```
 
@@ -56,7 +56,7 @@ gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
 Edit your `serve` task so that (a) editing a `.jsx` file triggers the `templates` task, and (b) the browser is refreshed whenever a `.js` file is generated in `.tmp/scripts`:
 
 ```diff
- gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+ gulp.task('serve', ['styles', 'templates', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',

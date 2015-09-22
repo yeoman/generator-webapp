@@ -22,7 +22,7 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ### 3. Edit a few tasks
 
 ```diff
- gulp.task('styles', function () {
+ gulp.task('styles', () => {
 -  return gulp.src('app/styles/main.scss')
 -    .pipe($.sass({
 -      outputStyle: 'nested',
@@ -41,8 +41,8 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
 ```diff
- gulp.task('wiredep', function () {
-   var wiredep = require('wiredep').stream;
+ gulp.task('wiredep', () => {
+   const wiredep = require('wiredep').stream;
 
 -  gulp.src('app/styles/*.scss')
 +  gulp.src('app/styles/*.less')
@@ -51,7 +51,7 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
 ```diff
- gulp.task('serve', ['styles', 'fonts'], function () {
+ gulp.task('serve', ['styles', 'fonts'], () => {
    ...
 -  gulp.watch('app/styles/**/*.scss', ['styles', reload]);
 +  gulp.watch('app/styles/**/*.less', ['styles', reload]);
@@ -86,7 +86,7 @@ Now you have two options for including Bootstrap in your page:
   - Exclude Bootstrap's compiled assets in the `wiredep` task:
 
   ```diff
-   gulp.task('wiredep', function () {
+   gulp.task('wiredep', () => {
      ...
      gulp.src('app/*.html')
        .pipe(wiredep({
@@ -112,7 +112,7 @@ $ npm install --save-dev gulp-sourcemaps
 Edit your `less` task to match the following:
 
 ```diff
- gulp.task('styles', function () {
+ gulp.task('styles', () => {
    return gulp.src('app/styles/main.less')
 +    .pipe($.sourcemaps.init())
      .pipe($.less({
