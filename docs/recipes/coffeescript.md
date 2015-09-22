@@ -16,7 +16,7 @@ $ npm install --save-dev gulp-coffee
 This compiles `.coffee` files into the `.tmp` directory.
 
 ```js
-gulp.task('scripts', function () {
+gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.coffee')
     .pipe($.coffee())
     .pipe(gulp.dest('.tmp/scripts'));
@@ -26,12 +26,12 @@ gulp.task('scripts', function () {
 ### 3. Add `scripts` as a dependency of `html` and `serve`
 
 ```js
-gulp.task('html', ['styles', 'scripts'], function () {
+gulp.task('html', ['styles', 'scripts'], () => () {
     ...
 ```
 
 ```js
-gulp.task('serve', ['styles', 'scripts', 'fonts'], function () {
+gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   ...
 ```
 
@@ -40,7 +40,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], function () {
 These changes ensure that (1) generated `.js` files trigger a browser reload, and (2) edits to `.coffee` files trigger recompilation.
 
 ```diff
- gulp.task('serve', ['styles', 'fonts'], function () {
+ gulp.task('serve', ['styles', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
