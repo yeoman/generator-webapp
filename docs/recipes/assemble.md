@@ -128,7 +128,7 @@ useminPrepare: {
             '*.{ico,png,txt}',
             'images/{,*/}*.webp',
 -           '{,*/}*.html',
-            'styles/fonts/{,*/}*.*'
+            'fonts/{,*/}*.*'
           ]
 +       }, {
 +         expand: true,
