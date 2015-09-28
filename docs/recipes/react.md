@@ -6,21 +6,21 @@ This recipe gets you set up with React, including precompilation of JSX into Jav
 
 ### 1. Add dependencies
 
-Install [gulp-react](https://github.com/sindresorhus/gulp-react), a gulp plugin for transforming JSX templates into real JavaScript:
+Install [gulp-react](https://github.com/sindresorhus/gulp-react), a gulp plugin for transforming JSX templates into vanilla JavaScript:
 
-```sh
+```
 $ npm install --save-dev gulp-react
 ```
 
 Install [React](https://github.com/facebook/react) itself as a Bower component:
 
-```sh
+```
 $ bower install --save react
 ```
 
 Run the wiredep task to insert a script tag into your `app/index.html`:
 
-```sh
+```
 $ gulp wiredep
 ```
 

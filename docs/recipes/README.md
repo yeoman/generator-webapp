@@ -7,6 +7,7 @@
 - [GitHub Pages](gh-pages.md)
 - [Asset revisioning](asset-revisioning.md)
 - [React](react.md)
+- [React Router](react-router.md)
 - [Nunjucks](nunjucks.md)
 - [AWS S3 deployment](aws-s3-deployment.md)
 

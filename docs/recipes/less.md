@@ -15,7 +15,7 @@ But don't choose Bootstrap in the generator – it's easier to manually set up t
 
 Remove gulp-sass and install [gulp-less](https://github.com/plus3network/gulp-less) instead:
 
-```sh
+```
 $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
@@ -72,7 +72,7 @@ Then verify that `gulp build` and `gulp serve` work correctly. While `gulp serve
 
 Install it as a bower component:
 
-```sh
+```
 $ bower install --save bootstrap
 ```
 
@@ -105,7 +105,7 @@ Now you have two options for including Bootstrap in your page:
 
 Install [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps):
 
-```sh
+```
 $ npm install --save-dev gulp-sourcemaps
 ```
 

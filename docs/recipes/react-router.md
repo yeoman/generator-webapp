@@ -1,25 +1,20 @@
 # Setting up React Router in addition to React and JSX
 
-This recipe builds on the React recipe and gets you set up with React Router in addition to React and JSX.
+This recipe builds on the [React recipe](react.md) and gets you set up with React Router in addition to React and JSX.
+
 
 ## Steps
 
 ### 1. React recipe
 
-Follow the steps in the [React recipe](https://github.com/yeoman/generator-gulp-webapp/blob/master/docs/recipes/react.md) to get set up with React and JSX.
+Follow the steps in the React recipe to get set up with React and JSX.
 
 ### 2. Add dependencies
 
-Install [React Router](https://github.com/rackt/react-router):
+Install [React Router](https://github.com/rackt/react-router) and [webpack](https://github.com/webpack/webpack) (bundler for JavaScript modules):
 
-```sh
-$ npm install react-router --save-dev
 ```
-
-Install [webpack](https://github.com/webpack/webpack), a bundler for JavaScript modules:
-
-```sh
-$ npm install webpack --save-dev
+$ npm install --save-dev react-router webpack
 ```
 
 ### 3. Add a `webpack` script
@@ -42,16 +37,19 @@ import webpack from 'webpack';
 Add the task. This task bundles the webpack script, including React Router, and outputs it in `.tmp/scripts`.
 
 ```js
-gulp.task('webpack', function(callback) {
+gulp.task('webpack', cb => {
   webpack({
     entry: './app/scripts/webpack.js',
     output: {
       path: '.tmp/scripts/',
       filename: 'bundle.js',
     },
-  }, function(err, stats) {
-    if (err) throw new gutil.PluginError('webpack', err);
-    callback();
+  }, (err, stats) => {
+    if (err) {
+      throw new gutil.PluginError('webpack', err);
+    }
+
+    cb();
   });
 });
 ```
@@ -59,12 +57,12 @@ gulp.task('webpack', function(callback) {
 ### 4. Add `webpack` as a dependency of `html` and `serve`
 
 ```js
-gulp.task('html', ['styles', 'templates', 'webpack'], function () {
+gulp.task('html', ['styles', 'templates', 'webpack'], () => {
   ...
 ```
 
 ```js
-gulp.task('serve', ['styles', 'templates', 'webpack', 'fonts'], function () {
+gulp.task('serve', ['styles', 'templates', 'webpack', 'fonts'], () => {
   ...
 ```
 
@@ -73,7 +71,7 @@ gulp.task('serve', ['styles', 'templates', 'webpack', 'fonts'], function () {
 Edit your `serve` task so that editing the `webpack.js` file triggers the `webpack` task, and (b) the browser is refreshed whenever a `.js` file is generated in `.tmp/scripts`:
 
 ```diff
- gulp.task('serve', ['styles', 'templates', 'fonts'], function () {
+ gulp.task('serve', ['styles', 'templates', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
@@ -94,7 +92,7 @@ Edit your `serve` task so that editing the `webpack.js` file triggers the `webpa
 
 Insert a script tag into your `app/index.html`:
 
-```
+```diff
     <!-- build:js scripts/main.js -->
 +   <script src="scripts/bundle.js"></script>
 ```

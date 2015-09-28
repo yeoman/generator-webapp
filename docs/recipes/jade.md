@@ -25,7 +25,7 @@ If you had something different in mind, modify paths accordingly.
 
 Install the Jade gulp plugin:
 
-```sh
+```
 $ npm install --save-dev gulp-jade
 ```
 

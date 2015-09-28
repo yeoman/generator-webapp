@@ -9,7 +9,7 @@ This recipe shows how to set up Handlebars to precompile your templates, includi
 
 Install some gulp plugins:
 
-```sh
+```
 $ npm install --save-dev gulp-handlebars gulp-define-module gulp-declare
 ```
 
@@ -18,7 +18,7 @@ $ npm install --save-dev gulp-handlebars gulp-define-module gulp-declare
 
 Install Handlebars as a bower component:
 
-```sh
+```
 $ bower install --save handlebars
 ```
 

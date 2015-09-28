@@ -7,7 +7,7 @@ With this setup you can freely mix `.js` and `.coffee` files in your `app/script
 
 ### 1. Install the [gulp-coffee](https://github.com/wearefractal/gulp-coffee) plugin
 
-```sh
+```
 $ npm install --save-dev gulp-coffee
 ```
 

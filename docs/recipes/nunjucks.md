@@ -25,7 +25,7 @@ If you had something different in mind, modify paths accordingly.
 
 Install [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render) to render Nunjucks template language to HTML:
 
-```sh
+```
 $ npm install --save-dev gulp-nunjucks-render
 ```
 
@@ -48,7 +48,7 @@ Modify `app/index.html`:
 
 Make it the default layout template:
 
-```sh
+```
 $ mv app/index.html app/layouts/default.html
 ```
 
