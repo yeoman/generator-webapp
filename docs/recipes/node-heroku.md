@@ -1,56 +1,57 @@
 # Deploying to Heroku using Node.js
 
-This is an easy way publish your site on heroku using Node to serve the generated static files.
+This is an easy way publish your site on Heroku using Node.js to serve the generated static files.
 
 ## Steps
 
 ### 1. Set dist/public as dist target
 
-In your gulpfile change distribution directory to gulp/dist, do not rename the taskname
-Eg. https://gist.github.com/gaboesquivel/b71d153475141a8f1c61
-
-Also update your `.gitignore` file.
+In your gulpfile, change the distribution directory to gulp/dist, do not rename the taskname. [Example](https://gist.github.com/gaboesquivel/b71d153475141a8f1c61). Also update your `.gitignore` file.
 
 ### 2. Create dist/server.js
 
 ```js
-var express = require('express')
-var serveStatic = require('serve-static')
-var compression = require('compression')
-var port = process.env.PORT || 3000;
-var domain =  process.env.DOMAIN;
+const express = require('express');
+const serveStatic = require('serve-static');
+const compression = require('compression');
+const port = process.env.PORT || 3000;
+const domain =  process.env.DOMAIN;
 
-function ensureDomain(req, res, next){
-  if(!domain || req.hostname === domain){
+function ensureDomain(req, res, next) {
+  if (!domain || req.hostname === domain) {
     // OK, continue
     return next();
   };
-  res.redirect('http://'+domain+req.url); // handle port numbers if you need non defaults
+
+  // handle port numbers if you need non defaults
+  res.redirect(`http://${domain}${req.url}`);
 };
 
+const app = express();
 
-var app = express();
-app.all('*', ensureDomain); // at top of routing calls
+// at top of routing calls
+app.all('*', ensureDomain);
+
 app.use(compression());
-app.use(serveStatic(__dirname + '/public', {'extensions': ['html']}))  // default to .html ( you can omit the extension in the url )
+
+// default to .html (you can omit the extension in the URL)
+app.use(serveStatic(`${__dirname}/public`, {'extensions': ['html']}));
+
 app.listen(port, () => {
-  console.log('server running...');
+  console.log('Server running...');
 });
 ```
 
 ### 3. Create dist/package.json
+
 ```json
 {
-  "name": "mysite",
-  "version": "0.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "engines":{
-    "node": "4.1.1"
+    "node": ">=4"
   },
   "dependencies": {
     "compression": "^1.4.4",
@@ -62,6 +63,6 @@ app.listen(port, () => {
 
 ### 4. Push the dist folder to Heroku
 
-Use the [Heroku Toolbelt](https://github.com/heroku/heroku)  to create an app and push your dist folder to the heroku server.
+Use the [Heroku Toolbelt](https://github.com/heroku/heroku) to create an app and push your `dist` folder to Heroku.
 
 That's it!
