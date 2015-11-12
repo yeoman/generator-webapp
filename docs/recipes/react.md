@@ -32,6 +32,10 @@ This task preprocesses `.jsx` files into pure JavaScript and outputs them in `.t
 gulp.task('templates', () => {
   return gulp.src('app/scripts/**/*.jsx')
     .pipe($.react())
+    .on('error', function (err) {
+      console.log(err);
+      this.end();
+    }))    
     .pipe(gulp.dest('.tmp/scripts'));
 });
 ```
