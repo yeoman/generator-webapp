@@ -31,11 +31,13 @@ This task preprocesses `.jsx` files into pure JavaScript and outputs them in `.t
 ```js
 gulp.task('templates', () => {
   return gulp.src('app/scripts/**/*.jsx')
+    .pipe($.sourcemaps.init())
     .pipe($.react())
     .on('error', function (err) {
       console.log(err);
       this.end();
-    }))    
+    }))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'));
 });
 ```
