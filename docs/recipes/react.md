@@ -6,10 +6,10 @@ This recipe gets you set up with React, including precompilation of JSX into Jav
 
 ### 1. Add dependencies
 
-Install [gulp-react](https://github.com/sindresorhus/gulp-react), a gulp plugin for transforming JSX templates into vanilla JavaScript:
+Install [gulp-babel](https://github.com/babel/gulp-babel), and the required presets for transforming JSX templates into vanilla JavaScript:
 
 ```
-$ npm install --save-dev gulp-react
+$ npm install --save-dev gulp-babel babel-preset-es2015 babel-preset-react
 ```
 
 Install [React](https://github.com/facebook/react) itself as a Bower component:
@@ -32,10 +32,8 @@ This task preprocesses `.jsx` files into pure JavaScript and outputs them in `.t
 gulp.task('templates', () => {
   return gulp.src('app/scripts/**/*.jsx')
     .pipe($.sourcemaps.init())
-    .pipe($.react())
-    .on('error', function (err) {
-      console.log(err);
-      this.end();
+    .pipe($.babel({
+      presets: ['es2015','react']
     }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'));
