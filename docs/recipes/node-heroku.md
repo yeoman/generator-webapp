@@ -6,7 +6,7 @@ This is an easy way publish your site on Heroku using Node.js to serve the gener
 
 ### 1. Set dist/public as dist target
 
-In your gulpfile, change the distribution directory to gulp/dist, do not rename the taskname. [Example](https://gist.github.com/gaboesquivel/b71d153475141a8f1c61). Also update your `.gitignore` file.
+In your gulpfile, change the distribution directory to dist/public, do not rename the taskname. [Example](https://gist.github.com/gaboesquivel/b71d153475141a8f1c61). Also update your `.gitignore` file.
 
 ### 2. Create dist/server.js
 
