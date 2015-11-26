@@ -16,7 +16,7 @@
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "^0.12.2",
     "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-imagemin": "^0.9.3",
+    "grunt-contrib-imagemin": "^1.0.0",
 <% if (testFramework === 'jasmine') { -%>
     "grunt-contrib-jasmine": "^0.8.2",
 <% } -%>
