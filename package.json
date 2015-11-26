@@ -7,7 +7,7 @@
   "author": "Yeoman",
   "main": "app/index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --reporter spec --timeout 3000"
   },
   "files": [
     "app"
