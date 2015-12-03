@@ -45,6 +45,7 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 * [getting started](docs/README.md) with this generator
 * [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript
 * [details](docs/bower.md) about our Bower setup
+* [contribution](contributing.md) docs and [FAQ](docs/faq.md), good to check before posting an issue
 
 
 ## Options
