@@ -23,10 +23,10 @@ If you had something different in mind, modify paths accordingly.
 
 ### 1. Install dependencies
 
-Install [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render) to render Nunjucks template language to HTML:
+Install [gulp-nunjucks](https://github.com/sindresorhus/gulp-nunjucks) to render Nunjucks template language to HTML:
 
 ```
-$ npm install --save-dev gulp-nunjucks-render
+$ npm install --save-dev gulp-nunjucks
 ```
 
 ### 2. Modify `app/index.html` to create as `app/layouts/default.html` layouts template
@@ -77,10 +77,8 @@ Create `app/index.html`:
 
 ```js
 gulp.task('views', () => {
-  $.nunjucksRender.nunjucks.configure(['app/']);
-
   return gulp.src('app/*.html')
-    .pipe($.nunjucksRender())
+    .pipe($.nunjucks(['app/']))
     .pipe(gulp.dest('.tmp'))
 });
 ```
