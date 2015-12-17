@@ -2,6 +2,12 @@
 
 [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app.
 
+## Looking for New Maintainers
+
+This generator is not actively maintained because we're focusing on [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp), which is very similar, but uses [gulp](http://gulpjs.com) instead of Grunt.
+
+We would be happy to take on new maintainers and will still be around for merging PRs.
+
 ![](http://i.imgur.com/uKTT2Hj.png)
 
 ## Features
