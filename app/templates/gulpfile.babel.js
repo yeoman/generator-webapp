@@ -88,9 +88,11 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', () => {
+  return del.bind(null, ['.tmp', 'dist']);
+});
 
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['clean', 'styles', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
