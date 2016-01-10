@@ -27,6 +27,7 @@ describe('general', function () {
       'bower.json',
       'package.json',
       'gulpfile.babel.js',
+      '.babelrc',
       '.editorconfig',
       '.bowerrc',
       '.gitignore',

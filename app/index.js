@@ -133,6 +133,13 @@ module.exports = generators.Base.extend({
       );
     },
 
+    babel: function () {
+      this.fs.copy(
+        this.templatePath('babelrc'),
+        this.destinationPath('.babelrc')
+      );
+    },
+
     git: function () {
       this.fs.copy(
         this.templatePath('gitignore'),

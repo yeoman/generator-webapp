@@ -4,12 +4,13 @@
     "node": ">=0.12.0"
   },
   "devDependencies": {
-    "babel-core": "^5.5.6",
+    "babel-core": "^6.4.0",
+    "babel-preset-es2015": "^6.3.13",
     "browser-sync": "^2.2.1",
     "del": "^1.1.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",<% if (includeBabel) { %>
-    "gulp-babel": "^5.3.0",<% } %>
+    "gulp-babel": "^6.1.1",<% } %>
     "gulp-cache": "^0.2.8",
     "gulp-cssnano": "^2.0.0",
     "gulp-eslint": "^0.13.2",
