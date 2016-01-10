@@ -27,6 +27,7 @@ describe('Babel feature', function () {
       assert.fileContent('gulpfile.babel.js', "['styles', 'scripts', 'fonts']");
       assert.fileContent('gulpfile.babel.js', "'.tmp/scripts/**/*.js',");
       assert.fileContent('gulpfile.babel.js', "gulp.watch('app/scripts/**/*.js', ['scripts'])");
+      assert.fileContent('gulpfile.babel.js', "'/scripts': '.tmp/scripts',");
     });
   });
 
@@ -53,6 +54,7 @@ describe('Babel feature', function () {
       assert.fileContent('gulpfile.babel.js', "['styles', 'fonts']");
       assert.fileContent('gulpfile.babel.js', "'app/scripts/**/*.js',");
       assert.noFileContent('gulpfile.babel.js', "gulp.watch('app/scripts/**/*.js', ['scripts'])");
+      assert.fileContent('gulpfile.babel.js', "'/scripts': 'app/scripts',");
     });
   });
 });
