@@ -25,20 +25,17 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     .pipe(reload({stream: true}));
 });
 
-gulp.task('scripts', () => {<% if (includeBabel) { %>
+<% if (includeBabel) { -%>
+gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
+    .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .on('error', function (e) {
-      process.stderr.write(e + '\n');
-      this.emit('end');
-    })<% } else { %>
-  return gulp.src('app/scripts/**/*.js')
-    .pipe($.sourcemaps.init())<% } %>
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(reload({stream: true}));
 });
+<% } -%>
 
 function lint(files, options) {
   return () => {
@@ -62,7 +59,11 @@ const testLintOptions = {
 gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
+<% if (includeBabel) { -%>
 gulp.task('html', ['styles', 'scripts'], () => {
+<% } else { -%>
+gulp.task('html', ['styles'], () => {
+<% } -%>
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
@@ -105,7 +106,11 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
+<% if (includeBabel) { -%>
 gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+<% } else { -%>
+gulp.task('serve', ['styles', 'fonts'], () => {
+<% } -%>
   browserSync({
     notify: false,
     port: 9000,
@@ -119,13 +124,19 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 
   gulp.watch([
     'app/*.html',
+<% if (includeBabel) { -%>
     '.tmp/scripts/**/*.js',
+<% } else { -%>
+    'app/scripts/**/*.js',
+<% } -%>
     'app/images/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
+<% if (includeBabel) { -%>
   gulp.watch('app/scripts/**/*.js', ['scripts']);
+<% } -%>
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });

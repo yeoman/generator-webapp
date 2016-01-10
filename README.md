@@ -58,6 +58,8 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 - `--test-framework=<framework>`
   Either `mocha` or `jasmine`. Defaults to `mocha`.
+- `--no-babel`
+  Scaffolds without [Babel](http://babeljs.io) support (this only applies to `app/scripts`, you can still write ES2015 in the gulpfile)
 
 
 ## Contribute

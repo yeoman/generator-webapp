@@ -28,6 +28,12 @@ module.exports = generators.Base.extend({
       defaults: 'mocha'
     });
 
+    this.option('babel', {
+      desc: 'Use Babel',
+      type: Boolean,
+      defaults: true
+    });
+
     if (this.options['test-framework'] === 'mocha') {
       testLocal = require.resolve('generator-mocha/generators/app/index.js');
     } else if (this.options['test-framework'] === 'jasmine') {
@@ -70,10 +76,6 @@ module.exports = generators.Base.extend({
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: true
-      }, {
-        name: 'Babel',
-        value: 'includeBabel',
-        checked: true
       }]
     }, {
       type: 'confirm',
@@ -97,7 +99,6 @@ module.exports = generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
-      this.includeBabel = hasFeature('includeBabel');
       this.includeJQuery = answers.includeJQuery;
 
       done();
@@ -115,7 +116,7 @@ module.exports = generators.Base.extend({
           version: this.pkg.version,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
-          includeBabel: this.includeBabel,
+          includeBabel: this.options['babel'],
           testFramework: this.options['test-framework']
         }
       );
@@ -127,7 +128,7 @@ module.exports = generators.Base.extend({
         this.destinationPath('package.json'),
         {
           includeSass: this.includeSass,
-          includeBabel: this.includeBabel
+          includeBabel: this.options['babel']
         }
       );
     },
