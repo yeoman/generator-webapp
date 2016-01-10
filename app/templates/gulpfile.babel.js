@@ -25,6 +25,21 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     .pipe(reload({stream: true}));
 });
 
+gulp.task('scripts', () => {<% if (includeBabel) { %>
+  return gulp.src('app/scripts/**/*.js')
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .on('error', function (e) {
+      process.stderr.write(e + '\n');
+      this.emit('end');
+    })<% } else { %>
+  return gulp.src('app/scripts/**/*.js')
+    .pipe($.sourcemaps.init())<% } %>
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts'))
+    .pipe(reload({stream: true}));
+});
+
 function lint(files, options) {
   return () => {
     return gulp.src(files)
@@ -47,7 +62,7 @@ const testLintOptions = {
 gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
-gulp.task('html', ['styles'], () => {
+gulp.task('html', ['styles', 'scripts'], () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
@@ -90,7 +105,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -104,12 +119,13 @@ gulp.task('serve', ['styles', 'fonts'], () => {
 
   gulp.watch([
     'app/*.html',
-    'app/scripts/**/*.js',
+    '.tmp/scripts/**/*.js',
     'app/images/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
+  gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });

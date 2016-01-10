@@ -5,6 +5,7 @@ Options:
     Sass: Include Sass
     Bootstrap: Include Bootstrap or Bootstrap Sass if Sass is included
     Modernizr: Include Modernizr
+    Babel: Use ES2015 features by using Babel
 
 Example:
     yo gulp-webapp
