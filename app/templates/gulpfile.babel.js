@@ -163,7 +163,11 @@ gulp.task('serve:test', () => {
     server: {
       baseDir: 'test',
       routes: {
-        '/scripts': <%= includeBabel ? '.tmp/scripts' : 'app/scripts' %>,
+<% if (includeBabel) { -%>
+        '/scripts': '.tmp/scripts',
+<% } else { -%>
+        '/scripts': 'app/scripts',
+<% } -%>
         '/bower_components': 'bower_components'
       }
     }
