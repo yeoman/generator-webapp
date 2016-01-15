@@ -296,6 +296,11 @@ module.exports = function (grunt) {
           cwd: '<%%= config.app %>/images',
           src: '{,*/}*.{gif,jpeg,jpg,png}',
           dest: '<%%= config.dist %>/images'
+        },{
+          expand: true,
+          cwd: '<%%= config.app %%>',
+          src: '*.{ico,png}',
+          dest: '<%%= config.dist %%>'
         }]
       }
     },
@@ -369,7 +374,7 @@ module.exports = function (grunt) {
           cwd: '<%%= config.app %>',
           dest: '<%%= config.dist %>',
           src: [
-            '*.{ico,png,txt}',
+            '*.txt',
             'images/{,*/}*.webp',
             '{,*/}*.html',
             'fonts/{,*/}*.*'
