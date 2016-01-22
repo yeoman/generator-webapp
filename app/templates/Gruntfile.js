@@ -298,9 +298,9 @@ module.exports = function (grunt) {
           dest: '<%%= config.dist %>/images'
         },{
           expand: true,
-          cwd: '<%%= config.app %%>',
+          cwd: '<%%= config.app %>',
           src: '*.{ico,png}',
-          dest: '<%%= config.dist %%>'
+          dest: '<%%= config.dist %>'
         }]
       }
     },
