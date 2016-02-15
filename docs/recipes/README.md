@@ -24,25 +24,25 @@
 If you haven't already, clone the generator and link it:
 
 ```sh
-$ git clone https://github.com/yeoman/generator-gulp-webapp
-$ cd generator-gulp-webapp
+$ git clone https://github.com/yeoman/generator-webapp
+$ cd generator-webapp
 $ npm link
 $ cd ../
 ```
 
-Now the `yo gulp-webapp` command will use that version of the generator. To make sure this is actually true:
+Now the `yo webapp` command will use that version of the generator. To make sure this is actually true:
 
 ```sh
-$ npm ls -g generator-gulp-webapp
+$ npm ls -g generator-webapp
 # you should get something like
 /usr/local/lib
-└── generator-gulp-webapp@0.1.0  -> /Users/username/generator-gulp-webapp
+└── generator-webapp@0.1.0  -> /Users/username/generator-webapp
 ```
 
 To update the generator, all you need to do is:
 
 ```sh
-$ cd generator-gulp-webapp
+$ cd generator-webapp
 $ git pull origin master
 $ cd ../
 ```
@@ -53,7 +53,7 @@ Writing a recipe without actually testing it is very hard and error-prone, you s
 
 ```sh
 $ mkdir recipe-stylus && cd $_
-$ yo gulp-webapp
+$ yo webapp
 # select all options
 ```
 
