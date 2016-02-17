@@ -77,10 +77,10 @@ Create `app/index.html`:
 
 ```js
 gulp.task('views', () => {
-  $.nunjucksRender.nunjucks.configure(['app/']);
-
-  return gulp.src('app/*.html')
-    .pipe($.nunjucksRender())
+  return gulp.src('app/**/*.html')
+    .pipe($.nunjucksRender({
+      path: ['app/']
+    }))
     .pipe(gulp.dest('.tmp'))
 });
 ```
