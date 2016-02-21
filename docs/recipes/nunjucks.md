@@ -7,14 +7,14 @@ We assume your directory structure will look something like this:
 ```
 webapp
 └── app
-    ├── about.html
-    ├── contact.html
-    ├── index.html
+    ├── about.njk
+    ├── contact.njk
+    ├── index.njk
     ├── includes
-    │   ├── footer.html
-    │   └── header.html
+    │   ├── footer.njk
+    │   └── header.njk
     └── layouts
-        └── default.html
+        └── default.njk
 ```
 
 If you had something different in mind, modify paths accordingly.
@@ -29,7 +29,7 @@ Install [gulp-nunjucks-render](https://github.com/carlosl/gulp-nunjucks-render) 
 $ npm install --save-dev gulp-nunjucks-render
 ```
 
-### 2. Modify `app/index.html` to create as `app/layouts/default.html` layouts template
+### 2. Modify `app/index.html` to create as `app/layouts/default.njk` layouts template
 
 Modify `app/index.html`:
 
@@ -49,15 +49,15 @@ Modify `app/index.html`:
 Make it the default layout template:
 
 ```
-$ mv app/index.html app/layouts/default.html
+$ mv app/index.html app/layouts/default.njk
 ```
 
-### 3. Create new Nunjucks `app/index.html` page to extend from `app/layouts/default.html`
+### 3. Create new Nunjucks `app/index.njk` page to extend from `app/layouts/default.njk`
 
-Create `app/index.html`:
+Create `app/index.njk`:
 
 ```diff
-+{% extends "layouts/default.html" %}
++{% extends "layouts/default.njk" %}
 +
 +{% block content %}
 +  <div class="hero-unit">
@@ -77,20 +77,20 @@ Create `app/index.html`:
 
 ```js
 gulp.task('views', () => {
-  return gulp.src('app/*.html')
-    .pipe($.nunjucksRender({
-      path: ['app/']
+  return gulp.src('app/*.njk')
+  .pipe($.nunjucksRender({
+      path: 'app'
     }))
     .pipe(gulp.dest('.tmp'))
 });
 ```
 
-This compiles `app/*.html` files into static `.html` files in the `.tmp` directory.
+This compiles `app/*.njk` files into static `.html` files in the `.tmp` directory.
 
 ### 5. Add `views` as a dependency of both `html` and `serve`
 
 ```js
-gulp.task('html', ['views', 'styles'], () => {
+gulp.task('html', ['views', 'styles', 'scripts'], () => {
     ...
 ```
 
@@ -102,46 +102,75 @@ gulp.task('serve', ['views', 'styles', 'fonts'], () => {
 ### 6. Configure `html` task to include files from `.tmp`
 
 ```diff
- gulp.task('html', ['styles', 'views'], () => {
-   const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
-
+ gulp.task('html', ['styles', 'views', 'scripts'], () => {
 -  return gulp.src('app/*.html')
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
-     .pipe(assets)
      .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.minifyCss({compatibility: 'ie8'})))
-     .pipe(assets.restore())
-     .pipe($.useref())
+     .pipe($.if('*.css', $.cssnano()))
+     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
      .pipe(gulp.dest('dist'));
  });
 ```
 
-### 7. Configure `wiredep` task to wire Bower components on layout templates only
+### 7. Update `extras`
+
+We don't want to copy over `.njk` files in the build process:
+
+```diff
+ gulp.task('extras', () => {
+   return gulp.src([
+     'app/*.*',
+-    '!app/*.html'
++    '!app/*.html',
++    '!app/*.njk'
+   ], {
+     dot: true
+   }).pipe(gulp.dest('dist'));
+ });
+```
+
+### 8. Configure `wiredep` task to wire Bower components on layout templates only
+
+Wiredep does not support `.njk`, so also add in the file type definition.
 
 ```diff
   gulp.task('wiredep', () => {
     ...
 -   gulp.src('app/*.html')
-+   gulp.src('app/layouts/*.html')
++   gulp.src('app/layouts/*.njk')
       .pipe(wiredep({
         exclude: ['bootstrap-sass'],
-        ignorePath: /^(\.\.\/)*\.\./
-      }))
+-       ignorePath: /^(\.\.\/)*\.\./
++       ignorePath: /^(\.\.\/)*\.\./,
++       fileTypes: {
++         njk: {
++           block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
++           detect: {
++             js: /<script.*src=['"]([^'"]+)/gi,
++             css: /<link.*href=['"]([^'"]+)/gi
++           },
++           replace: {
++             js: '<script src="{{filePath}}"></script>',
++             css: '<link rel="stylesheet" href="{{filePath}}" />'
++           }
++         }
++       }
++     }))
 -     .pipe(gulp.dest('app'));
 +     .pipe(gulp.dest('app/layouts'));
   });
 ```
 
 
-### 8. Edit your `serve` task
+### 9. Edit your `serve` task
 
-Edit your `serve` task so that (a) editing an `app/**/*.html` file triggers the `views` task, and (b) reloads the browser:
+Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an `app/**/*.html` or `app/**/*.njk` file triggers the `views` task, and (b) reloads the browser:
 
 ```diff
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
     ...
     gulp.watch([
--     'app/*.html',
+      'app/*.html',
 +     '.tmp/*.html',
       '.tmp/styles/**/*.css',
       'app/scripts/**/*.js',
@@ -149,9 +178,10 @@ Edit your `serve` task so that (a) editing an `app/**/*.html` file triggers the 
     ]).on('change', reload);
 
 +   gulp.watch('app/**/*.html', ['views', reload]);
++   gulp.watch('app/**/*.njk', ['views', reload]);
     gulp.watch('app/styles/**/*.scss', ['styles', reload]);
     gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
   });
 ```
 
-Notice that we don't watch `.html` files in `app` anymore (unlike in the [Jade](docs/recipes/jade.md) recipe). This is because our templates and compiled files have the same extension, so we want to make sure to refresh the browser once the templates have been compiled.
+Notice we are still watching `.html` files in `app` because our templates have a different extension.
