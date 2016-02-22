@@ -103,9 +103,9 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 <% if (includeBabel) { -%>
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['styles', 'scripts', 'fonts', 'clean-images'], () => {
 <% } else { -%>
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['styles', 'fonts', 'clean-images'], () => {
 <% } -%>
   browserSync({
     notify: false,
@@ -134,6 +134,16 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
+
+gulp.task('clean-images', function(){
+  var watcherImages = gulp.watch('app/images/**/*');
+  watcherImages.on('change', function(event){
+    if (event.type === 'deleted'){
+      del(event.path.replace('app', 'dist'));
+    }
+  });
+});
+
 
 gulp.task('serve:dist', () => {
   browserSync({
