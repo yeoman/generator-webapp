@@ -1,13 +1,11 @@
 'use strict';
 var path = require('path');
+var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
-var helpers = require('yeoman-generator').test;
 
 describe('gulp tasks', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
-      .inDir(path.join(__dirname, 'temp'))
-      .withOptions({'skip-install': true})
       .withPrompts({features: []})
       .on('end', done);
   });

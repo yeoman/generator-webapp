@@ -1,17 +1,13 @@
 'use strict';
 var path = require('path');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 
 describe('test framework', function () {
   describe('mocha', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({
-          'skip-install': true,
-          'test-framework': 'mocha'
-        })
+        .withOptions({'test-framework': 'mocha'})
         .withPrompts({features: []})
         .on('end', done);
     });
@@ -28,11 +24,7 @@ describe('test framework', function () {
   describe('jasmine', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({
-          'skip-install': true,
-          'test-framework': 'jasmine'
-        })
+        .withOptions({'test-framework': 'jasmine'})
         .withPrompts({features: []})
         .on('end', done);
     });

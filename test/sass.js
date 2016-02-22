@@ -1,14 +1,12 @@
 'use strict';
 var path = require('path');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 
 describe('Sass feature', function () {
   describe('on', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true})
         .withPrompts({features: [
           'includeSass'
         ]})
@@ -28,8 +26,7 @@ describe('Sass feature', function () {
   describe('off', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true, 'babel': false})
+        .withOptions({'babel': false})
         .withPrompts({features: []})
         .on('end', done);
     });
