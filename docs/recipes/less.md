@@ -23,43 +23,42 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 
 ```diff
  gulp.task('styles', () => {
--  return gulp.src('app/styles/main.scss')
--    .pipe($.sass({
--      outputStyle: 'nested',
+-  return gulp.src('app/styles/*.scss')
++  return gulp.src('app/styles/*.less')
+     .pipe($.plumber())
+     .pipe($.sourcemaps.init())
+-    .pipe($.sass.sync({
+-      outputStyle: 'expanded',
 -      precision: 10,
--      includePaths: ['.'],
--      onError: console.error.bind(console, 'Sass error:')
-+  return gulp.src('app/styles/main.less')
+-      includePaths: ['.']
+-    }).on('error', $.sass.logError))
 +    .pipe($.less({
 +      paths: ['.']
-     }))
-     .pipe($.postcss([
-       require('autoprefixer-core')({browsers: ['last 1 version']})
-     ]))
-     .pipe(gulp.dest('.tmp/styles'));
- });
++    }))
+     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
+     .pipe($.sourcemaps.write())
+     .pipe(gulp.dest('.tmp/styles'))
+     .pipe(reload({stream: true}));
+});
+```
+
+```diff
+gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+   ...
+-  gulp.watch('app/styles/**/*.scss', ['styles']);
++  gulp.watch('app/styles/**/*.less', ['styles']);
+   ...
 ```
 
 ```diff
  gulp.task('wiredep', () => {
-   const wiredep = require('wiredep').stream;
-
 -  gulp.src('app/styles/*.scss')
 +  gulp.src('app/styles/*.less')
      ...
  });
 ```
 
-```diff
- gulp.task('serve', ['styles', 'fonts'], () => {
-   ...
--  gulp.watch('app/styles/**/*.scss', ['styles', reload]);
-+  gulp.watch('app/styles/**/*.less', ['styles', reload]);
-   gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
- });
-```
-
-### 4. Check it's working
+### 4. Check that it's working
 
 Delete `app/styles/main.scss` and replace it with your own `main.less`.
 
@@ -99,36 +98,3 @@ Now you have two options for including Bootstrap in your page:
   - In your `main.less`, add `@import "bower_components/bootstrap/less/bootstrap.less";` – or you could do [something more granular](http://www.helloerik.com/bootstrap-3-less-workflow-tutorial)
   - In your `index.html`, add script tags for the individual components you want, e.g. `<script src="/bower_components/bootstrap/js/affix.js"></script>`
     - NB: Some modules depend on others, e.g. `popover.js` depends on `tooltip.js` – see the [docs](http://getbootstrap.com/javascript/)
-
-
-### Add Less Source Maps
-
-Install [gulp-sourcemaps](https://github.com/floridoo/gulp-sourcemaps):
-
-```
-$ npm install --save-dev gulp-sourcemaps
-```
-
-Edit your `less` task to match the following:
-
-```diff
- gulp.task('styles', () => {
-   return gulp.src('app/styles/main.less')
-+    .pipe($.sourcemaps.init())
-     .pipe($.less({
-       paths: ['.']
-     }))
-     .pipe($.postcss([
-       require('autoprefixer-core')({browsers: ['last 1 version']})
-     ]))
-+    .pipe($.sourcemaps.write('.'))
-     .pipe(gulp.dest('.tmp/styles'));
- });
-```
-
-Note that in this example it's specified that an external sourcemap should get written to the same directory as the CSS output. The default is to write the sourcemap inline:
-
-```diff
-- .pipe($.sourcemaps.write('.'))
-+ .pipe($.sourcemaps.write())
-```
