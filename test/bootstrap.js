@@ -1,14 +1,12 @@
 'use strict';
 var path = require('path');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 
 describe('Bootstrap feature', function () {
   describe('on', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true})
         .withPrompts({features: [
           'includeBootstrap'
         ]})
@@ -27,8 +25,6 @@ describe('Bootstrap feature', function () {
   describe('off', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true})
         .withPrompts({features: []})
         .on('end', done);
     });
@@ -45,8 +41,6 @@ describe('Bootstrap feature', function () {
   describe('with Sass', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true})
         .withPrompts({features: [
           'includeSass',
           'includeBootstrap'
@@ -80,8 +74,6 @@ describe('Bootstrap feature', function () {
   describe('without Sass', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true})
         .withPrompts({features: [
           'includeBootstrap'
         ]})

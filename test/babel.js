@@ -1,14 +1,13 @@
 'use strict';
 var path = require('path');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 
 describe('Babel feature', function () {
   describe('on', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true, babel: true})
+        .withOptions({babel: true})
         .withPrompts({features: []})
         .on('end', done);
     });
@@ -34,8 +33,7 @@ describe('Babel feature', function () {
   describe('off', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .inDir(path.join(__dirname, 'temp'))
-        .withOptions({'skip-install': true, babel: false})
+        .withOptions({babel: false})
         .withPrompts({features: []})
         .on('end', done);
     });
