@@ -3,5 +3,3 @@ language: node_js
 node_js:
   - v5
   - v4
-  - v0.12
-  - v0.10
