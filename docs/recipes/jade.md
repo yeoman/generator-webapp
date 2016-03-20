@@ -36,6 +36,7 @@ Add this task to your `gulpfile.babel.js`, it will compile `.jade` files to `.ht
 ```js
 gulp.task('views', () => {
   return gulp.src('app/*.jade')
+    .pipe($.plumber())
     .pipe($.jade({pretty: true}))
     .pipe(gulp.dest('.tmp'))
     .pipe(reload({stream: true}));
