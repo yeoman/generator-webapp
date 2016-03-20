@@ -31,7 +31,7 @@ $ npm install --save-dev gulp-jade
 
 ### 2. Create a `views` task
 
-Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` files in `.tmp`:
+Add this task to your `gulpfile.babel.js`, it will compile `.jade` files to `.html` files in `.tmp`:
 
 ```js
 gulp.task('views', () => {
@@ -47,12 +47,12 @@ We are passing `pretty: true` as an option to get a nice HTML output, otherwise 
 ### 3. Add `views` as a dependency of both `html` and `serve`
 
 ```js
-gulp.task('html', ['views', 'styles'], () => {
+gulp.task('html', ['views', 'styles', 'scripts'], () => {
     ...
 ```
 
 ```js
-gulp.task('serve', ['views', 'styles', 'fonts'], () => {
+gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
     ...
 ```
 
@@ -68,12 +68,10 @@ We want to parse the compiled HTML:
 
 -  return gulp.src('app/*.html')
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
-     .pipe(assets)
+     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
      .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.minifyCss({compatibility: 'ie8'})))
-     .pipe(assets.restore())
-     .pipe($.useref())
-     .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+     .pipe($.if('*.css', $.cssnano()))
+     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
      .pipe(gulp.dest('dist'));
 });
 ```
@@ -100,8 +98,6 @@ Wiredep supports Jade:
 
 ```diff
  gulp.task('wiredep', () => {
-   var wiredep = require('wiredep').stream;
-
    gulp.src('app/styles/*.scss')
      .pipe(wiredep({
        ignorePath: /^(\.\.\/)+/
@@ -125,18 +121,18 @@ Assuming your wiredep comment blocks are in the layouts.
 Recompile Jade templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
- gulp.task('serve', ['views', 'styles', 'fonts'], () => {
+ gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
 +    '.tmp/*.html',
-     '.tmp/styles/**/*.css',
-     'app/scripts/**/*.js',
-     'app/images/**/*'
+     'app/images/**/*',
+     '.tmp/fonts/**/*'
    ]).on('change', reload);
 
 +  gulp.watch('app/**/*.jade', ['views']);
    gulp.watch('app/styles/**/*.scss', ['styles']);
+   gulp.watch('app/scripts/**/*.js', ['scripts']);
    gulp.watch('app/fonts/**/*', ['fonts']);
    gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
