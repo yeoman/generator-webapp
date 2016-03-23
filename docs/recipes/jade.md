@@ -209,18 +209,18 @@ html.no-js
     // endbuild
 
     // build:js scripts/plugins.js
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js')
-    script(src='../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js')
+    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js')
     // endbuild
 
     // build:js scripts/main.js
