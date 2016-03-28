@@ -37,20 +37,15 @@ for example
 
 ### 3. Create a `deploy` task
 
-Add this task to your `gulpfile.js`. It will run `build` task before deploying:
+Add this task to your `gulpfile.babel.js`. It will run `build` task before deploying:
 
 ```js
-import rsync from 'gulp-rsync';
-
-...
-...
-
 gulp.task('deploy', ['build'], () => {
 
     var rsyncConfig = require('./rsync.json');
 
     return gulp.src('dist/**')
-        .pipe(rsync({
+        .pipe($.rsync({
             root: 'dist',
             hostname: rsyncConfig.hostname,
             username: rsyncConfig.username,
