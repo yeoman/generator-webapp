@@ -37,6 +37,14 @@ gulp.task('scripts', () => {
 });
 <% } -%>
 
+gulp.task('html', function() {
+  return gulp.src('app/*.html')
+    .pipe($.plumber())
+    .pipe($.fileInclude())
+    .pipe(gulp.dest('.tmp/'))
+    .pipe(reload({stream: true}));
+});
+
 function lint(files, options) {
   return () => {
     return gulp.src(files)
@@ -60,11 +68,11 @@ gulp.task('lint', lint('app/scripts/**/*.js'));
 gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 <% if (includeBabel) { -%>
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('useref', ['html', 'styles', 'scripts'], () => {
 <% } else { -%>
-gulp.task('html', ['styles'], () => {
+gulp.task('useref', ['html', 'styles'], () => {
 <% } -%>
-  return gulp.src('app/*.html')
+  return gulp.src('.tmp/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
@@ -103,9 +111,9 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 <% if (includeBabel) { -%>
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', ['html', 'styles', 'scripts', 'fonts'], () => {
 <% } else { -%>
-gulp.task('serve', ['styles', 'fonts'], () => {
+gulp.task('serve', ['html', 'styles', 'fonts'], () => {
 <% } -%>
   browserSync({
     notify: false,
@@ -119,7 +127,6 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   });
 
   gulp.watch([
-    'app/*.html',
 <% if (!includeBabel) { -%>
     'app/scripts/**/*.js',
 <% } -%>
@@ -127,6 +134,7 @@ gulp.task('serve', ['styles', 'fonts'], () => {
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
+  gulp.watch('app/**/*.html', ['html']);
   gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
 <% if (includeBabel) { -%>
   gulp.watch('app/scripts/**/*.js', ['scripts']);
@@ -191,7 +199,7 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'useref', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
