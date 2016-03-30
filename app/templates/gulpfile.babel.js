@@ -38,26 +38,32 @@ gulp.task('scripts', () => {
 <% } -%>
 
 function lint(files, options) {
-  return () => {
-    return gulp.src(files)
-      .pipe(reload({stream: true, once: true}))
-      .pipe($.eslint(options))
-      .pipe($.eslint.format())
-      .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
-  };
+  return gulp.src(files)
+    .pipe(reload({stream: true, once: true}))
+    .pipe($.eslint(options))
+    .pipe($.eslint.format())
+    .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
-const testLintOptions = {
-  env: {
-<% if (testFramework === 'mocha') { -%>
-    mocha: true
-<% } else if (testFramework === 'jasmine') { -%>
-    jasmine: true
-<% } -%>
-  }
-};
 
-gulp.task('lint', lint('app/scripts/**/*.js'));
-gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
+gulp.task('lint', () => {
+  return lint('app/scripts/**/*.js', {
+    fix: true
+  })
+    .pipe(gulp.dest('app/scripts'));
+});
+gulp.task('lint:test', () => {
+  return lint('test/spec/**/*.js', {
+    fix: true,
+    env: {
+<% if (testFramework === 'mocha') { -%>
+      mocha: true
+<% } else if (testFramework === 'jasmine') { -%>
+      jasmine: true
+<% } -%>
+    }
+  })
+    .pipe(gulp.dest('test/spec/**/*.js'));
+});
 
 <% if (includeBabel) { -%>
 gulp.task('html', ['styles', 'scripts'], () => {
