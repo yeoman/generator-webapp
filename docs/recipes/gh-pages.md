@@ -12,10 +12,10 @@ Deploying your app using `git subtree` allows the use of [GitHub Pages](https://
 
 > You can check your remotes with `$ git remote -v`. See [Adding a remote](https://help.github.com/articles/adding-a-remote) for more info.
 
-### 1. Install [gulp-subtree](https://github.com/Snugug/gulp-subtree)
+### 1. Install [gulp-subtree](https://github.com/Snugug/gulp-subtree) & [gulp-clean](https://github.com/peter-vilja/gulp-clean)
 
 ```
-$ npm install --save-dev gulp-subtree
+$ npm install --save-dev gulp-subtree gulp-clean
 ```
 
 ### 2. Create a `deploy` task
@@ -52,4 +52,5 @@ It might take a couple of minutes for your page to show up the first time you pu
 ### References
 
 - See [gulp-subtree](https://github.com/Snugug/gulp-subtree) for details on changing the branch and commit message.
+- See [gulp-clean](https://github.com/peter-vilja/gulp-clean).
 - See [GitHub Pages documentation](https://help.github.com/categories/20/articles) for features such as custom domains.
