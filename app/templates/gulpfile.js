@@ -135,7 +135,7 @@ gulp.task('serve', ['styles', 'fonts'], () => {
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
-gulp.task('serve:dist', () => {
+gulp.task('serve:dist', ['build'], () => {
   browserSync({
     notify: false,
     port: 9000,
