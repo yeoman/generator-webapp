@@ -12,6 +12,7 @@
 - [AWS S3 deployment](aws-s3-deployment.md)
 - [Heroku deployment - Node.js](node-heroku.md)
 - [Rsync deployment](rsync-deploy.md)
+- [Browserify](browserify.md)
 
 -
 
