@@ -14,6 +14,16 @@ $ npm install -save babelify vinyl-buffer vinyl-source-stream
 ### 2. Edit your `scripts` task
 
 ```diff
+ import browserSync from 'browser-sync';
+ import del from 'del';
+ import {stream as wiredep} from 'wiredep';
++import browserify from 'browserify';
++import babelify from 'babelify';
++import buffer from 'vinyl-buffer';
++import source from 'vinyl-source-stream';
+```
+
+```diff
 gulp.task('scripts', () => {
 -  return gulp.src('app/scripts/**/*.js')
 +
@@ -58,15 +68,13 @@ We are going to require the compiled bundle.
 For example, you could have `foo.js`:
 
 ```js
-module.exports =  {
-  speak: () => console.log('hello world')
-}
+module.exports.speak = () => console.log('hello world');
 ```
 
 And then in your `main.js`:
 
 ```js
-let foo = require('./foo')
-foo.speak()
+const foo = require('./foo');
+foo.speak();
 ```
 
