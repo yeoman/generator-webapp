@@ -14,13 +14,13 @@ $ npm install -save babelify vinyl-buffer vinyl-source-stream
 ### 2. Edit your `scripts` task
 
 ```diff
- import browserSync from 'browser-sync';
- import del from 'del';
- import {stream as wiredep} from 'wiredep';
-+import browserify from 'browserify';
-+import babelify from 'babelify';
-+import buffer from 'vinyl-buffer';
-+import source from 'vinyl-source-stream';
+ const browserSync = require('browser-sync');
+ const del = require('del');
+ const wiredep = require('wiredep').stream;
++const browserify = require('browserify');
++const babelify = require('babelify');
++const buffer = require('vinyl-buffer');
++const source = require('vinyl-source-stream');
 ```
 
 ```diff
@@ -46,7 +46,7 @@ gulp.task('scripts', () => {
 });
 ```
 
-### 3. Edit your `index.html` 
+### 3. Edit your `index.html`
 
 We are going to require the compiled bundle.
 
@@ -77,4 +77,3 @@ And then in your `main.js`:
 const foo = require('./foo');
 foo.speak();
 ```
-

@@ -31,7 +31,7 @@ $ npm install --save-dev gulp-jade
 
 ### 2. Create a `views` task
 
-Add this task to your `gulpfile.babel.js`, it will compile `.jade` files to `.html` files in `.tmp`:
+Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` files in `.tmp`:
 
 ```js
 gulp.task('views', () => {
