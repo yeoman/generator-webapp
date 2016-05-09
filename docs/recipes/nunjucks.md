@@ -177,10 +177,10 @@ Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an
       'app/images/**/*'
     ]).on('change', reload);
 
-+   gulp.watch('app/**/*.html', ['views', reload]);
-+   gulp.watch('app/**/*.njk', ['views', reload]);
-    gulp.watch('app/styles/**/*.scss', ['styles', reload]);
-    gulp.watch('bower.json', ['wiredep', 'fonts', reload]);
++   gulp.watch('app/**/*.html', ['views']);
++   gulp.watch('app/**/*.njk', ['views']);
+    gulp.watch('app/styles/**/*.scss', ['styles']);
+    gulp.watch('bower.json', ['wiredep', 'fonts']);
   });
 ```
 
