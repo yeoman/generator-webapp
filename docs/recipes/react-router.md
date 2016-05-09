@@ -31,7 +31,7 @@ window.Router = require('react-router');
 At the top of the gulpfile, add:
 
 ```js
-import webpack from 'webpack';
+const webpack = require('webpack');
 ```
 
 Add the task. This task bundles the webpack script, including React Router, and outputs it in `.tmp/scripts`.

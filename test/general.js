@@ -22,7 +22,7 @@ describe('general', function () {
     assert.file([
       'bower.json',
       'package.json',
-      'gulpfile.babel.js',
+      'gulpfile.js',
       '.babelrc',
       '.editorconfig',
       '.bowerrc',

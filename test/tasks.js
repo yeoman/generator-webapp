@@ -27,7 +27,7 @@ describe('gulp tasks', function () {
       'build',
       'default'
     ].forEach(function (task) {
-      assert.fileContent('gulpfile.babel.js', 'gulp.task(\'' + task);
+      assert.fileContent('gulpfile.js', 'gulp.task(\'' + task);
     });
   });
 });
