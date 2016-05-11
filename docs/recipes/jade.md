@@ -126,7 +126,6 @@ Recompile Jade templates on each change and reload the browser after an HTML fil
    ...
    gulp.watch([
      'app/*.html',
-+    '.tmp/*.html',
      'app/images/**/*',
      '.tmp/fonts/**/*'
    ]).on('change', reload);
