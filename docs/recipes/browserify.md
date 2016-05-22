@@ -1,4 +1,4 @@
-# Setting up Browserify / Babelify
+# Setting up Browserify with Babelify
 
 With this setup you can import modules into your `main.js`. Only code used in `main.js` will be called by the app.
 
@@ -8,7 +8,7 @@ With this setup you can import modules into your `main.js`. Only code used in `m
 ### 1. Install the required plugins
 
 ```
-$ npm install -save babelify vinyl-buffer vinyl-source-stream
+$ npm install --save-dev browserify babelify vinyl-buffer vinyl-source-stream
 ```
 
 ### 2. Edit your `scripts` task
@@ -51,14 +51,14 @@ gulp.task('scripts', () => {
 We are going to require the compiled bundle.
 
 ```diff
-<!-- endbuild -->
+    <!-- endbuild -->
 
-     <!-- build:js scripts/main.js -->
--    <script src="scripts/main.js"></script>
-+    <script src="scripts/bundle.js"></script>
-     <!-- endbuild -->
-   </body>
- </html>
+    <!-- build:js scripts/main.js -->
+-   <script src="scripts/main.js"></script>
++   <script src="scripts/bundle.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
 ```
 
 ## Usage
@@ -68,12 +68,14 @@ We are going to require the compiled bundle.
 For example, you could have `foo.js`:
 
 ```js
-module.exports.speak = () => console.log('hello world');
+export default function() {
+  console.log('hello world');
+}
 ```
 
 And then in your `main.js`:
 
 ```js
-const foo = require('./foo');
-foo.speak();
+import foo from './foo';
+foo(); // => hello world
 ```
