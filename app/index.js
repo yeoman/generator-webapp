@@ -260,8 +260,8 @@ module.exports = generators.Base.extend({
       }
 
       this.fs.copyTpl(
-        this.templatePath('index.html'),
-        this.destinationPath('app/index.html'),
+        this.templatePath('default.njk'),
+        this.destinationPath('app/layouts/default.njk'),
         {
           appname: this.appname,
           includeSass: this.includeSass,
@@ -285,11 +285,24 @@ module.exports = generators.Base.extend({
           ]
         }
       );
+	  
+	  this.fs.copyTpl(
+        this.templatePath('index.njk'),
+        this.destinationPath('app/index.njk'),
+        {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          includeBootstrap: this.includeBootstrap,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+        }
+      );
     },
 
     misc: function () {
       mkdirp('app/images');
       mkdirp('app/fonts');
+      mkdirp('app/includes');
     }
   },
 
