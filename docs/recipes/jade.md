@@ -85,7 +85,8 @@ We don't want to copy over `.jade` files in the build process:
  gulp.task('extras', () => {
    return gulp.src([
      'app/*.*',
-     '!app/*.html',
+-    '!app/*.html'
++    '!app/*.html',
 +    '!app/*.jade'
    ], {
      dot: true
