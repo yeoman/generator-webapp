@@ -62,7 +62,7 @@ gulp.task('lint:test', () => {
 <% } -%>
     }
   })
-    .pipe(gulp.dest('test/spec/**/*.js'));
+    .pipe(gulp.dest('test/spec'));
 });
 
 <% if (includeBabel) { -%>
