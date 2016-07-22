@@ -54,8 +54,6 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function () {
-    var done = this.async();
-
     if (!this.options['skip-welcome-message']) {
       this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
     }
@@ -87,7 +85,7 @@ module.exports = generators.Base.extend({
       }
     }];
 
-    this.prompt(prompts, function (answers) {
+    return this.prompt(prompts).then(function (answers) {
       var features = answers.features;
 
       function hasFeature(feat) {
@@ -101,7 +99,6 @@ module.exports = generators.Base.extend({
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeJQuery = answers.includeJQuery;
 
-      done();
     }.bind(this));
   },
 
