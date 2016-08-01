@@ -61,7 +61,7 @@ module.exports = generators.Base.extend({
     var prompts = [{
       type: 'checkbox',
       name: 'features',
-      message: 'What more would you like?',
+      message: 'Which additional features would you like to include?',
       choices: [{
         name: 'Sass',
         value: 'includeSass',
