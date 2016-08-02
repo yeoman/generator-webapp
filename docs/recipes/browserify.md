@@ -66,6 +66,7 @@ We are going to require the compiled bundle.
 The linter needs to know about the module use.
 
 ```diff
+  "eslintConfig": {
 +   "parserOptions": {
 +     "ecmaVersion": 6,
 +     "sourceType": "module"
