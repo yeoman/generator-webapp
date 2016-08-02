@@ -61,6 +61,17 @@ We are going to require the compiled bundle.
 </html>
 ```
 
+### 4. Edit your `package.json`
+
+The linter needs to know about the module use.
+
+```diff
++   "parserOptions": {
++     "ecmaVersion": 6,
++     "sourceType": "module"
++   },
+```
+
 ## Usage
 
 - Put your modules in `app/scripts`, and require them in your `main.js`.
