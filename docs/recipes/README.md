@@ -3,7 +3,6 @@
 - [CoffeeScript](coffeescript.md)
 - [Handlebars](handlebars.md)
 - [Less](less.md)
-- [Jade](jade.md)
 - [Pug](pug.md)
 - [GitHub Pages](gh-pages.md)
 - [Asset revisioning](asset-revisioning.md)
