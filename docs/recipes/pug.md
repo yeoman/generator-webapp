@@ -1,20 +1,20 @@
-# Setting up Jade
+# Setting up Pug (formerly known as Jade)
 
-This recipe demonstrates how to set up [Jade](http://jade-lang.com/) as your HTML template engine. In a similar way you can implement a different engine, like [Haml](http://haml.info/).
+This recipe demonstrates how to set up [Pug](http://jade-lang.com/) as your HTML template engine. In a similar way you can implement a different engine, like [Haml](http://haml.info/).
 
 We assume your directory structure will look something like this:
 
 ```
 webapp
 └── app
-    ├── about.jade
-    ├── contact.jade
-    ├── index.jade
+    ├── about.pug
+    ├── contact.pug
+    ├── index.pug
     ├── includes
-    │   ├── footer.jade
-    │   └── header.jade
+    │   ├── footer.pug
+    │   └── header.pug
     └── layouts
-        └── default.jade
+        └── default.pug
 ```
 
 If you had something different in mind, modify paths accordingly.
@@ -23,27 +23,27 @@ If you had something different in mind, modify paths accordingly.
 
 ### 1. Install dependencies
 
-Install the Jade gulp plugin:
+Install the Pug gulp plugin:
 
 ```
-$ npm install --save-dev gulp-jade
+$ npm install --save-dev gulp-pug
 ```
 
 ### 2. Create a `views` task
 
-Add this task to your `gulpfile.js`, it will compile `.jade` files to `.html` files in `.tmp`:
+Add this task to your `gulpfile.js`, it will compile `.pug` files to `.html` files in `.tmp`:
 
 ```js
 gulp.task('views', () => {
-  return gulp.src('app/*.jade')
+  return gulp.src('app/*.pug')
     .pipe($.plumber())
-    .pipe($.jade({pretty: true}))
+    .pipe($.pug({pretty: true}))
     .pipe(gulp.dest('.tmp'))
     .pipe(reload({stream: true}));
 });
 ```
 
-We are passing `pretty: true` as an option to get a nice HTML output, otherwise Jade would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
+We are passing `pretty: true` as an option to get a nice HTML output, otherwise Pug would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
 
 ### 3. Add `views` as a dependency of both `html` and `serve`
 
@@ -79,7 +79,7 @@ We want to parse the compiled HTML:
 
 #### `extras`
 
-We don't want to copy over `.jade` files in the build process:
+We don't want to copy over `.pug` files in the build process:
 
 ```diff
  gulp.task('extras', () => {
@@ -87,7 +87,7 @@ We don't want to copy over `.jade` files in the build process:
      'app/*.*',
 -    '!app/*.html'
 +    '!app/*.html',
-+    '!app/*.jade'
++    '!app/*.pug'
    ], {
      dot: true
    }).pipe(gulp.dest('dist'));
@@ -96,7 +96,7 @@ We don't want to copy over `.jade` files in the build process:
 
 #### `wiredep`
 
-Wiredep supports Jade:
+Wiredep supports Pug:
 
 ```diff
  gulp.task('wiredep', () => {
@@ -107,7 +107,7 @@ Wiredep supports Jade:
      .pipe(gulp.dest('app/styles'));
 
 -  gulp.src('app/*.html')
-+  gulp.src('app/layouts/*.jade')
++  gulp.src('app/layouts/*.pug')
      .pipe(wiredep({
        exclude: ['bootstrap-sass'],
        ignorePath: /^(\.\.\/)*\.\./
@@ -121,7 +121,7 @@ Assuming your wiredep comment blocks are in the layouts.
 
 #### `serve`
 
-Recompile Jade templates on each change and reload the browser after an HTML file is compiled:
+Recompile Pug templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
  gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
@@ -132,7 +132,7 @@ Recompile Jade templates on each change and reload the browser after an HTML fil
      '.tmp/fonts/**/*'
    ]).on('change', reload);
 
-+  gulp.watch('app/**/*.jade', ['views']);
++  gulp.watch('app/**/*.pug', ['views']);
    gulp.watch('app/styles/**/*.scss', ['styles']);
    gulp.watch('app/scripts/**/*.js', ['scripts']);
    gulp.watch('app/fonts/**/*', ['fonts']);
@@ -140,13 +140,13 @@ Recompile Jade templates on each change and reload the browser after an HTML fil
 });
 ```
 
-### 5. Rewrite `index.html` as `layout.jade` + `index.jade`
+### 5. Rewrite `index.html` as `layout.pug` + `index.pug`
 
 To do this automatically, check out [html2jade](https://github.com/donpark/html2jade).
 
-#### `app/layouts/default.jade`
+#### `app/layouts/default.pug`
 
-```jade
+```pug
 doctype html
 html.no-js
   head
@@ -229,9 +229,9 @@ html.no-js
     // endbuild
 ```
 
-#### `app/index.jade`
+#### `app/index.pug`
 
-```jade
+```pug
 extends layouts/default
 
 block content
