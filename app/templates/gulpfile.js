@@ -9,9 +9,6 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 var dev = true;
-gulp.task('set-prod-mode', function () {
-  dev = false;
-});
 
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
@@ -195,10 +192,11 @@ gulp.task('wiredep', () => {<% if (includeSass) { %>
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['set-prod-mode', 'lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', ['clean'], () => {
+  dev = false;
   gulp.start('build');
 });
