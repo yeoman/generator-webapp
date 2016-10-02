@@ -67,27 +67,21 @@ E.g. if you have Less files, you would want to notify LiveReload when Less files
 
 ## Bower
 
-We keep `bower_components` in the project root, you can read details about that [here](bower.md).
-
-While `gulp serve` is running, installing Bower components will usually be as easy as:
+We keep `bower_components` in the project root, you can read details about that [here](bower.md). Installing Bower components is usually as easy as:
 
 ```sh
 $ bower install --save jquery
 ```
 
-Behind the scenes [wiredep] will automatically inject assets from your Bower components to your HTML/SCSS files.
+Behind the scenes [wiredep] will automatically inject assets from your Bower components to your HTML/SCSS files as soon as you run `gulp serve` or `gulp`. If `gulp serve` was already running while installing the components, the injection will happen immediately.
 
-Keep in mind that there will sometimes be situations where you will have to do some extra work.
+However, in some situations you'll have to do some extra work:
 
-### 1. You ran `bower install` while `gulp serve` wasn't running
-
-`gulp serve` watches `bower.json` and runs `gulp wiredep` on change, so the solution is to simply run `gulp wiredep` yourself.
-
-### 2. There are images/fonts in the component
+### 1. There are images/fonts in the component
 
 These are a bit tricky, as they can't be automatically injected. Ideally you would want to put them in a place where the link would work both in development and in production, like we do with Bootstrap, but that's sometimes not possible. In those cases you would need to do some [gulp-replace][replace] trickery.
 
-### 3. Field values in the component's `bower.json` are incorrect or missing
+### 2. Field values in the component's `bower.json` are incorrect or missing
 
 If there's a problem, it's usually with the `main` field, which wiredep uses to wire up assets. Fortunately you can always [override][override] these fields and send a pull request to that component's repository, fixing their `bower.json` :wink:
 
