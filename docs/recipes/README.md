@@ -13,8 +13,7 @@
 - [Heroku deployment - Node.js](node-heroku.md)
 - [Rsync deployment](rsync-deploy.md)
 - [Browserify](browserify.md)
-
--
+- [HTMLHint](htmlhint.md)
 
 *We welcome additional recipes for common use-cases not covered by this generator.*
 
