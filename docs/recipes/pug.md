@@ -1,6 +1,6 @@
 # Setting up Pug (formerly known as Jade)
 
-This recipe demonstrates how to set up [Pug](http://jade-lang.com/) as your HTML template engine. In a similar way you can implement a different engine, like [Haml](http://haml.info/).
+This recipe demonstrates how to set up [Pug](https://pugjs.org) as your HTML template engine. In a similar way you can implement a different engine, like [Haml](http://haml.info/).
 
 We assume your directory structure will look something like this:
 
@@ -142,20 +142,20 @@ Recompile Pug templates on each change and reload the browser after an HTML file
 
 ### 5. Rewrite `index.html` as `layout.pug` + `index.pug`
 
-To do this automatically, check out [html2jade](https://github.com/donpark/html2jade).
+To partially automatize this job, you can use [html2jade](https://github.com/donpark/html2jade). However, at the time of this writing html2jade has some drawbacks (e.g. doesn't support conditional comments) and the output requires cleanup.
 
 #### `app/layouts/default.pug`
 
 ```pug
 doctype html
-html.no-js
+html.no-js(lang='')
   head
     meta(charset='utf-8')
-    title My Webapp
-    meta(name='description' content='')
-    meta(name='viewport' content='width=device-width, initial-scale=1')
-    link(rel='apple-touch-icon' href='apple-touch-icon.png')
-    // Place favicon.ico and apple-touch-icon.png in the root directory
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title webapp
+    link(rel='apple-touch-icon', href='apple-touch-icon.png')
+    // Place favicon.ico in the root directory
 
     // build:css styles/vendor.css
     // bower:css
@@ -163,18 +163,16 @@ html.no-js
     // endbuild
 
     // build:css styles/main.css
-    link(rel='stylesheet' href='styles/main.css')
+    link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
     // build:js scripts/vendor/modernizr.js
-    script(src='../bower_components/modernizr/modernizr.js')
+    script(src='/bower_components/modernizr/modernizr.js')
     // endbuild
-
   body
-    | <!--[if lt IE 10]>
-    |   <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    | <![endif]-->
-
+    <!--[if lt IE 10]>
+      p.browserupgrade You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+    <![endif]-->
     .container
       .header
         ul.nav.nav-pills.pull-right
@@ -182,46 +180,42 @@ html.no-js
           li: a(href='#') About
           li: a(href='#') Contact
 
-        h3.text-muted My Webapp
-
-      .jumbotron
-        h1 'Allo, 'Allo!
-        p.lead Always a pleasure scaffolding your apps.
-        p: a.btn.btn-lg.btn-success(href='#') Splendid!
+        h3.text-muted webapp
 
       block content
 
       .footer
-        p ♥ from the Yeoman team
+        p &hearts; from the Yeoman team
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
+      e.src='https://www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
 
     // build:js scripts/vendor.js
     // bower:js
-    script(src='../bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/modernizr/modernizr.js')
     // endbower
     // endbuild
 
     // build:js scripts/plugins.js
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js')
-    script(src='../bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js')
+    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js')
     // endbuild
 
     // build:js scripts/main.js
@@ -235,6 +229,11 @@ html.no-js
 extends layouts/default
 
 block content
+  .jumbotron
+    h1 'Allo, 'Allo!
+    p.lead Always a pleasure scaffolding your apps.
+    p: a.btn.btn-lg.btn-success(href='#') Splendid!
+
   .row.marketing
     .col-lg-6
       h4 HTML5 Boilerplate
@@ -250,6 +249,10 @@ block content
       p Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.
 ```
 
-### 6. Celebrate
+### 6. Test
 
-This wasn't the simplest recipe ever; go grab a :beer: or something.
+Check if everything is working properly. Run `gulp serve` and try changing a `.pug` file to see if the page updates etc.
+
+### 7. Celebrate
+
+This wasn't exactly the simplest recipe ever; go grab a :beer: or something.
