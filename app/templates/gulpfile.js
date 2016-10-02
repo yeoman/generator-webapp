@@ -134,7 +134,7 @@ gulp.task('serve', () => {
   });
 });
 
-gulp.task('serve:dist', ['build'], () => {
+gulp.task('serve:dist', ['default'], () => {
   browserSync({
     notify: false,
     port: 9000,
@@ -195,5 +195,7 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
 });
 
 gulp.task('default', () => {
-  runSequence(['clean', 'wiredep'], 'build');
+  return new Promise(resolve => {
+    runSequence(['clean', 'wiredep'], 'build', resolve);
+  });
 });
