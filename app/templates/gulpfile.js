@@ -134,7 +134,7 @@ gulp.task('serve', () => {
   });
 });
 
-gulp.task('serve:dist', () => {
+gulp.task('serve:dist', ['build'], () => {
   browserSync({
     notify: false,
     port: 9000,
