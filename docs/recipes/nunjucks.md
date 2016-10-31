@@ -82,6 +82,7 @@ gulp.task('views', () => {
       path: 'app'
     }))
     .pipe(gulp.dest('.tmp'))
+    .pipe(reload({stream: true}));
 });
 ```
 
@@ -164,19 +165,11 @@ Wiredep does not support `.njk`, so also add in the file type definition.
 
 ### 9. Edit your `serve` task
 
-Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an `app/**/*.html` or `app/**/*.njk` file triggers the `views` task, and (b) reloads the browser:
+Edit your `serve` task so that editing an `app/**/*.html` or `app/**/*.njk` file triggers the `views` task:
 
 ```diff
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
     ...
-    gulp.watch([
-      'app/*.html',
-+     '.tmp/*.html',
-      '.tmp/styles/**/*.css',
-      'app/scripts/**/*.js',
-      'app/images/**/*'
-    ]).on('change', reload);
-
 +   gulp.watch('app/**/*.html', ['views']);
 +   gulp.watch('app/**/*.njk', ['views']);
     gulp.watch('app/styles/**/*.scss', ['styles']);
