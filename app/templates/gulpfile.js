@@ -9,6 +9,8 @@ const runSequence = require('run-sequence');
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+var dev = true;
+
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
@@ -88,8 +90,7 @@ gulp.task('images', () => {
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
-    .pipe(gulp.dest('.tmp/fonts'))
-    .pipe(gulp.dest('dist/fonts'));
+    .pipe($.if(dev, gulp.dest('.tmp/fonts'), gulp.dest('dist/fonts')));
 });
 
 gulp.task('extras', () => {
@@ -196,6 +197,7 @@ gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
 
 gulp.task('default', () => {
   return new Promise(resolve => {
+    dev = false;
     runSequence(['clean', 'wiredep'], 'build', resolve);
   });
 });
