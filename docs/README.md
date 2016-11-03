@@ -65,6 +65,33 @@ This system can be a little confusing with the `watch` task, but it's actually p
 
 E.g. if you have Less files, you would want to notify LiveReload when Less files have compiled, i.e. when `.tmp/styles/**/*.css` change, but you would want to compile Less files by running the `styles` task when source files change, i.e. `app/styles/**/*.less`.
 
+### Adding New Assets
+
+#### Sass
+
+A common practice is to have a single, "main", Sass file, then use `@import` statements to add other partials. For example, let's say you created stylesheet for your navigation, `app/styles/_nav.scss`, you can then import it in `app/styles/main.scss` like this:
+
+```scss
+@import "nav";
+```
+
+#### JavaScript
+
+Our build step uses special `build` comment blocks to mark which assets to concatenate and compress for production. You can see them at the top and bottom of `app/index.html`.
+
+You don't have to worry about new Bower components, their JS files will be automatically injected in your `app/index.html`, but you have to add your own JS files manually. For example, let's say you created `app/scripts/nav.js`, defining some special behavior for the navigation. You should then include it in the comment blocks for your _source_ JS files, where `app/scripts/main.js` is located:
+
+```html
+<!-- build:js scripts/main.js -->
+<script src="scripts/main.js"></script>
+<script src="scripts/nav.js"></script>
+<!-- endbuild -->
+```
+
+Upon build these will be concatenated and compressed into a single file `scripts/main.js`.
+
+The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
+
 ## Bower
 
 We keep `bower_components` in the project root, you can read details about that [here](bower.md). Installing Bower components is usually as easy as:
