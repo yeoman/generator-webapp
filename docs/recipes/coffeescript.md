@@ -13,7 +13,7 @@ We strongly suggest to scaffold your app with Babel (the default behavior), that
 Current setup includes coding in JavaScript, compiling with Babel, and linting with ESLint. We're instead going to code in CoffeeScript and lint with [CoffeeLint](http://www.coffeelint.org/):
 
 ```
-$ npm install --save-dev gulp-coffee gulp-coffeelint
+$ npm install --save-dev gulp-coffee
 ```
 
 ### 2. Compile application code
