@@ -1,27 +1,26 @@
-'use strict';
-var path = require('path');
-var helpers = require('yeoman-test');
-var assert = require('yeoman-assert');
+const path = require('path');
+const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
 
-describe('Babel feature', function () {
-  describe('on', function () {
-    before(function (done) {
+describe('Babel feature', () => {
+  describe('on', () => {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withOptions({babel: true})
         .withPrompts({features: []})
         .on('end', done);
     });
 
-    it('should add dependencies', function () {
+    it('should add dependencies', () => {
       assert.fileContent('package.json', '"gulp-babel"');
       assert.fileContent('package.json', '"gulp-plumber"');
     });
 
-    it('should use the ES6 ESLint environment', function () {
+    it('should use the ES6 ESLint environment', () => {
       assert.fileContent('package.json', '"es6": true');
     });
 
-    it('should add the scripts task', function () {
+    it('should add the scripts task', () => {
       assert.fileContent('gulpfile.js', "gulp.task('scripts'");
       assert.fileContent('gulpfile.js', "['styles', 'scripts']");
       assert.fileContent('gulpfile.js', "['styles', 'scripts', 'fonts']");
@@ -30,24 +29,24 @@ describe('Babel feature', function () {
     });
   });
 
-  describe('off', function () {
-    before(function (done) {
+  describe('off', () => {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withOptions({babel: false})
         .withPrompts({features: []})
         .on('end', done);
     });
 
-    it('shouldn\'t add dependencies', function () {
+    it('shouldn\'t add dependencies', () => {
       assert.noFileContent('package.json', '"gulp-babel"');
       assert.noFileContent('package.json', '"gulp-plumber"');
     });
 
-    it('shouldn\'t use the ES6 ESLint environment', function () {
+    it('shouldn\'t use the ES6 ESLint environment', () => {
       assert.noFileContent('package.json', '"es6": true');
     });
 
-    it('shouldn\'t add the scripts task', function () {
+    it('shouldn\'t add the scripts task', () => {
       assert.noFileContent('gulpfile.js', "gulp.task('scripts'");
       assert.fileContent('gulpfile.js', "['styles']");
       assert.fileContent('gulpfile.js', "['styles', 'fonts']");

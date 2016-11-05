@@ -1,11 +1,10 @@
-'use strict';
-var path = require('path');
-var helpers = require('yeoman-test');
-var assert = require('yeoman-assert');
+const path = require('path');
+const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
 
-describe('jQuery feature', function () {
-  describe('on', function () {
-    before(function (done) {
+describe('jQuery feature', () => {
+  describe('on', () => {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [],
@@ -14,13 +13,13 @@ describe('jQuery feature', function () {
         .on('end', done);
     });
 
-    it('should add the correct dependencies', function () {
+    it('should add the correct dependencies', () => {
       assert.fileContent('bower.json', '"jquery"');
     });
   });
 
-  describe('off', function () {
-    before(function (done) {
+  describe('off', () => {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [],
@@ -29,7 +28,7 @@ describe('jQuery feature', function () {
         .on('end', done);
     });
 
-    it('should add the correct dependencies', function () {
+    it('should add the correct dependencies', () => {
       assert.noFileContent('bower.json', '"jquery"');
     });
   });

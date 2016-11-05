@@ -1,16 +1,15 @@
-'use strict';
-var path = require('path');
-var helpers = require('yeoman-test');
-var assert = require('yeoman-assert');
+const path = require('path');
+const helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
 
-describe('gulp tasks', function () {
-  before(function (done) {
+describe('gulp tasks', () => {
+  before(done => {
     helpers.run(path.join(__dirname, '../app'))
       .withPrompts({features: []})
       .on('end', done);
   });
 
-  it('should contain necessary tasks', function () {
+  it('should contain necessary tasks', () => {
     [
       'styles',
       'lint',
@@ -26,7 +25,7 @@ describe('gulp tasks', function () {
       'wiredep',
       'build',
       'default'
-    ].forEach(function (task) {
+    ].forEach((task) => {
       assert.fileContent('gulpfile.js', 'gulp.task(\'' + task);
     });
   });
