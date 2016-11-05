@@ -11,10 +11,6 @@ describe('test framework', () => {
         .on('end', done);
     });
 
-    it('uses the correct ESLint environment', () => {
-      assert.fileContent('gulpfile.js', 'mocha: true');
-    });
-
     it('generates the expected fixture', () => {
       assert.fileContent('test/index.html', 'mocha');
     });
@@ -26,10 +22,6 @@ describe('test framework', () => {
         .withOptions({'test-framework': 'jasmine'})
         .withPrompts({features: []})
         .on('end', done);
-    });
-
-    it('uses the correct ESLint environment', () => {
-      assert.fileContent('gulpfile.js', 'jasmine: true');
     });
 
     it('generates the expected fixture', () => {

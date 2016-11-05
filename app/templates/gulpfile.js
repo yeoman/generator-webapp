@@ -43,28 +43,17 @@ gulp.task('scripts', () => {
 function lint(files, options) {
   return gulp.src(files)
     .pipe(reload({stream: true, once: true}))
-    .pipe($.eslint(options))
+    .pipe($.eslint({ fix: true }))
     .pipe($.eslint.format())
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
 
 gulp.task('lint', () => {
-  return lint('app/scripts/**/*.js', {
-    fix: true
-  })
+  return lint('app/scripts/**/*.js')
     .pipe(gulp.dest('app/scripts'));
 });
 gulp.task('lint:test', () => {
-  return lint('test/spec/**/*.js', {
-    fix: true,
-    env: {
-<% if (testFramework === 'mocha') { -%>
-      mocha: true
-<% } else if (testFramework === 'jasmine') { -%>
-      jasmine: true
-<% } -%>
-    }
-  })
+  return lint('test/spec/**/*.js')
     .pipe(gulp.dest('test/spec'));
 });
 

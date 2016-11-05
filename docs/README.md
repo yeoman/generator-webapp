@@ -52,7 +52,27 @@ $ gulp --tasks
 
 ## Gulp plugins
 
-As you might have noticed, gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by [gulp-load-plugins][plugins] and available through the `$` variable.
+Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by [gulp-load-plugins][plugins] and available through the `$` variable.
+
+## Linting
+
+We use ESLint for linting JavaScript code. You can define rules in your `package.json` under the `"eslint"` field. Alternatively, you can add an `.eslintrc` file to your project root, where you can [configure][eslint-config] ESLint using JavaScript, JSON or YAML.
+
+### The `no-undef` rule and tests
+
+The ESLint rule [`no-undef`] will warn about usage of explicitly undeclared variables and functions. Because our tests use global functions like `describe` and `it` (defined by the testing framework), ESLint will consider those as warnings.
+
+Luckily, the fix is easy—add an `.eslintrc` file to the `test/spec` directory and let ESLint know about your testing framework. For example, if you're using Mocha, add this to `.eslintrc`:
+
+```json
+{
+  "env": {
+    "mocha": true
+  }
+}
+```
+
+Configuration from this `.eslintrc` will merge with your project-wide configuration.
 
 ## Serve
 
@@ -112,12 +132,14 @@ These are a bit tricky, as they can't be automatically injected. Ideally you wou
 
 If there's a problem, it's usually with the `main` field, which wiredep uses to wire up assets. Fortunately you can always [override][override] these fields and send a pull request to that component's repository, fixing their `bower.json` :wink:
 
-[gulp]:       https://github.com/gulpjs/gulp
-[gulp-docs]:  https://github.com/gulpjs/gulp/blob/master/docs/README.md
-[yo]:         https://github.com/yeoman/yo
+[gulp]: https://github.com/gulpjs/gulp
+[gulp-docs]: https://github.com/gulpjs/gulp/blob/master/docs/README.md
+[yo]: https://github.com/yeoman/yo
 [LiveReload]: https://github.com/intesso/connect-livereload
-[plugins]:    https://github.com/jackfranklin/gulp-load-plugins
-[calc]:       https://github.com/postcss/postcss-calc
-[wiredep]:    https://github.com/taptapship/wiredep
-[replace]:    https://github.com/lazd/gulp-replace
-[override]:   https://github.com/taptapship/wiredep#bower-overrides
+[plugins]: https://github.com/jackfranklin/gulp-load-plugins
+[eslint-config]: http://eslint.org/docs/user-guide/configuring
+[`no-undef`]: http://eslint.org/docs/rules/no-undef
+[calc]: https://github.com/postcss/postcss-calc
+[wiredep]: https://github.com/taptapship/wiredep
+[replace]: https://github.com/lazd/gulp-replace
+[override]: https://github.com/taptapship/wiredep#bower-overrides
