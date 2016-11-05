@@ -31,22 +31,13 @@ $ npm install --save-dev gulp-nunjucks-render
 
 ### 2. Modify `app/index.html` to create as `app/layouts/default.njk` layouts template
 
-Modify `app/index.html`:
+In `app/index.html` replace `<div class="container">` and its content (cut, so you can paste later) with the following:
 
-```diff
--    <div class="hero-unit">
--      <h1>'Allo, 'Allo!</h1>
--      <p>You now have</p>
--      <ul>
--        <li>HTML5 Boilerplate</li>
--        <li>Sass</li>
--        <li>Modernizr</li>
--      </ul>
--    </div>
-+    {% block content %}{% endblock %}
+```njk
+{% block content %}{% endblock %}
 ```
 
-Make it the default layout template:
+Now make it the default layout template:
 
 ```
 $ mv app/index.html app/layouts/default.njk
@@ -54,23 +45,16 @@ $ mv app/index.html app/layouts/default.njk
 
 ### 3. Create new Nunjucks `app/index.njk` page to extend from `app/layouts/default.njk`
 
-Create `app/index.njk`:
+Create `app/index.njk`, where you can paste the `<div class="container">` part from `app/index.html`:
 
-```diff
-+{% extends "layouts/default.njk" %}
-+
-+{% block content %}
-+  <div class="hero-unit">
-+    <h1>'Allo, 'Allo!</h1>
-+    <p>You now have</p>
-+    <ul>
-+      <li>HTML5 Boilerplate</li>
-+      <li>Sass</li>
-+      <li>Modernizr</li>
-+    </ul>
-+  </div>
-+{% endblock %}
-+
+```njk
+{% extends "layout/default.njk" %}
+
+{% block content %}
+  <div class="container">
+    <!-- ... -->
+  </div>
+{% endblock %}
 ```
 
 ### 4. Create a `views` task
@@ -78,7 +62,7 @@ Create `app/index.njk`:
 ```js
 gulp.task('views', () => {
   return gulp.src('app/*.njk')
-  .pipe($.nunjucksRender({
+    .pipe($.nunjucksRender({
       path: 'app'
     }))
     .pipe(gulp.dest('.tmp'))
@@ -92,12 +76,16 @@ This compiles `app/*.njk` files into static `.html` files in the `.tmp` director
 
 ```js
 gulp.task('html', ['views', 'styles', 'scripts'], () => {
-    ...
+  // ...
+});
 ```
 
 ```js
-gulp.task('serve', ['views', 'styles', 'fonts'], () => {
-  ...
+gulp.task('serve', () => {
+  runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
+    // ...
+  });
+});
 ```
 
 ### 6. Configure `html` task to include files from `.tmp`
@@ -106,8 +94,9 @@ gulp.task('serve', ['views', 'styles', 'fonts'], () => {
  gulp.task('html', ['styles', 'views', 'scripts'], () => {
 -  return gulp.src('app/*.html')
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
+     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
      .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.cssnano()))
+     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
      .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
      .pipe(gulp.dest('dist'));
  });
@@ -132,11 +121,12 @@ We don't want to copy over `.njk` files in the build process:
 
 ### 8. Configure `wiredep` task to wire Bower components on layout templates only
 
-Wiredep does not support `.njk`, so also add in the file type definition.
+Wiredep does not support `.njk` ([yet](https://github.com/taptapship/wiredep/pull/258)), so also add in the file type definition.
 
 ```diff
   gulp.task('wiredep', () => {
     ...
+
 -   gulp.src('app/*.html')
 +   gulp.src('app/layouts/*.njk')
       .pipe(wiredep({
@@ -165,15 +155,19 @@ Wiredep does not support `.njk`, so also add in the file type definition.
 
 ### 9. Edit your `serve` task
 
-Edit your `serve` task so that editing an `app/**/*.html` or `app/**/*.njk` file triggers the `views` task:
+Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views` task:
 
 ```diff
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
-    ...
-+   gulp.watch('app/**/*.html', ['views']);
-+   gulp.watch('app/**/*.njk', ['views']);
-    gulp.watch('app/styles/**/*.scss', ['styles']);
-    gulp.watch('bower.json', ['wiredep', 'fonts']);
+    runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
+      ...
+     
++     gulp.watch('app/**/*.{html,njk}', ['views']);
+      gulp.watch('app/styles/**/*.scss', ['styles']);
+      gulp.watch('app/scripts/**/*.js', ['scripts']);
+      gulp.watch('app/fonts/**/*', ['fonts']);
+      gulp.watch('bower.json', ['wiredep', 'fonts']);
+    });
   });
 ```
 
