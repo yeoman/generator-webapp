@@ -3,6 +3,7 @@
 - [CoffeeScript](coffeescript.md)
 - [Handlebars](handlebars.md)
 - [Less](less.md)
+- [Stylus](stylus.md)
 - [Pug](pug.md)
 - [GitHub Pages](gh-pages.md)
 - [Asset revisioning](asset-revisioning.md)
