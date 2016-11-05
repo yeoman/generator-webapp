@@ -42,8 +42,8 @@ gulp.task('scripts', () => {
 
 function lint(files, options) {
   return gulp.src(files)
-    .pipe(reload({stream: true, once: true}))
     .pipe($.eslint({ fix: true }))
+    .pipe(reload({stream: true, once: true}))
     .pipe($.eslint.format())
     .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
