@@ -16,7 +16,7 @@
     "gulp-cssnano": "^2.0.0",
     "gulp-eslint": "^3.0.0",
     "gulp-htmlmin": "^3.0.0",
-    "gulp-if": "^2.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.0.1",
     "gulp-load-plugins": "^1.2.4",<% if (includeBabel || includeSass) { %>
     "gulp-plumber": "^1.0.1",<% } if (includeSass) { %>
