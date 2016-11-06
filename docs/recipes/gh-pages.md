@@ -1,56 +1,82 @@
 # Deploying to GitHub Pages
 
-Deploying your app using `git subtree` allows the use of [GitHub Pages](https://pages.github.com). Your `gh-pages` branch will contain the files from `dist`.
+In this recipe you will learn how to set up deployment to [GitHub Pages](https://pages.github.com). Your `gh-pages` branch will contain files from `dist`.
 
 
 ## Steps
 
-### Prerequisites
+### 1. Install [gulp-gh-pages](https://github.com/shinnn/gulp-gh-pages)
 
-1. If not already available, [install git-subtree](http://engineeredweb.com/blog/how-to-install-git-subtree).
-2. Ensure your generated app is in a GitHub-hosted repository that is set as your `origin` remote.
-
-> You can check your remotes with `$ git remote -v`. See [Adding a remote](https://help.github.com/articles/adding-a-remote) for more info.
-
-### 1. Install [gulp-subtree](https://github.com/Snugug/gulp-subtree) & [gulp-clean](https://github.com/peter-vilja/gulp-clean)
+We only need to install one dependency for this recipe:
 
 ```
-$ npm install --save-dev gulp-subtree gulp-clean
+$ npm install --save-dev gulp-gh-pages
 ```
 
 ### 2. Create a `deploy` task
 
-This will run the build task, then push it to the `gh-pages` branch:
+We need to create a `deploy` task, which will deploy contents of `dist` to the remote `gh-pages` branch:
 
 ```js
-gulp.task('deploy', ['build'], () => {
-  return gulp.src('dist')
-    .pipe($.subtree())
-    .pipe($.clean());
+gulp.task('deploy', ['default'], () => {
+  return gulp.src('dist/**/*')
+    .pipe($.ghPages());
 });
 ```
 
-### 3. Remove `dist` from `.gitignore`
+If you don't want to trigger a rebuild on each `gulp deploy`, feel free to remove the `['default']` part.
 
-```diff
- node_modules
--dist
- .tmp
- .sass-cache
- bower_components
- test/bower_components
+Also, cache from this plugin will be saved to `.publish`, we can ignore it by adding this line to `.gitignore`:
+
+```
+.publish
 ```
 
+### 3. Ensure that your repository is on GitHub and that `origin` is set
+
+For gulp-gh-pages to work, we need to have our repository on GitHub, and the `origin` remote has to point there. We can check our remotes by running:
+
+```
+$ git remote -v
+```
+
+If `origin` doesn't exist, create it:
+
+```
+$ git remote add origin https://github.com/you/webapp.git
+```
+
+Our app will be hosted on the `gh-pages` branch, so we need to have it on the remote repository. We can create an [orphan branch](http://stackoverflow.com/a/4288660/1247274) by running:
+
+```
+$ git checkout --orphan gh-pages
+```
+
+In order to be able to push this branch, we have to have at least one commit, so let's create an empty one:
+
+```
+$ git commit -m "Initial commit" --allow-empty
+```
+
+Now we can push it to `origin`:
+
+```
+$ git push origin gh-pages
+```
 
 ## Usage
 
-1. Run `$ gulp deploy`.
+1. Run `gulp deploy`.
 2. Visit `http://[your-username].github.io/[repo-name]`.
 
-It might take a couple of minutes for your page to show up the first time you push to `gh-pages`. In the future, changes will show up instantly.
+It might take a couple of minutes for your page to show up the first time you push to `gh-pages`.
 
-### References
+## Troubleshooting
 
-- See [gulp-subtree](https://github.com/Snugug/gulp-subtree) for details on changing the branch and commit message.
-- See [gulp-clean](https://github.com/peter-vilja/gulp-clean).
-- See [GitHub Pages documentation](https://help.github.com/categories/20/articles) for features such as custom domains.
+In case your `gulp deploy` command is failing, try deleting the cache by running:
+
+```
+$ rm -rf .publish
+```
+
+and trying again.
