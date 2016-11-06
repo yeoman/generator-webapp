@@ -48,7 +48,7 @@ $ mv app/index.html app/layouts/default.njk
 Create `app/index.njk`, where you can paste the `<div class="container">` part from `app/index.html`:
 
 ```njk
-{% extends "layout/default.njk" %}
+{% extends "layouts/default.njk" %}
 
 {% block content %}
   <div class="container">
