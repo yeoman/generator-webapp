@@ -166,6 +166,7 @@ gulp.task('serve:test', () => {
 // inject bower components
 gulp.task('wiredep', () => {<% if (includeSass) { %>
   gulp.src('app/styles/*.scss')
+    .pipe($.filter(file => file.stat && file.stat.size))
     .pipe(wiredep({
       ignorePath: /^(\.\.\/)+/
     }))
