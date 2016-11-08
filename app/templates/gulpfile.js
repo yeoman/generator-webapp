@@ -95,7 +95,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
   runSequence(['clean', 'wiredep'], ['styles'<% if (includeBabel) { %>, 'scripts'<% } %>, 'fonts'], () => {
-    browserSync({
+    browserSync.init({
       notify: false,
       port: 9000,
       server: {
@@ -125,7 +125,7 @@ gulp.task('serve', () => {
 });
 
 gulp.task('serve:dist', ['default'], () => {
-  browserSync({
+  browserSync.init({
     notify: false,
     port: 9000,
     server: {
@@ -139,7 +139,7 @@ gulp.task('serve:test', ['scripts'], () => {
 <% } else { -%>
 gulp.task('serve:test', () => {
 <% } -%>
-  browserSync({
+  browserSync.init({
     notify: false,
     port: 9000,
     ui: false,
