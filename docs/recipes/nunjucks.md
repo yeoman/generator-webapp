@@ -161,6 +161,13 @@ Edit your `serve` task so that editing `.html` and `.njk` files triggers the `vi
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
     runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
       ...
+
+    gulp.watch([
+-     'app/*.html',
+      'app/scripts/**/*.js',
+      'app/images/**/*',
+      '.tmp/fonts/**/*'
+    ]).on('change', reload);
      
 +     gulp.watch('app/**/*.{html,njk}', ['views']);
       gulp.watch('app/styles/**/*.scss', ['styles']);
