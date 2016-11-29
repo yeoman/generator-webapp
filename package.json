@@ -26,9 +26,6 @@
     "jquery",
     "gulp"
   ],
-  "peerDependencies": {
-    "yo": ">=1.7.1"
-  },
   "dependencies": {
     "chalk": "^1.0.0",
     "generator-jasmine": "^0.2.1",
