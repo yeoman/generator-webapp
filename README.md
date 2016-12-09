@@ -30,8 +30,7 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 
 ## Getting Started
 
-- Install dependencies: `npm install --global yo gulp-cli bower`
-- Install the generator: `npm install --global generator-webapp`
+- Install: `npm install --global yo gulp-cli bower generator-webapp`
 - Run `yo webapp` to scaffold your webapp
 - Run `gulp serve` to preview and watch for changes
 - Run `bower install --save <package>` to install frontend dependencies
