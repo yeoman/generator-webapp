@@ -58,7 +58,7 @@ Unlike with Sass, Stylus doesn't ignore filenames starting with `_`, so we'll li
 -    }).on('error', $.sass.logError))
 +    .pipe($.stylus({
 +      paths: ['.']
-+    })
++    }))
      .pipe($.sourcemaps.init())
      .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
      .pipe($.sourcemaps.write())
