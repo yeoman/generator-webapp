@@ -10,7 +10,7 @@ This recipe shows how to set up Handlebars to precompile your templates, includi
 Install some gulp plugins:
 
 ```
-$ npm install --save-dev path gulp-concat gulp-handlebars gulp-define-module gulp-declare
+$ npm install --save-dev gulp-handlebars gulp-define-module gulp-declare gulp-wrap gulp-concat
 ```
 
 * [gulp-handlebars](https://github.com/lazd/gulp-handlebars) precompiles raw `.hbs` templates into JavaScript
@@ -23,23 +23,23 @@ $ bower install --save handlebars
 ```
 
 * You need this so you can include the Handlebars runtime in your page – even compiled templates depend on this. (You won't need to include the entire Handlebars library though.)
-  ```
-  // bower.json
-  {
-    "name": "MyApp",
-    "dependencies": {
-      ...
-    },
-    "devDependencies": {
-      ...
-    },
-    "overrides": {
-      "handlebars": {
-        "main": ["handlebars.runtime.js"]
-      }
+```
+// bower.json
+{
+  "name": "MyApp",
+  "dependencies": {
+    ...
+  },
+  "devDependencies": {
+    ...
+  },
+  "overrides": {
+    "handlebars": {
+      "main": ["handlebars.runtime.js"]
     }
   }
-  ```
+}
+```
 * It's a good idea to verify you've installed the same version of Handlebars as the one used by internally by gulp-handlebars, to guarantee compatibility between the runtime and your compiled templates. Look in `node_modules/gulp-handlebars/package.json` under `"dependencies"` and check the handlebars version – if necessary, you can ask bower to install that specific version, e.g. `bower install --save handlebars#^1.3.0`.
 
 ### 2. Create a `templates` task
@@ -80,7 +80,7 @@ gulp.task('partials', function() {
 ```
 This compiles the `.hbs` files inside the `templates/partials` directory into `partials.js` file in the `.tmp/templates` directory.
 
-### 3. Add `templates` as a dependency of both `html` and `serve`
+### 3. Add `templates` and `partials` as a dependencies of both `html` and `serve`
 
 ```js
 gulp.task('html', ['styles', 'templates', 'partials', 'scripts'], () => {
@@ -97,21 +97,24 @@ gulp.task('serve', ['styles', 'templates', 'partials', 'scripts', 'fonts'], () =
 Edit your `serve` task so that (a) editing an `.hbs` file triggers the `templates` task, and (b) the browser is reloaded whenever a `.js` file is generated in `.tmp/templates`:
 
 ```diff
-gulp.task('serve', ['styles', 'templates', 'partials', 'scripts', 'fonts'], () => {
-   ...
-   gulp.watch([
-    'app/*.html',
-    'app/images/**/*',
-    '.tmp/fonts/**/*',
-+   '.tmp/templates/**/*.js',
-  ]).on('change', reload);
+ gulp.task('serve', () => {
+-  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts'], () => {
++  runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'templates', 'partials', 'fonts'], () => {
+     ...
+     gulp.watch([
+      'app/*.html',
+      'app/images/**/*',
+      '.tmp/fonts/**/*',
++     '.tmp/templates/**/*.js',
+     ]).on('change', reload);
 
-  gulp.watch('app/styles/**/*.scss', ['styles']);
-+  gulp.watch('app/templates/*.hbs', ['templates']);
-+  gulp.watch('app/templates/partials/*.hbs', ['partials']);
-  gulp.watch('app/scripts/**/*.js', ['scripts']);
-  gulp.watch('app/fonts/**/*', ['fonts']);
-  gulp.watch('bower.json', ['wiredep', 'fonts']);
+     gulp.watch('app/styles/**/*.scss', ['styles']);
++    gulp.watch('app/templates/*.hbs', ['templates']);
++    gulp.watch('app/templates/partials/*.hbs', ['partials']);
+     gulp.watch('app/scripts/**/*.js', ['scripts']);
+     gulp.watch('app/fonts/**/*', ['fonts']);
+     gulp.watch('bower.json', ['wiredep', 'fonts']);
+   });
  });
 ```
 
@@ -119,17 +122,18 @@ gulp.task('serve', ['styles', 'templates', 'partials', 'scripts', 'fonts'], () =
 
 Put your `.hbs` files in `app/templates` and `app/templates/partials` (if you using partials), and include in your HTML after the bower components:
 
-```html
-  <!-- build:js scripts/vendor.js -->
-  <!-- bower:js -->
-  ...
-  <!-- endbower -->
-  <!-- endbuild -->
+```diff
+   <!-- build:js scripts/vendor.js -->
+   <!-- bower:js -->
+   ...
+   <!-- endbower -->
+   <!-- endbuild -->
 
-  <!-- build:js templates/index.js -->
-  <script src="templates/templates.js"></script>
-  <script src="templates/partials.js"></script>
-  <!-- endbuild -->
+   <!-- build:js scripts/main.js -->
++  <script src="templates/templates.js"></script>
++  <script src="templates/partials.js"></script>
+   <script src="scripts/main.js"></script>
+   <!-- endbuild -->
 ```
 
 You would then render the template like this:
