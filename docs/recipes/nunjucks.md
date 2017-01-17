@@ -65,7 +65,8 @@ gulp.task('views', () => {
     .pipe($.nunjucksRender({
       path: 'app'
     }))
-    .pipe(gulp.dest('.tmp'));
+    .pipe(gulp.dest('.tmp'))
+    .pipe(reload({stream: true}));
 });
 ```
 
@@ -168,7 +169,7 @@ Edit your `serve` task so that editing `.html` and `.njk` files triggers the `vi
       '.tmp/fonts/**/*'
     ]).on('change', reload);
      
-+     gulp.watch('app/**/*.{html,njk}', ['views', reload]);
++     gulp.watch('app/**/*.{html,njk}', ['views']);
       gulp.watch('app/styles/**/*.scss', ['styles']);
       gulp.watch('app/scripts/**/*.js', ['scripts']);
       gulp.watch('app/fonts/**/*', ['fonts']);
