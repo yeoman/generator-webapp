@@ -1,4 +1,5 @@
-<% if (includeBootstrap) { if (legacyBootstrap) { %>$icon-font-path: '../fonts/';
+<% if (includeBootstrap) { -%>
+<% if (legacyBootstrap) { %>$icon-font-path: '../fonts/';
 <% } %>
 // bower:scss
 // endbower

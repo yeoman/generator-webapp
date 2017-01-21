@@ -64,9 +64,18 @@ gulp.task('html', ['styles'], () => {
 <% } -%>
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.js', $.uglify({compress: {drop_console: true}})))
     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
-    .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
+    .pipe($.if('*.html', $.htmlmin({
+      collapseWhitespace: true,
+      minifyCSS: true,
+      minifyJS: {compress: {drop_console: true}},
+      processConditionalComments: true,
+      removeComments: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true
+    })))
     .pipe(gulp.dest('dist'));
 });
 
