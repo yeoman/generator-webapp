@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1<% if (includeBootstrap && !legacyBootstrap) { %>, shrink-to-fit=no<% } %>">
     <title><%= appname %></title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -23,22 +23,28 @@
     <!-- endbuild --><% } %>
   </head>
   <body>
-    <!--[if lt IE 10]>
+    <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <% if (includeBootstrap) { %>
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+        <ul class="nav nav-pills <% if (legacyBootstrap) { %>pull<% } else { %>float<% } %>-right">
+          <li class="<% if (legacyBootstrap) { %>active<% } else { %>nav-item<% } %>">
+            <a <% if (!legacyBootstrap) { %>class="nav-link active" <% } %>href="#">Home</a>
+          </li>
+          <li>
+            <a <% if (!legacyBootstrap) { %>class="nav-link" <% } %>href="#">About</a>
+          </li>
+          <li>
+            <a <% if (!legacyBootstrap) { %>class="nav-link" <% } %>href="#">Contact</a>
+          </li>
         </ul>
         <h3 class="text-muted"><%= appname %></h3>
       </div>
 
       <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
+        <h1 <% if (!legacyBootstrap) { %>class="display-3" <% } %>>'Allo, 'Allo!</h1>
         <p class="lead">Always a pleasure scaffolding your apps.</p>
         <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
       </div>

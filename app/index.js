@@ -338,6 +338,7 @@ module.exports = generators.Base.extend({
           appname: this.appname,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
+          legacyBootstrap: this.legacyBootstrap,
           includeModernizr: this.includeModernizr,
           includeJQuery: this.includeJQuery,
           bsPath: bsPath,
