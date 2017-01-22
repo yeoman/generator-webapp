@@ -37,13 +37,85 @@ describe('Bootstrap feature', () => {
     });
   });
 
+  // Bootstrap 4
   describe('with Sass', () => {
     before(done => {
       helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({features: [
-          'includeSass',
-          'includeBootstrap'
-        ]})
+        .withPrompts({
+          features: [
+            'includeSass',
+            'includeBootstrap'
+          ],
+          legacyBootstrap: false
+        })
+        .on('end', done);
+    });
+
+    it('should use Bootstrap', () => {
+      assert.fileContent('bower.json', '"bootstrap"');
+    });
+
+    it('should output the correct <script> paths', () => {
+      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\/dist\//);
+    });
+
+    it('should apply rem units in scss', () => {
+      assert.fileContent('app/styles/main.scss', '1.5rem');
+      assert.fileContent('app/styles/main.scss', '(min-width: 48em)');
+    });
+
+    it('should correctly override bootstrap\'s bower.json', () => {
+      assert.fileContent('bower.json', '"overrides"');
+      assert.fileContent('bower.json', 'scss/bootstrap.scss');
+      assert.fileContent('bower.json', 'dist/js/bootstrap.js');
+    });
+  });
+
+  // Bootstrap 4
+  describe('without Sass', () => {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../app'))
+        .withPrompts({
+          features: [
+            'includeBootstrap'
+          ],
+          legacyBootstrap: false
+        })
+        .on('end', done);
+    });
+
+    it('should use Bootstrap', () => {
+      assert.fileContent('bower.json', '"bootstrap"');
+    });
+
+    it('should output the correct <script> paths', () => {
+      assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\/dist\//);
+    });
+
+    it('should apply rem units in css', () => {
+      assert.fileContent('app/styles/main.css', '1.5rem');
+      assert.fileContent('app/styles/main.css', '(min-width: 48em)');
+    });
+
+    it('should correctly override bootstrap\'s bower.json', () => {
+      assert.fileContent('bower.json', '"overrides"');
+      assert.fileContent('bower.json', 'scss/bootstrap.scss');
+      assert.fileContent('bower.json', 'dist/css/bootstrap.css');
+      assert.fileContent('bower.json', 'dist/js/bootstrap.js');
+    });
+  });
+
+  // Bootstrap 3
+  describe('legacy with Sass', () => {
+    before(done => {
+      helpers.run(path.join(__dirname, '../app'))
+        .withPrompts({
+          features: [
+            'includeSass',
+            'includeBootstrap'
+          ],
+          legacyBootstrap: true
+        })
         .on('end', done);
     });
 
@@ -59,6 +131,10 @@ describe('Bootstrap feature', () => {
       assert.fileContent('app/styles/main.scss', '$icon-font-path');
     });
 
+    it('should apply px units in scss', () => {
+      assert.fileContent('app/styles/main.scss', '(min-width: 768px)');
+    });
+
     it('should correctly override bootstrap\'s bower.json', () => {
       assert.fileContent('bower.json', '"overrides"');
       assert.fileContent('bower.json', 'assets/stylesheets/_bootstrap.scss');
@@ -67,12 +143,16 @@ describe('Bootstrap feature', () => {
     });
   });
 
-  describe('without Sass', () => {
+  // Bootstrap 3
+  describe('legacy without Sass', () => {
     before(function (done) {
       helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({features: [
-          'includeBootstrap'
-        ]})
+        .withPrompts({
+          features: [
+            'includeBootstrap'
+          ],
+          legacyBootstrap: true
+        })
         .on('end', done);
     });
 
@@ -82,6 +162,10 @@ describe('Bootstrap feature', () => {
 
     it('should output the correct <script> paths', () => {
       assert.fileContent('app/index.html', /src=\"(.*?)\/bootstrap\/js\//);
+    });
+
+    it('should apply px units in css', () => {
+      assert.fileContent('app/styles/main.css', '(min-width: 768px)');
     });
 
     it('should correctly override bootstrap\'s bower.json', () => {
