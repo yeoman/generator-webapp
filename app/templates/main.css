@@ -1,10 +1,10 @@
-<% if (includeBootstrap) { %>.browserupgrade {
+.browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
 }
-
+<% if (includeBootstrap) { %>
 /* Space out content a bit */
 body {
   padding-top: <% if (legacyBootstrap) { %>20px<% } else { %>1.5rem<% } %>;
@@ -106,10 +106,4 @@ body {
   line-height: 1;
   letter-spacing: -1px;
 }
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}<% } %>
+<% } -%>
