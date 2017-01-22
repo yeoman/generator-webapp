@@ -84,7 +84,9 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>body {
+}
+<% } else { %>
+body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
