@@ -76,6 +76,20 @@ module.exports = generators.Base.extend({
         checked: true
       }]
     }, {
+      type: 'list',
+      name: 'legacyBootstrap',
+      message: 'Which version of Bootstrap would you like to include?',
+      choices: [{
+        name: 'Bootstrap 3',
+        value: true
+      }, {
+        name: 'Bootstrap 4',
+        value: false
+      }],
+      when: function (answers) {
+        return answers.features.indexOf('includeBootstrap') !== -1;
+      }
+    }, {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
@@ -97,6 +111,7 @@ module.exports = generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.legacyBootstrap = answers.legacyBootstrap;
       this.includeJQuery = answers.includeJQuery;
 
     }.bind(this));
@@ -113,6 +128,7 @@ module.exports = generators.Base.extend({
           version: this.pkg.version,
           includeSass: this.includeSass,
           includeBootstrap: this.includeBootstrap,
+          legacyBootstrap: this.legacyBootstrap,
           includeBabel: this.options['babel'],
           testFramework: this.options['test-framework']
         }
@@ -155,30 +171,55 @@ module.exports = generators.Base.extend({
       };
 
       if (this.includeBootstrap) {
-        if (this.includeSass) {
-          bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap-sass': {
-              'main': [
-                'assets/stylesheets/_bootstrap.scss',
-                'assets/fonts/bootstrap/*',
-                'assets/javascripts/bootstrap.js'
-              ]
-            }
-          };
-        } else {
-          bowerJson.dependencies['bootstrap'] = '~3.3.5';
-          bowerJson.overrides = {
-            'bootstrap': {
-              'main': [
-                'less/bootstrap.less',
-                'dist/css/bootstrap.css',
-                'dist/js/bootstrap.js',
-                'dist/fonts/*'
-              ]
-            }
-          };
+
+        // Bootstrap 4
+        bowerJson.dependencies = {
+          'bootstrap': '~4.0.0-alpha.6'
+        };
+        bowerJson.overrides = {
+          'bootstrap': {
+            'main': [
+              'scss/bootstrap.scss',
+              'dist/js/bootstrap.js'
+            ]
+          }
+        };
+        if (!this.includeSass) {
+          bowerJson.overrides.bootstrap.main.push('dist/css/bootstrap.css');
         }
+
+        // Bootstrap 3
+        if (this.legacyBootstrap) {
+          if (this.includeSass) {
+            bowerJson.dependencies = {
+              'bootstrap-sass': '~3.3.5'
+            };
+            bowerJson.overrides = {
+              'bootstrap-sass': {
+                'main': [
+                  'assets/stylesheets/_bootstrap.scss',
+                  'assets/fonts/bootstrap/*',
+                  'assets/javascripts/bootstrap.js'
+                ]
+              }
+            };
+          } else {
+            bowerJson.dependencies = {
+              'bootstrap': '~3.3.5'
+            };
+            bowerJson.overrides = {
+              'bootstrap': {
+                'main': [
+                  'less/bootstrap.less',
+                  'dist/css/bootstrap.css',
+                  'dist/js/bootstrap.js',
+                  'dist/fonts/*'
+                ]
+              }
+            };
+          }
+        }
+
       } else if (this.includeJQuery) {
         bowerJson.dependencies['jquery'] = '~2.1.1';
       }
@@ -230,7 +271,8 @@ module.exports = generators.Base.extend({
         this.templatePath(css),
         this.destinationPath('app/styles/' + css),
         {
-          includeBootstrap: this.includeBootstrap
+          includeBootstrap: this.includeBootstrap,
+          legacyBootstrap: this.legacyBootstrap
         }
       );
     },
@@ -243,30 +285,35 @@ module.exports = generators.Base.extend({
     },
 
     html: function () {
-      var bsPath;
+      var bsPath, bsPlugins;
 
       // path prefix for Bootstrap JS files
       if (this.includeBootstrap) {
-        bsPath = '/bower_components/';
 
-        if (this.includeSass) {
-          bsPath += 'bootstrap-sass/assets/javascripts/bootstrap/';
-        } else {
-          bsPath += 'bootstrap/js/';
-        }
-      }
+        // Bootstrap 4
+        bsPath = '/bower_components/bootstrap/js/dist/';
+        bsPlugins = [
+          'util',
+          'alert',
+          'button',
+          'carousel',
+          'collapse',
+          'dropdown',
+          'modal',
+          'scrollspy',
+          'tab',
+          'tooltip',
+          'popover'
+        ];
 
-      this.fs.copyTpl(
-        this.templatePath('index.html'),
-        this.destinationPath('app/index.html'),
-        {
-          appname: this.appname,
-          includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
-          includeModernizr: this.includeModernizr,
-          includeJQuery: this.includeJQuery,
-          bsPath: bsPath,
-          bsPlugins: [
+        // Bootstrap 3
+        if (this.legacyBootstrap) {
+          if (this.includeSass) {
+            bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
+          } else {
+            bsPath = '/bower_components/bootstrap/js/';
+          }
+          bsPlugins = [
             'affix',
             'alert',
             'dropdown',
@@ -279,7 +326,23 @@ module.exports = generators.Base.extend({
             'scrollspy',
             'collapse',
             'tab'
-          ]
+          ];
+        }
+
+      }
+
+      this.fs.copyTpl(
+        this.templatePath('index.html'),
+        this.destinationPath('app/index.html'),
+        {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          includeBootstrap: this.includeBootstrap,
+          legacyBootstrap: this.legacyBootstrap,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+          bsPath: bsPath,
+          bsPlugins: bsPlugins
         }
       );
     },

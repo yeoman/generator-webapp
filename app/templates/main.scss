@@ -1,6 +1,5 @@
-<% if (includeBootstrap) { %>$icon-font-path: '../fonts/';
-
-// bower:scss
+<% if (legacyBootstrap) { %>$icon-font-path: '../fonts/';
+<% } %>// bower:scss
 // endbower
 
 .browserupgrade {
@@ -9,89 +8,88 @@
   color: #000;
   padding: 0.2em 0;
 }
-
+<% if (includeBootstrap) { %>
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: <% if (legacyBootstrap) { %>20px<% } else { %>1.5rem<% } %>;
+  padding-bottom: <% if (legacyBootstrap) { %>20px<% } else { %>1.5rem<% } %>;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-right: <% if (legacyBootstrap) { %>15px<% } else { %>1rem<% } %>;
+  padding-left: <% if (legacyBootstrap) { %>15px<% } else { %>1rem<% } %>;
 }
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: <% if (legacyBootstrap) { %>20px<% } else { %>1rem<% } %>;
+  border-bottom: <% if (legacyBootstrap) { %>1px<% } else { %>.05rem<% } %> solid #e5e5e5;
+}
 
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: <% if (legacyBootstrap) { %>40px<% } else { %>3rem<% } %>;
 }
 
 /* Custom page footer */
 .footer {
-  padding-top: 19px;
+  padding-top: <% if (legacyBootstrap) { %>19px<% } else { %>1.5rem<% } %>;
   color: #777;
-  border-top: 1px solid #e5e5e5;
+  border-top: <% if (legacyBootstrap) { %>1px<% } else { %>.05rem<% } %> solid #e5e5e5;
 }
 
+/* Customize container */
+@media (min-width: <% if (legacyBootstrap) { %>768px<% } else { %>48em<% } %>) {
+  .container {
+    max-width: <% if (legacyBootstrap) { %>730px<% } else { %>46rem<% } %>;
+  }
+}
 .container-narrow > hr {
-  margin: 30px 0;
+  margin: <% if (legacyBootstrap) { %>30px<% } else { %>2rem<% } %> 0;
 }
 
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+  border-bottom: <% if (legacyBootstrap) { %>1px<% } else { %>.05rem<% } %> solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: <% if (legacyBootstrap) { %>14px 24px<% } else { %>.75rem 1.5rem<% } %>;
+  font-size: <% if (legacyBootstrap) { %>21px<% } else { %>1.5rem<% } %>;
 }
 
 /* Supporting marketing content */
 .marketing {
-  margin: 40px 0;
-  p + h4 {
-    margin-top: 28px;
-  }
+  margin: <% if (legacyBootstrap) { %>40px<% } else { %>3rem<% } %> 0;
+}
+.marketing p + h4 {
+  margin-top: <% if (legacyBootstrap) { %>28px<% } else { %>1.5rem<% } %>;
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
+@media screen and (min-width: <% if (legacyBootstrap) { %>768px<% } else { %>48em<% } %>) {
   /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
-    padding-left: 0;
     padding-right: 0;
+    padding-left: 0;
   }
-
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: <% if (legacyBootstrap) { %>30px<% } else { %>2rem<% } %>;
   }
-
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
-}<% } else { %>// bower:scss
-// endbower
-
+}
+<% } else { %>
 body {
   background: #fafafa;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -113,10 +111,4 @@ body {
     letter-spacing: -1px;
   }
 }
-
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}<% } %>
+<% } -%>
