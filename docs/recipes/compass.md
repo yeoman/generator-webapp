@@ -51,3 +51,7 @@ body {
 ```
 
 Now your page should have a visible baseline grid, which is helpful for maintaining a vertical rhythm.
+
+## Caveats
+
+compass-importer uses [compass-mixins](https://github.com/Igosuki/compass-mixins), which is not 100% feature-complete at the time of this writing. For example, there is a [known issue](https://github.com/Igosuki/compass-mixins/issues/36) with the `font-face` mixin.
