@@ -141,7 +141,8 @@ module.exports = generators.Base.extend({
         this.destinationPath('package.json'),
         {
           includeSass: this.includeSass,
-          includeBabel: this.options['babel']
+          includeBabel: this.options['babel'],
+          includeJQuery: this.includeJQuery,
         }
       );
     },

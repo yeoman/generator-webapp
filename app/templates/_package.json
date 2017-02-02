@@ -34,7 +34,8 @@
     "env": {<% if (includeBabel) { %>
       "es6": true,<% } %>
       "node": true,
-      "browser": true
+      "browser": true<% if (includeJQuery) { %>,
+      "jquery": true<% } %>
     },
     "rules": {
       "quotes": [
