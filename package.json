@@ -1,6 +1,6 @@
 {
   "name": "generator-webapp",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Scaffold out a front-end web app",
   "license": "BSD-2-Clause",
   "repository": "yeoman/generator-webapp",
