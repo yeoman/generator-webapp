@@ -72,10 +72,10 @@ gulp.task('views', () => {
 
 This compiles `app/*.njk` files into static `.html` files in the `.tmp` directory.
 
-### 5. Create a 'views_reload' task
+### 5. Create a 'views:reload' task
 
 ```js
-gulp.task('views_reload', ['views'], () => {
+gulp.task('views:reload', ['views'], () => {
   reload();
 });
 ```
@@ -165,7 +165,7 @@ Wiredep does not support `.njk` ([yet](https://github.com/taptapship/wiredep/pul
 
 ### 10. Edit your `serve` task
 
-Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views_reload` task:
+Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views:reload` task:
 
 ```diff
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
@@ -179,7 +179,7 @@ Edit your `serve` task so that editing `.html` and `.njk` files triggers the `vi
       '.tmp/fonts/**/*'
     ]).on('change', reload);
      
-+     gulp.watch('app/**/*.{html,njk}', ['views_reload']);
++     gulp.watch('app/**/*.{html,njk}', ['views:reload']);
       gulp.watch('app/styles/**/*.scss', ['styles']);
       gulp.watch('app/scripts/**/*.js', ['scripts']);
       gulp.watch('app/fonts/**/*', ['fonts']);
