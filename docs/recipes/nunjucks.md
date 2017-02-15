@@ -72,7 +72,17 @@ gulp.task('views', () => {
 
 This compiles `app/*.njk` files into static `.html` files in the `.tmp` directory.
 
-### 5. Add `views` as a dependency of both `html` and `serve`
+### 5. Create a 'views_reload' task
+
+```js
+gulp.task('views_reload', ['views'], () => {
+  reload();
+});
+```
+
+This triggers Browsersync after `views` task is completed
+
+### 6. Add `views` as a dependency of both `html` and `serve`
 
 ```js
 gulp.task('html', ['views', 'styles', 'scripts'], () => {
@@ -88,7 +98,7 @@ gulp.task('serve', () => {
 });
 ```
 
-### 6. Configure `html` task to include files from `.tmp`
+### 7. Configure `html` task to include files from `.tmp`
 
 ```diff
  gulp.task('html', ['styles', 'views', 'scripts'], () => {
@@ -102,7 +112,7 @@ gulp.task('serve', () => {
  });
 ```
 
-### 7. Update `extras`
+### 8. Update `extras`
 
 We don't want to copy over `.njk` files in the build process:
 
@@ -119,7 +129,7 @@ We don't want to copy over `.njk` files in the build process:
  });
 ```
 
-### 8. Configure `wiredep` task to wire Bower components on layout templates only
+### 9. Configure `wiredep` task to wire Bower components on layout templates only
 
 Wiredep does not support `.njk` ([yet](https://github.com/taptapship/wiredep/pull/258)), so also add in the file type definition.
 
@@ -153,9 +163,9 @@ Wiredep does not support `.njk` ([yet](https://github.com/taptapship/wiredep/pul
 ```
 
 
-### 9. Edit your `serve` task
+### 10. Edit your `serve` task
 
-Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views` task:
+Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views_reload` task:
 
 ```diff
   gulp.task('serve', ['views', 'styles', 'fonts'], () => {
@@ -169,7 +179,7 @@ Edit your `serve` task so that editing `.html` and `.njk` files triggers the `vi
       '.tmp/fonts/**/*'
     ]).on('change', reload);
      
-+     gulp.watch('app/**/*.{html,njk}', ['views']);
++     gulp.watch('app/**/*.{html,njk}', ['views_reload']);
       gulp.watch('app/styles/**/*.scss', ['styles']);
       gulp.watch('app/scripts/**/*.js', ['scripts']);
       gulp.watch('app/fonts/**/*', ['fonts']);
