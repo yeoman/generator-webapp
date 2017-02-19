@@ -177,14 +177,6 @@ module.exports = generators.Base.extend({
         bowerJson.dependencies = {
           'bootstrap': '~4.0.0-alpha.6'
         };
-        bowerJson.overrides = {
-          'bootstrap': {
-            'main': [
-              'scss/bootstrap.scss',
-              'dist/js/bootstrap.js'
-            ]
-          }
-        };
         if (!this.includeSass) {
           bowerJson.overrides.bootstrap.main.push('dist/css/bootstrap.css');
         }
