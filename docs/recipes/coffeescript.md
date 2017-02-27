@@ -127,7 +127,7 @@ const lazypipe = require('lazypipe');
 
 const eslintChannel = lazypipe()
   .pipe($.eslint, { fix: true })
-  .pipe(reload({stream: true, once: true}))
+  .pipe(reload, {stream: true, once: true})
   .pipe($.eslint.format)
   .pipe($.if, !browserSync.active, $.eslint.failAfterError());
 
