@@ -63,12 +63,6 @@ describe('Bootstrap feature', () => {
       assert.fileContent('app/styles/main.scss', '1.5rem');
       assert.fileContent('app/styles/main.scss', '(min-width: 48em)');
     });
-
-    it('should correctly override bootstrap\'s bower.json', () => {
-      assert.fileContent('bower.json', '"overrides"');
-      assert.fileContent('bower.json', 'scss/bootstrap.scss');
-      assert.fileContent('bower.json', 'dist/js/bootstrap.js');
-    });
   });
 
   // Bootstrap 4
@@ -95,13 +89,6 @@ describe('Bootstrap feature', () => {
     it('should apply rem units in css', () => {
       assert.fileContent('app/styles/main.css', '1.5rem');
       assert.fileContent('app/styles/main.css', '(min-width: 48em)');
-    });
-
-    it('should correctly override bootstrap\'s bower.json', () => {
-      assert.fileContent('bower.json', '"overrides"');
-      assert.fileContent('bower.json', 'scss/bootstrap.scss');
-      assert.fileContent('bower.json', 'dist/css/bootstrap.css');
-      assert.fileContent('bower.json', 'dist/js/bootstrap.js');
     });
   });
 
