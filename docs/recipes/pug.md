@@ -125,6 +125,8 @@ Recompile Pug templates on each change and reload the browser after an HTML file
 
 ```diff
  gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
+-   runSequence(['clean', 'wiredep'], ['styles', 'scripts', fonts'], () => {
++   runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', fonts'], () => {
    ...
    gulp.watch([
      'app/*.html',
