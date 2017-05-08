@@ -343,6 +343,18 @@ module.exports = generators.Base.extend({
     }
   },
 
+  docker: function () {
+    this.fs.copy(
+      this.templatePath('Dockerfile'),
+      this.destinationPath('Dockerfile')
+    );
+
+    this.fs.copy(
+      this.templatePath('.dockerignore'),
+      this.destinationPath('.dockerignore')
+    );
+  },
+
   install: function () {
     this.installDependencies({
       skipMessage: this.options['skip-install-message'],
