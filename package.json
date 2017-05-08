@@ -34,7 +34,7 @@
     "underscore.string": "^3.1.1",
     "wiredep": "^4.0.0",
     "yeoman-assert": "^2.1.1",
-    "yeoman-generator": "^0.24.1",
+    "yeoman-generator": "^1.1.0",
     "yosay": "^1.2.0"
   },
   "devDependencies": {
