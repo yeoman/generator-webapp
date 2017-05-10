@@ -62,10 +62,12 @@ gulp.task('html', ['styles', 'scripts'], () => {
 <% } else { -%>
 gulp.task('html', ['styles'], () => {
 <% } -%>
+  gulp.src('.tmp/**/*.map')
+    .pipe($.if(dev, gulp.dest('dist'))); // copy original sourcemaps if dev
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
-    .pipe($.if(/\.css$/, $.cssnano({safe: true, autoprefixer: false})))
+    .pipe($.if(!dev && /\.js$/, $.uglify({compress: {drop_console: true}})))
+    .pipe($.if(!dev && /\.css$/, $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if(/\.html$/, $.htmlmin({
       collapseWhitespace: true,
       minifyCSS: true,
