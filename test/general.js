@@ -3,7 +3,7 @@ const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 
 describe('general', () => {
-  before(function (done) {
+  before(done => {
     helpers.run(path.join(__dirname, '../app'))
       .withPrompts({features: []})
       .withGenerators([

@@ -42,7 +42,7 @@ Add this task to your `gulpfile.js`. It will run `build` task before deploying:
 ```js
 gulp.task('deploy', ['build'], () => {
 
-    var rsyncConfig = require('./rsync.json');
+    const rsyncConfig = require('./rsync.json');
 
     return gulp.src('dist/**')
         .pipe($.rsync({

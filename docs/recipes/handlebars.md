@@ -139,7 +139,7 @@ Put your `.hbs` files in `app/templates` and `app/templates/partials` (if you us
 You would then render the template like this:
 
 ```js
-var html = MyApp.templates.foo();
+const html = MyApp.templates.foo();
 ```
 
 The `MyApp.templates` namespace can be anything you want – change it in the `templates` task.

@@ -1,16 +1,15 @@
 'use strict';
-var generators = require('yeoman-generator');
-var yosay = require('yosay');
-var chalk = require('chalk');
-var wiredep = require('wiredep');
-var mkdirp = require('mkdirp');
-var _s = require('underscore.string');
+const Generator = require('yeoman-generator');
+const commandExists = require('command-exists').sync;
+const yosay = require('yosay');
+const chalk = require('chalk');
+const wiredep = require('wiredep');
+const mkdirp = require('mkdirp');
+const _s = require('underscore.string');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    var testLocal;
-
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
 
     this.option('skip-welcome-message', {
       desc: 'Skips the welcome message',
@@ -33,32 +32,22 @@ module.exports = generators.Base.extend({
       type: Boolean,
       defaults: true
     });
+  }
 
-    if (this.options['test-framework'] === 'mocha') {
-      testLocal = require.resolve('generator-mocha/generators/app/index.js');
-    } else if (this.options['test-framework'] === 'jasmine') {
-      testLocal = require.resolve('generator-jasmine/generators/app/index.js');
-    }
-
-    this.composeWith(this.options['test-framework'] + ':app', {
-      options: {
-        'skip-install': this.options['skip-install']
-      }
-    }, {
-      local: testLocal
-    });
-  },
-
-  initializing: function () {
+  initializing() {
     this.pkg = require('../package.json');
-  },
+    this.composeWith(
+      require.resolve(`generator-${this.options['test-framework']}/generators/app`),
+      { 'skip-install': this.options['skip-install'] }
+    );
+  }
 
-  prompting: function () {
+  prompting() {
     if (!this.options['skip-welcome-message']) {
       this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
     }
 
-    var prompts = [{
+    const prompts = [{
       type: 'checkbox',
       name: 'features',
       message: 'Which additional features would you like to include?',
@@ -86,25 +75,18 @@ module.exports = generators.Base.extend({
         name: 'Bootstrap 4',
         value: false
       }],
-      when: function (answers) {
-        return answers.features.indexOf('includeBootstrap') !== -1;
-      }
+      when: answers => answers.features.indexOf('includeBootstrap') !== -1
     }, {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
       default: true,
-      when: function (answers) {
-        return answers.features.indexOf('includeBootstrap') === -1;
-      }
+      when: answers => answers.features.indexOf('includeBootstrap') === -1
     }];
 
-    return this.prompt(prompts).then(function (answers) {
-      var features = answers.features;
-
-      function hasFeature(feat) {
-        return features && features.indexOf(feat) !== -1;
-      };
+    return this.prompt(prompts).then(answers => {
+      const { features } = answers;
+      const hasFeature = feat => features && features.indexOf(feat) !== -1;
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
@@ -114,251 +96,262 @@ module.exports = generators.Base.extend({
       this.legacyBootstrap = answers.legacyBootstrap;
       this.includeJQuery = answers.includeJQuery;
 
-    }.bind(this));
-  },
+    });
+  }
 
-  writing: {
-    gulpfile: function () {
-      this.fs.copyTpl(
-        this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'),
-        {
-          date: (new Date).toISOString().split('T')[0],
-          name: this.pkg.name,
-          version: this.pkg.version,
-          includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
-          legacyBootstrap: this.legacyBootstrap,
-          includeBabel: this.options['babel'],
-          testFramework: this.options['test-framework']
-        }
-      );
-    },
+  writing() {
+    this._writingGulpfile();
+    this._writingPackageJSON();
+    this._writingBabel();
+    this._writingGit();
+    this._writingBower();
+    this._writingEditorConfig();
+    this._writingH5bp();
+    this._writingStyles();
+    this._writingScripts();
+    this._writingHtml();
+    this._writingMisc();
+  }
 
-    packageJSON: function () {
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        {
-          includeSass: this.includeSass,
-          includeBabel: this.options['babel'],
-          includeJQuery: this.includeJQuery,
-        }
-      );
-    },
+  _writingGulpfile() {
+    this.fs.copyTpl(
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js'),
+      {
+        date: (new Date).toISOString().split('T')[0],
+        name: this.pkg.name,
+        version: this.pkg.version,
+        includeSass: this.includeSass,
+        includeBootstrap: this.includeBootstrap,
+        legacyBootstrap: this.legacyBootstrap,
+        includeBabel: this.options['babel'],
+        testFramework: this.options['test-framework']
+      }
+    );
+  }
 
-    babel: function () {
-      this.fs.copy(
-        this.templatePath('babelrc'),
-        this.destinationPath('.babelrc')
-      );
-    },
+  _writingPackageJSON() {
+    this.fs.copyTpl(
+      this.templatePath('_package.json'),
+      this.destinationPath('package.json'),
+      {
+        includeSass: this.includeSass,
+        includeBabel: this.options['babel'],
+        includeJQuery: this.includeJQuery,
+      }
+    );
+  }
 
-    git: function () {
-      this.fs.copy(
-        this.templatePath('gitignore'),
-        this.destinationPath('.gitignore'));
+  _writingBabel() {
+    this.fs.copy(
+      this.templatePath('babelrc'),
+      this.destinationPath('.babelrc')
+    );
+  }
 
-      this.fs.copy(
-        this.templatePath('gitattributes'),
-        this.destinationPath('.gitattributes'));
-    },
+  _writingGit() {
+    this.fs.copy(
+      this.templatePath('gitignore'),
+      this.destinationPath('.gitignore'));
 
-    bower: function () {
-      var bowerJson = {
-        name: _s.slugify(this.appname),
-        private: true,
-        dependencies: {}
+    this.fs.copy(
+      this.templatePath('gitattributes'),
+      this.destinationPath('.gitattributes'));
+  }
+
+  _writingBower() {
+    const bowerJson = {
+      name: _s.slugify(this.appname),
+      private: true,
+      dependencies: {}
+    };
+
+    if (this.includeBootstrap) {
+
+      // Bootstrap 4
+      bowerJson.dependencies = {
+        'bootstrap': '~4.0.0-alpha.6'
       };
 
-      if (this.includeBootstrap) {
-
-        // Bootstrap 4
-        bowerJson.dependencies = {
-          'bootstrap': '~4.0.0-alpha.6'
-        };
-
-        // Bootstrap 3
-        if (this.legacyBootstrap) {
-          if (this.includeSass) {
-            bowerJson.dependencies = {
-              'bootstrap-sass': '~3.3.5'
-            };
-            bowerJson.overrides = {
-              'bootstrap-sass': {
-                'main': [
-                  'assets/stylesheets/_bootstrap.scss',
-                  'assets/fonts/bootstrap/*',
-                  'assets/javascripts/bootstrap.js'
-                ]
-              }
-            };
-          } else {
-            bowerJson.dependencies = {
-              'bootstrap': '~3.3.5'
-            };
-            bowerJson.overrides = {
-              'bootstrap': {
-                'main': [
-                  'less/bootstrap.less',
-                  'dist/css/bootstrap.css',
-                  'dist/js/bootstrap.js',
-                  'dist/fonts/*'
-                ]
-              }
-            };
-          }
+      // Bootstrap 3
+      if (this.legacyBootstrap) {
+        if (this.includeSass) {
+          bowerJson.dependencies = {
+            'bootstrap-sass': '~3.3.5'
+          };
+          bowerJson.overrides = {
+            'bootstrap-sass': {
+              'main': [
+                'assets/stylesheets/_bootstrap.scss',
+                'assets/fonts/bootstrap/*',
+                'assets/javascripts/bootstrap.js'
+              ]
+            }
+          };
+        } else {
+          bowerJson.dependencies = {
+            'bootstrap': '~3.3.5'
+          };
+          bowerJson.overrides = {
+            'bootstrap': {
+              'main': [
+                'less/bootstrap.less',
+                'dist/css/bootstrap.css',
+                'dist/js/bootstrap.js',
+                'dist/fonts/*'
+              ]
+            }
+          };
         }
-
-      } else if (this.includeJQuery) {
-        bowerJson.dependencies['jquery'] = '~2.1.1';
       }
 
-      if (this.includeModernizr) {
-        bowerJson.dependencies['modernizr'] = '~2.8.1';
-      }
-
-      this.fs.writeJSON('bower.json', bowerJson);
-      this.fs.copy(
-        this.templatePath('bowerrc'),
-        this.destinationPath('.bowerrc')
-      );
-    },
-
-    editorConfig: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-    },
-
-    h5bp: function () {
-      this.fs.copy(
-        this.templatePath('favicon.ico'),
-        this.destinationPath('app/favicon.ico')
-      );
-
-      this.fs.copy(
-        this.templatePath('apple-touch-icon.png'),
-        this.destinationPath('app/apple-touch-icon.png')
-      );
-
-      this.fs.copy(
-        this.templatePath('robots.txt'),
-        this.destinationPath('app/robots.txt'));
-    },
-
-    styles: function () {
-      var css = 'main';
-
-      if (this.includeSass) {
-        css += '.scss';
-      } else {
-        css += '.css';
-      }
-
-      this.fs.copyTpl(
-        this.templatePath(css),
-        this.destinationPath('app/styles/' + css),
-        {
-          includeBootstrap: this.includeBootstrap,
-          legacyBootstrap: this.legacyBootstrap
-        }
-      );
-    },
-
-    scripts: function () {
-      this.fs.copy(
-        this.templatePath('main.js'),
-        this.destinationPath('app/scripts/main.js')
-      );
-    },
-
-    html: function () {
-      var bsPath, bsPlugins;
-
-      // path prefix for Bootstrap JS files
-      if (this.includeBootstrap) {
-
-        // Bootstrap 4
-        bsPath = '/bower_components/bootstrap/js/dist/';
-        bsPlugins = [
-          'util',
-          'alert',
-          'button',
-          'carousel',
-          'collapse',
-          'dropdown',
-          'modal',
-          'scrollspy',
-          'tab',
-          'tooltip',
-          'popover'
-        ];
-
-        // Bootstrap 3
-        if (this.legacyBootstrap) {
-          if (this.includeSass) {
-            bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
-          } else {
-            bsPath = '/bower_components/bootstrap/js/';
-          }
-          bsPlugins = [
-            'affix',
-            'alert',
-            'dropdown',
-            'tooltip',
-            'modal',
-            'transition',
-            'button',
-            'popover',
-            'carousel',
-            'scrollspy',
-            'collapse',
-            'tab'
-          ];
-        }
-
-      }
-
-      this.fs.copyTpl(
-        this.templatePath('index.html'),
-        this.destinationPath('app/index.html'),
-        {
-          appname: this.appname,
-          includeSass: this.includeSass,
-          includeBootstrap: this.includeBootstrap,
-          legacyBootstrap: this.legacyBootstrap,
-          includeModernizr: this.includeModernizr,
-          includeJQuery: this.includeJQuery,
-          bsPath: bsPath,
-          bsPlugins: bsPlugins
-        }
-      );
-    },
-
-    misc: function () {
-      mkdirp('app/images');
-      mkdirp('app/fonts');
+    } else if (this.includeJQuery) {
+      bowerJson.dependencies['jquery'] = '~2.1.1';
     }
-  },
 
-  install: function () {
+    if (this.includeModernizr) {
+      bowerJson.dependencies['modernizr'] = '~2.8.1';
+    }
+
+    this.fs.writeJSON('bower.json', bowerJson);
+    this.fs.copy(
+      this.templatePath('bowerrc'),
+      this.destinationPath('.bowerrc')
+    );
+  }
+
+  _writingEditorConfig() {
+    this.fs.copy(
+      this.templatePath('editorconfig'),
+      this.destinationPath('.editorconfig')
+    );
+  }
+
+  _writingH5bp() {
+    this.fs.copy(
+      this.templatePath('favicon.ico'),
+      this.destinationPath('app/favicon.ico')
+    );
+
+    this.fs.copy(
+      this.templatePath('apple-touch-icon.png'),
+      this.destinationPath('app/apple-touch-icon.png')
+    );
+
+    this.fs.copy(
+      this.templatePath('robots.txt'),
+      this.destinationPath('app/robots.txt'));
+  }
+
+  _writingStyles() {
+    let css = 'main';
+
+    if (this.includeSass) {
+      css += '.scss';
+    } else {
+      css += '.css';
+    }
+
+    this.fs.copyTpl(
+      this.templatePath(css),
+      this.destinationPath('app/styles/' + css),
+      {
+        includeBootstrap: this.includeBootstrap,
+        legacyBootstrap: this.legacyBootstrap
+      }
+    );
+  }
+
+  _writingScripts() {
+    this.fs.copy(
+      this.templatePath('main.js'),
+      this.destinationPath('app/scripts/main.js')
+    );
+  }
+
+  _writingHtml() {
+    let bsPath, bsPlugins;
+
+    // path prefix for Bootstrap JS files
+    if (this.includeBootstrap) {
+
+      // Bootstrap 4
+      bsPath = '/bower_components/bootstrap/js/dist/';
+      bsPlugins = [
+        'util',
+        'alert',
+        'button',
+        'carousel',
+        'collapse',
+        'dropdown',
+        'modal',
+        'scrollspy',
+        'tab',
+        'tooltip',
+        'popover'
+      ];
+
+      // Bootstrap 3
+      if (this.legacyBootstrap) {
+        if (this.includeSass) {
+          bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
+        } else {
+          bsPath = '/bower_components/bootstrap/js/';
+        }
+        bsPlugins = [
+          'affix',
+          'alert',
+          'dropdown',
+          'tooltip',
+          'modal',
+          'transition',
+          'button',
+          'popover',
+          'carousel',
+          'scrollspy',
+          'collapse',
+          'tab'
+        ];
+      }
+    }
+
+    this.fs.copyTpl(
+      this.templatePath('index.html'),
+      this.destinationPath('app/index.html'),
+      {
+        appname: this.appname,
+        includeSass: this.includeSass,
+        includeBootstrap: this.includeBootstrap,
+        legacyBootstrap: this.legacyBootstrap,
+        includeModernizr: this.includeModernizr,
+        includeJQuery: this.includeJQuery,
+        bsPath: bsPath,
+        bsPlugins: bsPlugins
+      }
+    );
+  }
+
+  _writingMisc() {
+    mkdirp('app/images');
+    mkdirp('app/fonts');
+  }
+
+  install() {
+    const hasYarn = commandExists('yarn');
     this.installDependencies({
+      npm: !hasYarn,
+      bower: true,
+      yarn: hasYarn,
       skipMessage: this.options['skip-install-message'],
       skipInstall: this.options['skip-install']
     });
-  },
+  }
 
-  end: function () {
-    var bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
-    var howToInstall =
-      '\nAfter running ' +
-      chalk.yellow.bold('npm install & bower install') +
-      ', inject your' +
-      '\nfront end dependencies by running ' +
-      chalk.yellow.bold('gulp wiredep') +
-      '.';
+  end() {
+    const bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
+    const howToInstall = `
+After running ${chalk.yellow.bold('npm install & bower install')}, inject your
+front end dependencies by running ${chalk.yellow.bold('gulp wiredep')}.`;
 
     if (this.options['skip-install']) {
       this.log(howToInstall);
@@ -384,4 +377,4 @@ module.exports = generators.Base.extend({
       });
     }
   }
-});
+}

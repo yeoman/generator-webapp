@@ -67,7 +67,7 @@ describe('Bootstrap feature', () => {
 
   // Bootstrap 4
   describe('without Sass', () => {
-    before(function (done) {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [
@@ -132,7 +132,7 @@ describe('Bootstrap feature', () => {
 
   // Bootstrap 3
   describe('legacy without Sass', () => {
-    before(function (done) {
+    before(done => {
       helpers.run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [
