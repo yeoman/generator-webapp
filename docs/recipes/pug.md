@@ -65,8 +65,6 @@ We want to parse the compiled HTML:
 
 ```diff
  gulp.task('html', ['views', 'styles'], () => {
-   var assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
-
 -  return gulp.src('app/*.html')
 +  return gulp.src(['app/*.html', '.tmp/*.html'])
      .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
@@ -110,7 +108,21 @@ Wiredep supports Pug:
 +  gulp.src('app/layouts/*.pug')
      .pipe(wiredep({
        exclude: ['bootstrap-sass'],
-       ignorePath: /^(\.\.\/)*\.\./
+-      ignorePath: /^(\.\.\/)*\.\./
+       ignorePath: /^(\.\.\/)*\.\./,
+       fileTypes: {
+         pug: {
+           block: /(([ \t]*)\/\/-?\s*bower:*(\S*))(\n|\r|.)*?(\/\/-?\s*endbower)/gi,
+           detect: {
+             js: /script\(.*src=['"]([^'"]+)/gi,
+             css: /link\(.*href=['"]([^'"]+)/gi
+           },
+           replace: {
+             js: 'script(src=\'{{filePath}}\')',
+             css: 'link(rel=\'stylesheet\', href=\'{{filePath}}\')'
+           }
+         }
+       }
      }))
 -    .pipe(gulp.dest('app'));
 +    .pipe(gulp.dest('app/layouts'));
@@ -124,7 +136,7 @@ Assuming your wiredep comment blocks are in the layouts.
 Recompile Pug templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
- gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
+ gulp.task('serve', () => {
 -   runSequence(['clean', 'wiredep'], ['styles', 'scripts', fonts'], () => {
 +   runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
    ...
