@@ -23,7 +23,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.css')
     .pipe($.if(dev, $.sourcemaps.init()))<% } %>
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
-    .pipe($.if(dev, $.sourcemaps.write()))
+    .pipe($.if(dev, $.sourcemaps.write('.')))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe(reload({stream: true}));
 });
@@ -62,10 +62,12 @@ gulp.task('html', ['styles', 'scripts'], () => {
 <% } else { -%>
 gulp.task('html', ['styles'], () => {
 <% } -%>
+  gulp.src('.tmp/**/*.map')
+    .pipe($.if(dev, gulp.dest('dist'))); // copy original sourcemaps if dev
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
-    .pipe($.if(/\.css$/, $.cssnano({safe: true, autoprefixer: false})))
+    .pipe($.if(!dev && /\.js$/, $.uglify({compress: {drop_console: true}})))
+    .pipe($.if(!dev && /\.css$/, $.cssnano({safe: true, autoprefixer: false})))
     .pipe($.if(/\.html$/, $.htmlmin({
       collapseWhitespace: true,
       minifyCSS: true,
