@@ -85,7 +85,7 @@ module.exports = class extends Generator {
     }];
 
     return this.prompt(prompts).then(answers => {
-      const { features } = answers;
+      const features = answers.features;
       const hasFeature = feat => features && features.indexOf(feat) !== -1;
 
       // manually deal with the response, get back and store the results.
