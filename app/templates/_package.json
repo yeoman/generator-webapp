@@ -21,7 +21,7 @@
     "gulp-imagemin": "^3.0.1",
     "gulp-load-plugins": "^1.2.4",<% if (includeBabel || includeSass) { %>
     "gulp-plumber": "^1.0.1",<% } if (includeSass) { %>
-    "gulp-sass": "^2.0.0",<% } %>
+    "gulp-sass": "^3.0.0",<% } %>
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^2.0.0",
