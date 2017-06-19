@@ -35,7 +35,7 @@ gulp.task('scripts', () => {
     .pipe($.plumber())
     .pipe(webpack({
       output: {
-        filename: '[name].js',
+        filename: 'main.js',
       },
     }))
     .pipe($.if(dev, $.sourcemaps.init()))
