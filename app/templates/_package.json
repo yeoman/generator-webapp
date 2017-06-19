@@ -28,7 +28,8 @@
     "gulp-useref": "^3.0.0",
     "main-bower-files": "^2.5.0",
     "run-sequence": "^1.2.2",
-    "wiredep": "^4.0.0"
+    "wiredep": "^4.0.0",
+    "webpack-stream": "^3.2.0"
   },
   "eslintConfig": {
     "env": {<% if (includeBabel) { %>
