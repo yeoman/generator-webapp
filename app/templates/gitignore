@@ -1,11 +1,10 @@
 # dependencies
 node_modules
 bower_components
-test/bower_components
 
 # compiled output
 /dist
-/tmp
+/.tmp
 
 # System Files
 .DS_Store
