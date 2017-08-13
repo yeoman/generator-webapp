@@ -17,7 +17,7 @@ describe('Bootstrap feature', () => {
     });
 
     it('should add the comment block', () => {
-      assert.fileContent('app/index.html', 'build:js scripts/plugins.js')
+      assert.fileContent('app/index.html', 'build:js scripts/plugins.js');
     });
   });
 
@@ -33,7 +33,7 @@ describe('Bootstrap feature', () => {
     });
 
     it('shouldn\'t add the comment block', () => {
-      assert.noFileContent('app/index.html', 'build:js scripts/plugins.js')
+      assert.noFileContent('app/index.html', 'build:js scripts/plugins.js');
     });
   });
 
