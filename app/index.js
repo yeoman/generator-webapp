@@ -170,7 +170,8 @@ module.exports = class extends Generator {
 
       // Bootstrap 4
       bowerJson.dependencies = {
-        'bootstrap': '~4.0.0-alpha.6'
+        'bootstrap': '~4.0.0-beta',
+        'popper.js-unpkg': 'https://unpkg.com/popper.js'
       };
 
       // Bootstrap 3
@@ -263,9 +264,13 @@ module.exports = class extends Generator {
   }
 
   _writingScripts() {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('main.js'),
-      this.destinationPath('app/scripts/main.js')
+      this.destinationPath('app/scripts/main.js'),
+      {
+        includeBootstrap: this.includeBootstrap,
+        legacyBootstrap: this.legacyBootstrap
+      }
     );
   }
 
@@ -377,4 +382,4 @@ front end dependencies by running ${chalk.yellow.bold('gulp wiredep')}.`;
       });
     }
   }
-}
+};
