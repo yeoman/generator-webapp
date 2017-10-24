@@ -45,6 +45,7 @@ If `origin` doesn't exist, create it:
 ```
 $ git remote add origin https://github.com/you/webapp.git
 ```
+Not sure which URL to use? Check out "[Which remote URL should I use?](https://help.github.com/articles/which-remote-url-should-i-use/)"
 
 Our app will be hosted on the `gh-pages` branch, so we need to have it on the remote repository. We can create an [orphan branch](http://stackoverflow.com/a/4288660/1247274) by running:
 
