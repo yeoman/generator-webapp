@@ -89,10 +89,12 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
+// temporary solution
 gulp.task('fonts', () => {
-  return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', () => {})
+  return gulp.src(require('main-bower-files')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('app/fonts/**/*'))
-    .pipe($.if(dev, gulp.dest('.tmp/fonts'), gulp.dest('dist/fonts')));
+    .pipe($.if(dev, gulp.dest('.tmp/fonts')))
+    .pipe(gulp.dest('dist/fonts'));
 });
 
 gulp.task('extras', () => {
