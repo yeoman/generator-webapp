@@ -12,8 +12,8 @@ describe('Bootstrap feature', () => {
         .on('end', done);
     });
 
-    it('shouldn\'t add jQuery explicitly as a dependency', () => {
-      assert.noFileContent('bower.json', '"jquery"');
+    it('should add jQuery explicitly as a dependency', () => {
+      assert.fileContent('bower.json', '"jquery"');
     });
 
     it('should add the comment block', () => {
@@ -26,10 +26,6 @@ describe('Bootstrap feature', () => {
       helpers.run(path.join(__dirname, '../app'))
         .withPrompts({features: []})
         .on('end', done);
-    });
-
-    it('should add jQuery explicitly as a dependency', () => {
-      assert.fileContent('bower.json', '"jquery"');
     });
 
     it('shouldn\'t add the comment block', () => {
