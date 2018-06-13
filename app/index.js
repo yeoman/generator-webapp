@@ -170,9 +170,9 @@ module.exports = class extends Generator {
 
       // Bootstrap 4
       bowerJson.dependencies = {
-        "bootstrap": "~4.0.0",
-        "jquery": "~3.3.1",
-        "popper.js": "~1.14.3"
+        'bootstrap': '~4.0.0',
+        'jquery': '~3.3.1',
+        'popper.js': '~1.14.3'
       };
 
       if (this.includeSass) {
@@ -238,9 +238,7 @@ module.exports = class extends Generator {
           };
         }
       }
-    }
-
-    if (this.includeJQuery) {
+    } else if (this.includeJQuery) {
       bowerJson.dependencies['jquery'] = '~3.3.1';
     }
 
