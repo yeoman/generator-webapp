@@ -170,15 +170,47 @@ module.exports = class extends Generator {
 
       // Bootstrap 4
       bowerJson.dependencies = {
-        'bootstrap': '~4.0.0-beta',
-        'popper.js-unpkg': 'https://unpkg.com/popper.js'
+        'bootstrap': '~4.0.0',
+        'jquery': '~3.3.1',
+        'popper.js': '~1.14.3'
       };
+
+      if (this.includeSass) {
+        bowerJson.overrides = {
+          'bootstrap': {
+            'main': [
+              'scss/bootstrap.scss',
+              'dist/js/bootstrap.js'
+            ]
+          },
+          'popper.js': {
+            'main': [
+              'dist/umd/popper.js'
+            ]
+          }
+        };
+      } else {
+        bowerJson.overrides = {
+          'bootstrap': {
+            'main': [
+              'dist/css/bootstrap.css',
+              'dist/js/bootstrap.js'
+            ]
+          },
+          'popper.js': {
+            'main': [
+              'dist/umd/popper.js'
+            ]
+          }
+        };
+      }
 
       // Bootstrap 3
       if (this.legacyBootstrap) {
         if (this.includeSass) {
           bowerJson.dependencies = {
-            'bootstrap-sass': '~3.3.5'
+            'bootstrap-sass': '~3.3.5',
+            'jquery': '~2.1.4'
           };
           bowerJson.overrides = {
             'bootstrap-sass': {
@@ -191,7 +223,8 @@ module.exports = class extends Generator {
           };
         } else {
           bowerJson.dependencies = {
-            'bootstrap': '~3.3.5'
+            'bootstrap': '~3.3.5',
+            'jquery': '~2.1.4'
           };
           bowerJson.overrides = {
             'bootstrap': {
@@ -205,9 +238,8 @@ module.exports = class extends Generator {
           };
         }
       }
-
     } else if (this.includeJQuery) {
-      bowerJson.dependencies['jquery'] = '~2.1.1';
+      bowerJson.dependencies['jquery'] = '~3.3.1';
     }
 
     if (this.includeModernizr) {
