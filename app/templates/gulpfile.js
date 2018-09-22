@@ -164,7 +164,8 @@ gulp.task('serve:test', () => {
 <% } else { -%>
         '/scripts': 'app/scripts',
 <% } -%>
-        '/bower_components': 'bower_components'
+        '/bower_components': 'bower_components',
+        '/node_modules': 'node_modules'
       }
     }
   });

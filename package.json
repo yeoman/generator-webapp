@@ -29,7 +29,7 @@
     "chalk": "^1.0.0",
     "command-exists": "^1.2.2",
     "generator-jasmine": "^1.0.0",
-    "generator-mocha": "^1.0.0",
+    "generator-mocha": "^2.0.0",
     "mkdirp": "^0.5.1",
     "underscore.string": "^3.1.1",
     "wiredep": "^4.0.0",
