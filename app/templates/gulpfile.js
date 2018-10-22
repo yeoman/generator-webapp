@@ -11,7 +11,9 @@ const cssnano = require('cssnano');
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
+
 let dev = true;
+const port = process.env.PORT || 9000;
 
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
