@@ -14,6 +14,8 @@ describe('Babel feature', () => {
     it('should add dependencies', () => {
       assert.fileContent('package.json', '"gulp-babel"');
       assert.fileContent('package.json', '"gulp-plumber"');
+      assert.fileContent('package.json', '"@babel/core"');
+      assert.fileContent('package.json', '"@babel/preset-env"');
     });
 
     it('should use the ES6 ESLint environment', () => {
@@ -40,6 +42,8 @@ describe('Babel feature', () => {
     it('shouldn\'t add dependencies', () => {
       assert.noFileContent('package.json', '"gulp-babel"');
       assert.noFileContent('package.json', '"gulp-plumber"');
+      assert.noFileContent('package.json', '"@babel/core"');
+      assert.noFileContent('package.json', '"@babel/preset-env"');
     });
 
     it('shouldn\'t use the ES6 ESLint environment', () => {
