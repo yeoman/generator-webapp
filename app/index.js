@@ -386,9 +386,10 @@ module.exports = class extends Generator {
 
   end() {
     const bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
+    const warning = chalk.yellow.bold;
     const howToInstall = `
-After running ${chalk.yellow.bold('npm install & bower install')}, inject your
-front end dependencies by running ${chalk.yellow.bold('gulp wiredep')}.`;
+After running ${warning('npm install & bower install')}, inject your
+front end dependencies by running ${warning('gulp wiredep')}.`;
 
     if (this.options['skip-install']) {
       this.log(howToInstall);

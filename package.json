@@ -26,7 +26,7 @@
     "gulp"
   ],
   "dependencies": {
-    "chalk": "^1.0.0",
+    "chalk": "2.4.1",
     "command-exists": "^1.2.2",
     "generator-jasmine": "^1.0.0",
     "generator-mocha": "^2.0.0",
