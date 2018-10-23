@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "chalk": "2.4.1",
-    "command-exists": "^1.2.2",
+    "command-exists": "1.2.8",
     "generator-jasmine": "2.0.1",
     "generator-mocha": "^2.0.0",
     "mkdirp": "^0.5.1",
