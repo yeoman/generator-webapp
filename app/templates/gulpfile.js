@@ -7,11 +7,13 @@ const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const { argv } = require('yargs');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 let dev = true;
+const port = argv.port || 9000;
 
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
@@ -110,7 +112,7 @@ gulp.task('serve', () => {
   runSequence(['clean', 'wiredep'], ['styles'<% if (includeBabel) { %>, 'scripts'<% } %>, 'fonts'], () => {
     browserSync.init({
       notify: false,
-      port: 9000,
+      port,
       server: {
         baseDir: ['.tmp', 'app'],
         routes: {
@@ -140,7 +142,7 @@ gulp.task('serve', () => {
 gulp.task('serve:dist', ['default'], () => {
   browserSync.init({
     notify: false,
-    port: 9000,
+    port,
     server: {
       baseDir: ['dist']
     }
@@ -154,7 +156,7 @@ gulp.task('serve:test', () => {
 <% } -%>
   browserSync.init({
     notify: false,
-    port: 9000,
+    port,
     ui: false,
     server: {
       baseDir: 'test',
