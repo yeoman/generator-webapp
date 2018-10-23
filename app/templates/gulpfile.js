@@ -7,12 +7,13 @@ const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const argv = require('yargs').argv;
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 let dev = true;
-const port = process.env.PORT || 9000;
+const port = argv.port || 9000;
 
 gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.scss')
