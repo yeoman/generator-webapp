@@ -7,7 +7,7 @@
   "author": "The Yeoman Team",
   "main": "app/index.js",
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "mocha --reporter spec --timeout 3000"
