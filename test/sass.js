@@ -15,6 +15,7 @@ describe('Sass feature', () => {
     it('should add dependencies', () => {
       assert.fileContent('package.json', '"gulp-sass"');
       assert.fileContent('package.json', '"gulp-plumber"');
+      assert.fileContent('package.json', '"gulp-filter"');
     });
 
     it('should create an SCSS file', () => {
@@ -33,6 +34,7 @@ describe('Sass feature', () => {
     it('shouldn\'t add dependencies', () => {
       assert.noFileContent('package.json', '"gulp-sass"');
       assert.noFileContent('package.json', '"gulp-plumber"');
+      assert.noFileContent('package.json', '"gulp-filter"');
     });
 
     it('should create a CSS file', () => {
