@@ -7,7 +7,7 @@
   "author": "The Yeoman Team",
   "main": "app/index.js",
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "mocha --reporter spec --timeout 3000"
@@ -26,18 +26,18 @@
     "gulp"
   ],
   "dependencies": {
-    "chalk": "^1.0.0",
-    "command-exists": "^1.2.2",
-    "generator-jasmine": "^1.0.0",
-    "generator-mocha": "^2.0.0",
+    "chalk": "^2.4.1",
+    "command-exists": "^1.2.8",
+    "generator-jasmine": "^2.0.1",
+    "generator-mocha": "^2.0.1",
     "mkdirp": "^0.5.1",
-    "underscore.string": "^3.1.1",
+    "underscore.string": "^3.3.5",
     "wiredep": "^4.0.0",
-    "yeoman-generator": "^1.1.1",
-    "yosay": "^2.0.0"
+    "yeoman-generator": "^3.1.1",
+    "yosay": "^2.0.2"
   },
   "devDependencies": {
-    "mocha": "^3.1.0",
+    "mocha": "^5.2.0",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
   }
