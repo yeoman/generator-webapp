@@ -7,7 +7,7 @@ const wiredep = require('wiredep').stream;
 const runSequence = require('run-sequence');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const argv = require('yargs').argv;
+const { argv } = require('yargs');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
