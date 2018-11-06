@@ -2,9 +2,7 @@
 const Generator = require('yeoman-generator');
 const commandExists = require('command-exists').sync;
 const yosay = require('yosay');
-const chalk = require('chalk');
 const mkdirp = require('mkdirp');
-const _s = require('underscore.string');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
