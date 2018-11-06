@@ -39,10 +39,8 @@
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^3.0.1",
     "gulp-useref": "^3.0.0",
-    "main-bower-files": "^2.5.0",
     "mocha": "^5.2.0",
     "run-sequence": "^2.2.1",
-    "wiredep": "^4.0.0",
     "yargs": "12.0.2"
   },
   "eslintConfig": {
