@@ -9,18 +9,16 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
     <% if (includeModernizr) { %>
-    <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild --><% } %>
+    <% } %>
+    
+    <% if (includeBootstrap) { %>
+      <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <% } %>
+    
+    
   </head>
   <body>
     <!--[if IE]>
@@ -90,20 +88,12 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
-
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <% if (includeBootstrap) { %>
-    <!-- build:js scripts/plugins.js -->
-<% bsPlugins.forEach(function (plugin) { -%>
-    <script src="<%= bsPath + plugin %>.js"></script>
-<% }) -%>
-    <!-- endbuild -->
+    <% if (includeJQuery || includeBootstrap) { %>
+      <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <% } %>
-    <!-- build:js scripts/main.js -->
+    <% if (includeBootstrap) { %>
+      <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <% } %>
     <script src="scripts/main.js"></script>
-    <!-- endbuild -->
   </body>
 </html>

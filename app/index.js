@@ -78,7 +78,7 @@ module.exports = class extends Generator {
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
       default: true,
-      when: answers => answers.features.includes('includeBootstrap')
+      when: answers => !answers.features.includes('includeBootstrap')
     }];
 
     return this.prompt(prompts).then(answers => {
@@ -134,6 +134,8 @@ module.exports = class extends Generator {
         includeSass: this.includeSass,
         includeBabel: this.options['babel'],
         includeJQuery: this.includeJQuery,
+        includeBootstrap: this.includeBootstrap,
+        legacyBootstrap: this.legacyBootstrap,
       }
     );
   }

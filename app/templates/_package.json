@@ -3,6 +3,19 @@
   "engines": {
     "node": ">=4"
   },
+  "dependencies": {
+    <% if(includeJQuery && !includeBootstrap) { %>
+      "jquery": "^3.3.1"
+    <% } %>
+    <% if (includeBootstrap && !legacyBootstrap) { %>
+    "bootstrap": "^4.1.3",
+    "jquery": "^3.3.1"
+    <% } %>
+    <% if(legacyBootstrap) { %>
+    "bootstrap": "^3.3.7",
+    "jquery": "^1.12.4"
+    <% } %>
+  },
   "devDependencies": {
 	  <% if (includeBabel) { %>
     "@babel/core": "^7.1.2",
