@@ -97,6 +97,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this._writingModernizr();
     this._writingGulpfile();
     this._writingPackageJSON();
     this._writingBabel();
@@ -109,6 +110,14 @@ module.exports = class extends Generator {
     this._writingMisc();
   }
 
+  _writingModernizr() {
+    if(this.includeModernizr) {
+      this.fs.copy(
+        this.templatePath('modernizr.json'),
+        this.destinationPath('modernizr.json')
+      );
+    }
+  }
   _writingGulpfile() {
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
@@ -136,6 +145,7 @@ module.exports = class extends Generator {
         includeJQuery: this.includeJQuery,
         includeBootstrap: this.includeBootstrap,
         legacyBootstrap: this.legacyBootstrap,
+        includeModernizr: this.includeModernizr
       }
     );
   }

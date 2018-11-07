@@ -4,8 +4,11 @@
     "node": ">=4"
   },
   "dependencies": {
+    <% if (includeModernizr) { %>
+    "modernizr": "^3.6.0",
+    <% } %>
     <% if(includeJQuery && !includeBootstrap) { %>
-      "jquery": "^3.3.1"
+    "jquery": "^3.3.1"
     <% } %>
     <% if (includeBootstrap && !legacyBootstrap) { %>
     "bootstrap": "^4.1.3",
@@ -55,7 +58,24 @@
     "mocha": "^5.2.0",
     "run-sequence": "^2.2.1",
     "yargs": "12.0.2"
-  },
+  }, 
+  "scripts": {
+    <% if (includeModernizr) { %>
+    "build:modernizr": "./node_modules/modernizr/bin/modernizr -c modernizr.json -d app/scripts/modernizr.js",
+    "serve": "npm run build:modernizr && gulp serve",
+    "serve:test": "npm run build:modernizr && gulp serve:test",
+    "serve:dist": "npm run build:modernizr && gulp serve:dist",
+    "start": "npm run build:modernizr && gulp serve",
+    <% } %>    
+    <% if (!includeModernizr) { %>
+    "serve": "gulp serve",
+    "serve:test": "gulp serve:test",
+    "serve:dist": "gulp serve:dist",
+    "start": "gulp serve",
+    <% } %>     
+    "build": "gulp",
+    "test": "npm run serve:test"
+  }, 
   "eslintConfig": {
     "env": {
       <% if (includeBabel) { %>
