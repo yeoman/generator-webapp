@@ -31,8 +31,8 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 
 - Install: `npm install --global yo gulp-cli generator-webapp`
 - Run `yo webapp` to scaffold your webapp
-- Run `npm run serve` or `npm start` to preview and watch for changes
-- Run `npm run serve -- --port=8080` or `npm start -- --port=8080` to preview and watch for changes in port `8080`
+- Run `npm start` to preview and watch for changes
+- Run `npm start -- --port=8080` to preview and watch for changes in port `8080`
 - Run `npm install --save <package>` to install dependencies, frontend included
 - Run `npm run  serve:test` to run the tests in the browser
 - Run `npm run  serve:test -- --port=8085` to run the tests in the browser in port `8085`

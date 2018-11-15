@@ -178,17 +178,15 @@ gulp.task('serve:test', () => {
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 
-gulp.task("build:size", () => {
-  return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
-})
-
 gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
-  return gulp.src('.tmp/**/*').pipe(gulp.dest('dist'));
+  return gulp.src('.tmp/**/*')
+      .pipe(gulp.dest('dist'))
+      .pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', () => {
   return new Promise(resolve => {
     dev = false;
-    runSequence('clean', 'build', 'build:size', resolve);
+    runSequence('clean', 'build', resolve);
   });
 });

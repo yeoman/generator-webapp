@@ -62,13 +62,11 @@
   "scripts": {
     <% if (includeModernizr) { %>
     "build:modernizr": "./node_modules/modernizr/bin/modernizr -c modernizr.json -d app/scripts/modernizr.js",
-    "serve": "npm run build:modernizr && gulp serve",
     "serve:test": "npm run build:modernizr && gulp serve:test",
     "serve:dist": "npm run build:modernizr && gulp serve:dist",
     "start": "npm run build:modernizr && gulp serve",
     <% } %>    
     <% if (!includeModernizr) { %>
-    "serve": "gulp serve",
     "serve:test": "gulp serve:test",
     "serve:dist": "gulp serve:dist",
     "start": "gulp serve",

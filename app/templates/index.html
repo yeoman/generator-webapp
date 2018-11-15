@@ -9,7 +9,9 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
+    <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
     <% if (includeModernizr) { %>
     <script src="scripts/modernizr.js"></script>
     <% } %>
@@ -88,12 +90,16 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
+    <!-- build:js scripts/vendor.js -->	
+    <!-- endbuild -->	
     <% if (includeJQuery || includeBootstrap) { %>
       <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <% } %>
     <% if (includeBootstrap) { %>
       <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <% } %>
+    <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <!-- endbuild -->
   </body>
 </html>
