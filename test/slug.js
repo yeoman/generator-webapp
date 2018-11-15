@@ -11,8 +11,6 @@ describe('slug name', () => {
 
   it('should generate the same appname in every file', () => {
     const name = path.basename(process.cwd());
-
-    assert.fileContent('bower.json', '"name": "' + name + '"');
     assert.fileContent('app/index.html', '<title>' + name + '</title>');
   });
 });

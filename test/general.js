@@ -19,12 +19,10 @@ describe('general', () => {
 
   it('creates expected files', () => {
     assert.file([
-      'bower.json',
       'package.json',
       'gulpfile.js',
       '.babelrc',
       '.editorconfig',
-      '.bowerrc',
       '.gitignore',
       '.gitattributes',
       'app/favicon.ico',
