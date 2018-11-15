@@ -62,18 +62,6 @@ module.exports = class extends Generator {
         checked: true
       }]
     }, {
-      type: 'list',
-      name: 'legacyBootstrap',
-      message: 'Which version of Bootstrap would you like to include?',
-      choices: [{
-        name: 'Bootstrap 3',
-        value: true
-      }, {
-        name: 'Bootstrap 4',
-        value: false
-      }],
-      when: answers => answers.features.includes('includeBootstrap')
-    }, {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
@@ -90,7 +78,6 @@ module.exports = class extends Generator {
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
-      this.legacyBootstrap = answers.legacyBootstrap;
       this.includeJQuery = answers.includeJQuery;
 
     });
@@ -128,7 +115,6 @@ module.exports = class extends Generator {
         version: this.pkg.version,
         includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
         includeBabel: this.options['babel'],
         testFramework: this.options['test-framework']
       }
@@ -144,7 +130,6 @@ module.exports = class extends Generator {
         includeBabel: this.options['babel'],
         includeJQuery: this.includeJQuery,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
         includeModernizr: this.includeModernizr
       }
     );
@@ -203,8 +188,7 @@ module.exports = class extends Generator {
       this.templatePath(css),
       this.destinationPath('app/styles/' + css),
       {
-        includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap
+        includeBootstrap: this.includeBootstrap
       }
     );
   }
@@ -214,8 +198,7 @@ module.exports = class extends Generator {
       this.templatePath('main.js'),
       this.destinationPath('app/scripts/main.js'),
       {
-        includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap
+        includeBootstrap: this.includeBootstrap
       }
     );
   }
@@ -230,7 +213,6 @@ module.exports = class extends Generator {
         appname: this.appname,
         includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
         includeModernizr: this.includeModernizr,
         includeJQuery: this.includeJQuery,
         bsPath,
