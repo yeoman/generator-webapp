@@ -55,7 +55,7 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 - `--skip-install-message`
   Skips the the message displayed after scaffolding has finished and before the dependencies are being installed.
 - `--skip-install`
-  Skips the automatic execution of `npm` after scaffolding has finished.
+  Doesn't automatically install dependencies after scaffolding has finished.
 - `--test-framework=<framework>`
   Either `mocha` or `jasmine`. Defaults to `mocha`.
 - `--no-babel`
