@@ -12,7 +12,10 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-
+    <% if (includeModernizr) { %>
+    <script src="scripts/modernizr.js"></script>
+    <% } %>
+    
     <% if (includeBootstrap) { %>
       <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
     <% } %>
@@ -87,9 +90,6 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
     <!-- build:js scripts/vendor.js -->	
-    <% if (includeModernizr) { %>
-    <script src="scripts/modernizr.js"></script>
-    <% } %>
     <% if (includeJQuery || includeBootstrap) { %>
       <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <% } %>
