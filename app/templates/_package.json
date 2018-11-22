@@ -4,7 +4,10 @@
     "node": ">=4"
   },
   "dependencies": {
-    <% if (includeModernizr) { %>
+    <% if (includeModernizr && !includeBootstrap && !includeJQuery) { %>
+    "modernizr": "^3.6.0"
+    <% } %>
+    <% if (includeModernizr && (includeBootstrap || includeJQuery)) { %>
     "modernizr": "^3.6.0",
     <% } %>
     <% if(includeJQuery && !includeBootstrap) { %>
