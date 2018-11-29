@@ -1,5 +1,5 @@
 console.log('\'Allo \'Allo!');
-<% if (includeBootstrap && !legacyBootstrap) { %>
+<% if (includeBootstrap) { %>
 // Uncomment to enable Bootstrap tooltips
 // https://getbootstrap.com/docs/4.0/components/tooltips/#example-enable-tooltips-everywhere
 // $(function () { $('[data-toggle="tooltip"]').tooltip(); });

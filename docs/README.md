@@ -99,7 +99,7 @@ A common practice is to have a single, "main", Sass file, then use `@import` sta
 
 Our build step uses special `build` comment blocks to mark which assets to concatenate and compress for production. You can see them at the top and bottom of `app/index.html`.
 
-You don't have to worry about new Bower components, their JS files will be automatically injected in your `app/index.html`, but you have to add your own JS files manually. For example, let's say you created `app/scripts/nav.js`, defining some special behavior for the navigation. You should then include it in the comment blocks for your _source_ JS files, where `app/scripts/main.js` is located:
+You have to add your own JS files manually. For example, let's say you created `app/scripts/nav.js`, defining some special behavior for the navigation. You should then include it in the comment blocks for your _source_ JS files, where `app/scripts/main.js` is located:
 
 ```html
 <!-- build:js scripts/main.js -->
@@ -111,35 +111,3 @@ You don't have to worry about new Bower components, their JS files will be autom
 Upon build these will be concatenated and compressed into a single file `scripts/main.js`.
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
-
-## Bower
-
-We keep `bower_components` in the project root, you can read details about that [here](bower.md). Installing Bower components is usually as easy as:
-
-```sh
-$ bower install --save jquery
-```
-
-Behind the scenes [wiredep] will automatically inject assets from your Bower components to your HTML/SCSS files as soon as you run `gulp serve` or `gulp`. If `gulp serve` was already running while installing the components, the injection will happen immediately.
-
-However, in some situations you'll have to do some extra work:
-
-### 1. There are images/fonts in the component
-
-These are a bit tricky, as they can't be automatically injected. Ideally you would want to put them in a place where the link would work both in development and in production, like we do with Bootstrap, but that's sometimes not possible. In those cases you would need to do some [gulp-replace][replace] trickery.
-
-### 2. Field values in the component's `bower.json` are incorrect or missing
-
-If there's a problem, it's usually with the `main` field, which wiredep uses to wire up assets. Fortunately you can always [override][override] these fields and send a pull request to that component's repository, fixing their `bower.json` :wink:
-
-[gulp]: https://github.com/gulpjs/gulp
-[gulp-docs]: https://github.com/gulpjs/gulp/blob/master/docs/README.md
-[yo]: https://github.com/yeoman/yo
-[LiveReload]: https://github.com/intesso/connect-livereload
-[plugins]: https://github.com/jackfranklin/gulp-load-plugins
-[eslint-config]: http://eslint.org/docs/user-guide/configuring
-[`no-undef`]: http://eslint.org/docs/rules/no-undef
-[calc]: https://github.com/postcss/postcss-calc
-[wiredep]: https://github.com/taptapship/wiredep
-[replace]: https://github.com/lazd/gulp-replace
-[override]: https://github.com/taptapship/wiredep#bower-overrides

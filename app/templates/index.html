@@ -3,24 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1<% if (includeBootstrap && !legacyBootstrap) { %>, shrink-to-fit=no<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1<% if (includeBootstrap) { %>, shrink-to-fit=no<% } %>">
     <title><%= appname %></title>
-
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
-
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <% if (includeModernizr) { %>
     <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild --><% } %>
+    <script src="scripts/modernizr.js"></script>
+    <!-- endbuild -->
+    <% } %>
+    <% if (includeBootstrap) { %>
+      <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <% } %>
   </head>
   <body>
     <!--[if IE]>
@@ -29,22 +26,22 @@
     <% if (includeBootstrap) { %>
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills <% if (legacyBootstrap) { %>pull<% } else { %>float<% } %>-right">
-          <li class="<% if (legacyBootstrap) { %>active<% } else { %>nav-item<% } %>">
-            <a <% if (!legacyBootstrap) { %>class="nav-link active" <% } %>href="#">Home</a>
+        <ul class="nav nav-pills float-right">
+          <li class="nav-item">
+            <a href="#" class="nav-link active">Home</a>
           </li>
           <li>
-            <a <% if (!legacyBootstrap) { %>class="nav-link" <% } %>href="#">About</a>
+            <a href="#" class="nav-link">About</a>
           </li>
           <li>
-            <a <% if (!legacyBootstrap) { %>class="nav-link" <% } %>href="#">Contact</a>
+            <a href="#" class="nav-link">Contact</a>
           </li>
         </ul>
         <h3 class="text-muted"><%= appname %></h3>
       </div>
 
       <div class="jumbotron">
-        <h1<% if (!legacyBootstrap) { %> class="display-3"<% } %>>'Allo, 'Allo!</h1>
+        <h1 class="display-3">'Allo, 'Allo!</h1>
         <p class="lead">Always a pleasure scaffolding your apps.</p>
         <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
       </div>
@@ -90,18 +87,14 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
-
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <% if (includeBootstrap) { %>
-    <!-- build:js scripts/plugins.js -->
-<% bsPlugins.forEach(function (plugin) { -%>
-    <script src="<%= bsPath + plugin %>.js"></script>
-<% }) -%>
-    <!-- endbuild -->
+    <!-- build:js scripts/vendor.js -->	
+    <% if (includeJQuery || includeBootstrap) { %>
+      <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
     <% } %>
+    <% if (includeBootstrap) { %>
+      <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <% } %>
+    <!-- endbuild -->	
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->

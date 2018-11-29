@@ -22,7 +22,6 @@ describe('gulp tasks', () => {
       'serve',
       'serve:dist',
       'serve:test',
-      'wiredep',
       'build',
       'default'
     ].forEach((task) => {

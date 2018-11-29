@@ -19,12 +19,10 @@ describe('general', () => {
 
   it('creates expected files', () => {
     assert.file([
-      'bower.json',
       'package.json',
       'gulpfile.js',
       '.babelrc',
       '.editorconfig',
-      '.bowerrc',
       '.gitignore',
       '.gitattributes',
       'app/favicon.ico',
@@ -38,4 +36,13 @@ describe('general', () => {
       'test'
     ]);
   });
+  
+  it('creates expected tasks', () => {
+      assert.fileContent('package.json', 'serve:test');
+      assert.fileContent('package.json', 'serve:dist');
+      assert.fileContent('package.json', 'start');
+      assert.fileContent('package.json', 'build');
+      assert.fileContent('package.json', 'test');
+  });
+  
 });

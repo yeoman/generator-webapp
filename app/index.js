@@ -2,10 +2,7 @@
 const Generator = require('yeoman-generator');
 const commandExists = require('command-exists').sync;
 const yosay = require('yosay');
-const chalk = require('chalk');
-const wiredep = require('wiredep');
 const mkdirp = require('mkdirp');
-const _s = require('underscore.string');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -65,46 +62,33 @@ module.exports = class extends Generator {
         checked: true
       }]
     }, {
-      type: 'list',
-      name: 'legacyBootstrap',
-      message: 'Which version of Bootstrap would you like to include?',
-      choices: [{
-        name: 'Bootstrap 3',
-        value: true
-      }, {
-        name: 'Bootstrap 4',
-        value: false
-      }],
-      when: answers => answers.features.indexOf('includeBootstrap') !== -1
-    }, {
       type: 'confirm',
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
       default: true,
-      when: answers => answers.features.indexOf('includeBootstrap') === -1
+      when: answers => !answers.features.includes('includeBootstrap')
     }];
 
     return this.prompt(prompts).then(answers => {
       const features = answers.features;
-      const hasFeature = feat => features && features.indexOf(feat) !== -1;
+      const hasFeature = feat => features && features.includes(feat);
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
-      this.legacyBootstrap = answers.legacyBootstrap;
       this.includeJQuery = answers.includeJQuery;
 
     });
   }
 
   writing() {
+    this._writingModernizr();
     this._writingGulpfile();
     this._writingPackageJSON();
     this._writingBabel();
     this._writingGit();
-    this._writingBower();
     this._writingEditorConfig();
     this._writingH5bp();
     this._writingStyles();
@@ -113,6 +97,14 @@ module.exports = class extends Generator {
     this._writingMisc();
   }
 
+  _writingModernizr() {
+    if(this.includeModernizr) {
+      this.fs.copy(
+        this.templatePath('modernizr.json'),
+        this.destinationPath('modernizr.json')
+      );
+    }
+  }
   _writingGulpfile() {
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
@@ -123,7 +115,6 @@ module.exports = class extends Generator {
         version: this.pkg.version,
         includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
         includeBabel: this.options['babel'],
         testFramework: this.options['test-framework']
       }
@@ -138,6 +129,8 @@ module.exports = class extends Generator {
         includeSass: this.includeSass,
         includeBabel: this.options['babel'],
         includeJQuery: this.includeJQuery,
+        includeBootstrap: this.includeBootstrap,
+        includeModernizr: this.includeModernizr
       }
     );
   }
@@ -157,100 +150,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('gitattributes'),
       this.destinationPath('.gitattributes'));
-  }
-
-  _writingBower() {
-    const bowerJson = {
-      name: _s.slugify(this.appname),
-      private: true,
-      dependencies: {}
-    };
-
-    if (this.includeBootstrap) {
-
-      // Bootstrap 4
-      bowerJson.dependencies = {
-        'bootstrap': '~4.0.0',
-        'jquery': '~3.3.1',
-        'popper.js': '~1.14.3'
-      };
-
-      if (this.includeSass) {
-        bowerJson.overrides = {
-          'bootstrap': {
-            'main': [
-              'scss/bootstrap.scss',
-              'dist/js/bootstrap.js'
-            ]
-          },
-          'popper.js': {
-            'main': [
-              'dist/umd/popper.js'
-            ]
-          }
-        };
-      } else {
-        bowerJson.overrides = {
-          'bootstrap': {
-            'main': [
-              'dist/css/bootstrap.css',
-              'dist/js/bootstrap.js'
-            ]
-          },
-          'popper.js': {
-            'main': [
-              'dist/umd/popper.js'
-            ]
-          }
-        };
-      }
-
-      // Bootstrap 3
-      if (this.legacyBootstrap) {
-        if (this.includeSass) {
-          bowerJson.dependencies = {
-            'bootstrap-sass': '~3.3.5',
-            'jquery': '~2.1.4'
-          };
-          bowerJson.overrides = {
-            'bootstrap-sass': {
-              'main': [
-                'assets/stylesheets/_bootstrap.scss',
-                'assets/fonts/bootstrap/*',
-                'assets/javascripts/bootstrap.js'
-              ]
-            }
-          };
-        } else {
-          bowerJson.dependencies = {
-            'bootstrap': '~3.3.5',
-            'jquery': '~2.1.4'
-          };
-          bowerJson.overrides = {
-            'bootstrap': {
-              'main': [
-                'less/bootstrap.less',
-                'dist/css/bootstrap.css',
-                'dist/js/bootstrap.js',
-                'dist/fonts/*'
-              ]
-            }
-          };
-        }
-      }
-    } else if (this.includeJQuery) {
-      bowerJson.dependencies['jquery'] = '~3.3.1';
-    }
-
-    if (this.includeModernizr) {
-      bowerJson.dependencies['modernizr'] = '~2.8.1';
-    }
-
-    this.fs.writeJSON('bower.json', bowerJson);
-    this.fs.copy(
-      this.templatePath('bowerrc'),
-      this.destinationPath('.bowerrc')
-    );
   }
 
   _writingEditorConfig() {
@@ -289,8 +188,7 @@ module.exports = class extends Generator {
       this.templatePath(css),
       this.destinationPath('app/styles/' + css),
       {
-        includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap
+        includeBootstrap: this.includeBootstrap
       }
     );
   }
@@ -300,57 +198,13 @@ module.exports = class extends Generator {
       this.templatePath('main.js'),
       this.destinationPath('app/scripts/main.js'),
       {
-        includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap
+        includeBootstrap: this.includeBootstrap
       }
     );
   }
 
   _writingHtml() {
     let bsPath, bsPlugins;
-
-    // path prefix for Bootstrap JS files
-    if (this.includeBootstrap) {
-
-      // Bootstrap 4
-      bsPath = '/bower_components/bootstrap/js/dist/';
-      bsPlugins = [
-        'util',
-        'alert',
-        'button',
-        'carousel',
-        'collapse',
-        'dropdown',
-        'modal',
-        'scrollspy',
-        'tab',
-        'tooltip',
-        'popover'
-      ];
-
-      // Bootstrap 3
-      if (this.legacyBootstrap) {
-        if (this.includeSass) {
-          bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
-        } else {
-          bsPath = '/bower_components/bootstrap/js/';
-        }
-        bsPlugins = [
-          'affix',
-          'alert',
-          'dropdown',
-          'tooltip',
-          'modal',
-          'transition',
-          'button',
-          'popover',
-          'carousel',
-          'scrollspy',
-          'collapse',
-          'tab'
-        ];
-      }
-    }
 
     this.fs.copyTpl(
       this.templatePath('index.html'),
@@ -359,11 +213,10 @@ module.exports = class extends Generator {
         appname: this.appname,
         includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
         includeModernizr: this.includeModernizr,
         includeJQuery: this.includeJQuery,
-        bsPath: bsPath,
-        bsPlugins: bsPlugins
+        bsPath,
+        bsPlugins
       }
     );
   }
@@ -377,42 +230,10 @@ module.exports = class extends Generator {
     const hasYarn = commandExists('yarn');
     this.installDependencies({
       npm: !hasYarn,
-      bower: true,
       yarn: hasYarn,
+      bower: false,
       skipMessage: this.options['skip-install-message'],
       skipInstall: this.options['skip-install']
     });
-  }
-
-  end() {
-    const bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
-    const warning = chalk.yellow.bold;
-    const howToInstall = `
-After running ${warning('npm install & bower install')}, inject your
-front end dependencies by running ${warning('gulp wiredep')}.`;
-
-    if (this.options['skip-install']) {
-      this.log(howToInstall);
-      return;
-    }
-
-    // wire Bower packages to .html
-    wiredep({
-      bowerJson: bowerJson,
-      directory: 'bower_components',
-      exclude: ['bootstrap-sass', 'bootstrap.js'],
-      ignorePath: /^(\.\.\/)*\.\./,
-      src: 'app/index.html'
-    });
-
-    if (this.includeSass) {
-      // wire Bower packages to .scss
-      wiredep({
-        bowerJson: bowerJson,
-        directory: 'bower_components',
-        ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
-      });
-    }
   }
 };

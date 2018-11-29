@@ -14,7 +14,7 @@ describe('jQuery feature', () => {
     });
 
     it('should add the correct dependencies', () => {
-      assert.fileContent('bower.json', '"jquery"');
+      assert.fileContent('package.json', '"jquery"');
     });
   });
 
@@ -29,7 +29,7 @@ describe('jQuery feature', () => {
     });
 
     it('should add the correct dependencies', () => {
-      assert.noFileContent('bower.json', '"jquery"');
+      assert.noFileContent('package.json', '"jquery"');
     });
   });
 });
