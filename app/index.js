@@ -60,6 +60,10 @@ module.exports = class extends Generator {
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: true
+      }, {
+        name: 'Google Analytics',
+        value: 'includeAnalytics',
+        checked: true
       }]
     }, {
       type: 'confirm',
@@ -78,6 +82,7 @@ module.exports = class extends Generator {
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includeAnalytics = hasFeature('includeAnalytics');
       this.includeJQuery = answers.includeJQuery;
 
     });
@@ -215,6 +220,7 @@ module.exports = class extends Generator {
         includeBootstrap: this.includeBootstrap,
         includeModernizr: this.includeModernizr,
         includeJQuery: this.includeJQuery,
+        includeAnalytics: this.includeAnalytics,
         bsPath,
         bsPlugins
       }
