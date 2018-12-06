@@ -78,6 +78,7 @@
       </ul>
     </div>
     <% } %>
+    <% if (includeAnalytics) { %>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -87,6 +88,7 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
+    <% } %>
     <!-- build:js scripts/vendor.js -->	
     <% if (includeJQuery || includeBootstrap) { %>
       <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
