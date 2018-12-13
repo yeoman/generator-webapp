@@ -2,8 +2,8 @@
 const Generator = require('yeoman-generator');
 const commandExists = require('command-exists').sync;
 const yosay = require('yosay');
-const helper = require('./lib/helper');
-const config = require('./lib/config');
+const mkdirp = require('mkdirp');
+const config = require('./config');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -41,9 +41,8 @@ module.exports = class extends Generator {
     });
   }
 
-  writing() {
-    const _self = this;
-    const data = {
+  writing () {
+    const templateData = {
       appname: this.appname,
       date: (new Date).toISOString().split('T')[0],
       name: this.pkg.name,
@@ -55,26 +54,43 @@ module.exports = class extends Generator {
       includeJQuery: this.includeJQuery,
       includeModernizr: this.includeModernizr
     };
+    
+    const copy = (input, output) => {
+      this.fs.copy(
+        this.templatePath(input),
+        this.destinationPath(output)
+      );
+    };
+    
+    const copyTpl = (input, output, data) => {
+      this.fs.copyTpl(
+        this.templatePath(input),
+        this.destinationPath(output),
+        data
+      );
+    };
 
     // Render Files
     config.filesToRender.forEach(file => {
-      helper.copyTpl.call(_self, file.input, file.output, data);
+      copyTpl(file.input, file.output, templateData);
     });
 
     // Copy Files
     config.filesToCopy.forEach(file => {
-      helper.copy.call(_self, file.input, file.output);
+      copy(file.input, file.output);
     });
 
     // Create extra directories
-    config.dirToCreate.forEach(helper.createDirectory);
+    config.dirsToCreate.forEach(item => {
+      mkdirp(item);
+    });
 
     if (this.includeModernizr) {
-      helper.copy.call(_self, 'modernizr.json', 'modernizr.json');
+      copy('modernizr.json', 'modernizr.json');
     }
 
     let cssFile = `main.${this.includeSass ? 'scss' : 'css'}`;
-    helper.copyTpl.call(_self, cssFile, `app/styles/${cssFile}`, data);
+    copyTpl(cssFile, `app/styles/${cssFile}`, templateData);
   }
 
   install() {

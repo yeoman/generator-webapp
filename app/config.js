@@ -43,7 +43,7 @@ module.exports = {
     default: true,
     when: answers => !answers.features.includes('includeBootstrap')
   }],
-  dirToCreate: ['app/images', 'app/fonts'],
+  dirsToCreate: ['app/images', 'app/fonts'],
   filesToCopy: [{
       input: 'babelrc',
       output: '.babelrc'
