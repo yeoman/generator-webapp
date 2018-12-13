@@ -35,6 +35,10 @@ module.exports = {
       name: 'Modernizr',
       value: 'includeModernizr',
       checked: true
+    },{
+        name: 'Google Analytics',
+        value: 'includeAnalytics',
+        checked: true
     }]
   }, {
     type: 'confirm',

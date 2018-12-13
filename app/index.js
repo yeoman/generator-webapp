@@ -52,7 +52,8 @@ module.exports = class extends Generator {
       includeBabel: this.options.babel,
       testFramework: this.options['test-framework'],
       includeJQuery: this.includeJQuery,
-      includeModernizr: this.includeModernizr
+      includeModernizr: this.includeModernizr,
+      includeAnalytics: this.includeAnalytics
     };
     
     const copy = (input, output) => {
