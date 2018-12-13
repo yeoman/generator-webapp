@@ -27,6 +27,7 @@ module.exports = class extends Generator {
       this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
     }
 
+
     return this.prompt(config.prompts).then(answers => {
       const features = answers.features;
       const hasFeature = feat => features && features.includes(feat);
@@ -36,6 +37,7 @@ module.exports = class extends Generator {
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includeAnalytics = hasFeature('includeAnalytics');
       this.includeJQuery = answers.includeJQuery;
 
     });
@@ -89,6 +91,7 @@ module.exports = class extends Generator {
     if (this.includeModernizr) {
       copy('modernizr.json', 'modernizr.json');
     }
+
 
     let cssFile = `main.${this.includeSass ? 'scss' : 'css'}`;
     copyTpl(cssFile, `app/styles/${cssFile}`, templateData);
