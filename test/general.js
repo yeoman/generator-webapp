@@ -4,11 +4,10 @@ const assert = require('yeoman-assert');
 
 describe('general', () => {
   before(done => {
-    helpers.run(path.join(__dirname, '../app'))
-      .withPrompts({features: []})
-      .withGenerators([
-        [helpers.createDummyGenerator(), 'mocha:app']
-      ])
+    helpers
+      .run(path.join(__dirname, '../app'))
+      .withPrompts({ features: [] })
+      .withGenerators([[helpers.createDummyGenerator(), 'mocha:app']])
       .on('end', done);
   });
 
@@ -36,13 +35,12 @@ describe('general', () => {
       'test'
     ]);
   });
-  
+
   it('creates expected tasks', () => {
-      assert.fileContent('package.json', 'serve:test');
-      assert.fileContent('package.json', 'serve:dist');
-      assert.fileContent('package.json', 'start');
-      assert.fileContent('package.json', 'build');
-      assert.fileContent('package.json', 'test');
+    assert.fileContent('package.json', 'serve:test');
+    assert.fileContent('package.json', 'serve:dist');
+    assert.fileContent('package.json', 'start');
+    assert.fileContent('package.json', 'build');
+    assert.fileContent('package.json', 'test');
   });
-  
 });

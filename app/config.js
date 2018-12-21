@@ -13,42 +13,51 @@ module.exports = {
       type: String,
       defaults: 'mocha'
     },
-    'babel': {
+    babel: {
       desc: 'Use Babel',
       type: Boolean,
       defaults: true
     }
   },
-  prompts: [{
-    type: 'checkbox',
-    name: 'features',
-    message: 'Which additional features would you like to include?',
-    choices: [{
-      name: 'Sass',
-      value: 'includeSass',
-      checked: true
-    }, {
-      name: 'Bootstrap',
-      value: 'includeBootstrap',
-      checked: true
-    }, {
-      name: 'Modernizr',
-      value: 'includeModernizr',
-      checked: true
-    },{
-        name: 'Google Analytics',
-        value: 'includeAnalytics',
-        checked: true
-    }]
-  }, {
-    type: 'confirm',
-    name: 'includeJQuery',
-    message: 'Would you like to include jQuery?',
-    default: true,
-    when: answers => !answers.features.includes('includeBootstrap')
-  }],
+  prompts: [
+    {
+      type: 'checkbox',
+      name: 'features',
+      message: 'Which additional features would you like to include?',
+      choices: [
+        {
+          name: 'Sass',
+          value: 'includeSass',
+          checked: true
+        },
+        {
+          name: 'Bootstrap',
+          value: 'includeBootstrap',
+          checked: true
+        },
+        {
+          name: 'Modernizr',
+          value: 'includeModernizr',
+          checked: true
+        },
+        {
+          name: 'Google Analytics',
+          value: 'includeAnalytics',
+          checked: true
+        }
+      ]
+    },
+    {
+      type: 'confirm',
+      name: 'includeJQuery',
+      message: 'Would you like to include jQuery?',
+      default: true,
+      when: answers => !answers.features.includes('includeBootstrap')
+    }
+  ],
   dirsToCreate: ['app/images', 'app/fonts'],
-  filesToCopy: [{
+  filesToCopy: [
+    {
       input: 'babelrc',
       output: '.babelrc'
     },
@@ -77,7 +86,8 @@ module.exports = {
       output: 'app/robots.txt'
     }
   ],
-  filesToRender: [{
+  filesToRender: [
+    {
       input: 'gulpfile.js',
       output: 'gulpfile.js'
     },

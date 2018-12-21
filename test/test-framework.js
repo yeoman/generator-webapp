@@ -5,9 +5,10 @@ const assert = require('yeoman-assert');
 describe('test framework', () => {
   describe('mocha', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
-        .withOptions({'test-framework': 'mocha'})
-        .withPrompts({features: []})
+      helpers
+        .run(path.join(__dirname, '../app'))
+        .withOptions({ 'test-framework': 'mocha' })
+        .withPrompts({ features: [] })
         .on('end', done);
     });
 
@@ -18,9 +19,10 @@ describe('test framework', () => {
 
   describe('jasmine', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
-        .withOptions({'test-framework': 'jasmine'})
-        .withPrompts({features: []})
+      helpers
+        .run(path.join(__dirname, '../app'))
+        .withOptions({ 'test-framework': 'jasmine' })
+        .withPrompts({ features: [] })
         .on('end', done);
     });
 

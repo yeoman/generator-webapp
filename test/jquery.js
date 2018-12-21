@@ -5,7 +5,8 @@ const assert = require('yeoman-assert');
 describe('jQuery feature', () => {
   describe('on', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
+      helpers
+        .run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [],
           includeJQuery: true
@@ -20,7 +21,8 @@ describe('jQuery feature', () => {
 
   describe('off', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
+      helpers
+        .run(path.join(__dirname, '../app'))
         .withPrompts({
           features: [],
           includeJQuery: false

@@ -4,8 +4,9 @@ const assert = require('yeoman-assert');
 
 describe('slug name', () => {
   before(done => {
-    helpers.run(path.join(__dirname, '../app'))
-      .withPrompts({features: []})
+    helpers
+      .run(path.join(__dirname, '../app'))
+      .withPrompts({ features: [] })
       .on('end', done);
   });
 

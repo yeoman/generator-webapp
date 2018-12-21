@@ -5,10 +5,9 @@ const assert = require('yeoman-assert');
 describe('Bootstrap feature', () => {
   describe('on', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({features: [
-          'includeBootstrap'
-        ]})
+      helpers
+        .run(path.join(__dirname, '../app'))
+        .withPrompts({ features: ['includeBootstrap'] })
         .on('end', done);
     });
 
@@ -19,8 +18,9 @@ describe('Bootstrap feature', () => {
 
   describe('off', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
-        .withPrompts({features: []})
+      helpers
+        .run(path.join(__dirname, '../app'))
+        .withPrompts({ features: [] })
         .on('end', done);
     });
   });
@@ -28,12 +28,10 @@ describe('Bootstrap feature', () => {
   // Bootstrap 4
   describe('with Sass', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
+      helpers
+        .run(path.join(__dirname, '../app'))
         .withPrompts({
-          features: [
-            'includeSass',
-            'includeBootstrap'
-          ]
+          features: ['includeSass', 'includeBootstrap']
         })
         .on('end', done);
     });
@@ -43,7 +41,10 @@ describe('Bootstrap feature', () => {
     });
 
     it('should output the correct <script> paths', () => {
-      assert.fileContent('app/index.html', "/node_modules/bootstrap/dist/js/bootstrap.min.js");
+      assert.fileContent(
+        'app/index.html',
+        '/node_modules/bootstrap/dist/js/bootstrap.min.js'
+      );
     });
 
     it('should apply rem units in scss', () => {
@@ -55,11 +56,10 @@ describe('Bootstrap feature', () => {
   // Bootstrap 4
   describe('without Sass', () => {
     before(done => {
-      helpers.run(path.join(__dirname, '../app'))
+      helpers
+        .run(path.join(__dirname, '../app'))
         .withPrompts({
-          features: [
-            'includeBootstrap'
-          ]
+          features: ['includeBootstrap']
         })
         .on('end', done);
     });
@@ -69,7 +69,10 @@ describe('Bootstrap feature', () => {
     });
 
     it('should output the correct <script> paths', () => {
-      assert.fileContent('app/index.html', "/node_modules/bootstrap/dist/js/bootstrap.min.js");
+      assert.fileContent(
+        'app/index.html',
+        '/node_modules/bootstrap/dist/js/bootstrap.min.js'
+      );
     });
 
     it('should apply rem units in css', () => {

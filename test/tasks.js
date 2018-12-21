@@ -4,8 +4,9 @@ const assert = require('yeoman-assert');
 
 describe('gulp tasks', () => {
   before(done => {
-    helpers.run(path.join(__dirname, '../app'))
-      .withPrompts({features: []})
+    helpers
+      .run(path.join(__dirname, '../app'))
+      .withPrompts({ features: [] })
       .on('end', done);
   });
 
@@ -24,8 +25,8 @@ describe('gulp tasks', () => {
       'serve:test',
       'build',
       'default'
-    ].forEach((task) => {
-      assert.fileContent('gulpfile.js', 'gulp.task(\'' + task);
+    ].forEach(task => {
+      assert.fileContent('gulpfile.js', "gulp.task('" + task);
     });
   });
 });

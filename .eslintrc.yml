@@ -1,0 +1,20 @@
+parserOptions:
+  ecmaVersion: 6
+
+env:
+  node: true
+
+plugins:
+  - prettier
+
+extends:
+  - eslint:recommended
+  - prettier
+
+rules:
+  prettier/prettier: error
+
+overrides:
+  - files: "test/**/*.js"
+    env:
+      mocha: true

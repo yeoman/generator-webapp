@@ -16,7 +16,10 @@ module.exports = class extends Generator {
   initializing() {
     this.pkg = require('../package.json');
     this.composeWith(
-      require.resolve(`generator-${this.options['test-framework']}/generators/app`), {
+      require.resolve(
+        `generator-${this.options['test-framework']}/generators/app`
+      ),
+      {
         'skip-install': this.options['skip-install']
       }
     );
@@ -24,7 +27,11 @@ module.exports = class extends Generator {
 
   prompting() {
     if (!this.options['skip-welcome-message']) {
-      this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
+      this.log(
+        yosay(
+          "'Allo 'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app."
+        )
+      );
     }
 
     return this.prompt(config.prompts).then(answers => {
@@ -38,14 +45,13 @@ module.exports = class extends Generator {
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeAnalytics = hasFeature('includeAnalytics');
       this.includeJQuery = answers.includeJQuery;
-
     });
   }
 
-  writing () {
+  writing() {
     const templateData = {
       appname: this.appname,
-      date: (new Date).toISOString().split('T')[0],
+      date: new Date().toISOString().split('T')[0],
       name: this.pkg.name,
       version: this.pkg.version,
       includeSass: this.includeSass,
@@ -56,14 +62,11 @@ module.exports = class extends Generator {
       includeModernizr: this.includeModernizr,
       includeAnalytics: this.includeAnalytics
     };
-    
+
     const copy = (input, output) => {
-      this.fs.copy(
-        this.templatePath(input),
-        this.destinationPath(output)
-      );
+      this.fs.copy(this.templatePath(input), this.destinationPath(output));
     };
-    
+
     const copyTpl = (input, output, data) => {
       this.fs.copyTpl(
         this.templatePath(input),

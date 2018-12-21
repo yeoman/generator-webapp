@@ -10,7 +10,7 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "mocha --reporter spec --timeout 3000"
+    "test": "eslint . && mocha --reporter spec --timeout 3000"
   },
   "files": [
     "app"
@@ -34,8 +34,31 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
     "mocha": "^5.2.0",
+    "prettier": "^1.15.3",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "^1.6.0"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
