@@ -22,7 +22,7 @@ To start developing, run:
 $ gulp serve
 ```
 
-This will fire up a local web server, open http://localhost:9000 in your default browser and watch files for changes, reloading the browser automatically via [LiveReload].
+This will fire up a local web server, open http://localhost:9000 in your default browser and watch files for changes, reloading the browser automatically.
 
 To run the tests in the browser, run:
 
@@ -52,7 +52,7 @@ $ gulp --tasks
 
 ## Gulp plugins
 
-Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by [gulp-load-plugins][plugins] and available through the `$` variable.
+Gulp plugins (the ones that begin with `gulp-`) don't have to be explicitly imported. They are automatically picked up by [gulp-load-plugins] and available through the `$` variable.
 
 ## Browser support
 
@@ -60,11 +60,11 @@ You can configure browser support for Autoprefixer and @babel/preset-env by modi
 
 ## Linting
 
-We use ESLint for linting JavaScript code. You can define rules in your `package.json` under the `"eslint"` field. Alternatively, you can add an `.eslintrc` file to your project root, where you can [configure][eslint-config] ESLint using JavaScript, JSON or YAML.
+We use ESLint for linting JavaScript code. You can define rules in your `package.json` under the `eslintConfig` field. Alternatively, you can add an `.eslintrc` file to your project root, where you can [configure][eslint-config] ESLint using JavaScript, JSON or YAML.
 
 ### The `no-undef` rule and tests
 
-The ESLint rule [`no-undef`] will warn about usage of explicitly undeclared variables and functions. Because our tests use global functions like `describe` and `it` (defined by the testing framework), ESLint will consider those as warnings.
+The ESLint rule [`no-undef`][no-undef] will warn about usage of explicitly undeclared variables and functions. Because our tests use global functions like `describe` and `it` (defined by the testing framework), ESLint will consider those as warnings.
 
 Luckily, the fix is easy—add an `.eslintrc` file to the `test/spec` directory and let ESLint know about your testing framework. For example, if you're using Mocha, add this to `.eslintrc`:
 
@@ -116,4 +116,10 @@ Upon build these will be concatenated and compressed into a single file `scripts
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
 
+[gulp]: https://github.com/gulpjs/gulp
+[gulp-docs]: https://gulpjs.com/docs/en/getting-started/quick-start
+[yo]: https://github.com/yeoman/yo
+[gulp-load-plugins]: https://github.com/jackfranklin/gulp-load-plugins
 [browserslist]: https://github.com/browserslist/browserslist
+[eslint-config]: https://eslint.org/docs/user-guide/configuring
+[no-undef]: https://eslint.org/docs/rules/no-undef
