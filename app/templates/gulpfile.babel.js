@@ -1,15 +1,15 @@
 // generated on <%= date %> using <%= name %> <%= version %>
-const gulp = require('gulp');
-const gulpLoadPlugins = require('gulp-load-plugins');
-const browserSync = require('browser-sync').create();
-const del = require('del');
-const runSequence = require('run-sequence');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
-const { argv } = require('yargs');
+import gulp from 'gulp';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import browserSync from 'browser-sync';
+import del from 'del';
+import runSequence from 'run-sequence';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import { argv } from 'yargs';
 
 const $ = gulpLoadPlugins();
-const reload = browserSync.reload;
+const server = browserSync.create();
 
 let dev = true;
 const port = argv.port || 9000;
@@ -30,7 +30,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     ]))
     .pipe($.if(dev, $.sourcemaps.write()))
     .pipe(gulp.dest('.tmp/styles'))
-    .pipe(reload({stream: true}));
+    .pipe(server.reload({stream: true}));
 });
 
 <% if (includeBabel) { -%>
@@ -41,16 +41,16 @@ gulp.task('scripts', () => {
     .pipe($.babel())
     .pipe($.if(dev, $.sourcemaps.write('.')))
     .pipe(gulp.dest('.tmp/scripts'))
-    .pipe(reload({stream: true}));
+    .pipe(server.reload({stream: true}));
 });
 <% } -%>
 
 function lint(files) {
   return gulp.src(files)
     .pipe($.eslint({ fix: true }))
-    .pipe(reload({stream: true, once: true}))
+    .pipe(server.reload({stream: true, once: true}))
     .pipe($.eslint.format())
-    .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
+    .pipe($.if(!server.active, $.eslint.failAfterError()));
 }
 
 gulp.task('lint', () => {
@@ -108,7 +108,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
   runSequence('clean', ['styles'<% if (includeBabel) { %>, 'scripts'<% } %>, 'fonts'], () => {
-    browserSync.init({
+    server.init({
       notify: false,
       port,
       server: {
@@ -126,7 +126,7 @@ gulp.task('serve', () => {
 <% } -%>
       'app/images/**/*',
       '.tmp/fonts/**/*'
-    ]).on('change', reload);
+    ]).on('change', server.reload);
 
     gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
 <% if (includeBabel) { -%>
@@ -137,7 +137,7 @@ gulp.task('serve', () => {
 });
 
 gulp.task('serve:dist', ['default'], () => {
-  browserSync.init({
+  server.init({
     notify: false,
     port,
     server: {
@@ -154,7 +154,7 @@ gulp.task('serve:test', ['scripts'], () => {
 <% } else { -%>
 gulp.task('serve:test', () => {
 <% } -%>
-  browserSync.init({
+  server.init({
     notify: false,
     port,
     ui: false,
@@ -174,7 +174,7 @@ gulp.task('serve:test', () => {
 <% if (includeBabel) { -%>
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 <% } -%>
-  gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', reload);
+  gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', server.reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 

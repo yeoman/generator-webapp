@@ -88,8 +88,8 @@ module.exports = {
   ],
   filesToRender: [
     {
-      input: 'gulpfile.js',
-      output: 'gulpfile.js'
+      input: 'gulpfile.babel.js',
+      output: 'gulpfile.babel.js'
     },
     {
       input: '_package.json',

@@ -15,7 +15,7 @@ $ npm install --save-dev gulp-awspublish
 
 ### 2. Create a `deploy` task
 
-Add this task to your `gulpfile.js`. It will run `build` task before deploying:
+Add this task to your `gulpfile.babel.js`. It will run `build` task before deploying:
 
 ```js
 gulp.task('deploy', ['default'], () => {

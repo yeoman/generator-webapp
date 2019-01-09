@@ -7,7 +7,7 @@
 
 ## Features
 
-Please see our [gulpfile](app/templates/gulpfile.js) for up to date information on what we support.
+Please see our [gulpfile](app/templates/gulpfile.babel.js) for up to date information on what we support.
 
 * enable [ES2015 features](https://babeljs.io/docs/learn-es2015/) using [Babel](https://babeljs.io)
 * CSS Autoprefixing

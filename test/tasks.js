@@ -26,7 +26,7 @@ describe('gulp tasks', () => {
       'build',
       'default'
     ].forEach(task => {
-      assert.fileContent('gulpfile.js', "gulp.task('" + task);
+      assert.fileContent('gulpfile.babel.js', "gulp.task('" + task);
     });
   });
 });

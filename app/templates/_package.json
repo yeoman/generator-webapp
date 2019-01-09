@@ -19,6 +19,7 @@
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     <% } %>
+    "@babel/register": "^7.0.0",
     "autoprefixer": "^9.4.4",
     "browser-sync": "^2.2.1",
     "cssnano": "^4.1.7",
@@ -73,6 +74,9 @@
   ],
   "eslintConfig": {
     "env": {
+      "parserOptions": {
+        "sourceType": "module"
+      },
       <% if (includeBabel) { %>
       "es6": true,
       <% } %>

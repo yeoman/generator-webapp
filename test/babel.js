@@ -24,14 +24,14 @@ describe('Babel feature', () => {
     });
 
     it('should add the scripts task', () => {
-      assert.fileContent('gulpfile.js', "gulp.task('scripts'");
-      assert.fileContent('gulpfile.js', "['styles', 'scripts']");
-      assert.fileContent('gulpfile.js', "['styles', 'scripts', 'fonts']");
+      assert.fileContent('gulpfile.babel.js', "gulp.task('scripts'");
+      assert.fileContent('gulpfile.babel.js', "['styles', 'scripts']");
+      assert.fileContent('gulpfile.babel.js', "['styles', 'scripts', 'fonts']");
       assert.fileContent(
-        'gulpfile.js',
+        'gulpfile.babel.js',
         "gulp.watch('app/scripts/**/*.js', ['scripts'])"
       );
-      assert.fileContent('gulpfile.js', "'/scripts': '.tmp/scripts',");
+      assert.fileContent('gulpfile.babel.js', "'/scripts': '.tmp/scripts',");
     });
   });
 
@@ -56,15 +56,15 @@ describe('Babel feature', () => {
     });
 
     it("shouldn't add the scripts task", () => {
-      assert.noFileContent('gulpfile.js', "gulp.task('scripts'");
-      assert.fileContent('gulpfile.js', "['styles']");
-      assert.fileContent('gulpfile.js', "['styles', 'fonts']");
-      assert.fileContent('gulpfile.js', "'app/scripts/**/*.js',");
+      assert.noFileContent('gulpfile.babel.js', "gulp.task('scripts'");
+      assert.fileContent('gulpfile.babel.js', "['styles']");
+      assert.fileContent('gulpfile.babel.js', "['styles', 'fonts']");
+      assert.fileContent('gulpfile.babel.js', "'app/scripts/**/*.js',");
       assert.noFileContent(
-        'gulpfile.js',
+        'gulpfile.babel.js',
         "gulp.watch('app/scripts/**/*.js', ['scripts'])"
       );
-      assert.fileContent('gulpfile.js', "'/scripts': 'app/scripts',");
+      assert.fileContent('gulpfile.babel.js', "'/scripts': 'app/scripts',");
     });
   });
 });

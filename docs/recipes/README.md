@@ -72,7 +72,7 @@ $ git commit -m "Initial commit"
 
 ### 4. Get your feature working
 
-Do whatever is necessary to get Stylus working, install required gulp plugins, change `gulpfile.js`, update styles etc.
+Do whatever is necessary to get Stylus working, install required gulp plugins, change `gulpfile.babel.js`, update styles etc.
 
 ### 5. Write the recipe
 
