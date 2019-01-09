@@ -4,18 +4,14 @@
     "node": ">=4"
   },
   "dependencies": {
-    <% if (includeModernizr && !includeBootstrap && !includeJQuery) { %>
-    "modernizr": "^3.6.0"
-    <% } %>
-    <% if (includeModernizr && (includeBootstrap || includeJQuery)) { %>
-    "modernizr": "^3.6.0",
-    <% } %>
-    <% if(includeJQuery && !includeBootstrap) { %>
-    "jquery": "^3.3.1"
-    <% } %>
     <% if (includeBootstrap) { %>
     "bootstrap": "^4.1.3",
-    "jquery": "^3.3.1"
+    <% } %>
+    <% if (includeBootstrap || includeJQuery) { %>
+    "jquery": "^3.3.1"<% if (includeModernizr) { %>,<% } %>
+    <% } %>
+    <% if (includeModernizr) { %>
+    "modernizr": "^3.6.0"
     <% } %>
   },
   "devDependencies": {
