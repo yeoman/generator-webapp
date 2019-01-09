@@ -35,7 +35,7 @@ $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 +    .pipe($.less({
 +      paths: ['.']
 +    }))
-     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
+     .pipe($.autoprefixer())
      .pipe($.sourcemaps.write())
      .pipe(gulp.dest('.tmp/styles'))
      .pipe(reload({stream: true}));

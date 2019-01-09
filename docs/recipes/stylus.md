@@ -60,7 +60,7 @@ Unlike with Sass, Stylus doesn't ignore filenames starting with `_`, so we'll li
 +      paths: ['.']
 +    }))
      .pipe($.sourcemaps.init())
-     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
+     .pipe($.autoprefixer())
      .pipe($.sourcemaps.write())
      .pipe(gulp.dest('.tmp/styles'))
      .pipe(reload({stream: true}));

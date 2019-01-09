@@ -54,6 +54,10 @@ $ gulp --tasks
 
 Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. They are automatically picked up by [gulp-load-plugins][plugins] and available through the `$` variable.
 
+## Browser support
+
+You can configure browser support for Autoprefixer and @babel/preset-env by modifying the [browserslist][] configuration, which in this case is the `browserslist` field in your `package.json`.
+
 ## Linting
 
 We use ESLint for linting JavaScript code. You can define rules in your `package.json` under the `"eslint"` field. Alternatively, you can add an `.eslintrc` file to your project root, where you can [configure][eslint-config] ESLint using JavaScript, JSON or YAML.
@@ -111,3 +115,5 @@ You have to add your own JS files manually. For example, let's say you created `
 Upon build these will be concatenated and compressed into a single file `scripts/main.js`.
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
+
+[browserslist]

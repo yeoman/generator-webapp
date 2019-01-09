@@ -31,7 +31,7 @@ Now we need to add compass-importer to node-sass by passing it to gulp-sass opti
 +      includePaths: ['.'],
 +      importer: compass
      }).on('error', $.sass.logError))
-     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
+     .pipe($.autoprefixer())
      .pipe($.sourcemaps.write())
      .pipe(gulp.dest('.tmp/styles'))
      .pipe(reload({stream: true}));
