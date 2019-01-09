@@ -26,7 +26,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
   return gulp.src('app/styles/*.css')
     .pipe($.if(dev, $.sourcemaps.init()))<% } %>
     .pipe($.postcss([
-      autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']})
+      autoprefixer()
     ]))
     .pipe($.if(dev, $.sourcemaps.write()))
     .pipe(gulp.dest('.tmp/styles'))

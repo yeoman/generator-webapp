@@ -57,22 +57,27 @@
     "mocha": "^5.2.0",
     "run-sequence": "^2.2.1",
     "yargs": "12.0.2"
-  }, 
+  },
   "scripts": {
     <% if (includeModernizr) { %>
     "build:modernizr": "modernizr -c modernizr.json -d app/scripts/modernizr.js",
     "serve:test": "npm run build:modernizr && gulp serve:test",
     "serve:dist": "npm run build:modernizr && gulp serve:dist",
     "start": "npm run build:modernizr && gulp serve",
-    <% } %>    
+    <% } %>
     <% if (!includeModernizr) { %>
     "serve:test": "gulp serve:test",
     "serve:dist": "gulp serve:dist",
     "start": "gulp serve",
-    <% } %>     
+    <% } %>
     "build": "gulp",
     "test": "npm run serve:test"
-  }, 
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR"
+  ],
   "eslintConfig": {
     "env": {
       <% if (includeBabel) { %>
