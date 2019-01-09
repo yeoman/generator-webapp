@@ -56,7 +56,7 @@ Gulp plugins (the ones that begin with `gulp-`) don't have to be `require()`'d. 
 
 ## Browser support
 
-You can configure browser support for Autoprefixer and @babel/preset-env by modifying the [browserslist][] configuration, which in this case is the `browserslist` field in your `package.json`.
+You can configure browser support for Autoprefixer and @babel/preset-env by modifying the [browserslist] configuration, which in this case is the `browserslist` field in your `package.json`.
 
 ## Linting
 
@@ -116,4 +116,4 @@ Upon build these will be concatenated and compressed into a single file `scripts
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
 
-[browserslist]
+[browserslist]: https://github.com/browserslist/browserslist
