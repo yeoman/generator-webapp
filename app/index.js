@@ -56,7 +56,6 @@ module.exports = class extends Generator {
       version: this.pkg.version,
       includeSass: this.includeSass,
       includeBootstrap: this.includeBootstrap,
-      includeBabel: this.options.babel,
       testFramework: this.options['test-framework'],
       includeJQuery: this.includeJQuery,
       includeModernizr: this.includeModernizr,

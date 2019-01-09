@@ -58,8 +58,6 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
   Doesn't automatically install dependencies after scaffolding has finished.
 - `--test-framework=<framework>`
   Either `mocha` or `jasmine`. Defaults to `mocha`.
-- `--no-babel`
-  Scaffolds without [Babel](http://babeljs.io) support. This only applies to `app/scripts`, you can still write ES2015 in the gulpfile, depending on what your version of Node [supports](https://kangax.github.io/compat-table/es6/).
 
 
 ## Contribute

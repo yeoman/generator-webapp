@@ -33,7 +33,6 @@ gulp.task('styles', () => {<% if (includeSass) { %>
     .pipe(server.reload({stream: true}));
 });
 
-<% if (includeBabel) { -%>
 gulp.task('scripts', () => {
   return gulp.src('app/scripts/**/*.js')
     .pipe($.plumber())
@@ -43,7 +42,6 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest('.tmp/scripts'))
     .pipe(server.reload({stream: true}));
 });
-<% } -%>
 
 function lint(files) {
   return gulp.src(files)
@@ -62,11 +60,7 @@ gulp.task('lint:test', () => {
     .pipe(gulp.dest('test/spec'));
 });
 
-<% if (includeBabel) { -%>
 gulp.task('html', ['styles', 'scripts'], () => {
-<% } else { -%>
-gulp.task('html', ['styles'], () => {
-<% } -%>
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
@@ -107,7 +101,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', () => {
-  runSequence('clean', ['styles'<% if (includeBabel) { %>, 'scripts'<% } %>, 'fonts'], () => {
+  runSequence('clean', ['styles', 'scripts', 'fonts'], () => {
     server.init({
       notify: false,
       port,
@@ -121,17 +115,12 @@ gulp.task('serve', () => {
 
     gulp.watch([
       'app/*.html',
-<% if (!includeBabel) { -%>
-      'app/scripts/**/*.js',
-<% } -%>
       'app/images/**/*',
       '.tmp/fonts/**/*'
     ]).on('change', server.reload);
 
     gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
-<% if (includeBabel) { -%>
     gulp.watch('app/scripts/**/*.js', ['scripts']);
-<% } -%>
     gulp.watch('app/fonts/**/*', ['fonts']);
   });
 });
@@ -149,11 +138,7 @@ gulp.task('serve:dist', ['default'], () => {
   });
 });
 
-<% if (includeBabel) { -%>
 gulp.task('serve:test', ['scripts'], () => {
-<% } else { -%>
-gulp.task('serve:test', () => {
-<% } -%>
   server.init({
     notify: false,
     port,
@@ -161,19 +146,13 @@ gulp.task('serve:test', () => {
     server: {
       baseDir: 'test',
       routes: {
-<% if (includeBabel) { -%>
         '/scripts': '.tmp/scripts',
-<% } else { -%>
-        '/scripts': 'app/scripts',
-<% } -%>
         '/node_modules': 'node_modules'
       }
     }
   });
 
-<% if (includeBabel) { -%>
   gulp.watch('app/scripts/**/*.js', ['scripts']);
-<% } -%>
   gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', server.reload);
   gulp.watch('test/spec/**/*.js', ['lint:test']);
 });

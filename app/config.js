@@ -12,11 +12,6 @@ module.exports = {
       desc: 'Test framework to be invoked',
       type: String,
       defaults: 'mocha'
-    },
-    babel: {
-      desc: 'Use Babel',
-      type: Boolean,
-      defaults: true
     }
   },
   prompts: [

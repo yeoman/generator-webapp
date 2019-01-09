@@ -15,19 +15,15 @@
     <% } %>
   },
   "devDependencies": {
-	  <% if (includeBabel) { %>
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
-    <% } %>
     "@babel/register": "^7.0.0",
     "autoprefixer": "^9.4.4",
     "browser-sync": "^2.2.1",
     "cssnano": "^4.1.7",
     "del": "^3.0.0",
     "gulp": "^3.9.0",
-    <% if (includeBabel) { %>
     "gulp-babel": "^8.0.0",
-    <% } %>
     "gulp-cache": "^1.0.2",
     "gulp-eslint": "^5.0.0",
     <% if (includeSass) { %>
@@ -37,9 +33,7 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
     "gulp-load-plugins": "^1.2.4",
-    <% if (includeBabel || includeSass) { %>
     "gulp-plumber": "^1.0.1",
-    <% } %>
     "gulp-postcss": "^8.0.0",
     <% if (includeSass) { %>
     "gulp-sass": "^4.0.2",
@@ -77,9 +71,7 @@
       "parserOptions": {
         "sourceType": "module"
       },
-      <% if (includeBabel) { %>
       "es6": true,
-      <% } %>
       "node": true,
       "browser": true
       <% if (includeJQuery) { %>,

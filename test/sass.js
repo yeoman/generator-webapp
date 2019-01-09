@@ -26,14 +26,12 @@ describe('Sass feature', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
-        .withOptions({ babel: false })
         .withPrompts({ features: [] })
         .on('end', done);
     });
 
     it("shouldn't add dependencies", () => {
       assert.noFileContent('package.json', '"gulp-sass"');
-      assert.noFileContent('package.json', '"gulp-plumber"');
       assert.noFileContent('package.json', '"gulp-filter"');
     });
 
