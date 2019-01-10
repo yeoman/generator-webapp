@@ -4,6 +4,12 @@
 
 ![](screenshot.png)
 
+---
+
+🚧 There is a pre-release version of this generator, you can install it by running `npm install --global generator-webapp@next`. Help us make it stable by reporting bugs! 🚧
+
+---
+
 
 ## Features
 
