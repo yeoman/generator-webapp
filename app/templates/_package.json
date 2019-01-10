@@ -8,10 +8,13 @@
     "bootstrap": "^4.1.3",
     <% } %>
     <% if (includeBootstrap || includeJQuery) { %>
-    "jquery": "^3.3.1"<% if (includeModernizr) { %>,<% } %>
+    "jquery": "^3.3.1"<% if (includeModernizr || includeBootstrap) { %>,<% } %>
     <% } %>
     <% if (includeModernizr) { %>
-    "modernizr": "^3.6.0"
+    "modernizr": "^3.6.0"<% if (includeBootstrap) { %>,<% } %>
+    <% } %>
+    <% if (includeBootstrap) { %>
+    "popper.js": "^1.14.6"
     <% } %>
   },
   "devDependencies": {
@@ -20,11 +23,12 @@
     "@babel/register": "^7.0.0",
     "autoprefixer": "^9.4.4",
     "browser-sync": "^2.2.1",
+    "cross-env": "^5.2.0",
     "cssnano": "^4.1.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
-    "gulp-cache": "^1.0.2",
+    "gulp-cli": "^2.0.1",
     "gulp-eslint": "^5.0.0",
     <% if (includeSass) { %>
     "gulp-filter": "^5.1.0",
@@ -43,23 +47,23 @@
     "gulp-uglify": "^3.0.1",
     "gulp-useref": "^3.0.0",
     "mocha": "^5.2.0",
-    "run-sequence": "^2.2.1",
     "yargs": "12.0.5"
   },
   "scripts": {
     <% if (includeModernizr) { %>
     "build:modernizr": "modernizr -c modernizr.json -d app/scripts/modernizr.js",
-    "serve:test": "npm run build:modernizr && gulp serve:test",
-    "serve:dist": "npm run build:modernizr && gulp serve:dist",
+    "serve:test": "npm run build:modernizr && cross-env NODE_ENV=test gulp serve",
+    "serve:dist": "npm run build:modernizr && cross-env NODE_ENV=production gulp serve",
     "start": "npm run build:modernizr && gulp serve",
     <% } %>
     <% if (!includeModernizr) { %>
-    "serve:test": "gulp serve:test",
-    "serve:dist": "gulp serve:dist",
+    "serve:test": "cross-env NODE_ENV=test gulp serve",
+    "serve:dist": "cross-env NODE_ENV=production gulp serve",
     "start": "gulp serve",
     <% } %>
-    "build": "gulp",
-    "test": "npm run serve:test"
+    "build": "cross-env NODE_ENV=production gulp",
+    "test": "npm run serve:test",
+    "tasks": "gulp --tasks"
   },
   "browserslist": [
     "> 1%",
@@ -67,14 +71,14 @@
     "Firefox ESR"
   ],
   "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    },
     "env": {
-      "parserOptions": {
-        "sourceType": "module"
-      },
       "es6": true,
       "node": true,
       "browser": true
-      <% if (includeJQuery) { %>,
+      <% if (includeJQuery || includeBootstrap) { %>,
       "jquery": true
       <% } %>
     },

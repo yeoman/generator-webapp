@@ -20,6 +20,10 @@ describe('Sass feature', () => {
     it('should create an SCSS file', () => {
       assert.file('app/styles/main.scss');
     });
+
+    it('should use Sass in gulpfile', () => {
+      assert.fileContent('gulpfile.babel.js', '.scss');
+    });
   });
 
   describe('off', () => {

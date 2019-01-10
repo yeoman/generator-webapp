@@ -15,7 +15,11 @@ describe('jQuery feature', () => {
     });
 
     it('should add the correct dependencies', () => {
-      assert.fileContent('package.json', '"jquery"');
+      assert.fileContent('package.json', '"jquery": "');
+    });
+
+    it('should enable jQuery environment in ESLint', () => {
+      assert.fileContent('package.json', '"jquery": true');
     });
   });
 
@@ -30,8 +34,8 @@ describe('jQuery feature', () => {
         .on('end', done);
     });
 
-    it('should add the correct dependencies', () => {
-      assert.noFileContent('package.json', '"jquery"');
+    it('should not contain jQuery', () => {
+      assert.noFileContent('package.json', 'jquery');
     });
   });
 });

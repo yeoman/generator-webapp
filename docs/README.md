@@ -19,7 +19,7 @@ $ yo webapp
 To start developing, run:
 
 ```sh
-$ gulp serve
+$ npm run start
 ```
 
 This will fire up a local web server, open http://localhost:9000 in your default browser and watch files for changes, reloading the browser automatically.
@@ -27,19 +27,19 @@ This will fire up a local web server, open http://localhost:9000 in your default
 To run the tests in the browser, run:
 
 ```sh
-$ gulp serve:test
+$ npm run serve:test
 ```
 
 To make a production-ready build of the app, run:
 
 ```sh
-$ gulp
+$ npm run build
 ```
 
 To preview the production-ready build to check if everything is ok:
 
 ```sh
-$ gulp serve:dist
+$ npm run serve:dist
 ```
 
 ## Tasks
@@ -47,7 +47,7 @@ $ gulp serve:dist
 To get the list of available tasks, run:
 
 ```sh
-$ gulp --tasks
+$ npm run tasks
 ```
 
 ## Gulp plugins
@@ -115,6 +115,26 @@ You have to add your own JS files manually. For example, let's say you created `
 Upon build these will be concatenated and compressed into a single file `scripts/main.js`.
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
+
+## Debugging `gulpfile.babel.js`
+
+Gulp tasks are not meant to be run directly, but instead through npm scripts. However, sometimes you want to run a tasks in order to debug it. If you don't have Gulp install globally, you can run the local CLI using `npx gulp`, so this is how you would run the `lint` task:
+
+```sh
+$ npx gulp lint
+```
+
+Keep in mind that only exported tasks are available to the CLI:
+
+```js
+function myPrivateTask() {
+  // not available to CLI
+}
+
+export function myPublicTask() {
+  // available to CLI as "myPublicTask"
+}
+```
 
 [gulp]: https://github.com/gulpjs/gulp
 [gulp-docs]: https://gulpjs.com/docs/en/getting-started/quick-start

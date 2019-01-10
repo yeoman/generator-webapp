@@ -36,11 +36,12 @@ describe('general', () => {
     ]);
   });
 
-  it('creates expected tasks', () => {
-    assert.fileContent('package.json', 'serve:test');
-    assert.fileContent('package.json', 'serve:dist');
-    assert.fileContent('package.json', 'start');
-    assert.fileContent('package.json', 'build');
-    assert.fileContent('package.json', 'test');
+  it('creates expected npm scripts', () => {
+    assert.fileContent('package.json', '"serve:test"');
+    assert.fileContent('package.json', '"serve:dist"');
+    assert.fileContent('package.json', '"start"');
+    assert.fileContent('package.json', '"build"');
+    assert.fileContent('package.json', '"test"');
+    assert.fileContent('package.json', '"tasks"');
   });
 });

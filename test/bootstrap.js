@@ -11,8 +11,13 @@ describe('Bootstrap feature', () => {
         .on('end', done);
     });
 
-    it('should add jQuery explicitly as a dependency', () => {
-      assert.fileContent('package.json', '"jquery"');
+    it('should add jQuery and Popper.js as dependencies', () => {
+      assert.fileContent('package.json', '"jquery": "');
+      assert.fileContent('package.json', '"popper.js": "');
+    });
+
+    it('should enable jQuery environment in ESLint', () => {
+      assert.fileContent('package.json', '"jquery": true');
     });
   });
 
@@ -20,8 +25,16 @@ describe('Bootstrap feature', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
-        .withPrompts({ features: [] })
+        .withPrompts({
+          features: [],
+          includeJQuery: false
+        })
         .on('end', done);
+    });
+
+    it('should not contain jQuery or Popper.js', () => {
+      assert.noFileContent('package.json', '"jquery": "');
+      assert.noFileContent('package.json', '"popper.js": "');
     });
   });
 

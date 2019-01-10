@@ -18,15 +18,15 @@ describe('Modernizr feature', () => {
       );
       assert.fileContent(
         'package.json',
-        'npm run build:modernizr && gulp serve:test'
+        '"serve:test": "npm run build:modernizr &&'
       );
       assert.fileContent(
         'package.json',
-        'npm run build:modernizr && gulp serve:dist'
+        '"serve:dist": "npm run build:modernizr &&'
       );
       assert.fileContent(
         'package.json',
-        'npm run build:modernizr && gulp serve'
+        '"start": "npm run build:modernizr && gulp serve'
       );
     });
 
@@ -35,7 +35,7 @@ describe('Modernizr feature', () => {
     });
 
     it('should add the correct dependencies', () => {
-      assert.fileContent('package.json', 'modernizr');
+      assert.fileContent('package.json', '"modernizr"');
     });
   });
 
@@ -50,31 +50,9 @@ describe('Modernizr feature', () => {
         .on('end', done);
     });
 
-    it('should add the correct tasks in package.json', () => {
-      assert.noFileContent(
-        'package.json',
-        'modernizr -c modernizr.json -d app/scripts/modernizr.js'
-      );
-      assert.noFileContent(
-        'package.json',
-        'npm run build:modernizr && gulp serve:test'
-      );
-      assert.noFileContent(
-        'package.json',
-        'npm run build:modernizr && gulp serve:dist'
-      );
-      assert.noFileContent(
-        'package.json',
-        'npm run build:modernizr && gulp serve'
-      );
-    });
-
-    it('should add the correct files', () => {
-      assert.noFile('modernizr.json');
-    });
-
-    it('should add the correct dependencies', () => {
+    it('should not contain Modernizr anywhere', () => {
       assert.noFileContent('package.json', 'modernizr');
+      assert.noFile('modernizr.json');
     });
   });
 });
