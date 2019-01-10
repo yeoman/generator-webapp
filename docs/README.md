@@ -58,6 +58,10 @@ Gulp plugins (the ones that begin with `gulp-`) don't have to be explicitly impo
 
 You can configure browser support for Autoprefixer and @babel/preset-env by modifying the [browserslist] configuration, which in this case is the `browserslist` field in your `package.json`.
 
+### Modernizr
+
+`modernizr.json` contains Modernizr configuration. You can use [this file][modernizr-config-all] as a reference for all available options.
+
 ## Linting
 
 We use ESLint for linting JavaScript code. You can define rules in your `package.json` under the `eslintConfig` field. Alternatively, you can add an `.eslintrc` file to your project root, where you can [configure][eslint-config] ESLint using JavaScript, JSON or YAML.
@@ -141,5 +145,6 @@ export function myPublicTask() {
 [yo]: https://github.com/yeoman/yo
 [gulp-load-plugins]: https://github.com/jackfranklin/gulp-load-plugins
 [browserslist]: https://github.com/browserslist/browserslist
+[modernizr-config-all]: https://github.com/Modernizr/Modernizr/blob/master/lib/config-all.json
 [eslint-config]: https://eslint.org/docs/user-guide/configuring
 [no-undef]: https://eslint.org/docs/rules/no-undef
