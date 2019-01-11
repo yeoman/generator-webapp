@@ -19,7 +19,7 @@ describe('general', () => {
   it('creates expected files', () => {
     assert.file([
       'package.json',
-      'gulpfile.babel.js',
+      'gulpfile.js',
       '.babelrc',
       '.editorconfig',
       '.gitignore',

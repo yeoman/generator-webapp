@@ -120,7 +120,7 @@ Upon build these will be concatenated and compressed into a single file `scripts
 
 The file name in the comment block and the first source aren't related, their name being the same is a pure coincidence. The file name in the comment block specifies how the final optimized file will be called, while the sources should map to your source files.
 
-## Debugging `gulpfile.babel.js`
+## Debugging `gulpfile.js`
 
 Gulp tasks are not meant to be run directly, but instead through npm scripts. However, sometimes you want to run a tasks in order to debug it. If you don't have Gulp install globally, you can run the local CLI using `npx gulp`, so this is how you would run the `lint` task:
 
@@ -135,9 +135,11 @@ function myPrivateTask() {
   // not available to CLI
 }
 
-export function myPublicTask() {
-  // available to CLI as "myPublicTask"
+function myPublicTask() {
 }
+
+// available to CLI as "myPublicTask"
+exports.myPublicTask = myPublicTask
 ```
 
 [gulp]: https://github.com/gulpjs/gulp

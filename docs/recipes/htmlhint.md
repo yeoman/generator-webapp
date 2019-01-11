@@ -14,7 +14,7 @@ $ npm install --save-dev gulp-htmlhint
 
 ### 2. Create the task
 
-Let's create a task in our `gulpfile.babel.js` which runs HTMLHint across all our HTML files and outputs the error in the terminal:
+Let's create a task in our `gulpfile.js` which runs HTMLHint across all our HTML files and outputs the error in the terminal:
 
 ```js
 gulp.task('htmlhint', () => {

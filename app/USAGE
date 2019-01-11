@@ -11,7 +11,7 @@ Example:
     yo webapp
 
     This will create:
-        gulpfile.babel.js: Configuration for the task runner.
+        gulpfile.js: Configuration for the task runner.
         package.json: Development packages installed by npm.
 
         app/: Your application files.

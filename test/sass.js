@@ -22,7 +22,7 @@ describe('Sass feature', () => {
     });
 
     it('should use Sass in gulpfile', () => {
-      assert.fileContent('gulpfile.babel.js', '.scss');
+      assert.fileContent('gulpfile.js', '.scss');
     });
   });
 

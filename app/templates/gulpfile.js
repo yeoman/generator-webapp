@@ -1,11 +1,11 @@
 // generated on <%= date %> using <%= name %> <%= version %>
-import { src, dest, watch, series, parallel, lastRun } from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync';
-import del from 'del';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-import { argv } from 'yargs';
+const { src, dest, watch, series, parallel, lastRun } = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const browserSync = require('browser-sync');
+const del = require('del');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const { argv } = require('yargs');
 
 const $ = gulpLoadPlugins();
 const server = browserSync.create();
@@ -108,7 +108,7 @@ function measureSize() {
     .pipe($.size({title: 'build', gzip: true}));
 }
 
-export const build = series(
+exports.build = series(
   parallel(
     lint,
     series(parallel(styles, scripts), html),
@@ -178,14 +178,12 @@ function startDistServer() {
   });
 }
 
-let serve;
 if (isDev) {
-  serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
+  exports.serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
 } else if (isTest) {
-  serve = series(scripts, startTestServer);
+  exports.serve = series(scripts, startTestServer);
 } else if (isProd) {
-  serve = series(build, startDistServer);
+  exports.serve = series(build, startDistServer);
 }
-export { serve };
 
-export default build;
+exports.default = build;
