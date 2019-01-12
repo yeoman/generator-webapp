@@ -55,11 +55,11 @@ const lintBase = files => {
 function lint() {
   return lintBase('app/scripts/**/*.js')
     .pipe(dest('app/scripts'));
-});
+};
 function lintTest() {
   return lintBase('test/spec/**/*.js')
     .pipe(dest('test/spec'));
-});
+};
 
 function html() {
   return src('app/*.html')

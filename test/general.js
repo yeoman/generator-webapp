@@ -1,6 +1,8 @@
 const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
+const babel = require('@babel/core');
+const fs = require('fs');
 
 describe('general', () => {
   before(done => {
@@ -43,5 +45,11 @@ describe('general', () => {
     assert.fileContent('package.json', '"build"');
     assert.fileContent('package.json', '"test"');
     assert.fileContent('package.json', '"tasks"');
+  });
+
+  it('produces a valid gulpfile', () => {
+    const filePath = path.resolve('gulpfile.js');
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    babel.parse(fileContent);
   });
 });

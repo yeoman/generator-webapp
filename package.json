@@ -34,6 +34,7 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
     "eslint": "^5.10.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.0",
