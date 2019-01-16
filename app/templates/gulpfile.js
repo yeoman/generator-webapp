@@ -108,7 +108,7 @@ function measureSize() {
     .pipe($.size({title: 'build', gzip: true}));
 }
 
-exports.build = series(
+const build = series(
   parallel(
     lint,
     series(parallel(styles, scripts), html),
@@ -178,12 +178,15 @@ function startDistServer() {
   });
 }
 
+let serve;
 if (isDev) {
-  exports.serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
+  serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
 } else if (isTest) {
-  exports.serve = series(scripts, startTestServer);
+  serve = series(scripts, startTestServer);
 } else if (isProd) {
-  exports.serve = series(build, startDistServer);
+  serve = series(build, startDistServer);
 }
 
+exports.serve = serve;
+exports.build = build;
 exports.default = build;
