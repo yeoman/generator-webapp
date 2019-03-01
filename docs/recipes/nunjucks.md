@@ -60,24 +60,24 @@ Create `app/index.njk`, where you can paste the `<div class="container">` part f
 ### 4. Create a `views` task
 
 ```js
-gulp.task('views', () => {
-  return gulp.src('app/*.njk')
+function views() {
+  return src('app/*.njk')
     .pipe($.nunjucksRender({
       path: 'app'
     }))
-    .pipe(gulp.dest('.tmp'))
-    .pipe(reload({stream: true}));
-});
+    .pipe(dest('.tmp'))
+    .pipe(server.reload({stream: true}));
+};
 ```
 
 This compiles `app/*.njk` files into static `.html` files in the `.tmp` directory.
 
-### 5. Create a 'views:reload' task
+### 5. Create a 'viewsreload' function
 
 ```js
-gulp.task('views:reload', ['views'], () => {
-  reload();
-});
+function viewsreload(){
+  server.reload();
+};
 ```
 
 This triggers Browsersync after `views` task is completed
@@ -101,15 +101,24 @@ gulp.task('serve', () => {
 ### 7. Configure `html` task to include files from `.tmp`
 
 ```diff
- gulp.task('html', ['styles', 'views', 'scripts'], () => {
--  return gulp.src('app/*.html')
-+  return gulp.src(['app/*.html', '.tmp/*.html'])
-     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-     .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.cssnano({safe: true, autoprefixer: false})))
-     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
-     .pipe(gulp.dest('dist'));
- });
+function html() {
+- return src('app/*.html')
++ return src(['app/*.html', '.tmp/*.html'])
+   .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+   .pipe($.if(/\.js$/, $.uglify({compress: {drop_console: true}})))
+   .pipe($.if(/\.css$/, $.postcss([cssnano({safe: true, autoprefixer: false})])))
+   .pipe($.if(/\.html$/, $.htmlmin({
+     collapseWhitespace: true,
+     minifyCSS: true,
+     minifyJS: {compress: {drop_console: true}},
+     processConditionalComments: true,
+     removeComments: true,
+     removeEmptyAttributes: true,
+     removeScriptTypeAttributes: true,
+     removeStyleLinkTypeAttributes: true
+  })))
+  .pipe(dest('dist'));
+}
 ```
 
 ### 8. Update `extras`
@@ -117,75 +126,44 @@ gulp.task('serve', () => {
 We don't want to copy over `.njk` files in the build process:
 
 ```diff
- gulp.task('extras', () => {
-   return gulp.src([
-     'app/*.*',
--    '!app/*.html'
-+    '!app/*.html',
-+    '!app/*.njk'
-   ], {
-     dot: true
-   }).pipe(gulp.dest('dist'));
- });
+function extras() {
+  return src([
+    'app/*',
+-   '!app/*.html'
++   '!app/*.html',
++   '!app/*.njk'
+  ], {
+    dot: true
+  }).pipe(dest('dist'));
+};
 ```
-
-### 9. Configure `wiredep` task to wire Bower components on layout templates only
-
-Wiredep does not support `.njk` ([yet](https://github.com/taptapship/wiredep/pull/258)), so also add in the file type definition.
+### 9. Edit your `watch` task
 
 ```diff
-  gulp.task('wiredep', () => {
-    ...
+  watch([
+-   'app/*.html',
+    'app/images/**/*',
+    '.tmp/fonts/**/*'
+  ]).on('change', server.reload);
 
--   gulp.src('app/*.html')
-+   gulp.src('app/layouts/*.njk')
-      .pipe(wiredep({
-        exclude: ['bootstrap-sass'],
--       ignorePath: /^(\.\.\/)*\.\./
-+       ignorePath: /^(\.\.\/)*\.\./,
-+       fileTypes: {
-+         njk: {
-+           block: /(([ \t]*)<!--\s*bower:*(\S*)\s*-->)(\n|\r|.)*?(<!--\s*endbower\s*-->)/gi,
-+           detect: {
-+             js: /<script.*src=['"]([^'"]+)/gi,
-+             css: /<link.*href=['"]([^'"]+)/gi
-+           },
-+           replace: {
-+             js: '<script src="{{filePath}}"></script>',
-+             css: '<link rel="stylesheet" href="{{filePath}}" />'
-+           }
-+         }
-+       }
-+     }))
--     .pipe(gulp.dest('app'));
-+     .pipe(gulp.dest('app/layouts'));
-  });
++ watch('app/**/*.{html,njk}', viewsreload);
+  watch('app/styles/**/*.scss', styles);
+  watch('app/scripts/**/*.js', scripts);
+  watch('app/fonts/**/*', fonts);
+}
 ```
 
+### 9. Edit your `serve` task
 
-### 10. Edit your `serve` task
-
-Edit your `serve` task so that editing `.html` and `.njk` files triggers the `views:reload` task:
+Edit your `serve` task so that editing `.html` and `.njk` files triggers the `viewsreload` function:
 
 ```diff
-  gulp.task('serve', ['views', 'styles', 'fonts'], () => {
-    runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
-      ...
-
-    gulp.watch([
--     'app/*.html',
-      'app/scripts/**/*.js',
-      'app/images/**/*',
-      '.tmp/fonts/**/*'
-    ]).on('change', reload);
-     
-+     gulp.watch('app/**/*.{html,njk}', ['views:reload']);
-      gulp.watch('app/styles/**/*.scss', ['styles']);
-      gulp.watch('app/scripts/**/*.js', ['scripts']);
-      gulp.watch('app/fonts/**/*', ['fonts']);
-      gulp.watch('bower.json', ['wiredep', 'fonts']);
-    });
-  });
+let serve;
+if (isDev) {
+- serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
++ serve = series(clean, parallel(views, styles, scripts, fonts), startAppServer);
+} ...
+}
 ```
 
 Notice we are still watching `.html` files in `app` because our templates have a different extension.
