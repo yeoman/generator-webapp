@@ -146,7 +146,7 @@ function extras() {
     '.tmp/fonts/**/*'
   ]).on('change', server.reload);
 
-+ watch('app/**/*.{html,njk}', viewsreload);
++ watch('app/**/*.{html,njk}', views);
   watch('app/styles/**/*.scss', styles);
   watch('app/scripts/**/*.js', scripts);
   watch('app/fonts/**/*', fonts);
