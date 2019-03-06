@@ -145,6 +145,7 @@ function measureSize() {
 }
 
 const build = series(
+  clean,
   parallel(
     lint,
     <% if (includeModernizr) { %>
@@ -229,7 +230,7 @@ if (isDev) {
   serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
   <% } %>
 } else if (isTest) {
-  serve = series(scripts, startTestServer);
+  serve = series(clean, scripts, startTestServer);
 } else if (isProd) {
   serve = series(build, startDistServer);
 }
