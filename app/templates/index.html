@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <% if (includeModernizr) { %>
-    <!-- build:js scripts/vendor/modernizr.js -->
+    <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
     <!-- endbuild -->
     <% } %>
     <% if (includeBootstrap) { %>
+    <!-- build:css styles/vendor.css -->
       <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- endbuild -->
     <% } %>
   </head>
   <body>
