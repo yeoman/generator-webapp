@@ -1,6 +1,11 @@
 // generated on <%= date %> using <%= name %> <%= version %>
 const { src, dest, watch, series, parallel, lastRun } = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
+<% if (includeModernizr) { %>
+const fs = require('fs');
+const mkdirp = require('mkdirp');
+const Modernizr = require('modernizr');
+<% } %>
 const browserSync = require('browser-sync');
 const del = require('del');
 const autoprefixer = require('autoprefixer');
@@ -44,6 +49,37 @@ function scripts() {
     .pipe(dest('.tmp/scripts'))
     .pipe(server.reload({stream: true}));
 };
+
+<% if (includeModernizr) { -%>
+async function modernizr() {
+  const readConfig = () => new Promise((resolve, reject) => {
+    fs.readFile(`${__dirname}/modernizr.json`, 'utf8', (err, data) => {
+      if (err) reject(err);
+      resolve(JSON.parse(data));
+    })
+  })
+  const createDir = () => new Promise((resolve, reject) => {
+    mkdirp(`${__dirname}/.tmp/scripts`, err => {
+      if (err) reject(err);
+      resolve();
+    })
+  });
+  const generateScript = config => new Promise((resolve, reject) => {
+    Modernizr.build(config, content => {
+      fs.writeFile(`${__dirname}/.tmp/scripts/modernizr.js`, content, err => {
+        if (err) reject(err);
+        resolve(content);
+      });
+    })
+  });
+
+  const [config] = await Promise.all([
+    readConfig(),
+    createDir()
+  ]);
+  await generateScript(config);
+}
+<% } -%>
 
 const lintBase = files => {
   return src(files)
@@ -111,7 +147,11 @@ function measureSize() {
 const build = series(
   parallel(
     lint,
+    <% if (includeModernizr) { %>
+    series(parallel(styles, scripts, modernizr), html),
+    <% } else { %>
     series(parallel(styles, scripts), html),
+    <% } %>
     images,
     fonts,
     extras
@@ -143,6 +183,9 @@ function startAppServer() {
   watch('app/styles/**/*.css', styles);
 <% } -%>
   watch('app/scripts/**/*.js', scripts);
+  <% if (includeModernizr) { %>
+  watch('modernizr.json', modernizr);
+  <% } %>
   watch('app/fonts/**/*', fonts);
 }
 
@@ -180,7 +223,11 @@ function startDistServer() {
 
 let serve;
 if (isDev) {
+  <% if (includeModernizr) { %>
+  serve = series(clean, parallel(styles, scripts, modernizr, fonts), startAppServer);
+  <% } else { %>
   serve = series(clean, parallel(styles, scripts, fonts), startAppServer);
+  <% } %>
 } else if (isTest) {
   serve = series(scripts, startTestServer);
 } else if (isProd) {

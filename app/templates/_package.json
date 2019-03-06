@@ -45,21 +45,16 @@
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^3.0.1",
     "gulp-useref": "^3.0.0",
+    <% if (includeModernizr) { %>
+    "mkdirp": "^0.5.1",
+    <% } %>
     "mocha": "^5.2.0",
     "yargs": "12.0.5"
   },
   "scripts": {
-    <% if (includeModernizr) { %>
-    "build:modernizr": "modernizr -c modernizr.json -d app/scripts/modernizr.js",
-    "serve:test": "npm run build:modernizr && cross-env NODE_ENV=test gulp serve",
-    "serve:dist": "npm run build:modernizr && cross-env NODE_ENV=production gulp serve",
-    "start": "npm run build:modernizr && gulp serve",
-    <% } %>
-    <% if (!includeModernizr) { %>
     "serve:test": "cross-env NODE_ENV=test gulp serve",
     "serve:dist": "cross-env NODE_ENV=production gulp serve",
     "start": "gulp serve",
-    <% } %>
     "build": "cross-env NODE_ENV=production gulp",
     "test": "npm run serve:test",
     "tasks": "gulp --tasks"
