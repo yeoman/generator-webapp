@@ -4,7 +4,8 @@
   color: #000;
   padding: 0.2em 0;
 }
-<% if (includeBootstrap) { %>
+
+<%_ if (includeBootstrap) { -%>
 /* Space out content a bit */
 body {
   padding-top: 1.5rem;
@@ -85,7 +86,7 @@ body {
     border-bottom: 0;
   }
 }
-<% } else { %>
+<%_ } else { -%>
 body {
   background: #fafafa;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -107,4 +108,4 @@ body {
     letter-spacing: -1px;
   }
 }
-<% } -%>
+<%_ } -%>

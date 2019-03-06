@@ -3,19 +3,11 @@
   "engines": {
     "node": ">=4"
   },
-  "dependencies": {
-    <% if (includeBootstrap) { %>
-    "bootstrap": "^4.1.3",
-    <% } %>
-    <% if (includeBootstrap || includeJQuery) { %>
-    "jquery": "^3.3.1"<% if (includeModernizr || includeBootstrap) { %>,<% } %>
-    <% } %>
-    <% if (includeModernizr) { %>
-    "modernizr": "^3.6.0"<% if (includeBootstrap) { %>,<% } %>
-    <% } %>
-    <% if (includeBootstrap) { %>
-    "popper.js": "^1.14.6"
-    <% } %>
+  "dependencies": {<% if (includeBootstrap) { %>
+    "bootstrap": "^4.1.3"<% } if (includeBootstrap || includeJQuery) { %>,
+    "jquery": "^3.3.1"<% } if (includeModernizr) { %>,
+    "modernizr": "^3.6.0"<% } if (includeBootstrap) { %>,
+    "popper.js": "^1.14.6"<% } %>
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -29,25 +21,25 @@
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.0.1",
     "gulp-eslint": "^5.0.0",
-    <% if (includeSass) { %>
+    <%_ if (includeSass) { -%>
     "gulp-filter": "^5.1.0",
-    <% } %>
+    <%_ } -%>
     "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^5.0.3",
     "gulp-load-plugins": "^1.2.4",
     "gulp-plumber": "^1.0.1",
     "gulp-postcss": "^8.0.0",
-    <% if (includeSass) { %>
+    <%_ if (includeSass) { -%>
     "gulp-sass": "^4.0.2",
-    <% } %>
+    <%_ } -%>
     "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^3.0.1",
     "gulp-useref": "^3.0.0",
-    <% if (includeModernizr) { %>
+    <%_ if (includeModernizr) { -%>
     "mkdirp": "^0.5.1",
-    <% } %>
+    <%_ } -%>
     "mocha": "^5.2.0",
     "yargs": "12.0.5"
   },
@@ -71,10 +63,8 @@
     "env": {
       "es6": true,
       "node": true,
-      "browser": true
-      <% if (includeJQuery || includeBootstrap) { %>,
-      "jquery": true
-      <% } %>
+      "browser": true<% if (includeJQuery || includeBootstrap) { %>,
+      "jquery": true<% } %>
     },
     "rules": {
       "quotes": [
