@@ -15,17 +15,17 @@
     <title><%= appname %></title>
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
+    <%_ if (includeBootstrap) { -%>
+    <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <!-- endbuild -->
+    <%_ } -%>
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <%_ if (includeModernizr) { -%>
     <!-- build:js scripts/modernizr.js -->
     <script src="scripts/modernizr.js"></script>
-    <!-- endbuild -->
-    <%_ } -%>
-    <%_ if (includeBootstrap) { -%>
-    <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
     <!-- endbuild -->
     <%_ } -%>
   </head>
