@@ -7,7 +7,7 @@ With this setup you can import modules into your `main.js`. Only code used in `m
 
 ### 1. Install the required plugins
 
-```console
+```sh
 $ npm install --save-dev browserify babelify vinyl-buffer vinyl-source-stream
 ```
 
@@ -28,11 +28,9 @@ function scripts() {
 -  return src('app/scripts/**/*.js')
 +  const b = browserify({
 +    entries: 'app/scripts/main.js',
++    transform: babelify,
 +    debug: true
 +  })
-+  .transform(babelify.configure({
-+    presets: ["@babel/preset-env"]
-+  }));
 +
 +  return b.bundle()
 +    .pipe(source('bundle.js'))
