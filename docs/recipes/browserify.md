@@ -7,7 +7,7 @@ With this setup you can import modules into your `main.js`. Only code used in `m
 
 ### 1. Install the required plugins
 
-```
+```sh
 $ npm install --save-dev browserify babelify vinyl-buffer vinyl-source-stream
 ```
 
@@ -24,25 +24,24 @@ $ npm install --save-dev browserify babelify vinyl-buffer vinyl-source-stream
 ```
 
 ```diff
-gulp.task('scripts', () => {
--  return gulp.src('app/scripts/**/*.js')
-+
+function scripts() {
+-  return src('app/scripts/**/*.js')
 +  const b = browserify({
 +    entries: 'app/scripts/main.js',
 +    transform: babelify,
 +    debug: true
-+  });
++  })
 +
 +  return b.bundle()
 +    .pipe(source('bundle.js'))
      .pipe($.plumber())
--    .pipe($.sourcemaps.init())
+-    .pipe($.if(!isProd, $.sourcemaps.init()))
 -    .pipe($.babel())
 +    .pipe(buffer())
-+    .pipe($.sourcemaps.init({loadMaps: true}))
-     .pipe($.sourcemaps.write('.'))
-     .pipe(gulp.dest('.tmp/scripts'))
-     .pipe(reload({stream: true}));
++    .pipe($.if(!isProd, $.sourcemaps.init({loadMaps: true})))
+     .pipe($.if(!isProd, $.sourcemaps.write('.')))
+     .pipe(dest('.tmp/scripts'))
+     .pipe(server.reload({stream: true}));
 });
 ```
 
@@ -67,10 +66,10 @@ The linter needs to know about the module use.
 
 ```diff
   "eslintConfig": {
-+   "parserOptions": {
+    "parserOptions": {
 +     "ecmaVersion": 6,
-+     "sourceType": "module"
-+   },
+      "sourceType": "module"
+    },
 ```
 
 ## Usage
