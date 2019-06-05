@@ -2,6 +2,30 @@ const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 
+function avaPresent() {
+  assert.fileContent('package.json', '"test:unit": "ava --verbose"');
+  assert.fileContent('package.json', '"test:unit-coverage": "nyc ava"');
+  assert.fileContent(
+    'package.json',
+    '"test:unit-watch": "ava  --verbose --watch"'
+  );
+  assert.fileContent('package.json', '"ava": ');
+  assert.fileContent('package.json', '"nyc": ');
+  assert.fileContent('package.json', '"esm": ');
+  assert.fileContent('package.json', '"ava": {');
+  assert.file('__test__/main.test.js');
+}
+
+function avaNotPresent() {
+  assert.noFileContent('package.json', '"test:unit": "ava"');
+  assert.noFileContent('package.json', '"test:unit-coverage": "nyc ava"');
+  assert.noFileContent('package.json', '"test:unit-watch": "ava --watchAll"');
+  assert.noFileContent('package.json', '"ava": ');
+  assert.noFileContent('package.json', '"nyc": ');
+  assert.noFileContent('package.json', '"esm": ');
+  assert.noFileContent('package.json', '"ava": {');
+}
+
 function jestPresent() {
   assert.fileContent('package.json', '"test:unit": "jest"');
   assert.fileContent('package.json', '"test:unit-coverage": "jest --coverage"');
@@ -18,7 +42,6 @@ function jestNotPresent() {
   );
   assert.noFileContent('package.json', '"test:unit-watch": "jest --watchAll"');
   assert.noFileContent('package.json', '"jest": ');
-  assert.noFile('__test__/main.test.js');
 }
 
 function unitPresent() {
@@ -31,6 +54,7 @@ function unitNotPresent() {
   assert.noFileContent('app/index.html', 'type="module" src="scripts/main.js"');
   assert.noFileContent('app/scripts/main.js', 'export function greeting');
   assert.noFileContent('package.json', '"test:unit": "');
+  assert.noFile('__test__/main.test.js');
 }
 
 function e2ePresent() {
@@ -130,7 +154,7 @@ describe('Test handler', () => {
       e2ePresent();
     });
 
-    it.skip('Should add unit tests Basics', () => {
+    it('Should add unit tests Basics', () => {
       unitPresent();
     });
 
@@ -141,8 +165,8 @@ describe('Test handler', () => {
       );
     });
 
-    it.skip('Should add unit tests for Ava', () => {
-      //@TODO
+    it('Should add unit tests for Ava', () => {
+      avaPresent();
     });
 
     it('Should not add unit tests for Jest', () => {
@@ -186,8 +210,8 @@ describe('Test handler', () => {
       jestPresent();
     });
 
-    it.skip('Should not add unit tests for Ava', () => {
-      //@TODO
+    it('Should not add unit tests for Ava', () => {
+      avaNotPresent();
     });
 
     it.skip('Should not add unit tests for Jasmine', () => {
@@ -231,8 +255,8 @@ describe('Test handler', () => {
       jestNotPresent();
     });
 
-    it.skip('Should not add unit tests for Ava', () => {
-      //@TODO
+    it('Should not add unit tests for Ava', () => {
+      avaNotPresent();
     });
 
     it.skip('Should not add unit tests for Mocha (TDD)', () => {
@@ -276,8 +300,8 @@ describe('Test handler', () => {
       jestNotPresent();
     });
 
-    it.skip('Should not add unit tests for Ava', () => {
-      //@TODO
+    it('Should not add unit tests for Ava', () => {
+      avaNotPresent();
     });
 
     it.skip('Should not add unit tests for Mocha (BDD)', () => {
@@ -321,8 +345,8 @@ describe('Test handler', () => {
       jestNotPresent();
     });
 
-    it.skip('Should not add unit tests for Ava', () => {
-      //@TODO
+    it('Should not add unit tests for Ava', () => {
+      avaNotPresent();
     });
   });
 });

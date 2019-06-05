@@ -15,6 +15,9 @@
     <%_ } -%>
   },
   "devDependencies": {
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "ava": "^2.0.0",
+    <%_ } -%>    
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "autoprefixer": "^9.4.4",
@@ -25,6 +28,9 @@
     "cypress": "^3.3.1",
     <%_ } -%>
     "del": "^3.0.0",
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "esm": "^3.2.25"
+    <%_ } -%> 
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.0.1",
@@ -51,12 +57,30 @@
     <%_ if (includeModernizr) { -%>
     "mkdirp": "^0.5.1",
     <%_ } -%>
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "nyc": "^14.1.1",
+    <%_ } -%> 
     <%_ if (includeE2e) { -%>
     "start-server-and-test": "^1.9.1",
     <%_ } -%>
     "yargs": "12.0.5"
   },
+  <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+  "ava": {
+    "files": [
+      "__test__/**/*.js"
+    ],
+    "require": [
+      "esm"
+    ]
+  },
+  <%_ } -%>
   "scripts": {
+    <%_ if (includeUnit && unitTestFramework === "ava") { -%>
+    "test:unit": "ava --verbose",
+    "test:unit-coverage": "nyc ava",
+    "test:unit-watch": "ava  --verbose --watch",
+    <%_ } -%>
     <%_ if (includeUnit && unitTestFramework === "jest") { -%>
     "test:unit": "jest",
     "test:unit-coverage": "jest --coverage",

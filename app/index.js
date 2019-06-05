@@ -102,6 +102,10 @@ module.exports = class extends Generator {
       copy('demo_jest.js', '__test__/main.test.js');
     }
 
+    if (this.includeUnit && this.unitTestFramework === 'ava') {
+      copy('demo_ava.js', '__test__/main.test.js');
+    }
+
     let cssFile = `main.${this.includeSass ? 'scss' : 'css'}`;
     copyTpl(cssFile, `app/styles/${cssFile}`, templateData);
   }
