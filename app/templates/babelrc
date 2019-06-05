@@ -1,7 +1,6 @@
 {
   "presets": [
     ["@babel/preset-env",       {
-      "sourceType": "unambiguous",
       "targets": {
         "esmodules": true
       }
