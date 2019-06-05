@@ -15,14 +15,6 @@ module.exports = class extends Generator {
 
   initializing() {
     this.pkg = require('../package.json');
-    this.composeWith(
-      require.resolve(
-        `generator-${this.options['test-framework']}/generators/app`
-      ),
-      {
-        'skip-install': this.options['skip-install']
-      }
-    );
   }
 
   prompting() {
@@ -36,7 +28,9 @@ module.exports = class extends Generator {
 
     return this.prompt(config.prompts).then(answers => {
       const features = answers.features;
+      const testsWanted = answers.testsWanted;
       const hasFeature = feat => features && features.includes(feat);
+      const hasTest = type => testsWanted && testsWanted.includes(type);
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
@@ -45,6 +39,10 @@ module.exports = class extends Generator {
       this.includeModernizr = hasFeature('includeModernizr');
       this.includeAnalytics = hasFeature('includeAnalytics');
       this.includeJQuery = answers.includeJQuery;
+      this.includeE2e = hasTest('includeE2e');
+      this.includeUnit = hasTest('includeUnit');
+      this.includeTest = this.includeE2e || this.includeUnit;
+      this.unitTestFramework = answers.unitTestFramework;
     });
   }
 
@@ -56,10 +54,13 @@ module.exports = class extends Generator {
       version: this.pkg.version,
       includeSass: this.includeSass,
       includeBootstrap: this.includeBootstrap,
-      testFramework: this.options['test-framework'],
       includeJQuery: this.includeJQuery,
       includeModernizr: this.includeModernizr,
-      includeAnalytics: this.includeAnalytics
+      includeAnalytics: this.includeAnalytics,
+      includeTest: this.includeTest,
+      includeE2e: this.includeE2e,
+      includeUnit: this.includeUnit,
+      unitTestFramework: this.unitTestFramework
     };
 
     const copy = (input, output) => {
