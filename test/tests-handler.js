@@ -2,6 +2,18 @@ const path = require('path');
 const helpers = require('yeoman-test');
 const assert = require('yeoman-assert');
 
+function unitPresent() {
+  assert.fileContent('app/index.html', 'type="module" src="scripts/main.js"');
+  assert.fileContent('app/scripts/main.js', 'export function greeting');
+  assert.fileContent('package.json', '"test:unit": "');
+}
+
+function unitNotPresent() {
+  assert.noFileContent('app/index.html', 'type="module" src="scripts/main.js"');
+  assert.noFileContent('app/scripts/main.js', 'export function greeting');
+  assert.noFileContent('package.json', '"test:unit": "');
+}
+
 function e2ePresent() {
   assert.fileContent('package.json', '"cypress": "');
   assert.fileContent('package.json', '"start-server-and-test": "');
@@ -26,7 +38,7 @@ describe('Test handler', () => {
     });
 
     it.skip('Should not add unit tests', () => {
-      //@TODO
+      unitNotPresent();
     });
 
     it('Should not add e2e tests', () => {
@@ -43,7 +55,7 @@ describe('Test handler', () => {
     });
 
     it.skip('Should not add any unit tests', () => {
-      //@TODO
+      unitNotPresent();
     });
 
     it('Should not add e2e tests', () => {
@@ -60,7 +72,7 @@ describe('Test handler', () => {
     });
 
     it.skip('Should not add any unit tests', () => {
-      //@TODO
+      unitNotPresent();
     });
 
     it('Should add e2e tests', () => {
@@ -84,7 +96,12 @@ describe('Test handler', () => {
       e2ePresent();
     });
 
+    it.skip('Should add unit tests Basics', () => {
+      unitPresent();
+    });
+
     it.skip('Should add unit tests for Ava', () => {
+      unitPresent();
       //@TODO
     });
 
@@ -119,6 +136,10 @@ describe('Test handler', () => {
 
     it('Should not add e2e tests', () => {
       e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests Basics', () => {
+      unitPresent();
     });
 
     it.skip('Should add unit tests for Jest', () => {
@@ -158,6 +179,10 @@ describe('Test handler', () => {
       e2eNotPresent();
     });
 
+    it.skip('Should add unit tests Basics', () => {
+      unitPresent();
+    });
+
     it.skip('Should add unit tests for Jasmine', () => {
       //@TODO
     });
@@ -195,6 +220,10 @@ describe('Test handler', () => {
       e2eNotPresent();
     });
 
+    it.skip('Should add unit tests Basics', () => {
+      unitPresent();
+    });
+
     it.skip('Should add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
@@ -230,6 +259,10 @@ describe('Test handler', () => {
 
     it('Should not add e2e tests', () => {
       e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests Basics', () => {
+      unitPresent();
     });
 
     it.skip('Should add unit tests for Mocha (BDD)', () => {
