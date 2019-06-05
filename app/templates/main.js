@@ -1,4 +1,12 @@
-console.log('\'Allo \'Allo!');
+<%_ if (includeUnit) { -%>
+export function greeting() {
+    return '\'Allo \'Allo!';
+}
+
+console.log(greeting());
+<%_ } else { -%>
+    console.log('\'Allo \'Allo!');
+<%_ } -%>
 
 <%_ if (includeBootstrap) { -%>
 // Uncomment to enable Bootstrap tooltips
