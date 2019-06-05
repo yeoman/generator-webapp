@@ -27,8 +27,6 @@
   ],
   "dependencies": {
     "command-exists": "^1.2.8",
-    "generator-jasmine": "^2.0.1",
-    "generator-mocha": "^2.0.1",
     "mkdirp": "^0.5.1",
     "yeoman-generator": "^3.1.1",
     "yosay": "^2.0.2"
