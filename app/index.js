@@ -98,6 +98,10 @@ module.exports = class extends Generator {
       copy('demo_cypress.js', 'cypress/integration/index_spec.js');
     }
 
+    if (this.includeUnit && this.unitTestFramework === 'jest') {
+      copy('demo_jest.js', '__test__/main.test.js');
+    }
+
     let cssFile = `main.${this.includeSass ? 'scss' : 'css'}`;
     copyTpl(cssFile, `app/styles/${cssFile}`, templateData);
   }

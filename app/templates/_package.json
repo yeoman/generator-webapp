@@ -45,6 +45,9 @@
     "gulp-sourcemaps": "^2.2.0",
     "gulp-uglify": "^3.0.1",
     "gulp-useref": "^3.0.0",
+    <%_ if (includeUnit && unitTestFramework === 'jest') { -%>
+    "jest": "^24.8.0",
+    <%_ } -%>
     <%_ if (includeModernizr) { -%>
     "mkdirp": "^0.5.1",
     <%_ } -%>
@@ -54,6 +57,11 @@
     "yargs": "12.0.5"
   },
   "scripts": {
+    <%_ if (includeUnit && unitTestFramework === "jest") { -%>
+    "test:unit": "jest",
+    "test:unit-coverage": "jest --coverage",
+    "test:unit-watch": "jest --watchAll",
+    <%_ } -%>
     <%_ if (includeE2e) { -%>
     "test:e2e-open": "cypress open",
     "test:e2e": "start-server-and-test start http://localhost:9000 test:e2e-open",
@@ -62,8 +70,14 @@
     "serve:dist": "cross-env NODE_ENV=production gulp serve",
     "start": "gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
-    <%_ if (includeE2e) { -%>
+    <%_ if (includeE2e && !includeUnit) { -%>
     "test": "npm run test:e2e",
+    <%_ } -%>
+    <%_ if (includeUnit && !includeE2e) { -%>
+    "test": "npm run test:unit",
+    <%_ } -%>
+    <%_ if (includeE2e && includeUnit) { -%>
+    "test": "npm run test:unit && npm run test:e2e",
     <%_ } -%>
     "tasks": "gulp --tasks"
   },
