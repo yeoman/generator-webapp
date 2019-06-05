@@ -1,8 +1,22 @@
 const path = require('path');
 const helpers = require('yeoman-test');
-//const assert = require('yeoman-assert');
+const assert = require('yeoman-assert');
 
-describe.skip('Test handler', () => {
+function e2ePresent() {
+  assert.fileContent('package.json', '"cypress": "');
+  assert.fileContent('package.json', '"start-server-and-test": "');
+  assert.fileContent('package.json', '"test:e2e-open": "');
+  assert.fileContent('package.json', '"test:e2e": "');
+}
+
+function e2eNotPresent() {
+  assert.noFileContent('package.json', '"cypress": "');
+  assert.noFileContent('package.json', '"start-server-and-test": "');
+  assert.noFileContent('package.json', '"test:e2e-open": "');
+  assert.noFileContent('package.json', '"test:e2e": "');
+}
+
+describe('Test handler', () => {
   describe('When user refused unit and e2e tests directly', () => {
     before(done => {
       helpers
@@ -11,16 +25,16 @@ describe.skip('Test handler', () => {
         .on('end', done);
     });
 
-    it('Should not add unit tests', () => {
+    it.skip('Should not add unit tests', () => {
       //@TODO
     });
 
     it('Should not add e2e tests', () => {
-      //@TODO
+      e2eNotPresent();
     });
   });
 
-  describe.skip('When user agrees to add test but avoid to pick unit and e2e test', () => {
+  describe('When user agrees to add test but avoid to pick unit and e2e test', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -28,33 +42,33 @@ describe.skip('Test handler', () => {
         .on('end', done);
     });
 
-    it('Should not add any unit tests', () => {
+    it.skip('Should not add any unit tests', () => {
       //@TODO
     });
 
     it('Should not add e2e tests', () => {
-      //@TODO
+      e2eNotPresent();
     });
   });
 
-  describe.skip('When user agrees to test only e2e', () => {
+  describe('When user agrees to test only e2e', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
-        .withPrompts({ includeTest: true, testsWanted: [] })
+        .withPrompts({ includeTest: true, testsWanted: ['includeE2e'] })
         .on('end', done);
     });
 
-    it('Should not add any unit tests', () => {
+    it.skip('Should not add any unit tests', () => {
       //@TODO
     });
 
     it('Should add e2e tests', () => {
-      //@TODO
+      e2ePresent();
     });
   });
 
-  describe.skip('When user agrees to e2e testing add Unit Testing (Ava)', () => {
+  describe('When user agrees to e2e testing add Unit Testing (Ava)', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -67,31 +81,31 @@ describe.skip('Test handler', () => {
     });
 
     it('Should add e2e tests', () => {
+      e2ePresent();
+    });
+
+    it.skip('Should add unit tests for Ava', () => {
       //@TODO
     });
 
-    it('Should add unit tests for Ava', () => {
+    it.skip('Should not add unit tests for Jest', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jest', () => {
+    it.skip('Should not add unit tests for Jasmine', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jasmine', () => {
+    it.skip('Should not add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Mocha (TDD)', () => {
-      //@TODO
-    });
-
-    it('Should not add unit tests for Mocha (BDD)', () => {
+    it.skip('Should not add unit tests for Mocha (BDD)', () => {
       //@TODO
     });
   });
 
-  describe.skip('When user agrees to add only Unit Testing (Jest)', () => {
+  describe('When user agrees to add only Unit Testing (Jest)', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -104,31 +118,31 @@ describe.skip('Test handler', () => {
     });
 
     it('Should not add e2e tests', () => {
+      e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests for Jest', () => {
       //@TODO
     });
 
-    it('Should add unit tests for Jest', () => {
+    it.skip('Should not add unit tests for Ava', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Ava', () => {
+    it.skip('Should not add unit tests for Jasmine', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jasmine', () => {
+    it.skip('Should not add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Mocha (TDD)', () => {
-      //@TODO
-    });
-
-    it('Should not add unit tests for Mocha (BDD)', () => {
+    it.skip('Should not add unit tests for Mocha (BDD)', () => {
       //@TODO
     });
   });
 
-  describe.skip('When user agrees to add only Unit Testing (Jasmine)', () => {
+  describe('When user agrees to add only Unit Testing (Jasmine)', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -141,31 +155,31 @@ describe.skip('Test handler', () => {
     });
 
     it('Should not add e2e tests', () => {
+      e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests for Jasmine', () => {
       //@TODO
     });
 
-    it('Should add unit tests for Jasmine', () => {
+    it.skip('Should not add unit tests for Jest', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jest', () => {
+    it.skip('Should not add unit tests for Ava', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Ava', () => {
+    it.skip('Should not add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Mocha (TDD)', () => {
-      //@TODO
-    });
-
-    it('Should not add unit tests for Mocha (BDD)', () => {
+    it.skip('Should not add unit tests for Mocha (BDD)', () => {
       //@TODO
     });
   });
 
-  describe.skip('When user agrees to add only Unit Testing for Mocha (TDD)', () => {
+  describe('When user agrees to add only Unit Testing for Mocha (TDD)', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -178,31 +192,31 @@ describe.skip('Test handler', () => {
     });
 
     it('Should not add e2e tests', () => {
+      e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
 
-    it('Should add unit tests for Mocha (TDD)', () => {
+    it.skip('Should not add unit tests for Jasmine', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jasmine', () => {
+    it.skip('Should not add unit tests for Jest', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jest', () => {
+    it.skip('Should not add unit tests for Ava', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Ava', () => {
-      //@TODO
-    });
-
-    it('Should not add unit tests for Mocha (BDD)', () => {
+    it.skip('Should not add unit tests for Mocha (BDD)', () => {
       //@TODO
     });
   });
 
-  describe.skip('When user agrees to add only Unit Testing for Mocha (BDD)', () => {
+  describe('When user agrees to add only Unit Testing for Mocha (BDD)', () => {
     before(done => {
       helpers
         .run(path.join(__dirname, '../app'))
@@ -215,26 +229,26 @@ describe.skip('Test handler', () => {
     });
 
     it('Should not add e2e tests', () => {
+      e2eNotPresent();
+    });
+
+    it.skip('Should add unit tests for Mocha (BDD)', () => {
       //@TODO
     });
 
-    it('Should add unit tests for Mocha (BDD)', () => {
+    it.skip('Should not add unit tests for Mocha (TDD)', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Mocha (TDD)', () => {
+    it.skip('Should not add unit tests for Jasmine', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jasmine', () => {
+    it.skip('Should not add unit tests for Jest', () => {
       //@TODO
     });
 
-    it('Should not add unit tests for Jest', () => {
-      //@TODO
-    });
-
-    it('Should not add unit tests for Ava', () => {
+    it.skip('Should not add unit tests for Ava', () => {
       //@TODO
     });
   });

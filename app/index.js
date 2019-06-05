@@ -94,6 +94,10 @@ module.exports = class extends Generator {
       copy('modernizr.json', 'modernizr.json');
     }
 
+    if (this.includeE2e) {
+      copy('demo_cypress.js', 'cypress/integration/index_spec.js');
+    }
+
     let cssFile = `main.${this.includeSass ? 'scss' : 'css'}`;
     copyTpl(cssFile, `app/styles/${cssFile}`, templateData);
   }

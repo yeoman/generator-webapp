@@ -21,6 +21,9 @@
     "browser-sync": "^2.2.1",
     "cross-env": "^5.2.0",
     "cssnano": "^4.1.7",
+    <%_ if (includeE2e) { -%>
+    "cypress": "^3.3.1",
+    <%_ } -%>
     "del": "^3.0.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
@@ -45,15 +48,23 @@
     <%_ if (includeModernizr) { -%>
     "mkdirp": "^0.5.1",
     <%_ } -%>
-    "mocha": "^5.2.0",
+    <%_ if (includeE2e) { -%>
+    "start-server-and-test": "^1.9.1",
+    <%_ } -%>
     "yargs": "12.0.5"
   },
   "scripts": {
+    <%_ if (includeE2e) { -%>
+    "test:e2e-open": "cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:9000 test:e2e-open",
+    <%_ } -%>
     "serve:test": "cross-env NODE_ENV=test gulp serve",
     "serve:dist": "cross-env NODE_ENV=production gulp serve",
     "start": "gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
-    "test": "npm run serve:test",
+    <%_ if (includeE2e) { -%>
+    "test": "npm run test:e2e",
+    <%_ } -%>
     "tasks": "gulp --tasks"
   },
   "browserslist": [
