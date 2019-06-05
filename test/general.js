@@ -33,8 +33,7 @@ describe('general', () => {
       'app/scripts/main.js',
       'app/styles/main.css',
       'app/images',
-      'app/fonts',
-      'test'
+      'app/fonts'
     ]);
   });
 
