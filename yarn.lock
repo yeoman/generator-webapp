@@ -1349,10 +1349,10 @@ generator-jasmine@^2.0.1:
   dependencies:
     yeoman-generator "^1.1.1"
 
-generator-mocha@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/generator-mocha/-/generator-mocha-2.0.1.tgz#35dd0dd529c43d809f54808023cd29aeaea174d9"
-  integrity sha1-Nd0N1SnEPYCfVICAI80prq6hdNk=
+generator-mocha@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/generator-mocha/-/generator-mocha-2.0.3.tgz#d4e591690b1a6ad5af1578837d6c66485979dcfc"
+  integrity sha512-uCauEHJZ1UW6CYpmsdc+WVxX7KJJRv9VSWB/TgKhu3M8j2zyENwra4Nk+WSYiZRfFwUFHEeRQpEwfhrNca3PEA==
   dependencies:
     yeoman-generator "^1.1.1"
 
