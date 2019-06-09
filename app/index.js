@@ -15,6 +15,11 @@ module.exports = class extends Generator {
 
   initializing() {
     this.pkg = require('../package.json');
+
+    if (this.options['skip-test-framework']) {
+      return;
+    }
+
     this.composeWith(
       require.resolve(
         `generator-${this.options['test-framework']}/generators/app`

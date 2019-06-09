@@ -12,6 +12,10 @@ module.exports = {
       desc: 'Test framework to be invoked',
       type: String,
       defaults: 'mocha'
+    },
+    'skip-test-framework': {
+      desc: `Skips adding the test framework`,
+      type: Boolean
     }
   },
   prompts: [
