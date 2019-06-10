@@ -15,6 +15,9 @@ module.exports = class extends Generator {
 
   initializing() {
     this.pkg = require('../package.json');
+    if (this.options['skip-test-framework']) {
+      return;
+    }
   }
 
   prompting() {
