@@ -18,9 +18,9 @@
     <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
     "ava": "^2.0.0",
     <%_ } -%>    
-    "autoprefixer": "^9.5.1",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.5",
     "cross-env": "^5.2.0",
     <%_ if (includeE2e) { -%>
