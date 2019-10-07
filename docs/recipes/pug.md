@@ -34,27 +34,47 @@ $ npm install --save-dev gulp-pug
 Add this task to your `gulpfile.js`, it will compile `.pug` files to `.html` files in `.tmp`:
 
 ```js
-gulp.task('views', () => {
-  return gulp.src('app/*.pug')
+function pug() {
+  return src('app/*.pug')
     .pipe($.plumber())
     .pipe($.pug({pretty: true}))
-    .pipe(gulp.dest('.tmp'))
-    .pipe(reload({stream: true}));
-});
+    .pipe(dest('.tmp'))
+    .pipe(server.reload({stream: true}));
+}
 ```
 
 We are passing `pretty: true` as an option to get a nice HTML output, otherwise Pug would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
 
-### 3. Add `views` as a dependency of both `html` and `serve`
+### 3. Add `pug` task to `server` and `build` process
 
 ```js
-gulp.task('html', ['views', 'styles', 'scripts'], () => {
+if (isDev) {
+  serve = series(clean, pug, parallel(styles, scripts, fonts), startAppServer);
+} else if (isTest) {
+  serve = series(clean, pug, scripts, startTestServer);
+} else if (isProd) {
+  serve = series(build, pug, startDistServer);
+}
     ...
 ```
 
 ```js
-gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
-    ...
+const build = series(
+  clean,
+  parallel(
+    lint,
+    series(pug, parallel(styles, scripts), html),
+    images,
+    fonts,
+    extras
+  ),
+  addInlineAttr,
+  inlineCss,
+  injectFavicon,
+  sw,
+  measureSize
+);
+  ...
 ```
 
 ### 4. Update other tasks
@@ -64,15 +84,11 @@ gulp.task('serve', ['views', 'styles', 'scripts', 'fonts'], () => {
 We want to parse the compiled HTML:
 
 ```diff
- gulp.task('html', ['views', 'styles'], () => {
--  return gulp.src('app/*.html')
-+  return gulp.src(['app/*.html', '.tmp/*.html'])
-     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-     .pipe($.if('*.js', $.uglify()))
-     .pipe($.if('*.css', $.cssnano()))
-     .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
-     .pipe(gulp.dest('dist'));
-});
+function html() {
+-  return src(['app/*.html'])
++  return src(['app/*.html', '.tmp/*.html'])
+    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+  ...
 ```
 
 #### `extras`
@@ -90,67 +106,35 @@ We don't want to copy over `.pug` files in the build process:
      dot: true
    }).pipe(gulp.dest('dist'));
  });
+
+function extras() {
+  return src([
+    'app/*',
+-    '!app/*.html',
++    '!app/*.html',
++    '!app/*.pug'
+  ], {
+    dot: true
+  }).pipe(dest('dist'));
+};
 ```
 
-#### `wiredep`
-
-Wiredep supports Pug:
-
-```diff
- gulp.task('wiredep', () => {
-   gulp.src('app/styles/*.scss')
-     .pipe(wiredep({
-       ignorePath: /^(\.\.\/)+/
-     }))
-     .pipe(gulp.dest('app/styles'));
-
--  gulp.src('app/*.html')
-+  gulp.src('app/layouts/*.pug')
-     .pipe(wiredep({
-       exclude: ['bootstrap-sass'],
--      ignorePath: /^(\.\.\/)*\.\./
-       ignorePath: /^(\.\.\/)*\.\./,
-       fileTypes: {
-         pug: {
-           block: /(([ \t]*)\/\/-?\s*bower:*(\S*))(\n|\r|.)*?(\/\/-?\s*endbower)/gi,
-           detect: {
-             js: /script\(.*src=['"]([^'"]+)/gi,
-             css: /link\(.*href=['"]([^'"]+)/gi
-           },
-           replace: {
-             js: 'script(src=\'{{filePath}}\')',
-             css: 'link(rel=\'stylesheet\', href=\'{{filePath}}\')'
-           }
-         }
-       }
-     }))
--    .pipe(gulp.dest('app'));
-+    .pipe(gulp.dest('app/layouts'));
- });
-```
-
-Assuming your wiredep comment blocks are in the layouts.
 
 #### `serve`
 
 Recompile Pug templates on each change and reload the browser after an HTML file is compiled:
 
 ```diff
- gulp.task('serve', () => {
--   runSequence(['clean', 'wiredep'], ['styles', 'scripts', fonts'], () => {
-+   runSequence(['clean', 'wiredep'], ['views', 'styles', 'scripts', 'fonts'], () => {
-   ...
-   gulp.watch([
-     'app/*.html',
-     'app/images/**/*',
-     '.tmp/fonts/**/*'
-   ]).on('change', reload);
+ watch([
+    'app/*.html',
+    'app/images/**/*',
+    '.tmp/fonts/**/*'
+  ]).on('change', server.reload);
 
-+  gulp.watch('app/**/*.pug', ['views']);
-   gulp.watch('app/styles/**/*.scss', ['styles']);
-   gulp.watch('app/scripts/**/*.js', ['scripts']);
-   gulp.watch('app/fonts/**/*', ['fonts']);
-   gulp.watch('bower.json', ['wiredep', 'fonts']);
++ watch('app/**/*.pug', pug);
+  watch('app/styles/**/*.scss', styles);
+  watch('app/scripts/**/*.js', scripts);
+  watch('app/fonts/**/*', fonts);
 });
 ```
 
