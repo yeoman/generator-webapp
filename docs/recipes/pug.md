@@ -34,7 +34,7 @@ $ npm install --save-dev gulp-pug
 Add this task to your `gulpfile.js`, it will compile `.pug` files to `.html` files in `.tmp`:
 
 ```js
-function pug() {
+function views() {
   return src('app/*.pug')
     .pipe($.plumber())
     .pipe($.pug({pretty: true}))
@@ -43,17 +43,17 @@ function pug() {
 }
 ```
 
-We are passing `pretty: true` as an option to get a nice HTML output, otherwise Pug would output the HTML on a single line, which would break our comment blocks for wiredep and useref.
+We are passing `pretty: true` as an option to get a nice HTML output, otherwise Pug would output the HTML on a single line, which would break our comment blocks for useref.
 
 ### 3. Add `pug` task to `server` and `build` process
 
 ```js
 if (isDev) {
-  serve = series(clean, pug, parallel(styles, scripts, fonts), startAppServer);
+  serve = series(clean, parallel(views, styles, scripts, fonts), startAppServer);
 } else if (isTest) {
-  serve = series(clean, pug, scripts, startTestServer);
+  serve = series(clean, parallel(views, scripts), startTestServer);
 } else if (isProd) {
-  serve = series(build, pug, startDistServer);
+  serve = series(build, startDistServer);
 }
     ...
 ```
@@ -63,15 +63,11 @@ const build = series(
   clean,
   parallel(
     lint,
-    series(pug, parallel(styles, scripts), html),
+    series(parallel(views, styles, scripts), html),
     images,
     fonts,
     extras
   ),
-  addInlineAttr,
-  inlineCss,
-  injectFavicon,
-  sw,
   measureSize
 );
   ...
@@ -96,17 +92,6 @@ function html() {
 We don't want to copy over `.pug` files in the build process:
 
 ```diff
- gulp.task('extras', () => {
-   return gulp.src([
-     'app/*.*',
--    '!app/*.html'
-+    '!app/*.html',
-+    '!app/*.pug'
-   ], {
-     dot: true
-   }).pipe(gulp.dest('dist'));
- });
-
 function extras() {
   return src([
     'app/*',
