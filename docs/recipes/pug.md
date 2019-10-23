@@ -45,7 +45,7 @@ function views() {
 
 We are passing `pretty: true` as an option to get a nice HTML output, otherwise Pug would output the HTML on a single line, which would break our comment blocks for useref.
 
-### 3. Add `pug` task to `server` and `build` process
+### 3. Add `views` task to `server` and `build` process
 
 ```js
 if (isDev) {
