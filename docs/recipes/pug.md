@@ -116,7 +116,7 @@ Recompile Pug templates on each change and reload the browser after an HTML file
     '.tmp/fonts/**/*'
   ]).on('change', server.reload);
 
-+ watch('app/**/*.pug', pug);
++ watch('app/**/*.pug', views);
   watch('app/styles/**/*.scss', styles);
   watch('app/scripts/**/*.js', scripts);
   watch('app/fonts/**/*', fonts);
