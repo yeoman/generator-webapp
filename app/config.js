@@ -51,7 +51,68 @@ module.exports = {
       name: 'includeJQuery',
       message: 'Would you like to include jQuery?',
       default: true,
-      when: answers => !answers.features.includes('includeBootstrap')
+      when: answers =>
+        answers.features && !answers.features.includes('includeBootstrap')
+    },
+    {
+      type: 'confirm',
+      name: 'includeTest',
+      message: 'Would you like to add testing?',
+      default: true
+    },
+    {
+      type: 'checkbox',
+      name: 'testsWanted',
+      message: 'Which type of test would you like to cover?',
+      when: answers => answers.includeTest,
+      choices: [
+        {
+          name: 'End to end (e2e)',
+          value: 'includeE2e',
+          checked: true
+        },
+        {
+          name: 'Unit Test',
+          value: 'includeUnit',
+          checked: true
+        }
+      ]
+    },
+    {
+      type: 'list',
+      name: 'unitTestFramework',
+      message: 'Which test framework would you like to use?',
+      when: answers =>
+        answers.includeTest &&
+        answers.testsWanted &&
+        answers.testsWanted.includes('includeUnit'),
+      choices: [
+        {
+          name: 'Jest',
+          value: 'jest',
+          checked: true
+        },
+        {
+          name: 'Ava',
+          value: 'ava',
+          checked: true
+        },
+        {
+          name: 'Jasmine',
+          value: 'jasmine',
+          checked: true
+        },
+        {
+          name: 'Mocha (Testing driven design)',
+          value: 'mochaTdd',
+          checked: true
+        },
+        {
+          name: 'Mocha (Behaviour Driven Design)',
+          value: 'mochaBdd',
+          checked: true
+        }
+      ]
     }
   ],
   dirsToCreate: ['app/images', 'app/fonts'],

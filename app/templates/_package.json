@@ -15,11 +15,20 @@
     <%_ } -%>
   },
   "devDependencies": {
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "ava": "^2.0.0",
+    <%_ } -%>    
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "autoprefixer": "^9.5.1",
     "browser-sync": "^2.26.5",
     "cross-env": "^5.2.0",
+    <%_ if (includeE2e) { -%>
+    "cypress": "^3.3.1",
+    <%_ } -%>
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "esm": "^3.2.25",
+    <%_ } -%> 
     "cssnano": "^4.1.10",
     "del": "^4.1.1",
     "gulp": "^4.0.2",
@@ -39,21 +48,61 @@
     "gulp-sass": "^4.0.2",
     <%_ } -%>
     "gulp-size": "^3.0.0",
+    <%_ if (includeUnit && unitTestFramework === 'jest') { -%>
+    "jest": "^24.8.0",
+    <%_ } -%>
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-useref": "^3.1.6",
     <%_ if (includeModernizr) { -%>
     "mkdirp": "^0.5.1",
     <%_ } -%>
-    "mocha": "^6.1.4",
-    "yargs": "13.2.4"
+    <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+    "nyc": "^14.1.1",
+    <%_ } -%> 
+    <%_ if (includeE2e) { -%>
+    "start-server-and-test": "^1.9.1",
+    <%_ } -%>
+    "yargs": "12.0.5"
   },
+  <%_ if (includeUnit && unitTestFramework === 'ava') { -%>
+  "ava": {
+    "files": [
+      "__test__/**/*.js"
+    ],
+    "require": [
+      "esm"
+    ]
+  },
+  <%_ } -%>
   "scripts": {
+    <%_ if (includeUnit && unitTestFramework === "ava") { -%>
+    "test:unit": "ava --verbose",
+    "test:unit-coverage": "nyc ava",
+    "test:unit-watch": "ava  --verbose --watch",
+    <%_ } -%>
+    <%_ if (includeUnit && unitTestFramework === "jest") { -%>
+    "test:unit": "jest",
+    "test:unit-coverage": "jest --coverage",
+    "test:unit-watch": "jest --watchAll",
+    <%_ } -%>
+    <%_ if (includeE2e) { -%>
+    "test:e2e-open": "cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:9000 test:e2e-open",
+    <%_ } -%>
     "serve:test": "cross-env NODE_ENV=test gulp serve",
     "serve:dist": "cross-env NODE_ENV=production gulp serve",
     "start": "gulp serve",
     "build": "cross-env NODE_ENV=production gulp",
-    "test": "npm run serve:test",
+    <%_ if (includeE2e && !includeUnit) { -%>
+    "test": "npm run test:e2e",
+    <%_ } -%>
+    <%_ if (includeUnit && !includeE2e) { -%>
+    "test": "npm run test:unit",
+    <%_ } -%>
+    <%_ if (includeE2e && includeUnit) { -%>
+    "test": "npm run test:unit && npm run test:e2e",
+    <%_ } -%>
     "tasks": "gulp --tasks"
   },
   "browserslist": [

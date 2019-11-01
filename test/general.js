@@ -33,8 +33,7 @@ describe('general', () => {
       'app/scripts/main.js',
       'app/styles/main.css',
       'app/images',
-      'app/fonts',
-      'test'
+      'app/fonts'
     ]);
   });
 
@@ -43,7 +42,6 @@ describe('general', () => {
     assert.fileContent('package.json', '"serve:dist"');
     assert.fileContent('package.json', '"start"');
     assert.fileContent('package.json', '"build"');
-    assert.fileContent('package.json', '"test"');
     assert.fileContent('package.json', '"tasks"');
   });
 
