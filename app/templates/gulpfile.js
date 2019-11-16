@@ -23,33 +23,38 @@ const isDev = !isProd && !isTest;
 
 function styles() {
   <%_ if (includeSass) { -%>
-  return src('app/styles/*.scss')
+  return src('app/styles/*.scss', {
+    sourcemaps: !isProd,
+  })
     .pipe($.plumber())
-    .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.sass.sync({
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
     }).on('error', $.sass.logError))
   <%_ } else { -%>
-  return src('app/styles/*.css')
-    .pipe($.if(!isProd, $.sourcemaps.init()))
+  return src('app/styles/*.css', {
+    sourcemaps: !isProd,
+  })
   <%_ } -%>
     .pipe($.postcss([
       autoprefixer()
     ]))
-    .pipe($.if(!isProd, $.sourcemaps.write()))
-    .pipe(dest('.tmp/styles'))
+    .pipe(dest('.tmp/styles', {
+      sourcemaps: !isProd,
+    }))
     .pipe(server.reload({stream: true}));
 };
 
 function scripts() {
-  return src('app/scripts/**/*.js')
+  return src('app/scripts/**/*.js', {
+    sourcemaps: !isProd,
+  })
     .pipe($.plumber())
-    .pipe($.if(!isProd, $.sourcemaps.init()))
     .pipe($.babel())
-    .pipe($.if(!isProd, $.sourcemaps.write('.')))
-    .pipe(dest('.tmp/scripts'))
+    .pipe(dest('.tmp/scripts', {
+      sourcemaps: !isProd ? '.' : false,
+    }))
     .pipe(server.reload({stream: true}));
 };
 

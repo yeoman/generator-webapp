@@ -39,7 +39,6 @@
     "gulp-sass": "^4.0.2",
     <%_ } -%>
     "gulp-size": "^3.0.0",
-    "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-useref": "^3.1.6",
     <%_ if (includeModernizr) { -%>
