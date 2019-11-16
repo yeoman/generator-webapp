@@ -1,7 +1,6 @@
 # Setting up Less
 
-This is an easy way to set up Less, including integration with `watch` and LiveReload.
-
+This recipe shows how to set up compiling styles with Less.
 
 ## Steps
 
@@ -17,23 +16,29 @@ Remove gulp-sass if you have selected it and install [gulp-less](https://github.
 $ npm uninstall --save-dev gulp-sass && npm install --save-dev gulp-less
 ```
 
-### 3. Edit the `styles` and `watch` tasks
+### 3. Edit the `styles` and `startAppServer` tasks
 
 ```diff
-function styles() {
-- return src('app/styles/*.css')
-+ return src('app/styles/*.less')
-    .pipe($.if(!isProd, $.sourcemaps.init()))
--   .pipe($.postcss([
--     autoprefixer()
--   ]))
-+   .pipe($.less({
-+     paths: ['.']
-+   }))
-    .pipe($.if(!isProd, $.sourcemaps.write()))
-    .pipe(dest('.tmp/styles'))
-    .pipe(server.reload({stream: true}));
-};
+ function styles() {
+-  return src('app/styles/*.css')
++  return src('app/styles/*.less')
+     .pipe($.plumber())
+     .pipe($.if(!isProd, $.sourcemaps.init()))
+-    .pipe($.sass.sync({
+-      outputStyle: 'expanded',
+-      precision: 10,
+-      includePaths: ['.']
+-    }).on('error', $.sass.logError))
++    .pipe($.less({
++      paths: ['.']
++    }))
+     .pipe($.postcss([
+       autoprefixer()
+     ]))
+     .pipe($.if(!isProd, $.sourcemaps.write()))
+     .pipe(dest('.tmp/styles'))
+     .pipe(server.reload({stream: true}));
+ };
 ```
 
 ```diff
@@ -55,4 +60,4 @@ function styles() {
 
 Delete `app/styles/main.scss` and replace it with your own `main.less`.
 
-Then verify that `gulp build` and `gulp serve` work correctly. While `gulp serve` is running you should be able to edit your `main.less` and see the styles dynamically update in your browser.
+Then verify that `npm run build` and `npm start` work correctly. While the server is running you should be able to edit your `main.less` and see the styles dynamically update in your browser.
