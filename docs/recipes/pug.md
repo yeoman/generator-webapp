@@ -139,29 +139,25 @@ html.no-js(lang='')
     title webapp
     link(rel='apple-touch-icon', href='apple-touch-icon.png')
     // Place favicon.ico in the root directory
-
     // build:css styles/vendor.css
-    // bower:css
-    // endbower
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
     // endbuild
-
     // build:css styles/main.css
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
-
     // build:js scripts/vendor/modernizr.js
-    script(src='/bower_components/modernizr/modernizr.js')
+    script(src='scripts/modernizr.js')
     // endbuild
   body
-    <!--[if lt IE 10]>
+    <!--[if IE]>
       p.browserupgrade You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
     <![endif]-->
     .container
       .header
-        ul.nav.nav-pills.pull-right
-          li.active: a(href='#') Home
-          li: a(href='#') About
-          li: a(href='#') Contact
+        ul.nav.nav-pills.float-right
+          li.nav-item: a.nav-link.active(href='#') Home
+          li.nav-item: a.nav-link(href='#') About
+          li.nav-item: a.nav-link(href='#') Contact
 
         h3.text-muted webapp
 
@@ -180,27 +176,9 @@ html.no-js(lang='')
       ga('create','UA-XXXXX-X');ga('send','pageview');
 
     // build:js scripts/vendor.js
-    // bower:js
-    script(src='/bower_components/jquery/dist/jquery.js')
-    script(src='/bower_components/modernizr/modernizr.js')
-    // endbower
+    <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     // endbuild
-
-    // build:js scripts/plugins.js
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js')
-    script(src='/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js')
-    // endbuild
-
     // build:js scripts/main.js
     script(src='scripts/main.js')
     // endbuild
@@ -213,7 +191,7 @@ extends layouts/default
 
 block content
   .jumbotron
-    h1 'Allo, 'Allo!
+    h1.display-3 'Allo, 'Allo!
     p.lead Always a pleasure scaffolding your apps.
     p: a.btn.btn-lg.btn-success(href='#') Splendid!
 
@@ -225,8 +203,8 @@ block content
       h4 Sass
       p Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.
 
-      h4 Bootstrap
-      p Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.
+      <h4>Bootstrap</h4>
+      <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
 
       h4 Modernizr
       p Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.
