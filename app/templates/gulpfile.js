@@ -214,7 +214,6 @@ function startTestServer() {
 
   watch('app/scripts/**/*.js', scripts);
   watch(['test/spec/**/*.js', 'test/index.html']).on('change', server.reload);
-  watch('test/spec/**/*.js', lintTest);
 }
 
 function startDistServer() {
