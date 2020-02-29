@@ -1,0 +1,35 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    name: Lint and test on ${{ matrix.os }} with Node.js ${{ matrix.node }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [8, 10, 12]
+        # run only one instance of Windows as a sanity check
+        exclude:
+          -
+            os: windows-latest
+            node: 8
+          -
+            os: windows-latest
+            node: 10
+    runs-on: ${{ matrix.os }}
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      -
+        name: Run scripts
+        run: |
+          yarn
+          yarn lint
+          yarn test --colors
+        env:
+          CI: true
