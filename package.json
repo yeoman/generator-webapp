@@ -10,7 +10,8 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "eslint . && mocha --reporter spec --timeout 3000"
+    "lint": "eslint .",
+    "test": "mocha --reporter spec --timeout 3000"
   },
   "files": [
     "app"
@@ -54,8 +55,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn test",
-      "pre-publish": "yarn test"
+      "pre-push": "yarn lint && yarn test",
+      "pre-publish": "yarn lint && yarn test"
     }
   },
   "lint-staged": {
