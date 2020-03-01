@@ -212,6 +212,7 @@ function startTestServer() {
   });
 
   watch('test/index.html').on('change', server.reload);
+  watch('app/scripts/**/*.js', scripts);
   watch('test/spec/**/*.js', lintTest);
 }
 
