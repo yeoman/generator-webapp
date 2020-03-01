@@ -89,20 +89,19 @@ async function modernizr() {
 }
 <%_ } -%>
 
-const lintBase = files => {
+const lintBase = (files, options) => {
   return src(files)
-    .pipe($.eslint({ fix: true }))
+    .pipe($.eslint(options))
     .pipe(server.reload({stream: true, once: true}))
     .pipe($.eslint.format())
     .pipe($.if(!server.active, $.eslint.failAfterError()));
 }
 function lint() {
-  return lintBase('app/scripts/**/*.js')
+  return lintBase('app/scripts/**/*.js', { fix: true })
     .pipe(dest('app/scripts'));
 };
 function lintTest() {
-  return lintBase('test/spec/**/*.js')
-    .pipe(dest('test/spec'));
+  return lintBase('test/spec/**/*.js');
 };
 
 function html() {
@@ -212,8 +211,8 @@ function startTestServer() {
     }
   });
 
+  watch('test/index.html').on('change', server.reload);
   watch('app/scripts/**/*.js', scripts);
-  watch(['test/spec/**/*.js', 'test/index.html']).on('change', server.reload);
   watch('test/spec/**/*.js', lintTest);
 }
 
