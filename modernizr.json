@@ -1,0 +1,27 @@
+{
+  "classPrefix": "modernizr-",
+  "options": [
+    "addTest",
+    "atRule",
+    "domPrefixes",
+    "hasEvent",
+    "html5shiv",
+    "html5printshiv",
+    "load",
+    "mq",
+    "prefixed",
+    "prefixes",
+    "prefixedCSS",
+    "setClasses",
+    "testAllProps",
+    "testProp",
+    "testStyles"
+  ],
+  "feature-detects": [
+    "css/supports",
+    "img/sizes",
+    "img/srcset",
+    "serviceworker",
+    "touchevents"
+  ]
+}

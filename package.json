@@ -1,68 +1,71 @@
 {
-  "name": "generator-webapp",
-  "version": "4.0.0-8",
-  "description": "Scaffold out a front-end web app",
-  "license": "BSD-2-Clause",
-  "repository": "yeoman/generator-webapp",
-  "author": "The Yeoman Team",
-  "main": "app/index.js",
+  "private": true,
   "engines": {
-    "node": ">=6"
+    "node": ">=4"
   },
-  "scripts": {
-    "lint": "eslint .",
-    "test": "mocha --reporter spec --timeout 3000"
-  },
-  "files": [
-    "app"
-  ],
-  "keywords": [
-    "yeoman-generator",
-    "web",
-    "app",
-    "front-end",
-    "h5bp",
-    "modernizr",
-    "jquery",
-    "gulp"
-  ],
   "dependencies": {
-    "command-exists": "^1.2.8",
-    "generator-jasmine": "^2.0.1",
-    "generator-mocha": "^2.0.4",
-    "mkdirp": "^0.5.1",
-    "yeoman-generator": "^4.0.1",
-    "yosay": "^2.0.2"
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "modernizr": "^3.7.1",
+    "popper.js": "^1.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^2.3.0",
-    "lint-staged": "^8.1.7",
-    "mocha": "^6.1.4",
-    "prettier": "^1.17.1",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^2.0.0"
+    "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.5.1",
+    "browser-sync": "^2.26.5",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "cssnano": "^4.1.10",
+    "del": "^4.1.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-cli": "^2.2.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-filter": "^6.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^6.0.0",
+    "gulp-load-plugins": "^1.6.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-useref": "^3.1.6",
+    "mkdirp": "^0.5.1",
+    "mocha": "^6.2.3",
+    "yargs": "13.2.4"
   },
-  "prettier": {
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "endOfLine": "auto"
+  "scripts": {
+    "serve:test": "cross-env NODE_ENV=test gulp serve",
+    "serve:dist": "cross-env NODE_ENV=production gulp serve",
+    "start": "gulp serve",
+    "build": "cross-env NODE_ENV=production gulp",
+    "test": "npm run serve:test",
+    "tasks": "gulp --tasks"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn lint && yarn test",
-      "pre-publish": "yarn lint && yarn test"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR"
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "node": true,
+      "browser": true,
+      "jquery": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
     }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
   }
 }
