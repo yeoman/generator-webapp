@@ -1,5 +1,5 @@
 # dependencies
-node_modules
+node_modules/
 bower_components
 
 # compiled output
@@ -9,4 +9,6 @@ bower_components
 # System Files
 .DS_Store
 Thumbs.db
+
 .env
+.editorconfig
