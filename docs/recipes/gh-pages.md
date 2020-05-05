@@ -18,13 +18,17 @@ $ npm install --save-dev gulp-gh-pages
 We need to create a `deploy` task, which will deploy contents of `dist` to the remote `gh-pages` branch:
 
 ```js
-gulp.task('deploy', ['default'], () => {
-  return gulp.src('dist/**/*')
+function ghPages() {
+  return src('dist/**/*')
     .pipe($.ghPages());
-});
+}
+
+const deploy = series(build, ghPages);
+
+exports.deploy = deploy;
 ```
 
-If you don't want to trigger a rebuild on each `gulp deploy`, feel free to remove the `['default']` part.
+If you don't want to trigger a rebuild on each `gulp deploy`, feel free to remove the `build` part.
 
 Also, cache from this plugin will be saved to `.publish`, we can ignore it by adding this line to `.gitignore`:
 
