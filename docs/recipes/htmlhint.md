@@ -67,7 +67,7 @@ In the `serve` task add the following line to run `htmlhint` every time a HTML f
      'app/images/**/*',
      '.tmp/fonts/**/*'
 -  ]).on('change', server.reload);
-+  ], {}, htmlhint).on('change', server.reload);
++  ], htmlhint).on('change', server.reload);
 
    watch('app/styles/**/*.css', styles);
    watch('app/scripts/**/*.js', scripts);
