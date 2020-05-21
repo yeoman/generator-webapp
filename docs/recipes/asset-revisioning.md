@@ -11,7 +11,7 @@ Make sure to set the files to [never expire](http://developer.yahoo.com/performa
 Install these gulp plugins:
 
 ```
-$ npm install --save-dev gulp-rev gulp-rev-replace
+$ npm install --save-dev gulp-rev gulp-rev-rewrite
 ```
 
 * [gulp-rev](https://github.com/sindresorhus/gulp-rev) appends content hashes
