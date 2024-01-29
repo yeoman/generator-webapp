@@ -36,7 +36,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^8.0.0",
     <%_ if (includeSass) { -%>
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^5.1.0",
     <%_ } -%>
     "gulp-size": "^3.0.0",
     "gulp-uglify": "^3.0.2",
@@ -45,6 +45,9 @@
     "mkdirp": "^0.5.1",
     <%_ } -%>
     "mocha": "^6.1.4",
+    <%_ if (includeSass) { -%>
+    "sass": "^1.58.3",
+    <%_ } -%>
     "yargs": "13.2.4"
   },
   "scripts": {
