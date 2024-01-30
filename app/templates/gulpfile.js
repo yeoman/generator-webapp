@@ -9,6 +9,9 @@ const Modernizr = require('modernizr');
 const browserSync = require('browser-sync');
 const del = require('del');
 const autoprefixer = require('autoprefixer');
+<%_ if (includeSass) { -%>
+const sass = require('gulp-sass')(require('sass'));
+<%_ } -%>
 const cssnano = require('cssnano');
 const { argv } = require('yargs');
 
@@ -27,11 +30,11 @@ function styles() {
     sourcemaps: !isProd,
   })
     .pipe($.plumber())
-    .pipe($.sass.sync({
+    .pipe(sass.sync({
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
-    }).on('error', $.sass.logError))
+    }).on('error', sass.logError))
   <%_ } else { -%>
   return src('app/styles/*.css', {
     sourcemaps: !isProd,
